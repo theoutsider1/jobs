@@ -40,7 +40,7 @@ const ContractDropDown = () => {
                 <span className='p-2 text-black'>{contractType}</span>
                 <IonIcon icon= {chevronForward} className= {`py-3 text-black transition-transform transform ${contract ? 'rotate-90' : 'rotate-0'}`} ></IonIcon>  
             </div>
-            <div className={`${!contract ? 'hidden' : 'h-56 overflow-y-auto rounded' }`}>
+            <div className={`${!contract ? 'hidden' : 'h-56 overflow-y-auto rounded z-40' }`}>
               { contract &&
 
                   contractData.map((contractElem: Contract)=>(
