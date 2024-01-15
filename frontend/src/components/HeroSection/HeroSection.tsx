@@ -3,7 +3,7 @@ import {IonIcon} from '@ionic/react';
 import {chevronForward} from 'ionicons/icons';
 
 import ContractDropDown from './Contract';
-//import CountryDropDown from './Country';
+import CountryDropDown from './Country';
 
 interface Field {
     id: number;
@@ -57,7 +57,7 @@ function HeroSection (){
             </div>
 
             /** ---------Filter div---------- */
-
+            
             <div className="flex mb-4 gap-3 w-full px-48 py-8 text-white ">
 
             /** ---------Country DropDown----------- */
@@ -95,7 +95,7 @@ function HeroSection (){
                 </div>
                 /** ---------Country DropDown----------- */
                 <div className="w-1/3 h-10 bg-secondary rounded"> 
-                  /** <CountryDropDown/>*/
+                   <CountryDropDown/>
                 </div>
 
             </div>
