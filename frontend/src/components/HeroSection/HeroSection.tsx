@@ -2,6 +2,9 @@ import { useState } from 'react';
 import {IonIcon} from '@ionic/react';
 import {chevronForward} from 'ionicons/icons';
 
+import ContractDropDown from './Contract';
+//import CountryDropDown from './Country';
+
 interface Field {
     id: number;
     field: string;
@@ -33,6 +36,7 @@ const fields:Field[] = [
 ]
 
 function HeroSection (){
+    // Field State 
     const [showList, setShowList] = useState(false);
     const [clickField, setClickField] = useState("select field");
     
@@ -52,38 +56,47 @@ function HeroSection (){
                 
             </div>
 
+            /** ---------Filter div---------- */
+
             <div className="flex mb-4 gap-3 w-full px-48 py-8 text-white ">
+
+            /** ---------Country DropDown----------- */
+
                 <div className="w-1/3 h-10 bg-secondary rounded ">
                     <div className='flex w-full justify-between cursor-pointer' onClick={handleClick}>
                         
                             <span className='p-2 text-black'>{clickField}</span>
-                        <IonIcon icon= {chevronForward} className= {`py-3 text-black transition-transform transform ${showList ? 'rotate-90' : 'rotate-0'}`}></IonIcon>  
+                            <IonIcon icon= {chevronForward} className= {`py-3 text-black transition-transform transform ${showList ? 'rotate-90' : 'rotate-0'}`}></IonIcon>  
                     </div>
-                    <div className='h-60 p-0 overflow-y-auto rounded-lg' >
+                    
+                    <div className={`${!showList ? 'hidden' : 'h-56 overflow-y-auto rounded' }`}>
                         { showList &&
                             fields.map((elem: Field)=>(
+
                                 <ul className='bg-secondary p-2 text-black '>
                                     <li className='w-full p-2 border-b-2 border-neutral-950/[.10] hover:bg-primary' 
                                         key={elem.id} 
-                                        onClick={()=> {setClickField(elem.field)}}>
+                                        onClick={()=> {
+                                            // Hide List after the Click
+                                            handleClick();
+                                            setClickField(elem.field)}}>
                                         {elem.field}</li>
                                     
                                 </ul>
                             ))
                         }
                     </div>
-                                       
-                   {/* <label  htmlFor="">
-                        <select className='w-full h-10 bg-secondary text-black rounded border-none' name="" id="">
-                        { 
-                            fields.map((elem:Field )=> (
-                            <option value={`${elem.field}`}>{elem.field}</option>
-                         ))}
-                        </select> 
-                    </label>  */}
                 </div>
-                <div className="w-1/3 h-10 bg-secondary">2</div>
-                <div className="w-1/3 h-10 bg-secondary">3</div>
+                /** ---------Contract DropDown----------- */
+                <div className="w-1/3 h-10 bg-secondary rounded">
+                    
+                    <ContractDropDown/>
+                
+                </div>
+                /** ---------Country DropDown----------- */
+                <div className="w-1/3 h-10 bg-secondary rounded"> 
+                  /** <CountryDropDown/>*/
+                </div>
 
             </div>
         </div>
