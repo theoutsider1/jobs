@@ -65,6 +65,7 @@ const NavLinks = ()=>{
      
      const handleHoverOut = ()=>{
         setHover(false);
+
      }
     return (
     <>
@@ -72,12 +73,12 @@ const NavLinks = ()=>{
             links.map((item,index:number) => (
                 
                     <div className='inline-block px-3 text-left cursor-pointer'  >
-                        <h1 className='inline py-7' onMouseOver={() => handleHoverIn(index)} onMouseOut= {handleHoverOut}  key={index} >{item.name} </h1>
+                        <h1 className='inline py-7 ' onMouseOver={() => handleHoverIn(index)} onMouseOut= {handleHoverOut}  key={index} >{item.name} </h1>
                         <IonIcon icon= {chevronForward} className= ''></IonIcon>                      
                             <div className= {` absolute bg-primary rounded-xl `}>    
                                 { hover && indexHovered === index &&
                                     item.subLinks.map((subItem) => (
-                                        <ul className='p-7 ' key={index} onMouseOver={() => setHover(true)}  onMouseOut= {handleHoverOut} >
+                                        <ul className='pt-7 px-7 mb-4 ' key={index} onMouseOver={() => setHover(true)}  onMouseOut= {handleHoverOut} >
                                             <li >{subItem.head} </li>                                            
                                         </ul>
                                     ))

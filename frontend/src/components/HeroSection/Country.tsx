@@ -2,6 +2,11 @@ import { useState } from 'react';
 import {IonIcon} from '@ionic/react';
 import {chevronForward} from 'ionicons/icons';
 
+type a = {
+    isActive: boolean;
+    onClick?: ()=> void;
+}
+
 interface Country{
     id: number;
     countryName: string;
@@ -25,24 +30,24 @@ const countryData:Country[] = [
     },
 ]
 
-const CountryDropDown = ()=> {
-    const [countryList, setCountryList] = useState(false);
+const CountryDropDown: React.FC<a> = ({isActive, onClick})=> {
+    //const [countryList, setCountryList] = useState(false);
     const [country, setCountry] = useState('Select Country');
 
-    const handleCountryClick = ()=> {
-        setCountryList(!countryList);
-    }
+    // const handleCountryClick = ()=> {
+    //     setCountryList(!countryList);
+    // }
     
     return (
         <>
-            <div className='flex w-full justify-between  cursor-pointer' onClick={handleCountryClick} >
+            <div className='flex w-full justify-between  cursor-pointer' onClick={onClick} >
                         
                     <span className='p-2 text-black'>{country}</span>
-                    <IonIcon icon= {chevronForward} className= {`py-3 text-black transition-transform transform ${countryList ? 'rotate-90' : 'rotate-0'}`}></IonIcon>  
+                    <IonIcon icon= {chevronForward} className= {`py-3 text-black transition-transform transform ${isActive ? 'rotate-90' : 'rotate-0'}`}></IonIcon>  
             </div>
 
-            <div className={`${!countryList ? 'hidden' : 'h-56 overflow-y-auto rounded' }`}>
-              { countryList &&
+            <div className={`${!isActive ? 'hidden' : 'h-56 overflow-y-auto rounded' }`}>
+              { isActive &&
 
                   countryData.map((countryElem:Country)=>(
 
@@ -52,7 +57,7 @@ const CountryDropDown = ()=> {
                               key={countryElem.id} 
                               onClick={()=> {
                                 // Hide List after the Click
-                                handleCountryClick(); 
+                                onClick; 
                                 setCountry(countryElem.countryName) }}>
                               {countryElem.countryName}</li>
                           

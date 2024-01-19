@@ -10,6 +10,7 @@ export default {
         // Customize your colors here
         primary: '#debdb2',  // custom primary color
         secondary: '#d5b19c',
+        third: '#f6ebe7',
       },
     },
   },

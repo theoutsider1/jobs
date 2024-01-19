@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../assets/2jobs.svg";
 import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
@@ -6,6 +6,7 @@ import Button from "./Button";
 //import menuOutline from '../../assets/menu-outline.svg';
 import { IonIcon } from '@ionic/react';
 import { menu , close } from 'ionicons/icons';
+//import Espace from "./BeforeNav/Espace";
 
 
 
@@ -13,10 +14,29 @@ import { menu , close } from 'ionicons/icons';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isScrolled , setIsScrolled] = useState(false);
 
+
+
+  
+  useEffect(()=> {
+    const handleScroll = () => {
+
+    setIsScrolled(window.scrollY > 0);
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    return () => 
+    window.removeEventListener("scroll", handleScroll); 
+    
+  },[])
+  
+  
 
   return (
-    <nav className="bg-primary w-full fixed">
+    <>
+    
+    <nav id='nav-bar' className={`bg-primary w-full ${isScrolled ? 'top-0 fixed transition-all duration-300' : ''}`}>
       <div className="flex items-center font-medium justify-around">
         <div className="z-40 p-5 md:w-auto w-full flex justify-between  ">
           <img src={logo} alt="2jobs" className="md:cursor-pointer h-9" />
@@ -25,7 +45,7 @@ const Navbar = () => {
           
           </div>
         </div>
-        <ul className="md:flex hidden gap-6 items-center">
+        <ul className="md:flex hidden gap-2 items-center">
           <li>
             <Link to="/" className=" /*py-7*/ px-3 inline-block">
               Home
@@ -37,7 +57,10 @@ const Navbar = () => {
             Contact
             </Link>
           </li>
+          <li className="z-50">
           <NavLinks />
+          </li>
+          
         </ul>
         <div className="md:block hidden">
           <Button />
@@ -67,7 +90,8 @@ const Navbar = () => {
         </ul>
       </div>
     </nav>
-  );
+    </>
+  )
 };
 
 export default Navbar;
