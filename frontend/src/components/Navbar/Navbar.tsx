@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <>
     
-    <nav id='nav-bar' className={`bg-primary w-full ${isScrolled ? 'top-0 fixed transition-all duration-300' : ''}`}>
+    <nav id='nav-bar' className={`bg-primary w-full ${isScrolled ? 'top-0 fixed transition-all duration-300 z-40' : ''}`}>
       <div className="flex items-center font-medium justify-around">
         <div className="z-40 p-5 md:w-auto w-full flex justify-between  ">
           <img src={logo} alt="2jobs" className="md:cursor-pointer h-9" />
