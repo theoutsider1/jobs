@@ -5,6 +5,7 @@ import {chevronForward} from 'ionicons/icons';
 type a = {
     isActive: boolean;
     onClick?: ()=> void;
+    onItemClick?: (item:Country)=> void;
 }
 
 interface Country{
@@ -30,7 +31,7 @@ const countryData:Country[] = [
     },
 ]
 
-const CountryDropDown: React.FC<a> = ({isActive, onClick})=> {
+const CountryDropDown: React.FC<a> = ({isActive, onClick, onItemClick})=> {
     //const [countryList, setCountryList] = useState(false);
     const [country, setCountry] = useState('Select Country');
 
@@ -53,11 +54,12 @@ const CountryDropDown: React.FC<a> = ({isActive, onClick})=> {
 
                       <ul className='bg-secondary p-2 text-black '>
 
-                          <li className='w-full p-2 border-b-2 border-neutral-950/[.10] hover:bg-primary ' 
+                          <li className='w-full p-2 border-b-2 border-neutral-950/[.10] hover:bg-primary cursor-pointer' 
                               key={countryElem.id} 
                               onClick={()=> {
                                 // Hide List after the Click
-                                onClick; 
+                                
+                                onItemClick ? onItemClick(countryElem): null;
                                 setCountry(countryElem.countryName) }}>
                               {countryElem.countryName}</li>
                           

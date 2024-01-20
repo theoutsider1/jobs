@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import {IonIcon} from '@ionic/react';
 import {chevronForward} from 'ionicons/icons';
 
-type b = {
-    isActive: boolean;
-    onClick?: ()=> void;
-}
+ 
 
 interface Field {
     id: number;
     field: string;
 }
-
+type b = {
+    isActive: boolean;
+    onClick?: ()=> void;
+    onItemClick?: (item: Field)=> void;
+}  
 
 const fieldsData:Field[] = [
     
@@ -38,7 +39,7 @@ const fieldsData:Field[] = [
 
 ]
 
-const Fields: React.FC<b> = ({isActive, onClick})=> {
+const Fields: React.FC<b> = ({isActive, onClick, onItemClick})=> {
     //const [showList, setShowList] = useState(false);
     const [clickField, setClickField] = useState("select field");
 
@@ -57,14 +58,15 @@ const Fields: React.FC<b> = ({isActive, onClick})=> {
                             
                             <div className={`${!isActive ? 'hidden' : 'h-56 overflow-y-auto rounded' }`}>
                                 { isActive &&
-                                    fieldsData.map((elem: Field)=>(
+                                    fieldsData.map((elem)=>(
 
                                         <ul className='bg-secondary p-2 text-black '>
-                                            <li className='w-full p-2 border-b-2 border-neutral-950/[.10] hover:bg-primary' 
+                                            <li className='w-full p-2 border-b-2 border-neutral-950/[.10] hover:bg-primary cursor-pointer' 
                                                 key={elem.id} 
                                                 onClick={()=> {
                                                     // Hide List after the Click
-                                                    onClick;
+                                                    
+                                                    onItemClick ? onItemClick(elem): null;
                                                     setClickField(elem.field)}}>
                                                 {elem.field}</li>
                                             
