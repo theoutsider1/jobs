@@ -11,7 +11,9 @@ export default {
         primary: '#debdb2',  // custom primary color
         secondary: '#d5b19c',
         third: '#f6ebe7',
+        fourth : '#cfa59a'
       },
+      
     },
   },
   plugins: [],
