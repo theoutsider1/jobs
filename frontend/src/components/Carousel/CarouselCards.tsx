@@ -5,7 +5,7 @@ const CarouselCards = () => {
     <div>
         
 
-        <div className="flex flex-col-2 gap-24 p-24">
+        <div className="flex flex-col-2 gap-24 pt-24 px-24 pb-4">
             <div className="w-1/2 ">
             <div className="relative z-20 bg-third ">
         <div className="absolute top-0 left-12">

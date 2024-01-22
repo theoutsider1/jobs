@@ -10,7 +10,7 @@ import CarouselCards from "./CarouselCards";
 
 const swiper = () => {
   return (
-    <div className="bg-third">
+    <div className="bg-third -pb-20">
         <div className="w-full p-14 flex justify-center ">
             <h2 className="text-secondary text-3xl font-bold tracking-wider">
             Témoignage de nos candidats
