@@ -4,6 +4,7 @@ import ContractDropDown from './Contract';
 import CountryDropDown from './Country';
 import GetStartedButton from './GetStartedButton';
 import Fields from './fields';
+import LatestOffer from '../LatestOffers/Latestoffers';
 
 
 // type ChildProps = {
@@ -74,8 +75,13 @@ const HeroSection: React.FC =( )=>{
                     <div className={`${dropdownContract ? '-z-40' : ''}`}>
                             <GetStartedButton />
                     </div>
+
+                    
                {/* </div>*/}               
            
+        </div>
+        <div>
+            <LatestOffer/>
         </div>
         </>
     ) 

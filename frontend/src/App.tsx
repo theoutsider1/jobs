@@ -13,7 +13,7 @@ function App() {
     <Espace/>
     <Navbar/>
     <HeroSection/>
-    <LatestOffer/>
+   
     
     
     </>

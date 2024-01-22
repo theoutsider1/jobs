@@ -1,4 +1,4 @@
-import Statistics from "./Statistics";
+import StatisticsBar from "./Statistics";
 
 
 
@@ -170,9 +170,15 @@ const LatestOffer = ()=> {
                         </div>
                     </div>
                 </div>
+                
             </div>
-            <div>
-                <Statistics/>
+            <div className="w-full pb-4 flex justify-center items-center ">
+                    <button className="bg-fourth shadow-shadow hover:bg-secondary text-white font-light text-lg py-3 px-10 rounded">
+                         Test
+                    </button>
+                </div>
+            <div className="">
+                <StatisticsBar/>
             </div>
             
         </div>
