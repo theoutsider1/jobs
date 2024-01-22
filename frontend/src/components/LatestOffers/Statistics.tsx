@@ -2,11 +2,11 @@ const StatisticsBar = () => {
 
     return (
         
-             <div className=" p-1 bg-fourth 
+             <div className="p-10 bg-fourth 
                 rounded 
                 shadow-shadow
-                md:p-2" id="stats" role="tabpanel" aria-labelledby="stats-tab">
-             <dl className="grid max-w-screen-xl grid-cols-2 gap-8 p-2 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-4 dark:text-white sm:p-8">
+                " id="stats" role="tabpanel" aria-labelledby="stats-tab">
+             <dl className="grid items-center max-w-screen-xl grid-cols-2 gap-36 p-2 mx-auto sm:grid-cols-3 xl:grid-cols-4 text-white sm:p-8">
                 <div className="flex flex-col items-center justify-center">
                     <dt className="mb-2 text-3xl font-extrabold">+2800</dt>
                     <dd className="text-white-500 ">Offres d'emplois</dd>

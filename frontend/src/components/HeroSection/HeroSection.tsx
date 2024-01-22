@@ -5,7 +5,8 @@ import CountryDropDown from './Country';
 import GetStartedButton from './GetStartedButton';
 import Fields from './fields';
 import LatestOffer from '../LatestOffers/Latestoffers';
-
+//import CarouselCards from '../Carousel/CarouselCards';
+import TestiCarousel from '../Carousel/TestiCarousel';
 
 // type ChildProps = {
 //     isActive: boolean;
@@ -83,8 +84,14 @@ const HeroSection: React.FC =( )=>{
         <div>
             <LatestOffer/>
         </div>
+
+        <div>
+            
+            <TestiCarousel/>
+        </div>
         </>
     ) 
 }
 
 export default HeroSection;
+
