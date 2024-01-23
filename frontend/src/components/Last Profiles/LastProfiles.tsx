@@ -7,7 +7,7 @@ const LastProfiles = () => {
         <div className='bg-third'>
             <div className="w-full   drop-shadow-lg pt-10 bg-[url('../../src/assets/shape.svg')] bg-cover bg-no-repeat">
 
-            <div className="w-full  flex justify-between pt-44 ">
+            <div className="w-full  flex justify-between pt-40 ">
                      <div className="w-1/2 p-10 px-24">
                         <h2 className="text-black text-3xl font-bold tracking-wider">
                             Dernières profils:

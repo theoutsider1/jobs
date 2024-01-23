@@ -8,6 +8,7 @@ import LatestOffer from '../LatestOffers/Latestoffers';
 //import CarouselCards from '../Carousel/CarouselCards';
 import TestiCarousel from '../Carousel/TestiCarousel';
 import LastProfiles from '../Last Profiles/LastProfiles';
+import WhyUs from '../WhyUs/WhyUs';
 
 // type ChildProps = {
 //     isActive: boolean;
@@ -92,6 +93,9 @@ const HeroSection: React.FC =( )=>{
         </div>
         <div>
             <LastProfiles/>
+        </div>
+        <div>
+            <WhyUs/>
         </div>
         </>
     ) 
