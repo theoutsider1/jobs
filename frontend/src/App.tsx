@@ -1,25 +1,19 @@
-import './App.css';
-//import Nav from './components/nav';
-import Navbar from './components/Navbar/Navbar';
-import HeroSection from './components/HeroSection/HeroSection';
-//import LatestOffer from './components/LatestOffers/Latestoffers';
-import Espace from './components/Navbar/BeforeNav/Espace';
-import Footer from './components/Footer/Footer';
+//import './App.css';
+
+import { RouterProvider } from 'react-router-dom';
+import Router from './Routes/Router';
+//import {PrimeReactProvider} from "primereact/api";
 
 function App() {
   
 
   return (
     <>
-    <Espace/>
-    <Navbar/>
-    <HeroSection/>
-    <Footer/>
-   
-    
+
+    <RouterProvider router={Router}/>
     
     </>
   )
 }
 
-export default App
+export default App;
