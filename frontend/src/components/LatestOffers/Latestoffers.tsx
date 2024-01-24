@@ -42,7 +42,7 @@ const LatestOffer = ()=> {
                             <p className="text-sm">publish date</p>
                             </div>
                         </div>
-                        </div>
+                    </div>
                     
                     <div className="">
                     <div className="flex items-center bg-primary p-3 rounded">
