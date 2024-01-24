@@ -16,6 +16,7 @@ export default {
         success: '#4ADE80',
         darkk: '#bb877a',
         bright: '#f3e2d6',
+        search: '#b2543e',
       },
       boxShadow: {'shadow': 'inset 0 -90px 30px 0 rgba(70, 70, 70, 0.2), inset 0 -90px 60px 0 rgba(70, 70, 70, 0.2)'},
       backgroundImage:

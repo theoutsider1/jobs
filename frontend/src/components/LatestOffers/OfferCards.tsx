@@ -14,8 +14,7 @@ const CardsOffers = () => {
                             Project #1 .
                             <a
                                 className="ml-1 font-medium text-brand-500 hover:text-brand-500 dark:text-white"
-                                href=" "
-                            >
+                                href="#">
                                 See product details
                             </a>
                             </p>

@@ -2,7 +2,7 @@
 import { IonIcon } from '@ionic/react';
 import { chevronDownCircle,time, list } from 'ionicons/icons';
 import Advice from './AdviceSection';
-
+import jobguy from '../../assets/jobguy.svg'
 
 
 
@@ -68,15 +68,18 @@ const WhyUs = () => {
                     
 
                 </div>
-                <div className='w-1/2 flex justify-center items-center'>
-                    <div className='relative bg-primary rounded-3xl w-1/2 h-96'>
-                    <div className="absolute -bottom-0 -left-7">
-                    <div className="flex justify-center items-center rounded-full w-16 h-16  bg-darkk">
+                <div className='w-1/2 flex justify-end items-end relative px-10 py-28'>
+                    <div className='relative bg-primary rounded-3xl w-96 h-96 flex  '>
+                        <div className="absolute -bottom-0 -left-7">
+                             <div className="flex  rounded-full w-16 h-16  bg-darkk"></div>
+                             
+                         </div>
+                        
+                        
                         
                     </div>
-                    </div>
-                            dkdjsjsd
-                    </div>
+                    <img src={jobguy} alt="" className='absolute left-0 right-0'/>
+                    
                 </div>
                 
             </div>
