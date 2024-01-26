@@ -14,7 +14,7 @@ const OffersList = () => {
 
                 <div className="p-14">
                     <h2 className="text-white text-5xl font-extrabold tracking-widest">
-                        Trouver L’EMPLOI de vos rêves
+                        Trouver l'emploi de vos rêves
                     </h2>
                 </div>
 
