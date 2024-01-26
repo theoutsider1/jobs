@@ -2,7 +2,27 @@ import { IonIcon } from '@ionic/react';
 import {heartOutline} from 'ionicons/icons';
 import {bagOutline} from 'ionicons/icons';
 import {locationOutline} from 'ionicons/icons';
+import {newspaperOutline} from 'ionicons/icons';
 
+interface offerData {
+    jobTitle: string,
+    companyName : string,
+    contract: string,
+    ville : string,
+    domaine: string,
+    studies : string,
+    experienceYears: 'string',
+}
+
+const offerData : offerData = [{
+    jobTitle: 'Responsable administratif et financier h/f',
+    companyName : 'McDonald\'s',
+    contract: 'CDD',
+    ville : 'Kesh',
+    domaine: 'Information',
+    studies : 'Niveau d’études: Bac +5 en Finance',
+    experienceYears: '3 ans',
+}]
 
 const OffersCard = () => {
 
@@ -44,12 +64,15 @@ const OffersCard = () => {
                                     <div className='px-4'>
                                         company name
                                     </div>
+                                    
                                     <div className='border-x-2 border-neutral-500 px-4'>
-                                        CDD
+                                        <IonIcon icon={locationOutline} className='text-base'></IonIcon>
+                                        Rabat
                                     </div>
+
                                     <div className='px-4'>
-                                        <IonIcon icon={locationOutline}></IonIcon>
-                                        location
+                                        <IonIcon icon={newspaperOutline} className='text-base text-rose-950 pr-1' ></IonIcon>
+                                        CDD
                                     </div>
                                 </div>
 
@@ -72,7 +95,7 @@ const OffersCard = () => {
                                    <span className='text-light text-base px-2'>Finance</span>
                                 </div>
 
-                                {/** Publish date + button*/}
+                                {/** Publish date + Button*/}
 
                                 <div className='flex justify-between pt-6'>
                                     <div className=' opacity-70'>
@@ -81,7 +104,7 @@ const OffersCard = () => {
                                     <div>
                                     <button
                                         type="button"
-                                        className="rounded bg-darkk px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]  " >
+                                        className="rounded bg-darkk px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_8px_9px_-4px_rgba(0,0,0,0.3)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]" >
                                         Postuler
                                         </button>
                                     </div>
