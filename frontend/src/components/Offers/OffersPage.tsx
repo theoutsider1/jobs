@@ -1,3 +1,4 @@
+import OffersCard from "./OffersCard";
 import OffersList from "./OffersList"
 
 const OffersPage = () => {
@@ -6,6 +7,7 @@ const OffersPage = () => {
     return (
         <div>
             <OffersList/>
+           {/** <OffersCard/>*/ }
         </div>
     )
 }

@@ -1,34 +1,22 @@
+import React from 'react';
 import { IonIcon } from '@ionic/react';
 import {heartOutline} from 'ionicons/icons';
 import {bagOutline} from 'ionicons/icons';
 import {locationOutline} from 'ionicons/icons';
 import {newspaperOutline} from 'ionicons/icons';
+import { OfferData } from '../../Types/Globals';
 
-interface offerData {
-    jobTitle: string,
-    companyName : string,
-    contract: string,
-    ville : string,
-    domaine: string,
-    studies : string,
-    experienceYears: 'string',
-}
 
-const offerData : offerData = [{
-    jobTitle: 'Responsable administratif et financier h/f',
-    companyName : 'McDonald\'s',
-    contract: 'CDD',
-    ville : 'Kesh',
-    domaine: 'Information',
-    studies : 'Niveau d’études: Bac +5 en Finance',
-    experienceYears: '3 ans',
-}]
 
-const OffersCard = () => {
+
+
+const OffersCard: React.FC<{ jobs: OfferData }> = ({ jobs }) =>  {
 
 
     return (
-        <div className="flex flex-row w-full justify-start p-24 gap-14">
+        <>
+            
+            <div className="flex flex-row w-full justify-start p-24 gap-14">
 
 
             <div className="bg-white flex-none w-96">
@@ -62,17 +50,17 @@ const OffersCard = () => {
                                 <div className="flex ">
                                     
                                     <div className='px-4'>
-                                        company name
+                                      {jobs.companyName}
                                     </div>
                                     
                                     <div className='border-x-2 border-neutral-500 px-4'>
                                         <IonIcon icon={locationOutline} className='text-base'></IonIcon>
-                                        Rabat
+                                        {jobs.ville}
                                     </div>
 
                                     <div className='px-4'>
                                         <IonIcon icon={newspaperOutline} className='text-base text-rose-950 pr-1' ></IonIcon>
-                                        CDD
+                                        {/**job.contract*/}
                                     </div>
                                 </div>
 
@@ -80,11 +68,11 @@ const OffersCard = () => {
 
                                 <div className='flex py-4'>
                                         <div className='pr-4 borde border-r-2 border-neutral-500'>
-                                            Niveau d’études: Bac +5 en Finance
+                                            {/**job.studies*/}
                                         </div>
                                         
                                         <div className='px-4'>
-                                            5 ans Experience
+                                            {/**job.experience_Years*/}
                                         </div>
                                 </div>
 
@@ -92,7 +80,7 @@ const OffersCard = () => {
 
                                 <div className='flex items-center'>
                                    <IonIcon icon={bagOutline} className='text-base'></IonIcon>
-                                   <span className='text-light text-base px-2'>Finance</span>
+                                   <span className='text-light text-base px-2'>{/**job.domaine*/}</span>
                                 </div>
 
                                 {/** Publish date + Button*/}
@@ -120,6 +108,8 @@ const OffersCard = () => {
 
 
         </div>
+        
+    </>
     )
 }
 

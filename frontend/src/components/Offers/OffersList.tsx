@@ -1,11 +1,34 @@
+import { useState } from "react";
 import OffersCard from "./OffersCard";
-
+import { OfferData } from "../../Types/Globals";
 
 
 
 const OffersList = () => {
 
+    const offers: OfferData[] = [{
+        jobTitle: 'Responsable administratif et financier h/f',
+        companyName : 'McDonald\'s',
+        contract: 'CDD',
+        ville : 'Kesh',
+        domaine: 'Information',
+        studies : 'Niveau d’études: Bac +5 en Finance',
+        experienceYears: '3 ans',
+    },
+    {
+        jobTitle: 'administratif et financier h/f',
+        companyName : 'Maltem',
+        contract: 'CDD',
+        ville : 'Kesh',
+        domaine: 'Information',
+        studies : 'Niveau d’études: Bac +5 en Finance',
+        experienceYears: '5 ‹ans',
+    }]
 
+    const [showData, setShowData] = useState(false);
+    const handleClick = () => {
+        setShowData(!showData);
+    }
     return (
         <>
             <div className="w-full h-46 justify-center items-center bg-darkk flex flex-col  ">
@@ -42,7 +65,7 @@ const OffersList = () => {
                                     </svg>
                             </button>
                             <div className="flex-none w-9">
-                            <button type="submit" className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-search rounded-e-lg border border-gray-300 hover:bg-secondary">
+                            <button type="submit" onClick={handleClick} className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-search rounded-e-lg border border-gray-300 hover:bg-secondary">
                                     <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                     </svg>
@@ -59,11 +82,20 @@ const OffersList = () => {
 
 
                 
-            </div>
+            </div>            
 
-            <div className="w-full">
-                <OffersCard/>
-            </div>
+            { showData && 
+
+                //  <div className={w-full}>
+                // 
+                // <div>
+                offers.map((offer, index) => (
+                    <OffersCard key={index} jobs={offer} />
+                ))}
+                
+                
+
+                
         </>
     )
 } 
