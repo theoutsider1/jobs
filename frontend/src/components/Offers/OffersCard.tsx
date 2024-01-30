@@ -16,17 +16,12 @@ const OffersCard: React.FC<{ jobs: OfferData }> = ({ jobs }) =>  {
     return (
         <>
             
-            <div className="flex flex-row w-full justify-start p-24 gap-14">
+            
+            {/** offer details */}
 
-
-            <div className="bg-white flex-none w-96">
-                <div className="bg-third w-full">
-                    fhdfh
-                </div>
-            </div>
-            <div className="flex-auto ">
-                <div className="w-auto">
-                     <div className="w-full">
+            
+                
+                     <div className="w-full m-9">
                         <div className="flex w-full items-center bg-primary p-3 rounded">
                             <div className="w-1/3 ">
                                 <img className=" w-full rounded-lg"
@@ -60,7 +55,7 @@ const OffersCard: React.FC<{ jobs: OfferData }> = ({ jobs }) =>  {
 
                                     <div className='px-4'>
                                         <IonIcon icon={newspaperOutline} className='text-base text-rose-950 pr-1' ></IonIcon>
-                                        {/**job.contract*/}
+                                        {jobs.contract}
                                     </div>
                                 </div>
 
@@ -68,11 +63,11 @@ const OffersCard: React.FC<{ jobs: OfferData }> = ({ jobs }) =>  {
 
                                 <div className='flex py-4'>
                                         <div className='pr-4 borde border-r-2 border-neutral-500'>
-                                            {/**job.studies*/}
+                                            {jobs.studies}
                                         </div>
                                         
                                         <div className='px-4'>
-                                            {/**job.experience_Years*/}
+                                            {jobs.experienceYears}
                                         </div>
                                 </div>
 
@@ -80,7 +75,7 @@ const OffersCard: React.FC<{ jobs: OfferData }> = ({ jobs }) =>  {
 
                                 <div className='flex items-center'>
                                    <IonIcon icon={bagOutline} className='text-base'></IonIcon>
-                                   <span className='text-light text-base px-2'>{/**job.domaine*/}</span>
+                                   <span className='text-light text-base px-2'>{jobs.domaine}</span>
                                 </div>
 
                                 {/** Publish date + Button*/}
@@ -103,11 +98,11 @@ const OffersCard: React.FC<{ jobs: OfferData }> = ({ jobs }) =>  {
                             </div>
                         </div>
                      </div>
-                </div>
-            </div>
+                
+            
 
 
-        </div>
+        
         
     </>
     )

@@ -1,29 +1,30 @@
 import { useState } from "react";
 import OffersCard from "./OffersCard";
 import { OfferData } from "../../Types/Globals";
+import { SiderbarFilter } from "./SidebarFiiter";
 
-
+export const offers: OfferData[] = [{
+    jobTitle: 'Responsable administratif et financier h/f',
+    companyName : 'McDonald\'s',
+    contract: 'CDD',
+    ville : 'Kesh',
+    domaine: 'Information',
+    studies : 'Niveau d’études: Bac +5 en Finance',
+    experienceYears: '3 ans',
+},
+{
+    jobTitle: 'administratif et financier h/f',
+    companyName : 'Maltem',
+    contract: 'CDD',
+    ville : 'Kesh',
+    domaine: 'Information',
+    studies : 'Niveau d’études: Bac +5 en Finance',
+    experienceYears: '5 ‹ans',
+}]
 
 const OffersList = () => {
 
-    const offers: OfferData[] = [{
-        jobTitle: 'Responsable administratif et financier h/f',
-        companyName : 'McDonald\'s',
-        contract: 'CDD',
-        ville : 'Kesh',
-        domaine: 'Information',
-        studies : 'Niveau d’études: Bac +5 en Finance',
-        experienceYears: '3 ans',
-    },
-    {
-        jobTitle: 'administratif et financier h/f',
-        companyName : 'Maltem',
-        contract: 'CDD',
-        ville : 'Kesh',
-        domaine: 'Information',
-        studies : 'Niveau d’études: Bac +5 en Finance',
-        experienceYears: '5 ‹ans',
-    }]
+   
 
     const [showData, setShowData] = useState(false);
     const handleClick = () => {
@@ -84,18 +85,30 @@ const OffersList = () => {
                 
             </div>            
 
-            { showData && 
 
-                //  <div className={w-full}>
-                // 
-                // <div>
-                offers.map((offer, index) => (
-                    <OffersCard key={index} jobs={offer} />
-                ))}
-                
-                
+            <div className="flex flex-row w-full justify-start p-24 gap-14">
 
-                
+
+                <div className="bg-white flex-none w-96">
+                    <SiderbarFilter/>
+                </div>
+                <div className="flex-auto">
+
+                { showData && 
+
+                    //  <div className={w-full}>
+                    // 
+                    // <div>
+                    offers.map((offer, index) => (
+                        
+                        <OffersCard key={index} jobs={offer} />
+                    
+                    ))}
+                    
+                </div>
+            </div>
+            
+            
         </>
     )
 } 
