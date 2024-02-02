@@ -1,10 +1,31 @@
+import { useEffect, useState } from "react"
 
 
 
 
 
 export const SiderbarFilter = () => {
+    const [userInfo, setUserInfo]= useState([])
 
+    const [newValue, setnewValue]= useState('')
+    const handleChange = (e:React.FormEvent<HTMLInputElement>)=> {
+        
+        if (e.currentTarget.checked){
+            setUserInfo([...userInfo , e.currentTarget.value])
+            
+        } else {
+            setUserInfo(userInfo.filter(item => item !== e.currentTarget.value))
+            
+        }
+        
+    };    
+
+    useEffect(()=> {
+        console.log(userInfo)
+    },[userInfo])
+
+    
+    
     return (
         <>
              <div className="bg-third w-full">
@@ -13,26 +34,26 @@ export const SiderbarFilter = () => {
                     <h4>Le type du travail:</h4>
                     <ul className="p-2">
                         <li> 
-                            <label className="" >
-                            <input type="checkbox" />
+                            <label className="" htmlFor="temps_plein" >
+                            <input type="checkbox" id="temps-plein" value ="temps_plein" name="work_type" onChange={handleChange} />
                                <span className="px-3">Temps plein</span> 
                             </label>
                         </li>
                         <li>
-                            <label>
-                                <input type="checkbox" />
+                            <label htmlFor="mi_temps">
+                                <input type="checkbox" id="mi-temps" value ="mi_temps"  name="work_type" onChange={handleChange}/>
                                 <span className="px-3">Mi-temps</span>
                               </label>
                         </li>
                         <li>
-                            <label>
-                                <input type="checkbox" />
-                                <span className="px-3"> étudiant</span>
+                            <label htmlFor="etudiant">
+                                <input type="checkbox" id="etudiant" value ="étudiant" name="work_type" onChange={handleChange}/>
+                                <span className="px-3">étudiant</span>
                             </label>
                         </li>
                         <li>
-                             <label>
-                                <input type="checkbox" />
+                             <label htmlFor="distance">
+                                <input type="checkbox" id="distance" value ="distance" name="work_type" onChange={handleChange}/>
                                 <span className="px-3">à distance</span> 
                             </label>
                         </li>
@@ -49,31 +70,31 @@ export const SiderbarFilter = () => {
                     <ul className="p-2">
                         <li> 
                             <label className="" >
-                            <input type="checkbox" />
+                            <input type="checkbox" value ="" />
                                <span className="px-3">CDI</span> 
                             </label>
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">CDD</span>
                               </label>
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">Stage</span>
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">Anapec</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">Freelance</span> 
                             </label>
                         </li>
@@ -86,61 +107,61 @@ export const SiderbarFilter = () => {
                     <ul className="p-2">
                         <li> 
                             <label className="" >
-                            <input type="checkbox" />
+                            <input type="checkbox" value ="" />
                                <span className="px-3">Agriculture</span> 
                             </label>
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">Audiovisual</span>
                               </label>
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">industrie</span>
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">énergie</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">électrique</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">Marketing</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">Finance</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">Santé</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">Tourisme</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value =""/>
                                 <span className="px-3">Immobilier</span> 
                             </label>
                         </li>
@@ -388,7 +409,7 @@ export const SiderbarFilter = () => {
                         <li>
                             <label>
                                 <input type="checkbox" />
-                                <span className="px-3"> Stage d’observation</span>
+                                <span className="px-3">Stage d’observation</span>
                             </label>
                         </li>
                         <li>
