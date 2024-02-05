@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OffersCard from "./OffersCard";
 import { OfferData } from "../../Types/Globals";
 import { SiderbarFilter } from "./SidebarFiiter";
@@ -15,7 +15,7 @@ export const offers: OfferData[] = [{
 {
     jobTitle: 'administratif et financier h/f',
     companyName : 'Maltem',
-    contract: 'CDD',
+    contract: 'stage',
     ville : 'Kesh',
     domaine: 'Information',
     studies : 'Niveau d’études: Bac +5 en Finance',
@@ -24,12 +24,24 @@ export const offers: OfferData[] = [{
 
 const OffersList = () => {
 
-   
-
     const [showData, setShowData] = useState(false);
+    const [checkboxValues, setCheckboxValues] = useState<string[]>([]);
+
     const handleClick = () => {
         setShowData(!showData);
+        //console.log(checkboxValues)
     }
+
+    const handleFilterChange = (values: string[])=>{
+        setCheckboxValues(values)
+        console.log(values)
+
+    }
+    useEffect(()=>{
+       setShowData(!showData);
+    },[checkboxValues])
+   
+    
     return (
         <>
             <div className="w-full h-46 justify-center items-center bg-darkk flex flex-col  ">
@@ -90,20 +102,25 @@ const OffersList = () => {
 
 
                 <div className="bg-white flex-none w-96">
-                    <SiderbarFilter/>
+                    <SiderbarFilter onCheckboxChange= {handleFilterChange}/>
                 </div>
                 <div className="flex-auto">
 
                 { showData && 
 
-                    //  <div className={w-full}>
-                    // 
-                    // <div>
-                    offers.map((offer, index) => (
-                        
-                        <OffersCard key={index} jobs={offer} />
                     
-                    ))}
+                    offers.filter(offer => {
+                        // Check if any property value in the offer matches any value in checkboxValues
+                        return Object.values(offer).some(value => {
+                          if (typeof value === 'string') {
+                            return checkboxValues.some(checkboxValue => value.includes(checkboxValue));
+                          }
+                          return false;
+                        });
+                      })
+                      .map((filteredOffer, index) => (
+                        <OffersCard key={index} jobs={filteredOffer} />
+                      ))}
                     
                 </div>
             </div>

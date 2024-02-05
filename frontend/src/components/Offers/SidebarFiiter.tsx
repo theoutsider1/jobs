@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react"
 
+import { dataFromChild } from "../../Types/Globals";
 
 
 
+export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
+    const [userInfo, setUserInfo]= useState<string[]>([])
 
-export const SiderbarFilter = () => {
-    const [userInfo, setUserInfo]= useState([])
-
-    const [newValue, setnewValue]= useState('')
     const handleChange = (e:React.FormEvent<HTMLInputElement>)=> {
         
         if (e.currentTarget.checked){
@@ -17,14 +16,9 @@ export const SiderbarFilter = () => {
             setUserInfo(userInfo.filter(item => item !== e.currentTarget.value))
             
         }
-        
+        onCheckboxChange(userInfo)
     };    
 
-    useEffect(()=> {
-        console.log(userInfo)
-    },[userInfo])
-
-    
     
     return (
         <>
@@ -70,19 +64,19 @@ export const SiderbarFilter = () => {
                     <ul className="p-2">
                         <li> 
                             <label className="" >
-                            <input type="checkbox" value ="" />
+                            <input type="checkbox" value ="CDI"  onChange={handleChange}/>
                                <span className="px-3">CDI</span> 
                             </label>
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="CDD" onChange={handleChange}/>
                                 <span className="px-3">CDD</span>
                               </label>
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="stage" onChange={handleChange}/>
                                 <span className="px-3">Stage</span>
                             </label>
                         </li>

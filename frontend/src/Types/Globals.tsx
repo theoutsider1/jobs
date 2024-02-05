@@ -7,3 +7,11 @@ export interface OfferData {
     studies?: string;
     experienceYears?: string;
 }
+
+
+// function props that i'm passing to sideBarFilter to collect checkboxes values 
+
+
+export interface dataFromChild {
+    onCheckboxChange: (values: string[])=> void;
+}
