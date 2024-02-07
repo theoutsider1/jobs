@@ -6,20 +6,38 @@ import { SiderbarFilter } from "./SidebarFiiter";
 export const offers: OfferData[] = [{
     jobTitle: 'Responsable administratif et financier h/f',
     companyName : 'McDonald\'s',
-    contract: 'CDD',
+    contract: 'C-DD',
     ville : 'Kesh',
     domaine: 'Information',
     studies : 'Niveau d’études: Bac +5 en Finance',
     experienceYears: '3 ans',
 },
 {
-    jobTitle: 'administratif et financier h/f',
+    jobTitle: 'DevOps',
     companyName : 'Maltem',
-    contract: 'stage',
+    contract: 'Stage',
     ville : 'Kesh',
     domaine: 'Information',
     studies : 'Niveau d’études: Bac +5 en Finance',
-    experienceYears: '5 ‹ans',
+    experienceYears: '5 ans',
+},
+{
+    jobTitle: 'Big data',
+    companyName : 'DXC',
+    contract: 'Freelance',
+    ville : 'Kesh',
+    domaine: 'Information',
+    studies : 'Niveau d’études: Bac +5 en Finance',
+    experienceYears: '5 ans',
+},
+{
+    jobTitle: 'Big data',
+    companyName : 'DXC',
+    contract: 'Anapec',
+    ville : 'Kesh',
+    domaine: 'finance',
+    studies : 'Niveau d’études: Bac +5 en Finance',
+    experienceYears: '5 ans',
 }]
 
 const OffersList = () => {
@@ -34,11 +52,14 @@ const OffersList = () => {
 
     const handleFilterChange = (values: string[])=>{
         setCheckboxValues(values)
-        console.log(values)
+        
+        //console.log(values)
 
     }
     useEffect(()=>{
-       setShowData(!showData);
+        
+       //setShowData(!showData);
+      
     },[checkboxValues])
    
     
@@ -106,19 +127,24 @@ const OffersList = () => {
                 </div>
                 <div className="flex-auto">
 
-                { showData && 
+                {// showData && 
 
                     
                     offers.filter(offer => {
+                        
                         // Check if any property value in the offer matches any value in checkboxValues
                         return Object.values(offer).some(value => {
+                           
                           if (typeof value === 'string') {
-                            return checkboxValues.some(checkboxValue => value.includes(checkboxValue));
+                            return checkboxValues.some(checkboxValue => value.toLowerCase().replace(/-/,"").includes(checkboxValue.toLowerCase().replace(/-/,"")));
+                            
                           }
                           return false;
                         });
+                        
                       })
                       .map((filteredOffer, index) => (
+                        console.log(filteredOffer),
                         <OffersCard key={index} jobs={filteredOffer} />
                       ))}
                     

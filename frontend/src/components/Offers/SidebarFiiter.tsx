@@ -6,9 +6,9 @@ import { dataFromChild } from "../../Types/Globals";
 
 export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
     const [userInfo, setUserInfo]= useState<string[]>([])
-
-    const handleChange = (e:React.FormEvent<HTMLInputElement>)=> {
-        
+    
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=> {
+       
         if (e.currentTarget.checked){
             setUserInfo([...userInfo , e.currentTarget.value])
             
@@ -17,8 +17,12 @@ export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
             
         }
         onCheckboxChange(userInfo)
+       
     };    
+     useEffect(()=> {
+       onCheckboxChange(userInfo)
 
+    },[onCheckboxChange,userInfo])
     
     return (
         <>
@@ -29,13 +33,13 @@ export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
                     <ul className="p-2">
                         <li> 
                             <label className="" htmlFor="temps_plein" >
-                            <input type="checkbox" id="temps-plein" value ="temps_plein" name="work_type" onChange={handleChange} />
+                            <input type="checkbox" id="temps-plein" value ="temps-plein" name="work_type" onChange={handleChange} />
                                <span className="px-3">Temps plein</span> 
                             </label>
                         </li>
                         <li>
                             <label htmlFor="mi_temps">
-                                <input type="checkbox" id="mi-temps" value ="mi_temps"  name="work_type" onChange={handleChange}/>
+                                <input type="checkbox" id="mi-temps" value ="mi-temps"  name="work_type" onChange={handleChange}/>
                                 <span className="px-3">Mi-temps</span>
                               </label>
                         </li>
@@ -70,7 +74,7 @@ export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" value ="CDD" onChange={handleChange}/>
+                                <input type="checkbox" value ="C-DD" onChange={handleChange}/>
                                 <span className="px-3">CDD</span>
                               </label>
                         </li>
@@ -82,13 +86,13 @@ export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="anapec" onChange={handleChange}/>
                                 <span className="px-3">Anapec</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="freelance" onChange={handleChange}/>
                                 <span className="px-3">Freelance</span> 
                             </label>
                         </li>
@@ -101,61 +105,61 @@ export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
                     <ul className="p-2">
                         <li> 
                             <label className="" >
-                            <input type="checkbox" value ="" />
+                            <input type="checkbox" value ="Agriculture" onChange={handleChange}/>
                                <span className="px-3">Agriculture</span> 
                             </label>
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="Audiovisual" onChange={handleChange}/>
                                 <span className="px-3">Audiovisual</span>
                               </label>
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="industrie" onChange={handleChange}/>
                                 <span className="px-3">industrie</span>
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="énergie" onChange={handleChange}/>
                                 <span className="px-3">énergie</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="électrique" onChange={handleChange}/>
                                 <span className="px-3">électrique</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="Marketing" onChange={handleChange}/>
                                 <span className="px-3">Marketing</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="Finance" onChange={handleChange}/>
                                 <span className="px-3">Finance</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="Santé" onChange={handleChange}/>
                                 <span className="px-3">Santé</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="Tourisme" onChange={handleChange}/>
                                 <span className="px-3">Tourisme</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" value =""/>
+                                <input type="checkbox" value ="Immobilier" onChange={handleChange}/>
                                 <span className="px-3">Immobilier</span> 
                             </label>
                         </li>
@@ -169,61 +173,61 @@ export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
                     <ul className="p-2">
                         <li> 
                             <label className="" >
-                            <input type="checkbox" />
+                            <input type="checkbox" value="RH" onChange={handleChange}/>
                                <span className="px-3">RH</span> 
                             </label>
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="Comptabilité" onChange={handleChange}/>
                                 <span className="px-3">Comptabilité</span>
                               </label>
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="Gestion/Gestion du projet" onChange={handleChange}/>
                                 <span className="px-3">Gestion/Gestion du projet</span>
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="Achat" onChange={handleChange} />
                                 <span className="px-3">Achat</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="Communication/publicité" onChange={handleChange}/>
                                 <span className="px-3">Communication/publicité</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="Assurance" onChange={handleChange}/>
                                 <span className="px-3">Assurance</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="Commercial" onChange={handleChange}/>
                                 <span className="px-3">Commercial</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="Assistant" onChange={handleChange}/>
                                 <span className="px-3">Assistant</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="Audit" onChange={handleChange}/>
                                 <span className="px-3">Audit</span> 
                             </label>
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="Droit" onChange={handleChange}/>
                                 <span className="px-3">Droit</span> 
                             </label>
                         </li>
