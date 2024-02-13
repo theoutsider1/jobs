@@ -35,7 +35,7 @@ const OffersCard: React.FC<{ jobs: OfferData }> = ({ jobs }) =>  {
 
                                 <div className="flex justify-between">
 
-                                    <h2 className="font-medium text-xl">Responsable administratif et financier h/f</h2>
+                                    <h2 className="font-medium text-xl">{jobs.jobTitle}</h2>
                                     <span> <IonIcon icon={heartOutline}></IonIcon></span>  
 
                                 </div>

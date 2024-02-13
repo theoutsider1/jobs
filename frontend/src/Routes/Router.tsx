@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import HeroSection from "../components/HeroSection/HeroSection";
 import  Layout  from "./Layout";
 import LastProfiles from "../components/Last Profiles/LastProfiles";
-import OffersPage from "../components/Offers/OffersPage";
+//import OffersPage from "../components/Offers/OffersPage";
+import OffersList from "../components/Offers/OffersList";
 
 const Router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/offers",
-                element: <OffersPage/>,
+                element: <OffersList/>,
             }
         ]
 

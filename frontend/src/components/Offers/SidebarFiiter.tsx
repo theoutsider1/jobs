@@ -7,27 +7,31 @@ import { dataFromChild } from "../../Types/Globals";
 export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
     const [userInfo, setUserInfo]= useState<string[]>([])
     
-    const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=> {
+    const handleChange =  (e:React.ChangeEvent<HTMLInputElement>)=> {
        
         if (e.currentTarget.checked){
-            setUserInfo([...userInfo , e.currentTarget.value])
+              setUserInfo([...userInfo , e.currentTarget.value.toLowerCase()])
             
         } else {
-            setUserInfo(userInfo.filter(item => item !== e.currentTarget.value))
+             setUserInfo(userInfo.filter(item => item !== e.currentTarget.value.toLocaleLowerCase()))
             
         }
-        onCheckboxChange(userInfo)
+        
+        
        
-    };    
+    }; 
+     
      useEffect(()=> {
        onCheckboxChange(userInfo)
+       //console.log(userInfo);
+       
 
-    },[onCheckboxChange,userInfo])
+    },[ userInfo])
     
     return (
         <>
              <div className="bg-third w-full">
-                <form action="">
+               {/** <form action="">*/ }
                 <div className="p-4 border-b-2 border-b-pink-950">
                     <h4>Le type du travail:</h4>
                     <ul className="p-2">
@@ -147,7 +151,7 @@ export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
                         </li>
                         <li>
                              <label>
-                                <input type="checkbox" value ="Santé" onChange={handleChange}/>
+                                <input type="checkbox" value ="santé" onChange={handleChange}/>
                                 <span className="px-3">Santé</span> 
                             </label>
                         </li>
@@ -331,7 +335,7 @@ export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
                         </li>
                         <li>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" value="Rabat" onChange={handleChange}/>
                                 <span className="px-3">Rabat/Salé </span>
                               </label>
                         </li>
@@ -421,7 +425,7 @@ export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
                    
                    
                 </div>
-                </form>
+               { /**</form>*/}
                
             </div>
         </>
