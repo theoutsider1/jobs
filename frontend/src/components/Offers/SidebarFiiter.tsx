@@ -1,434 +1,70 @@
-import { useEffect, useState } from "react"
-
+import { useEffect, useState } from "react";
 import { dataFromChild } from "../../Types/Globals";
 
+const filterCategories = [
+  {
+    title: "Le type du travail",
+    options: ["Temps plein", "Mi-temps", "Étudiant", "À distance"],
+  },
+  {
+    title: "Le type du contrat",
+    options: ["CDI", "CDD", "Stage", "Anapec", "Freelance"],
+  },
+  {
+    title: "Domaines",
+    options: [
+      "Agriculture",
+      "Audiovisual",
+      "Industrie",
+      "Énergie",
+      "Électrique",
+      "Marketing",
+      "Finance",
+      "Santé",
+      "Tourisme",
+      "Immobilier",
+    ],
+  },
+  // Add more categories as needed
+];
 
+export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => {
+  const [userInfo, setUserInfo] = useState<string[]>([]);
 
-export const SiderbarFilter:React.FC<dataFromChild> = ({onCheckboxChange}) => {
-    const [userInfo, setUserInfo]= useState<string[]>([])
+  const handleChange =  (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value, checked } = e.currentTarget;
+      setUserInfo((prevUserInfo) =>
+      checked ? [value,...prevUserInfo ] : prevUserInfo.filter((item) => item !== value)
+    );
+     //onCheckboxChange(userInfo);
+   
     
-    const handleChange =  (e:React.ChangeEvent<HTMLInputElement>)=> {
-       
-        if (e.currentTarget.checked){
-              setUserInfo([...userInfo , e.currentTarget.value.toLowerCase()])
-            
-        } else {
-             setUserInfo(userInfo.filter(item => item !== e.currentTarget.value.toLocaleLowerCase()))
-            
-        }
-        
-        
-       
-    }; 
-     
-     useEffect(()=> {
-       onCheckboxChange(userInfo)
-       //console.log(userInfo);
-       
+  };
 
-    },[ userInfo])
+  useEffect(() => {
+    onCheckboxChange(userInfo);
+    //console.log(userInfo);
     
-    return (
-        <>
-             <div className="bg-third w-full">
-               {/** <form action="">*/ }
-                <div className="p-4 border-b-2 border-b-pink-950">
-                    <h4>Le type du travail:</h4>
-                    <ul className="p-2">
-                        <li> 
-                            <label className="" htmlFor="temps_plein" >
-                            <input type="checkbox" id="temps-plein" value ="temps-plein" name="work_type" onChange={handleChange} />
-                               <span className="px-3">Temps plein</span> 
-                            </label>
-                        </li>
-                        <li>
-                            <label htmlFor="mi_temps">
-                                <input type="checkbox" id="mi-temps" value ="mi-temps"  name="work_type" onChange={handleChange}/>
-                                <span className="px-3">Mi-temps</span>
-                              </label>
-                        </li>
-                        <li>
-                            <label htmlFor="etudiant">
-                                <input type="checkbox" id="etudiant" value ="étudiant" name="work_type" onChange={handleChange}/>
-                                <span className="px-3">étudiant</span>
-                            </label>
-                        </li>
-                        <li>
-                             <label htmlFor="distance">
-                                <input type="checkbox" id="distance" value ="distance" name="work_type" onChange={handleChange}/>
-                                <span className="px-3">à distance</span> 
-                            </label>
-                        </li>
-                    </ul>
-                   
-                   
-                   
-                </div>
+  }, [userInfo]);
 
-                {/** le type du contrat: */}
-
-                <div className="p-4 border-b-2 border-b-pink-950">
-                    <h4>Le type du contrat:</h4>
-                    <ul className="p-2">
-                        <li> 
-                            <label className="" >
-                            <input type="checkbox" value ="CDI"  onChange={handleChange}/>
-                               <span className="px-3">CDI</span> 
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" value ="C-DD" onChange={handleChange}/>
-                                <span className="px-3">CDD</span>
-                              </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" value ="stage" onChange={handleChange}/>
-                                <span className="px-3">Stage</span>
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value ="anapec" onChange={handleChange}/>
-                                <span className="px-3">Anapec</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value ="freelance" onChange={handleChange}/>
-                                <span className="px-3">Freelance</span> 
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-
-                {/**Domaines: */}
-                <div className="p-4 border-b-2 border-b-pink-950">
-                    <h4>Domaines:</h4>
-                    <ul className="p-2">
-                        <li> 
-                            <label className="" >
-                            <input type="checkbox" value ="Agriculture" onChange={handleChange}/>
-                               <span className="px-3">Agriculture</span> 
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" value ="Audiovisual" onChange={handleChange}/>
-                                <span className="px-3">Audiovisual</span>
-                              </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" value ="industrie" onChange={handleChange}/>
-                                <span className="px-3">industrie</span>
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value ="énergie" onChange={handleChange}/>
-                                <span className="px-3">énergie</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value ="électrique" onChange={handleChange}/>
-                                <span className="px-3">électrique</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value ="Marketing" onChange={handleChange}/>
-                                <span className="px-3">Marketing</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value ="Finance" onChange={handleChange}/>
-                                <span className="px-3">Finance</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value ="santé" onChange={handleChange}/>
-                                <span className="px-3">Santé</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value ="Tourisme" onChange={handleChange}/>
-                                <span className="px-3">Tourisme</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value ="Immobilier" onChange={handleChange}/>
-                                <span className="px-3">Immobilier</span> 
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                
-                {/**Fonction: */}
-
-                <div className="p-4 border-b-2 border-b-pink-950">
-                    <h4>Fonction:</h4>
-                    <ul className="p-2">
-                        <li> 
-                            <label className="" >
-                            <input type="checkbox" value="RH" onChange={handleChange}/>
-                               <span className="px-3">RH</span> 
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" value="Comptabilité" onChange={handleChange}/>
-                                <span className="px-3">Comptabilité</span>
-                              </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" value="Gestion/Gestion du projet" onChange={handleChange}/>
-                                <span className="px-3">Gestion/Gestion du projet</span>
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value="Achat" onChange={handleChange} />
-                                <span className="px-3">Achat</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value="Communication/publicité" onChange={handleChange}/>
-                                <span className="px-3">Communication/publicité</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value="Assurance" onChange={handleChange}/>
-                                <span className="px-3">Assurance</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value="Commercial" onChange={handleChange}/>
-                                <span className="px-3">Commercial</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value="Assistant" onChange={handleChange}/>
-                                <span className="px-3">Assistant</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value="Audit" onChange={handleChange}/>
-                                <span className="px-3">Audit</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" value="Droit" onChange={handleChange}/>
-                                <span className="px-3">Droit</span> 
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-
-                {/**Niveau d’études: */}
-
-                <div className="p-4 border-b-2 border-b-pink-950">
-                    <h4>Niveau d’études:</h4>
-                    <ul className="p-2">
-                        <li> 
-                            <label className="" >
-                            <input type="checkbox" />
-                               <span className="px-3">Bac+5 et plus</span> 
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Bac+4</span>
-                              </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Bac+3</span>
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Bac+2</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Bac</span> 
-                            </label>
-                        </li>
-                        
-                    </ul>
-                </div>
-
-                 {/** Année d’expériences: */}
-
-                <div className="p-4 border-b-2 border-b-pink-950">
-                    <h4> Année d’expériences:</h4>
-                    <ul className="p-2">
-                        <li> 
-                            <label className="" >
-                            <input type="checkbox" />
-                               <span className="px-3">Plus de 20 ans</span> 
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" />
-                                <span className="px-3">De 5 à 10 ans </span>
-                              </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" />
-                                <span className="px-3">de 3 à 5 ans</span>
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">De 1 à 3 ans</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Moins de 1 an</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Débutant</span> 
-                            </label>
-                        </li>
-                        
-                    </ul>
-                </div>
-
-                 {/** Région:*/}
-
-                <div className="p-4 border-b-2 border-b-pink-950">
-                    <h4> Région:</h4>
-                    <ul className="p-2">
-                        <li> 
-                            <label className="" >
-                            <input type="checkbox" />
-                               <span className="px-3">Casablanca/settat</span> 
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" value="Rabat" onChange={handleChange}/>
-                                <span className="px-3">Rabat/Salé </span>
-                              </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Fes/Meknes</span>
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Souss Massa</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Daraa Tafilalt</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Tanger-Al houceima</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Oujda</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Marrakesh/Safi</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Laayoune Dakhla</span> 
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Beni Mellal-khnifra</span> 
-                            </label>
-                        </li>
-                        
-                    </ul>
-                </div>
-
-                {/** Offers de stages */}
-
-                <div className="p-4 ">
-                    <h4>Offers de stages:</h4>
-                    <ul className="p-2">
-                        <li> 
-                            <label className="" >
-                            <input type="checkbox" />
-                               <span className="px-3">Stage PFE</span> 
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Stage PFA</span>
-                              </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Stage d’observation</span>
-                            </label>
-                        </li>
-                        <li>
-                             <label>
-                                <input type="checkbox" />
-                                <span className="px-3">Stage pré-mbauche</span> 
-                            </label>
-                        </li>
-                    </ul>
-                   
-                   
-                   
-                </div>
-               { /**</form>*/}
-               
-            </div>
-        </>
-    )
-}
-
+  return (
+    <div className="bg-third w-full">
+      {filterCategories.map((category) => (
+        <div key={category.title} className="p-4 border-b-2 border-b-pink-950">
+          <h4>{category.title}:</h4>
+          <ul className="p-2">
+            {category.options.map((option) => (
+              <li key={option}>
+                <label>
+                  <input type="checkbox" value={option} onChange={handleChange} />
+                  <span className="px-3">{option}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+      {/* Add more filter sections as needed */}
+    </div>
+  );
+};
