@@ -5,14 +5,17 @@ import {bagOutline} from 'ionicons/icons';
 import {locationOutline} from 'ionicons/icons';
 import {newspaperOutline} from 'ionicons/icons';
 import { OfferData } from '../../Types/Globals';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 
 const OffersCard: React.FC<{ jobs: OfferData }> = ({ jobs }) =>  {
-
-
+    const navigate = useNavigate();
+    const navigateToJobDescription = ()=> {
+            navigate('/JobDescription');
+    }
     return (
         <>
             
@@ -87,23 +90,15 @@ const OffersCard: React.FC<{ jobs: OfferData }> = ({ jobs }) =>  {
                                     <div>
                                     <button
                                         type="button"
+                                        onClick={navigateToJobDescription}
                                         className="rounded bg-darkk px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_8px_9px_-4px_rgba(0,0,0,0.3)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]" >
                                         Postuler
                                         </button>
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
-                     </div>
-                
-            
-
-
-        
-        
+                     </div>      
     </>
     )
 }

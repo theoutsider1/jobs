@@ -25,6 +25,52 @@ const filterCategories = [
       "Immobilier",
     ],
   },
+  {
+    title: "Fonction:",
+    options:[
+      "RH",
+      "Comptabilité",
+      "Gestion/Gestion du projet",
+      "Achat",
+      "Communication/publicité",
+      "Assurance",
+      "Commercial",
+      "Assistant",
+      "Audit",
+      "Droit",
+    ],
+  },
+  {
+    title: "Niveau d’études:",
+    options:[
+      "Bac+5 et plus",
+      "Bac+4",
+      "Bac+3",
+      "Bac+2",
+      "Bac",
+    ],
+  },
+  {
+    title: "Année d’expériences:",
+    options:[
+      "Plus de 20 ans",
+      "De 5 à 10 ans ",
+      "de 3 à 5 ans",
+      "De 1 à 3 ans",
+      "Moins de 1 an",
+      "Débutant",
+    ],
+  },
+  {
+    title: "Offers de stages:",
+    options:[
+      "Stage PFE",
+      "Stage PFA",
+      "Stage d’observation<",
+      "Stage pré-mbauche",
+      
+    ],
+  },
   // Add more categories as needed
 ];
 

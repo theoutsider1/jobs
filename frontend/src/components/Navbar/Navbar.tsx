@@ -53,7 +53,7 @@ const Navbar = () => {
             <Link to="/offers" className=" /*py-7*/ px-3 inline-block">
               A propos
             </Link>
-            <Link to="/" className=" /*py-7*/ px-3 inline-block">
+            <Link to="/JobDescription" className=" /*py-7*/ px-3 inline-block">
             Contact
             </Link>
           </li>

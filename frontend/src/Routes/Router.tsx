@@ -4,6 +4,7 @@ import  Layout  from "./Layout";
 import LastProfiles from "../components/Last Profiles/LastProfiles";
 //import OffersPage from "../components/Offers/OffersPage";
 import OffersList from "../components/Offers/OffersList";
+import JobDescription from "../components/OfferDetails/JobDescription";
 
 const Router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const Router = createBrowserRouter([
             {
                 path: "/offers",
                 element: <OffersList/>,
+            },
+            {
+                path: "/JobDescription",
+                element:<JobDescription/>,
             }
         ]
 

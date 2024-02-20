@@ -1,44 +1,9 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import OffersCard from "./OffersCard";
-import { OfferData } from "../../Types/Globals";
 import { SidebarFilter } from "./SidebarFiiter";
 import {regions} from "../../Types/Globals";
-export const offers: OfferData[] = [{
-    jobTitle: 'Responsable administratif et Information h/f',
-    companyName : 'McDonald\'s',
-    contract: 'CDI',
-    ville : 'Kesh',
-    domaine: 'Information',
-    studies : 'Niveau d’études: Bac +5 en Information',
-    experienceYears: '3 ans',
-},
-{
-    jobTitle: 'DevOps',
-    companyName : 'maltem',
-    contract: 'stage',
-    ville : 'rabat',
-    domaine: 'tourisme',
-    studies : 'Niveau d’études: Bac +5 en tourisme',
-    experienceYears: '5 ans',
-},
-{
-    jobTitle: 'Agriculture ',
-    companyName : 'DXC',
-    contract: 'anapec',
-    ville : 'Kesh',
-    domaine: 'Agriculture',
-    studies : 'Niveau d’études: Bac +5 en Agriculture',
-    experienceYears: '5 ans',
-},
-{
-    jobTitle: 'caissier',
-    companyName : 'alten',
-    contract: 'CDD',
-    ville : 'oujda',
-    domaine: 'finance',
-    studies : 'Niveau d’études: Bac +6 en chirurgie',
-    experienceYears: '5 ans',
-}]
+import { jobDetails } from "../../Types/DataJobs";
+
 
 const OffersList = () => {
 
@@ -49,62 +14,92 @@ const OffersList = () => {
     const [searchValue, setSearchValue] = useState('')
 
    
-    //toggle region dropdown agriculture
+    //toggle region dropdown 
 
     const handleDropdownToggle = () =>{
         setdropdrownToggle(!dropdownToggle)
-        
+                  
     }
+  
     // get the value of the list regions
     const handleDropDownValue = (value:string)=>{
-        setRegionSelected(value)
+       
+        setRegionSelected(value.toLowerCase().replace(/[-_',]/g," " ) )
+
         setdropdrownToggle(!dropdownToggle)
     }
     
     // handle Search input 
-    const handleSubmit = (e: any, searchValue: string, setCheckboxValues: React.Dispatch<React.SetStateAction<string[]>>) => {
+    const handleSubmit = (e: any, searchValue: string, regionSelected: string, setCheckboxValues: React.Dispatch<React.SetStateAction<string[]>>) => {
         e.preventDefault();
         
         setCheckboxValues((prevValues) => {
-            if (searchValue ) {
+            if ( searchValue && !checkboxValues.includes(searchValue) 
+            && regionSelected && regionSelected !== "Ville, Région" && !checkboxValues.includes(regionSelected)){
+                // let f : string = regionSelected
+                return [...prevValues,searchValue, regionSelected];
+            }
+
+            if (searchValue && !checkboxValues.includes(searchValue)) {
               
                 return [...prevValues, searchValue];
+
             } 
+            if(regionSelected && !checkboxValues.includes(regionSelected)){
+                
+                return [...prevValues, regionSelected];
+                
+            } 
+           
            
             return prevValues;
         });
     };
 
-
-    
-    // Assume this function is called when you handle form submission
-    const handlesub = (e: any) => {
-        handleSubmit(e, searchValue, setCheckboxValues);
-   
-    };
     const handleInputChange =  (e:React.ChangeEvent<HTMLInputElement>)=>{
         if (checkboxValues.includes(searchValue)){
 
             // clean the previous searchValue from checkboxValues Array
             setCheckboxValues(checkboxValues.filter(v => v !== searchValue))
-            setSearchValue( e.target.value )
+            setSearchValue( e.target.value.toLowerCase().replace(/[-_',]/g," " ))
         } else {
-            setSearchValue( e.target.value )
+            setSearchValue( e.target.value.toLowerCase().replace(/[-_',]/g," " ) )
         }
     
     }
- 
     
+    // Assume this function is called when you handle form submission
+    const handlesub = (e: any) => {
+        
+        handleSubmit(e, searchValue,regionSelected ,setCheckboxValues);
+        
+   
+    };
+   
     const handleFilterChange = (values: string[])=>{
-        if (searchValue){
-            setCheckboxValues([...values, searchValue])
+        if (searchValue || regionSelected && regionSelected !== "Ville, Région"){
+
+           if (searchValue && regionSelected && regionSelected !== "Ville, Région"){
+
+                setCheckboxValues([searchValue, regionSelected, ...values])
+
+           } else  if (regionSelected && regionSelected !== "Ville, Région") {
+
+                setCheckboxValues([regionSelected, ...values])
+
+            } else if (searchValue){                
+                setCheckboxValues([searchValue, ...values])
+            } 
         } else {
             setCheckboxValues([...values])
         }
        
 
     }
-  
+    useEffect(()=>{
+        console.log(checkboxValues);
+        
+    },[checkboxValues])
     
     return (
         <>
@@ -142,15 +137,17 @@ const OffersList = () => {
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                         </svg>
                                 </button>
-                                { dropdownToggle &&
-                                    <div className={`${dropdownToggle  ? " w-[343px] z-30 mt-11 absolute bg-primary" : "hidden"}`}>
+                                { dropdownToggle &&(
+                                    <div className={`${dropdownToggle  ? " w-[343px] h-56 overflow-y-auto z-30 mt-11 absolute rounded-b-md bg-third" : "hidden"}`}>
                                             {regions.map(ville => (
                                                 <ul className="text-sm pt-4 ">
-                                                    <li key= {ville} value={ville} onClick={() => handleDropDownValue(ville)} className="px-4 py-3 hover:bg-third cursor-pointer " >{ville}</li>
+                                                    <li key={ville} value={ville} onClick={() =>
+                                                        handleDropDownValue(ville)} 
+                                                        className="px-4 py-3 hover:bg-third cursor-pointer " >{ville}</li>
                                                 
                                                 </ul>
                                             ))}
-                                    </div>}
+                                    </div>)}
                             
                             </div>
                          
@@ -182,7 +179,7 @@ const OffersList = () => {
 
                 {
                 
-                    offers.filter(offer => {
+                jobDetails.filter(offer => {
                         
                         // Check if any property value in the offer matches any value in checkboxValues
                         return Object.values(offer).some(value => {
