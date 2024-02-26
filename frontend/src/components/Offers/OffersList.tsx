@@ -5,6 +5,7 @@ import {regions} from "../../Types/Globals";
 import { jobDetails } from "../../Types/DataJobs";
 
 
+
 const OffersList = () => {
 
     //const [showData, setShowData] = useState(false);
@@ -12,7 +13,7 @@ const OffersList = () => {
     const [dropdownToggle, setdropdrownToggle] = useState(false);
     const [regionSelected, setRegionSelected] = useState("Ville, Région")
     const [searchValue, setSearchValue] = useState('')
-
+    
    
     //toggle region dropdown 
 
@@ -196,7 +197,7 @@ const OffersList = () => {
                       })
                       .map((filteredOffer, index) => (
                         
-                        <OffersCard key={index} jobs={filteredOffer} />
+                        <OffersCard key={index} jobs={filteredOffer} id= {filteredOffer.id}/>
                       ))  }                  
                 </div>                
             </div>

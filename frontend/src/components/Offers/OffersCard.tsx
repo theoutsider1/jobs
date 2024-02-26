@@ -1,4 +1,3 @@
-import React from 'react';
 import { IonIcon } from '@ionic/react';
 import {heartOutline} from 'ionicons/icons';
 import {bagOutline} from 'ionicons/icons';
@@ -7,14 +6,24 @@ import {newspaperOutline} from 'ionicons/icons';
 import { OfferData } from '../../Types/Globals';
 import { useNavigate } from 'react-router-dom';
 
+import { getJob } from '../store/features/jobDetailsSlice';
+import { useAppDispatch } from '../store/store';
 
 
 
 
-const OffersCard: React.FC<{ jobs: OfferData }> = ({ jobs }) =>  {
+
+
+const OffersCard: React.FC<{ jobs: OfferData, id:any }> = ({ jobs,id }) =>  {
+   // const [targetJob , setTargetJob] = useState(Number)
     const navigate = useNavigate();
+    const  dispatch = useAppDispatch()
+
     const navigateToJobDescription = ()=> {
             navigate('/JobDescription');
+           dispatch(getJob({id:id}))
+                 
+         
     }
     return (
         <>

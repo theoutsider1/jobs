@@ -1,20 +1,27 @@
 // fake data check TYPES / DATA JOBS  Folder
-import { jobDetails } from "../../Types/DataJobs";
+//import { jobDetails } from "../../Types/DataJobs";
+//import { useEffect } from "react";
+
+import { useAppSelector } from "../store/store";
 
 
 const JobDetails = ()=> {
-
+    const jobD = useAppSelector(state => state.getJob.job)
+    
+    console.log(jobD);
+   
     return (
         <>
              <div className="w-full  bg-white ">
                 
                  <div className="bg-third py-10 px-44">
                  {
-                    jobDetails.map((job) => (
+                    
+                    jobD.map((job) => (
                         <div className="bg-white p-14 rounded-md">
 
                         <h4 className="font-semibold text-xl p-3 ">
-                            Description: 
+                            Description:
                         </h4>
                         <p key={Math.random()} className="px-6">
                         {job.description}

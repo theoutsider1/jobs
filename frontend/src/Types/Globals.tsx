@@ -1,5 +1,6 @@
 // interfaces
 export interface OfferData {
+    id: number;
     jobTitle: string;
     companyName?: string;
     contract?: string;
