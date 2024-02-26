@@ -6,6 +6,7 @@ import LastProfiles from "../components/Last Profiles/LastProfiles";
 import OffersList from "../components/Offers/OffersList";
 import JobDescription from "../components/OfferDetails/JobDescription";
 import { HeroSectionRecruteur } from "../components/Recruteur/LandingPage/HeroSection2";
+import { ContactezNous } from "../components/ContactPage/ContactezNous";
 
 const Router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const Router = createBrowserRouter([
             {
                 path: "/EspaceRecruteur",
                 element:<HeroSectionRecruteur/>,
+            },
+            {
+                path: "/ContacezNous",
+                element:<ContactezNous/>,
             },
         ]
 
