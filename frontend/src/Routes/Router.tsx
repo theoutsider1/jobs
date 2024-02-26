@@ -5,6 +5,7 @@ import LastProfiles from "../components/Last Profiles/LastProfiles";
 //import OffersPage from "../components/Offers/OffersPage";
 import OffersList from "../components/Offers/OffersList";
 import JobDescription from "../components/OfferDetails/JobDescription";
+import { HeroSectionRecruteur } from "../components/Recruteur/LandingPage/HeroSection2";
 
 const Router = createBrowserRouter([
     {
@@ -12,7 +13,7 @@ const Router = createBrowserRouter([
         element:<Layout/>,
         children: [
             {
-                path: "/",
+                path: "/EspaceCandidat",
                 element: <HeroSection/>,
             },
 
@@ -27,7 +28,11 @@ const Router = createBrowserRouter([
             {
                 path: "/JobDescription",
                 element:<JobDescription/>,
-            }
+            },
+            {
+                path: "/EspaceRecruteur",
+                element:<HeroSectionRecruteur/>,
+            },
         ]
 
     }

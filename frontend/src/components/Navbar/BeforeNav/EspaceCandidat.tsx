@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { activeStateProps } from "../../../Types/Globals";
 
-export const CandidatSpace= ()=> { 
+export const CandidatSpace: React.FC<activeStateProps>= ({active,onActive})=> { 
 
-    const [candidatIsActive, setCandidatIsActive] = useState(Boolean);
-
+    
 
     return (
         <div>
-            <button className="w-44 h-14 bg-darkk font-semibold">
+            <button onClick={onActive} disabled={active} className={`w-44 h-14 ${active ? ' bg-darkk font-semibold' : 'bg-third'}`}>
                 Espace Candidat
             </button>
         </div>

@@ -1,3 +1,13 @@
+// Manage which space is active props 
+
+export interface  activeStateProps{
+    active: boolean;
+    onActive: ()=> void;
+}
+
+
+
+
 // interfaces
 export interface OfferData {
     id: number;

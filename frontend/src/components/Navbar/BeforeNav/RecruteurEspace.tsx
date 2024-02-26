@@ -1,12 +1,12 @@
-import { useState } from "react";
 
-export const RecruterSpace= ()=> { 
-    const [RecruteurIsActive, setRecruteurIsActive]= useState(Boolean);
+import { activeStateProps } from "../../../Types/Globals";
 
+export const RecruterSpace: React.FC<activeStateProps>= ({active,onActive})=> { 
 
+    
     return (
         <div>
-            <button className="w-44 h-14 bg-darkk font-semibold">
+            <button onClick={onActive} disabled={active} className={`w-44 h-14 ${active ? ' bg-darkk font-semibold' : 'bg-third'}`}>
                 Espace Recruteur
             </button>
         </div>
