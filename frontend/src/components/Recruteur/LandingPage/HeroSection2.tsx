@@ -1,4 +1,5 @@
 import { Testimonials } from '../Testimonial';
+import { StatisRec } from './RecStatistics';
 import { TestimonialsCards } from './TestiCards';
 
 
@@ -54,6 +55,7 @@ export const HeroSectionRecruteur = ()=>{
         </div>
         <Testimonials/>
         <TestimonialsCards/>
+        <StatisRec/>
     
 </>
      

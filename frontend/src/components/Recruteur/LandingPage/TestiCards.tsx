@@ -10,7 +10,7 @@ export const TestimonialsCards = ()=> {
         <div>
         
 
-        <div className="flex flex-col-2 gap-12 p-24 bg-third bg-[url('../../src/assets/shape2.png')] bg-cover bg-no-repeat">
+        <div className="flex flex-col-2 gap-12 p-36 bg-third bg-[url('../../src/assets/shape2.png')] bg-cover bg-no-repeat">
             <div className="w-1/2 px-12">
             <div className="relative z-20 ">
         <div className="absolute top-0 left-12">
