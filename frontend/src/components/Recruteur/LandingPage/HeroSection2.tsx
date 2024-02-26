@@ -1,4 +1,6 @@
+//import LastProfiles from '../../Last Profiles/LastProfiles';
 import { Testimonials } from '../Testimonial';
+import { LatestProfiles } from './LastestProfs';
 import { StatisRec } from './RecStatistics';
 import { TestimonialsCards } from './TestiCards';
 
@@ -56,6 +58,7 @@ export const HeroSectionRecruteur = ()=>{
         <Testimonials/>
         <TestimonialsCards/>
         <StatisRec/>
+        <LatestProfiles/>
     
 </>
      
