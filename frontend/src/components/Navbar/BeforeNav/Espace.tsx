@@ -16,7 +16,7 @@ const Espace:React.FC = ()=> {
     const activeCandidat = ()=> {
         setCandidatIsActive(true);
         setRecruteurIsActive(false);
-        navigate('/EspaceCandidat')
+        navigate('/')
 
 
     }

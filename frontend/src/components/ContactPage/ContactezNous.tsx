@@ -1,10 +1,15 @@
-
+import { IonIcon } from '@ionic/react';
+import {mailOutline} from 'ionicons/icons';
+import {callOutline} from 'ionicons/icons';
+import { locationOutline } from 'ionicons/icons';
 export const ContactezNous = ()=> {
 
     return (
-        <div className="w-full flex flex-col justify-center items-center bg-third ">
-            <h2 className="p-10 text-3xl font-semibold"> Contact </h2>
-            <form id="contactForm">
+        <div className={`w-full flex flex-col justify-center items-center bg-third  `}>
+          
+            <h2 className="p-10 text-3xl font-semibold z-10 "> Contact </h2>
+          
+            <form id="contactForm z-40 ">
                 <div className="w-full flex flex-rows-3">
                     <div className="w-1/3">
                         <div className="flex flex-col">
@@ -43,12 +48,25 @@ export const ContactezNous = ()=> {
                 Envoyé
             </button>
 
-            <div className="w-full m-5 bg-secondary flex flex-col-3 space-x-12">
-                <div className="w-1/3 p-6">
-                Envoyé
+            <div className=" m-5 bg-secondary rounded-xl flex flex-col-3 space-x-12">
+                <div className="w-1/3 p-4 flex flex-col justify-center items-center">
+                    <div>
+                     <IonIcon icon={mailOutline} className='text-5xl'></IonIcon>
+                    </div>
+                    <h3>2jobs@gmail.com</h3>
                 </div>
-                <div className="w-1/3">Envoyé</div>
-                <div className="w-1/3">Envoyé</div>
+                <div className="w-1/3 p-4 flex flex-col justify-center items-center">
+                    <div>
+                    <IonIcon icon={callOutline} className='text-5xl'></IonIcon>
+                    </div>
+                     <h3> +212 600 000 000</h3>
+                </div>
+                <div className="w-1/3 p-4 flex flex-col justify-center items-center">
+                    <div>
+                        <IonIcon icon={locationOutline} className='text-5xl text-center'></IonIcon>
+                    </div>
+                    <h3>Rue al maarifa, Res yassmine étage 2 Rabat</h3>             
+                </div>
             </div>
 
         </div>

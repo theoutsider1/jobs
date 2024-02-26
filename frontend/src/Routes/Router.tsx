@@ -14,7 +14,7 @@ const Router = createBrowserRouter([
         element:<Layout/>,
         children: [
             {
-                path: "/EspaceCandidat",
+                path: "/",
                 element: <HeroSection/>,
             },
 
