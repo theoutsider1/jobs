@@ -1,20 +1,25 @@
-import Logo from "../../assets/2jobs.svg";
+import Logo from "../../../assets/2jobs.svg";
 
-const CarouselCards = () => {
-  return (
-    <div>
+
+
+export const TestimonialsCards = ()=> {
+
+
+
+    return (
+        <div>
         
 
-        <div className="flex flex-col-2 gap-24 pt-24 px-24 pb-4">
-            <div className="w-1/2 ">
-            <div className="relative z-20 bg-third ">
+        <div className="flex flex-col-2 gap-12 p-24 bg-third bg-[url('../../src/assets/shape2.png')] bg-cover bg-no-repeat">
+            <div className="w-1/2 px-12">
+            <div className="relative z-20 ">
         <div className="absolute top-0 left-12">
           <div className="flex justify-center items-center rounded-full w-24 h-24 border-gray-700 bg-black -mt-10 ">
             <img src={Logo} alt="2jobs" className="" />
           </div>
         </div>
         <div className="group h-60 ">
-          <div className="absolute bg-white h-full left-0 top-0 w-full -z-10 rounded-xl">
+          <div className="absolute bg-white  h-full left-0 top-0 w-full -z-10 rounded-xl">
             <div className="flex flex-col-2 justify-between">
                 <div>
                     <svg
@@ -40,7 +45,7 @@ const CarouselCards = () => {
       </div>
 
       
-            </div>
+    </div>
             
             <div className="w-1/2">
             <div className="relative z-20 bg-third ">
@@ -79,7 +84,5 @@ const CarouselCards = () => {
             </div>
         </div>
     </div>
-  );
-};
-
-export default CarouselCards;
+    )
+}

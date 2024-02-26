@@ -1,3 +1,10 @@
+import { Testimonials } from '../Testimonial';
+import { TestimonialsCards } from './TestiCards';
+
+
+
+
+
 export const HeroSectionRecruteur = ()=>{
 
     return (
@@ -13,8 +20,8 @@ export const HeroSectionRecruteur = ()=>{
         </div>       
        
     </div>
-    <div className="w-full flex justify-center items-center absolute -bottom-20  ">
-        <div className="w-96 p-8 bg-third rounded-lg">
+    <div className="w-full flex justify-center items-center absolute -bottom-36  ">
+        <div className="w-96 p-8 bg-white rounded-lg">
             <h3 className="text-2xl font-semibold">Connectez-vous:</h3>
             <form action="" className="">
                 <div className="p-3">
@@ -43,10 +50,10 @@ export const HeroSectionRecruteur = ()=>{
                   </p>
             </form>
         </div>
-        
-    
+
         </div>
-                
+        <Testimonials/>
+        <TestimonialsCards/>
     
 </>
      
