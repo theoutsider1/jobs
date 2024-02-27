@@ -1,7 +1,7 @@
 // Manage which space is active props 
 
 export interface  activeStateProps{
-    active: boolean;
+    
     onActive: ()=> void;
 }
 
@@ -48,3 +48,11 @@ export const regions: string[] = [
     "Laayoune Dakhla",
     "Beni Mellal-khnifra"
 ];
+
+
+// interface Manage Which space isActive 
+
+export interface whichSpaceIsActive {
+    recruteurSpace: boolean;
+    candidatSpace: boolean;
+}

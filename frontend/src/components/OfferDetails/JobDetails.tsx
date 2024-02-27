@@ -1,14 +1,9 @@
-// fake data check TYPES / DATA JOBS  Folder
-//import { jobDetails } from "../../Types/DataJobs";
-//import { useEffect } from "react";
-
 import { useAppSelector } from "../store/store";
 
 
 const JobDetails = ()=> {
     const jobD = useAppSelector(state => state.getJob.job)
     
-    console.log(jobD);
    
     return (
         <>
@@ -71,12 +66,7 @@ const JobDetails = ()=> {
                     
                    
                 </div>
-                 
-
-                
-                
-                
-            
+     
             </div>
         </>
     )
