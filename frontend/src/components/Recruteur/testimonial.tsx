@@ -30,7 +30,7 @@ export const Testimonials = ()=> {
             </div>
             <div className={`flex justify-center items-center bg-${shape}`}>
                 <h2 className='text-4xl font-semibold pt-24 pb-8'>
-                     Témoignage de nos recruteurs
+                     Témoignage de <span className='underline decoration-fourth'>nos recruteurs</span>
                 </h2>
             </div>
            

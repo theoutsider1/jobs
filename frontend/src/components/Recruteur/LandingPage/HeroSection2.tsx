@@ -15,7 +15,7 @@ export const HeroSectionRecruteur = ()=>{
         <div className="w-full h-screen drop-shadow-lg pt-10 bg-[url('../../src/assets/recrutePhoto.png')] bg-cover bg-no-repeat  flexc justify-center items-center relative ">
         <div className="w-full flex flex-col justify-start items-end ">
             <h1 className="text-white text-5xl font-extrabold tracking-widest m-24  ">
-            2JOBS LA PLATEFORME  <br />
+            <span className='underline decoration-darkk'>2JOBS</span> LA PLATEFORME  <br />
             de recrutement Dédiée<br />
             aux START-up et pme
             </h1>
