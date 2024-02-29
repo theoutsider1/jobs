@@ -7,6 +7,7 @@ import OffersList from "../components/Offers/OffersList";
 import JobDescription from "../components/OfferDetails/JobDescription";
 import { HeroSectionRecruteur } from "../components/Recruteur/LandingPage/HeroSection2";
 import { ContactezNous } from "../components/ContactPage/ContactezNous";
+import { AddJobComponent } from "../components/Recruteur/AddOffersPage/AddJobComponent";
 
 const Router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const Router = createBrowserRouter([
                 path: "/ContacezNous",
                 element:<ContactezNous/>,
             },
+            {
+                path:"/lancerUnOffre",
+                element: <AddJobComponent/>,
+            }
         ]
 
     }

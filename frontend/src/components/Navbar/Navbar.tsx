@@ -50,7 +50,7 @@ const Navbar = () => {
             <Link to="/" className=" /*py-7*/ px-3 inline-block">
               Home
             </Link>
-            <Link to="/offers" className=" /*py-7*/ px-3 inline-block">
+            <Link to="/lancerUnOffre" className=" /*py-7*/ px-3 inline-block">
               A propos
             </Link>
             <Link to="/ContacezNous" className=" /*py-7*/ px-3 inline-block">
@@ -75,7 +75,7 @@ const Navbar = () => {
             <Link to="/" className=" /*py-7*/ px-3 py-3 block">
                 Home
             </Link>
-            <Link to="/offers" className=" /*py-7*/ px-3 py-3 block">
+            <Link to="/lancerUnOffre" className=" /*py-7*/ px-3 py-3 block">
               A propos
             </Link>
             <Link to="/ContacezNous" className=" /*py-7*/ px-3 py-3 block">
