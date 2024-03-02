@@ -23,7 +23,10 @@ export const AddAdvantageComponent = ()=> {
     const removeAvantage = (index:number) => {
         setAvantage([...avantage.filter(tag => avantage.indexOf(tag) !== index)]);
     };
-  
+    // useEffect(() => {
+    //     handleAddAvantage
+    // }, [handleAddAvantage]);
+    //console.log(avantage)
 
     return (
         <div className=" mx-14 flex flex-row-4 justify-center">
@@ -42,7 +45,7 @@ export const AddAdvantageComponent = ()=> {
                     onChange={handleInputChange}
                     onKeyUp={(e)=> handleAddAvantage(e)}
                     placeholder="Press enter to add tags"
-                    className=" block w-full rounded-md border-0 py-1.5 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+                    className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
 
                     <ul>
                         {

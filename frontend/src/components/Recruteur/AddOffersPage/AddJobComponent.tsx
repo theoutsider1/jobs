@@ -11,7 +11,7 @@ export const AddJobComponent = ()=> {
         <div className="w-full">
 
                 <AddOfferFormComponent/>
-                <HistoricalSideBarComponent/>
+                {/**<HistoricalSideBarComponent/>*/}
                 
         </div>
     )
