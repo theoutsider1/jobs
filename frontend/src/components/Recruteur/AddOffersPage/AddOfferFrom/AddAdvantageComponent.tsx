@@ -1,4 +1,4 @@
-import {KeyboardEvent, useEffect, useState } from "react"
+import {ChangeEvent, KeyboardEvent, useState } from "react"
 
 
 
@@ -9,11 +9,11 @@ export const AddAdvantageComponent = ()=> {
     const [avantage, setAvantage] = useState<string[]>([]);
     const [currentInput, setCurrentInput] = useState<string>('');
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setCurrentInput(event.target.value);
     };
 
-    const handleAddAvantage = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter' && currentInput.trim() !== '') {
             setAvantage([...avantage, currentInput.trim()]);
             setCurrentInput('');
@@ -23,10 +23,7 @@ export const AddAdvantageComponent = ()=> {
     const removeAvantage = (index:number) => {
         setAvantage([...avantage.filter(tag => avantage.indexOf(tag) !== index)]);
     };
-    // useEffect(() => {
-    //     handleAddAvantage
-    // }, [handleAddAvantage]);
-    console.log(avantage)
+  
 
     return (
         <div className=" mx-14 flex flex-row-4 justify-center">
