@@ -1,4 +1,4 @@
-import {ChangeEvent, KeyboardEvent, useState } from "react"
+import {ChangeEvent, KeyboardEvent, useEffect, useState } from "react"
 
 
 
@@ -23,7 +23,10 @@ export const AddAdvantageComponent = ()=> {
     const removeAvantage = (index:number) => {
         setAvantage([...avantage.filter(tag => avantage.indexOf(tag) !== index)]);
     };
-  
+    useEffect(() => {
+       console.log(avantage)
+    }, [handleAddAvantage]);
+    //console.log(avantage)
 
     return (
         <div className=" mx-14 flex flex-row-4 justify-center">

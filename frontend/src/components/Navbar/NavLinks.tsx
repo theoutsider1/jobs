@@ -1,5 +1,4 @@
 import {useState} from 'react';
-
 import { Link } from 'react-router-dom';
 
 
@@ -55,7 +54,7 @@ const links:Links[] = [
 const NavLinks = ()=>{
      const [hover, setHover]= useState(false);
      const [indexHovered, setIndexHovered]=useState<null | number>(null);
-
+     
 
      const handleHoverIn = (index:number) =>{
         setHover(true);
@@ -67,13 +66,7 @@ const NavLinks = ()=>{
      }
 
      
-    //  const handleMouseOver = (MouseEvent<HTMLUListElement>) => {
-    //     setIsHovered(true);
-    //   };
     
-    //   const handleMouseOut = (MouseEvent<HTMLUListElement>) => {
-    //     setIsHovered(false);
-    //   };
 
     return (
     <>
@@ -82,7 +75,7 @@ const NavLinks = ()=>{
                 
                     <div key={index} className='inline-block px-3 text-left cursor-pointer '  >
                         <div className=''>
-                            <h1 className='inline py-7 ' onMouseEnter={() => handleHoverIn(index)}  key={index} >{item.name} </h1>
+                            <h1 className='inline py-7 ' onMouseEnter={() => handleHoverIn(index)}  key={item.name} >{item.name} </h1>
                             <svg className={`inline w-2.5 h-2.5 transform ${hover && indexHovered === index ? '' : `-rotate-90`}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
                             </svg>
@@ -90,9 +83,9 @@ const NavLinks = ()=>{
                                           
                             <div className= {`${hover ? `absolute bg-primary rounded-md mt-5 `: `hidden` }  `} onMouseLeave={handleMouseLeave}>    
                                 { hover && indexHovered === index &&
-                                    item.subLinks.map((subItem) => (
-                                        <ul className='py-2 '  key={index}  >
-                                            <li key={subItem.head} className='w-full text-left block px-4 py-2 hover:bg-bright '>
+                                    item.subLinks.map((subItem, subIndex) => (
+                                        <ul className='py-2 '  key={`ul-${subIndex}`}  >
+                                            <li key={`li-${subItem.sublink}`} className='w-full text-left block px-4 py-2 hover:bg-bright '>
                                                 <Link to="/">
                                                     {subItem.head}
                                                 </Link> 
