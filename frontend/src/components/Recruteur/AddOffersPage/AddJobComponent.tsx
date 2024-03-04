@@ -1,5 +1,4 @@
 import { AddOfferFormComponent } from "./AddOfferFrom/AddOfferComponent"
-import { HistoricalSideBarComponent } from "./Historic/HistoricalSection"
 
 
 
@@ -11,7 +10,7 @@ export const AddJobComponent = ()=> {
         <div className="w-full">
 
                 <AddOfferFormComponent/>
-                {/**<HistoricalSideBarComponent/>*/}
+                
                 
         </div>
     )

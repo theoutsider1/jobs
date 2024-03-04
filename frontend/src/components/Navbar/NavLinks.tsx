@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import { IonIcon } from '@ionic/react';
-import {chevronForward} from 'ionicons/icons';
+
+import { Link } from 'react-router-dom';
 
 
 
@@ -17,15 +17,15 @@ interface SubLinks {
     }
 
 const links:Links[] = [
-    {id : 1,name: 'Offres d\'emplois', submenu: false,
-    subLinks: [
-       { head: 'Offres jeunes diplômés', sublink: '/',},
-       { head: 'Offres cadres', sublink: '/',},
-       { head: 'Offres Freelance', sublink: '/',},
-       { head: 'Offres de stage', sublink: '/',},
-       { head: 'Offres internationales', sublink: '/',},
-    ] 
-},
+    // {id : 1,name: 'Offres d\'emplois', submenu: false,
+    // subLinks: [
+    //    { head: 'Offres jeunes diplômés', sublink: '/',},
+    //    { head: 'Offres cadres', sublink: '/',},
+    //    { head: 'Offres Freelance', sublink: '/',},
+    //    { head: 'Offres de stage', sublink: '/',},
+    //    { head: 'Offres internationales', sublink: '/',},
+    // ] 
+// },
     {id :2,name: 'Guides', submenu: false,
     subLinks: [       
         { head: 'Créer la lettre de motivation',sublink: '/',},
@@ -44,10 +44,10 @@ const links:Links[] = [
       {id :4,name: 'Pays',submenu: false, 
       subLinks: [
         { head: 'Maroc',sublink: '/',},
-        { head: 'France',sublink: '/',},
-        { head: 'Allemagne',sublink: '/',},
-        { head: 'Canada',sublink: '/',},
-        { head: 'Espagne',sublink: '/',},
+        // { head: 'France',sublink: '/',},
+        // { head: 'Allemagne',sublink: '/',},
+        // { head: 'Canada',sublink: '/',},
+        // { head: 'Espagne',sublink: '/',},
      ]
     }];
 
@@ -55,31 +55,48 @@ const links:Links[] = [
 const NavLinks = ()=>{
      const [hover, setHover]= useState(false);
      const [indexHovered, setIndexHovered]=useState<null | number>(null);
-     
+
+
      const handleHoverIn = (index:number) =>{
         setHover(true);
         setIndexHovered(index)
         
      }
+     const handleMouseLeave = ()=>{
+        setHover(!hover)
+     }
 
      
-     const handleHoverOut = ()=>{
-        setHover(false);
+    //  const handleMouseOver = (MouseEvent<HTMLUListElement>) => {
+    //     setIsHovered(true);
+    //   };
+    
+    //   const handleMouseOut = (MouseEvent<HTMLUListElement>) => {
+    //     setIsHovered(false);
+    //   };
 
-     }
     return (
     <>
         {
             links.map((item,index:number) => (
                 
-                    <div className='inline-block px-3 text-left cursor-pointer'  >
-                        <h1 className='inline py-7 ' onMouseOver={() => handleHoverIn(index)} onMouseOut= {handleHoverOut}  key={index} >{item.name} </h1>
-                        <IonIcon icon= {chevronForward} className= ''></IonIcon>                      
-                            <div className= {` absolute bg-primary rounded-xl `}>    
+                    <div key={index} className='inline-block px-3 text-left cursor-pointer '  >
+                        <div className=''>
+                            <h1 className='inline py-7 ' onMouseEnter={() => handleHoverIn(index)}  key={index} >{item.name} </h1>
+                            <svg className={`inline w-2.5 h-2.5 transform ${hover && indexHovered === index ? '' : `-rotate-90`}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                         </div>
+                                          
+                            <div className= {`${hover ? `absolute bg-primary rounded-md mt-5 `: `hidden` }  `} onMouseLeave={handleMouseLeave}>    
                                 { hover && indexHovered === index &&
                                     item.subLinks.map((subItem) => (
-                                        <ul className='pt-7 px-7 mb-4 ' key={index} onMouseOver={() => setHover(true)}  onMouseOut= {handleHoverOut} >
-                                            <li >{subItem.head} </li>                                            
+                                        <ul className='py-2 '  key={index}  >
+                                            <li key={subItem.head} className='w-full text-left block px-4 py-2 hover:bg-bright '>
+                                                <Link to="/">
+                                                    {subItem.head}
+                                                </Link> 
+                                            </li>                                            
                                         </ul>
                                     ))
                                 }

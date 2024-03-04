@@ -9,7 +9,7 @@ import { locationOutline } from 'ionicons/icons';
 export const ContactezNous = ()=> {
 
     return (
-        <div className={`w-full flex flex-col justify-center items-center bg-third  `}>
+        <div className="w-full flex flex-col justify-center items-center bg-third bg-[url('../../assets/svgBgContact.png')] bg-cover bg-no-repeat">
           
              <h2 className="p-10 text-3xl font-semibold z-10 "> Contact </h2>
           
