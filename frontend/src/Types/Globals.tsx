@@ -78,3 +78,10 @@ export const typeTravail: DropdownOption[] = [
     { id: 3, label: "Etudiant", },
     { id: 4, label: "Mi-Temps",}
 ];
+
+// ----------- Upload Cv Props / espace candidat --------------
+
+export interface uploadCvCandidatProps {
+        isOpen : boolean;
+        isClose : ()=> void;
+}

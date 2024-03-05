@@ -18,11 +18,6 @@ const Router = createBrowserRouter([
                 path: "/",
                 element: <HeroSection/>,
             },
-
-            {
-                path :"/about",
-                element:<LastProfiles/>
-            },
             {
                 path: "/offers",
                 element: <OffersList/>,
@@ -42,7 +37,8 @@ const Router = createBrowserRouter([
             {
                 path:"/lancerUnOffre",
                 element: <AddJobComponent/>,
-            }
+            },
+            
         ]
 
     }

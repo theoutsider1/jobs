@@ -1,10 +1,19 @@
+
 import { useAppSelector } from "../store/store";
+import { UploadCvComponent } from "../UploadCvComponent/UploadCvComponent";
+import  { useState } from "react";
 
 
 const JobDetails = ()=> {
     const jobD = useAppSelector(state => state.getJob.job)
+    const [handleCvPopup, setHandleCvPopup] = useState(false);
     
-   
+    const handleTurnPopupTrue = ()=> {
+        setHandleCvPopup(true);
+    }
+    const handleTurnPopupFalse = ()=> {
+        setHandleCvPopup(false);
+    }
     return (
         <>
              <div className="w-full  bg-white ">
@@ -56,6 +65,7 @@ const JobDetails = ()=> {
                         <div className="flex justify-end">
                         <button
                             type="button"
+                            onClick={handleTurnPopupTrue}
                             className="rounded bg-darkk px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_8px_9px_-4px_rgba(0,0,0,0.3)] " >
                             Postuler
                         </button>
@@ -68,6 +78,7 @@ const JobDetails = ()=> {
                 </div>
      
             </div>
+            <UploadCvComponent isOpen={handleCvPopup} isClose={handleTurnPopupFalse}/>
         </>
     )
 }
