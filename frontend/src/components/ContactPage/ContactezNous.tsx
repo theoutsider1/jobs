@@ -6,6 +6,7 @@ import { locationOutline } from 'ionicons/icons';
 
 
 
+
 export const ContactezNous = ()=> {
 
     return (
@@ -96,6 +97,7 @@ export const ContactezNous = ()=> {
                         <h3>Rue al maarifa, Res yassmine étage 2 Rabat</h3>             
                  </div>
              </div>
+             
 
         </div>
        

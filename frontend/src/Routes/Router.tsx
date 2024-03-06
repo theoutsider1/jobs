@@ -1,13 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import HeroSection from "../components/HeroSection/HeroSection";
 import  Layout  from "./Layout";
-import LastProfiles from "../components/Last Profiles/LastProfiles";
-//import OffersPage from "../components/Offers/OffersPage";
 import OffersList from "../components/Offers/OffersList";
 import JobDescription from "../components/OfferDetails/JobDescription";
 import { HeroSectionRecruteur } from "../components/Recruteur/LandingPage/HeroSection2";
 import { ContactezNous } from "../components/ContactPage/ContactezNous";
 import { AddJobComponent } from "../components/Recruteur/AddOffersPage/AddJobComponent";
+import { ChooseSpace } from "../components/ChooseSpace/ChooseSpaceT";
 
 const Router = createBrowserRouter([
     {
@@ -37,6 +36,10 @@ const Router = createBrowserRouter([
             {
                 path:"/lancerUnOffre",
                 element: <AddJobComponent/>,
+            },
+            {
+                path:"/chooseSpace",
+                element: <ChooseSpace/>,
             },
             
         ]
