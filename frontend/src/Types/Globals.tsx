@@ -73,10 +73,10 @@ export const dropdownOptions: DropdownOption[] = [
 // ---------- Types de travail -------
 
 export const typeTravail: DropdownOption[] = [
-    { id: 1, label: "Temps plein" },
-    { id: 2, label: "A distance", },
-    { id: 3, label: "Etudiant", },
-    { id: 4, label: "Mi-Temps",}
+    { id: 11, label: "Temps plein" },
+    { id: 12, label: "A distance", },
+    { id: 13, label: "Etudiant", },
+    { id: 14, label: "Mi-Temps",}
 ];
 
 // ----------- Upload Cv Props / espace candidat --------------

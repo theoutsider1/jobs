@@ -9,7 +9,7 @@ const JobTitleBar = ()=> {
     return (
         <>
         {jobD.map(e =>(
-            <div className="w-full bg-fourth">
+            <div className="w-full bg-fourth" key={e.jobTitle}>
                 <div className=" grid grid-cols-4 gap-14 p-10 px-24 justify-around items-center">
                     <div className=" col-span-3 flex justify-end ">
                         <h3 className='text-5xl font-semibold'>Responsable administratif et financier h/f</h3>
