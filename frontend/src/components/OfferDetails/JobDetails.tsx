@@ -14,7 +14,7 @@ const JobDetails = ()=> {
     const handleTurnPopupFalse = ()=> {
         setHandleCvPopup(false);
     }
-    console.log(jobD);
+    //console.log(jobD);
     
     return (
         <>

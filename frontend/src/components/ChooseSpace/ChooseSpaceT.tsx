@@ -6,7 +6,6 @@ import secondStepSvg from "../../assets/secondStepSvg.svg";
 import groupeAs from "../../assets/groupAs.svg";
 import groupeBs from "../../assets/groupBs.svg";
 
-
 export const ChooseSpace= ()=> {
   // const [currentRole, setCurrentRole] = useState(roles[0]);
 

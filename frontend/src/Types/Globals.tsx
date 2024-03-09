@@ -85,3 +85,18 @@ export interface uploadCvCandidatProps {
         isOpen : boolean;
         isClose : ()=> void;
 }
+
+// -------------- lancer un offre  interface -------------------
+
+export interface inputOffer {
+    id: string;
+    label : string;
+}
+
+export const inputOfferAttributes: inputOffer[] = [
+    {id: 'nomComplet', label:'Nom Complet'},
+    {id: 'description', label:'Description'},
+    {id: 'companyName', label:'companyName'},
+    {id: 'nomComplet', label:'Nom Complet'},
+    {id: 'nomComplet', label:'Nom Complet'},
+]

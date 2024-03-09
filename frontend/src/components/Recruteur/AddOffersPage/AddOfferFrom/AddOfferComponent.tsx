@@ -67,6 +67,63 @@ export const AddOfferFormComponent = () => {
                     </div>
                   </div>
                 </li>
+
+                <li className="p-3">
+                  <div className=" mx-14 flex justify-center items-center">
+                    <div className="w-1/4 mx-14">
+                      <label
+                        htmlFor="entreprise"
+                        className="w-full m-1 text-xl font-semibold">
+                        Entreprise:
+                      </label>
+                    </div>
+                    <div className="w-3/4">
+                      <input
+                        type="text"
+                        id="entreprise"
+                        className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+                    </div>
+                  </div>
+                </li>
+
+                <li className="p-3">
+                  <div className=" mx-14 flex justify-center items-center">
+                    <div className="w-1/4 mx-14">
+                      <label
+                        htmlFor="experience"
+                        className="w-full m-1 text-xl font-semibold">
+                        Experience:
+                      </label>
+                    </div>
+                    <div className="w-3/4">
+                      <input
+                        type="text"
+                        id="experience"
+                        className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+                    </div>
+                  </div>
+                </li>
+
+                <li className="p-3">
+                  <div className=" mx-14 flex justify-center items-center">
+                    <div className="w-1/4 mx-14">
+                      <label
+                        htmlFor="fonction"
+                        className="w-full m-1 text-xl font-semibold">
+                        Fonction:
+                      </label>
+                    </div>
+                    <div className="w-3/4">
+                      <input
+                        type="text"
+                        id="fonction"
+                        className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+                    </div>
+                  </div>
+                </li>
+
+
+
                 <li className="p-3">
                   <div className=" mx-14 flex flex-row-4 justify-center">
                     <div className="w-1/4 mx-14">
