@@ -25,14 +25,14 @@ const OffersCard: React.FC<{ jobs: OfferData, id:any }> = ({ jobs,id }) =>  {
                  
          
     }
+
+   
     return (
         <>
             
             
             {/** offer details */}
 
-            
-                
                      <div className="w-full m-9">
                         <div className="flex w-full items-center bg-primary p-3 rounded">
                             <div className="w-1/3 ">
@@ -48,7 +48,7 @@ const OffersCard: React.FC<{ jobs: OfferData, id:any }> = ({ jobs,id }) =>  {
                                 <div className="flex justify-between">
 
                                     <h2 className="font-medium text-xl">{jobs.jobTitle}</h2>
-                                    <span> <IonIcon icon={heartOutline}></IonIcon></span>  
+                                    <span> <IonIcon icon={heartOutline} style= {{backgroundColor:'#FF204E', overflow:'hdiden'}}  className='cursor-pointer '></IonIcon></span>  
 
                                 </div>
 
