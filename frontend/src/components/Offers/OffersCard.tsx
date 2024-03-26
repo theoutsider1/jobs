@@ -48,7 +48,7 @@ const OffersCard: React.FC<{ jobs: OfferData, id:any }> = ({ jobs,id }) =>  {
                                 <div className="flex justify-between">
 
                                     <h2 className="font-medium text-xl">{jobs.jobTitle}</h2>
-                                    <span> <IonIcon icon={heartOutline} style= {{backgroundColor:'#FF204E', overflow:'hdiden'}}  className='cursor-pointer '></IonIcon></span>  
+                                    <span> <IonIcon icon={heartOutline}  className='cursor-pointer'></IonIcon></span>  
 
                                 </div>
 
