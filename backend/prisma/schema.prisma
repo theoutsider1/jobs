@@ -39,9 +39,9 @@ model Job {
 
   appliedCandidateId Int
 
-  candidates Candidate @relation(fields: [appliedCandidateId], references: [id])
+  candidates Candidate? @relation(fields: [appliedCandidateId], references: [id])
 
-  publishedBy Recruiter @relation(fields: [publishedById],references: [id] )
+  publishedBy Recruiter? @relation(fields: [publishedById],references: [id] )
 
   publishedById Int
 }
@@ -54,11 +54,14 @@ model Recruiter {
 
   jobs Job[]
 
+  // email 
   mail String @unique
 
   phone_number String @db.VarChar(10)
 
-  recruiterId Int @unique
+  password String 
+
+  
 }
 
 
