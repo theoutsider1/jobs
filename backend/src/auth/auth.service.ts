@@ -5,11 +5,17 @@ import * as bcrypt from "bcrypt";
 import { error } from "node:console";
 import { Prisma } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { JwtService } from "@nestjs/jwt";
+import { ConfigService } from "@nestjs/config";
 
 
 @Injectable()
 export class AuthService {
-    constructor(private prisma : PrismaService){}
+    constructor(
+        private prisma : PrismaService,
+        private jwtService: JwtService,
+        private config: ConfigService){}
+        
 
     async signup(dto : AuthDto) {
         
@@ -31,10 +37,9 @@ export class AuthService {
                     
                 }
             })
-            console.log(recruiter)
 
              // return the saved user (Recruiter)
-            return recruiter;
+            return this.signToken(recruiter.id , recruiter.mail);
         }catch(error){
              
             if (error instanceof Prisma.PrismaClientKnownRequestError){
@@ -73,10 +78,8 @@ export class AuthService {
                 throw new UnauthorizedException()
             }
 
-            delete recruiter.password;
-
             // if the credentials are correct
-            return recruiter
+            return this.signToken(recruiter.id, recruiter.mail)
             
 
        } catch (error) {
@@ -91,4 +94,25 @@ export class AuthService {
        } 
   
     }
+
+    async signToken(
+        recruiterId: number,
+        email : string
+        ) : Promise<{access_token : string}> {
+            const payload = {
+                sub: recruiterId,
+                email
+            } ;
+
+            const secret = this.config.get('JWT_SECRET');
+            const token = await this.jwtService.signAsync(
+                payload,
+                {
+                    expiresIn : '15m',
+                    secret:secret
+                })
+            return {
+                access_token : token,
+            };
+        }
 }

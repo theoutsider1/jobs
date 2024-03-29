@@ -5,7 +5,7 @@ import { AuthDto, loginDto } from "./dto";
 
 
 
-@Controller('recruteur')
+@Controller('espacerecruteurs')
 export class AuthController {
     constructor (private authService : AuthService){}
    
