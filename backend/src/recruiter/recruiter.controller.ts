@@ -11,7 +11,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class RecruiterController {
 
     @Get('profile')
-    getProfil(@GetRecruiter('id') recruiterId:string){        
+    getProfil(@GetRecruiter() recruiterId:Recruiter){        
         return recruiterId;
     }
 }

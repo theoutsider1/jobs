@@ -6,23 +6,23 @@ import { PrismaService } from "src/prisma/prisma.service";
 
 
 @Injectable()
+// This class has a specific use case which is 
+//validating the (access token) 
 export class jwtStrategy extends PassportStrategy(
     Strategy,
     'jwt',
     ){
     constructor(
         config: ConfigService,
-        private prisma: PrismaService,
-        ) {
+        private prisma: PrismaService,) {
+
             super({
                 jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
                 secretOrKey: config.get('JWT_SECRET'),
             });
         }
-    async validate (payload : {
-        sub: number,
-         email: string}
-         ) {
+        
+    async validate (payload : {sub: number, email: string}){
         const user =  await this.prisma.recruiter.findUnique({
             where: {
                 id: payload.sub
