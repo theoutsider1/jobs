@@ -37,7 +37,7 @@ model Job {
 
   advantages String[]
 
-  appliedCandidateId Int
+  appliedCandidateId Int?
 
   candidates Candidate? @relation(fields: [appliedCandidateId], references: [id])
 
