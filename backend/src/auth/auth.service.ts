@@ -32,6 +32,7 @@ export class AuthService {
                     mail: dto.email,
                     phone_number: dto.phoneNumber,
                     password : hash,
+                    // jobs: null,
                     
                 }
             })

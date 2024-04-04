@@ -51,7 +51,7 @@ export class RecruiterService {
         })
 
         try {
-            if(!myAllJobOffers){
+            if(myAllJobOffers.length === 0 ){
                 return {"msg" : "You didn't add any job offer yet"};
             } 
 
