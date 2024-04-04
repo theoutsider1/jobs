@@ -44,6 +44,7 @@ export class RecruiterService {
     }
 
     async myJobOffers(recruiterId: number ) {
+        // Get the job offers if there are any
         const myAllJobOffers = await this.prisma.job.findMany({
             where: {
                 publishedById : recruiterId,
@@ -51,10 +52,12 @@ export class RecruiterService {
         })
 
         try {
+            // if job[] is empty 
             if(myAllJobOffers.length === 0 ){
                 return {"msg" : "You didn't add any job offer yet"};
             } 
-
+            
+            // if not 
             return {"Your Job Offers" : myAllJobOffers}
 
             

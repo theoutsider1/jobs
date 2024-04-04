@@ -32,7 +32,6 @@ export class AuthService {
                     mail: dto.email,
                     phone_number: dto.phoneNumber,
                     password : hash,
-                    // jobs: null,
                     
                 }
             })
@@ -56,13 +55,14 @@ export class AuthService {
     }
 
     async logIn(loginDto : loginDto ) {
-
+        
+        const recruiter = await this.prisma.recruiter.findUnique({
+            where: {
+                mail : loginDto.email
+            }
+        })
         try {
-            const recruiter = await this.prisma.recruiter.findUnique({
-                where: {
-                    mail : loginDto.email
-                }
-            })
+            
             // Email doesn't exist 
             if (!recruiter) {
                 throw new ForbiddenException('Credentials incorrect')
