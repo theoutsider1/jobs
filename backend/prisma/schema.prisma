@@ -10,10 +10,10 @@ datasource db {
 }
 
 model Job {
-  id  Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
 
   title String 
 
@@ -37,11 +37,11 @@ model Job {
 
   advantages String[]
 
-  appliedCandidateId Int?
+  appliedCandidateId Int? @default(0)
 
   candidates Candidate? @relation(fields: [appliedCandidateId], references: [id])
 
-  publishedBy Recruiter? @relation(fields: [publishedById],references: [id] )
+  publishedBy Recruiter @relation(fields: [publishedById],references: [id] )
 
   publishedById Int
 }

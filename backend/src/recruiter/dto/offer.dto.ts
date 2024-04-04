@@ -1,4 +1,5 @@
-import { IsString } from "class-validator";
+import { Optional } from "@nestjs/common";
+import { IsNumber, IsOptional, IsString } from "class-validator";
 
 
 export class OfferDTO {
@@ -32,9 +33,12 @@ export class OfferDTO {
     @IsString()
     profil: string;
 
-    @IsString()
+    
+    @IsOptional()
     advantages: string[];
 
+    @Optional()
+    publishedById: number;
 
 
 }

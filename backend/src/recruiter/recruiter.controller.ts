@@ -11,14 +11,21 @@ import { RecruiterService } from './recruiter.service';
 @UseGuards(JwtGuard)
 @Controller('recruteurs')
 export class RecruiterController {
-    constructor(private recruiterService : RecruiterService  ){}
+    constructor(private recruiterService : RecruiterService){}
+
+
     @Get('profile')
-    getProfil(@GetRecruiter() recruiterId:Recruiter){        
+    getProfil(@GetRecruiter() recruiterId:Recruiter){   
+        console.log(typeof recruiterId.id);
+             
         return recruiterId;
     }
 
     @Post('addjob')
-    async addOffer(@Body() offerDto: OfferDTO ){
-        this.recruiterService.createOffer(offerDto)
+    async addOffer(@Body() offerDto: OfferDTO, @GetRecruiter() recuiterId: Recruiter){
+        
+        const idRecuiter: number = recuiterId.id
+        return await this.recruiterService.createOffer(offerDto, idRecuiter);
+
     }
 }
