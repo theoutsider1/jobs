@@ -42,4 +42,31 @@ export class RecruiterService {
             }
         }
     }
+
+    async myJobOffers(recruiterId: number ) {
+        const myAllJobOffers = await this.prisma.job.findMany({
+            where: {
+                publishedById : recruiterId,
+            }
+        })
+
+        try {
+            if(!myAllJobOffers){
+                return {"msg" : "You didn't add any job offer yet"};
+            } 
+
+            return {"Your Job Offers" : myAllJobOffers}
+
+            
+        } catch (error) {
+            if (error instanceof PrismaClientKnownRequestError){
+                throw error.code
+            } else {
+                
+                throw error
+            }
+        }
+    }
 }
+
+

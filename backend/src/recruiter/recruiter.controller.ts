@@ -13,19 +13,27 @@ import { RecruiterService } from './recruiter.service';
 export class RecruiterController {
     constructor(private recruiterService : RecruiterService){}
 
-
+// Recruiter Profile 
     @Get('profile')
-    getProfil(@GetRecruiter() recruiterId:Recruiter){   
-        console.log(typeof recruiterId.id);
-             
+    getProfil(@GetRecruiter() recruiterId:Recruiter){        
         return recruiterId;
     }
 
+// Add a Job offer
     @Post('addjob')
-    async addOffer(@Body() offerDto: OfferDTO, @GetRecruiter() recuiterId: Recruiter){
+    async addOffer(@Body() offerDto: OfferDTO, @GetRecruiter() recuiter: Recruiter){
         
-        const idRecuiter: number = recuiterId.id
+        // get the job creator by the custom decorator (GetREcruiter)
+        const idRecuiter: number = recuiter.id
+
         return await this.recruiterService.createOffer(offerDto, idRecuiter);
+    }
+
+// Show all the Job Offers
+    @Get('myjoboffers')
+    async myOffers(@GetRecruiter() recruiter : Recruiter){
+        const recruiterId = recruiter.id; 
+    return await this.recruiterService.myJobOffers(recruiterId);
 
     }
 }
