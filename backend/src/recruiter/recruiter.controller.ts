@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Recruiter } from '@prisma/client';
 import { GetRecruiter } from 'src/auth/decorator';
@@ -36,4 +36,20 @@ export class RecruiterController {
     return await this.recruiterService.myJobOffers(recruiterId);
 
     }
+// Delete a job offer 
+
+    @Delete('delete/:id')
+    async removeJobOffer(@Param('id') id: string){
+        // convert the 'id' to a number
+
+        return await this.recruiterService.removeOffer();
+    }
+// get 1 offer
+    @Get('offer/:id')
+    async getJob(@Param('id') id: string){
+        // convert the 'id' to a number
+        const jobId = parseInt(id);
+        return this.recruiterService.getJobById(jobId);
+    }
+// 
 }

@@ -56,7 +56,7 @@ export class RecruiterService {
             if(myAllJobOffers.length === 0 ){
                 return {"msg" : "You didn't add any job offer yet"};
             } 
-            
+
             // if not 
             return {"Your Job Offers" : myAllJobOffers}
 
@@ -70,6 +70,38 @@ export class RecruiterService {
             }
         }
     }
-}
+
+    async removeOffer() {
+       
+    }
+
+    async getJobById(jobId: number){
+        try {
+            const job = await this.prisma.job.findUnique({
+                where: {
+                    id : jobId,
+                } 
+        })
+            if (!job){
+                return `Job with Id ${jobId} doesn't exist`
+            }
+
+            if(job.appliedCandidateId === null){
+                delete job.appliedCandidateId;
+                return {job};
+            }
+            return {job};
+            
+        } catch (error) {
+            if (error instanceof PrismaClientKnownRequestError){
+                throw error.code
+            } else {
+                
+                throw error
+            }
+        }
+        }
+    }
+
 
 
