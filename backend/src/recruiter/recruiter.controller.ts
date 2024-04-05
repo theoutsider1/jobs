@@ -41,8 +41,8 @@ export class RecruiterController {
     @Delete('delete/:id')
     async removeJobOffer(@Param('id') id: string){
         // convert the 'id' to a number
-
-        return await this.recruiterService.removeOffer();
+        const jobId = parseInt(id);
+        return await this.recruiterService.removeOffer(jobId);
     }
 // get 1 offer
     @Get('offer/:id')

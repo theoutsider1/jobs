@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { Prisma, PrismaClient } from '@prisma/client';
+import { identity } from 'rxjs';
 
 @Injectable()
 export class RecruiterService {
@@ -71,8 +72,32 @@ export class RecruiterService {
         }
     }
 
-    async removeOffer() {
-       
+    async removeOffer (jobId: number) {
+        // search for the job
+        const job = await this.prisma.job.findUnique({
+            where: {
+                id: jobId,
+            }
+        })
+        try {
+            
+            // if the job doesn't exist
+            if (!job){
+                return `Job with Id ${jobId} doesn't exist`
+            }
+            // if the job exists 
+            if(job){
+                await this.prisma.job.delete({
+                    where:{
+                        id : jobId,
+                    }
+                })
+                return {"Msg" : "Job was deleted Successfully"};
+            }
+
+        } catch (error) {
+            
+        }
     }
 
     async getJobById(jobId: number){
@@ -83,7 +108,7 @@ export class RecruiterService {
                 } 
         })
             if (!job){
-                return `Job with Id ${jobId} doesn't exist`
+                return `This job doesn't exist`
             }
 
             if(job.appliedCandidateId === null){
