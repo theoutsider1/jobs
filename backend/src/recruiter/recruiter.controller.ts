@@ -16,7 +16,7 @@ export class RecruiterController {
 // Recruiter Profile 
     @Get('profile')
     getProfil(@GetRecruiter() recruiterId:Recruiter){        
-        return recruiterId;
+        return this.recruiterService.myprofile(recruiterId);
     }
 
 // Add a Job offer

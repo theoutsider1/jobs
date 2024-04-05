@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient, Recruiter } from '@prisma/client';
 import { identity } from 'rxjs';
 
 @Injectable()
 export class RecruiterService {
     constructor (
         private prisma : PrismaService,){}
+
+    async myprofile (myProfileDetails : Recruiter){
+        return {"myProfileDetails" : myProfileDetails};
+    }
 
     async createOffer(data : Prisma.JobCreateWithoutPublishedByInput, idRecuiter: any ) {
         const recruiterIdNumber: number = Number(idRecuiter);
@@ -83,7 +87,7 @@ export class RecruiterService {
             
             // if the job doesn't exist
             if (!job){
-                return `Job with Id ${jobId} doesn't exist`
+                return {"Msg" : "This job doesn't exist"};
             }
             // if the job exists 
             if(job){
@@ -108,7 +112,7 @@ export class RecruiterService {
                 } 
         })
             if (!job){
-                return `This job doesn't exist`
+                return {"Msg" : "This job doesn't exist"}
             }
 
             if(job.appliedCandidateId === null){
