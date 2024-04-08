@@ -7,6 +7,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { OfferDTO } from './dto';
 import { RecruiterService } from './recruiter.service';
 import { updateJobOfferDto } from './dto/updateJob.dto';
+import { UpdateRecruiterDto } from './dto/updateRecuiterProfile.dto';
 
 
 @UseGuards(JwtGuard)
@@ -62,6 +63,12 @@ export class RecruiterController {
         return this.recruiterService.updateJobOffer(jobId, updateJobOfferDto, recruiterId);
     }
 // Update myProfile
-
-    
+    @Patch('updatemyprofile/:id')
+    async updateRecuiterProfile(@Param('id') jobId:number,
+         @GetRecruiter() recuiter:Recruiter,
+         @Body() updateRecruiterDto: UpdateRecruiterDto 
+         ){
+            const recruiterId:number = Number(recuiter.id)
+        return this.recruiterService.updateRecruiterInfos(jobId , recruiterId, updateRecruiterDto)
+    }
 }

@@ -1,10 +1,7 @@
 import { IsEmail, IsOptional, IsString } from "class-validator";
 
 
-
-
-
-export class RecruiterDto {
+export class UpdateRecruiterDto {
     
     @IsOptional()
     @IsEmail()

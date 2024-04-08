@@ -156,6 +156,10 @@ export class RecruiterService {
                 }
             }        
     }
+
+    async updateRecruiterInfos(jobId , recuiterId, updateRecruiterDto){
+
+    }
 }
 
     
