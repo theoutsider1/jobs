@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { Prisma, PrismaClient, Recruiter } from '@prisma/client';
 import { identity } from 'rxjs';
+import { error } from 'node:console';
 
 @Injectable()
 export class RecruiterService {
@@ -15,7 +16,6 @@ export class RecruiterService {
 
     async createOffer(data : Prisma.JobCreateWithoutPublishedByInput, idRecuiter: any ) {
         const recruiterIdNumber: number = Number(idRecuiter);
-        console.log(data);
         
         const { title, city, contractType, experience, domaine, companyName, description, jobType, missions, profil, advantages } = data;
         try {
@@ -129,8 +129,35 @@ export class RecruiterService {
                 throw error
             }
         }
-        }
     }
 
+    async updateJobOffer(
+        jobId : number,
+        data : Prisma.JobUpdateWithoutPublishedByInput,
+        recruiterId: number){            
 
+
+            try {
+                if (!recruiterId){
+                    return ({"msg" : "You're not allowed"}) 
+                }
+                const findJobById = await this.prisma.job.findUnique({
+                    where: {
+                        id: jobId,
+                    }
+                })
+                if (findJobById){
+                    return this.prisma.job.update({where: {id: jobId,}, data})}
+            } catch (error) {
+                if (error instanceof PrismaClientKnownRequestError){
+                    throw error.code
+                } else {
+                    
+                    throw error
+                }
+            }        
+    }
+}
+
+    
 

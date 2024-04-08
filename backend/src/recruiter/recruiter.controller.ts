@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Recruiter } from '@prisma/client';
 import { GetRecruiter } from 'src/auth/decorator';
@@ -6,6 +6,7 @@ import { JwtGuard } from 'src/auth/guard';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { OfferDTO } from './dto';
 import { RecruiterService } from './recruiter.service';
+import { updateJobOfferDto } from './dto/updateJob.dto';
 
 
 @UseGuards(JwtGuard)
@@ -21,12 +22,12 @@ export class RecruiterController {
 
 // Add a Job offer
     @Post('addjob')
-    async addOffer(@Body() offerDto: OfferDTO, @GetRecruiter() recuiter: Recruiter){
+    async addOffer(@Body() offerDto: OfferDTO, @GetRecruiter() recruiter: Recruiter){
         
         // get the job creator by the custom decorator (GetREcruiter)
-        const idRecuiter: number = recuiter.id
+        const idRecruiter: number = recruiter.id
 
-        return await this.recruiterService.createOffer(offerDto, idRecuiter);
+        return await this.recruiterService.createOffer(offerDto, idRecruiter);
     }
 
 // Show all the Job Offers
@@ -51,5 +52,14 @@ export class RecruiterController {
         const jobId = parseInt(id);
         return this.recruiterService.getJobById(jobId);
     }
-// 
+// Update job offer
+    @Patch('update/:id')
+    async editJobOffer(@Param('id', ParseIntPipe) jobId : number , @Body() updateJobOfferDto: updateJobOfferDto, @GetRecruiter() recruiter : Recruiter){
+        // convert the 'id' to a number
+        const recruiterId = Number(recruiter.id);
+         console.log(recruiterId);
+         
+        return this.recruiterService.updateJobOffer(jobId, updateJobOfferDto, recruiterId);
+    }
+// Update myProfile
 }

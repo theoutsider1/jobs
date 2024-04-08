@@ -75,7 +75,7 @@ export class AuthService {
             if (!isMatch) {
                 throw new UnauthorizedException()
             }
-
+            
             // if the credentials are correct
             return this.signToken(recruiter.id, recruiter.mail)
             
