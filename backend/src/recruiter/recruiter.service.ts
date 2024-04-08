@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { Prisma, PrismaClient, Recruiter } from '@prisma/client';
-import { identity } from 'rxjs';
-import { error } from 'node:console';
+
 
 @Injectable()
 export class RecruiterService {

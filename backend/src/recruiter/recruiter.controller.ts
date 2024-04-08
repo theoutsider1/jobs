@@ -62,4 +62,6 @@ export class RecruiterController {
         return this.recruiterService.updateJobOffer(jobId, updateJobOfferDto, recruiterId);
     }
 // Update myProfile
+
+    
 }
