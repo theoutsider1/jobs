@@ -55,20 +55,25 @@ export class RecruiterController {
     }
 // Update job offer
     @Patch('update/:id')
-    async editJobOffer(@Param('id', ParseIntPipe) jobId : number , @Body() updateJobOfferDto: updateJobOfferDto, @GetRecruiter() recruiter : Recruiter){
-        // convert the 'id' to a number
-        const recruiterId = Number(recruiter.id);
-         console.log(recruiterId);
+    async editJobOffer(
+        @Param('id', ParseIntPipe) jobId : number , 
+        @Body() updateJobOfferDto: updateJobOfferDto,
+        @GetRecruiter() recruiter : Recruiter
+        ){
+            // convert the 'id' to a number
+            const recruiterId = Number(recruiter.id);
+            console.log(recruiterId);
          
-        return this.recruiterService.updateJobOffer(jobId, updateJobOfferDto, recruiterId);
+            return this.recruiterService.updateJobOffer(jobId, updateJobOfferDto, recruiterId);
     }
 // Update myProfile
-    @Patch('updatemyprofile/:id')
-    async updateRecuiterProfile(@Param('id') jobId:number,
-         @GetRecruiter() recuiter:Recruiter,
-         @Body() updateRecruiterDto: UpdateRecruiterDto 
+    @Patch('profile/updatemyprofile')
+    async updateRecuiterProfile(
+        @GetRecruiter() recruiter:Recruiter,
+        @Body() updateRecruiterDto: UpdateRecruiterDto 
          ){
-            const recruiterId:number = Number(recuiter.id)
-        return this.recruiterService.updateRecruiterInfos(jobId , recruiterId, updateRecruiterDto)
+            // convert the 'id' to a number
+            const recruiterId:number = Number(recruiter.id)
+            return this.recruiterService.updateRecruiterInfos(recruiterId, updateRecruiterDto)
     }
 }

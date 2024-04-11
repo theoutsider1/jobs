@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { Prisma, PrismaClient, Recruiter } from '@prisma/client';
+import { UpdateRecruiterDto } from './dto/updateRecuiterProfile.dto';
 
 
 @Injectable()
@@ -146,7 +147,13 @@ export class RecruiterService {
                     }
                 })
                 if (findJobById){
-                    return this.prisma.job.update({where: {id: jobId,}, data})}
+                    const updatedJob =  await this.prisma.job.update({
+                        where: {
+                            id: jobId,}, data})
+                        
+                        return updatedJob}
+
+                
             } catch (error) {
                 if (error instanceof PrismaClientKnownRequestError){
                     throw error.code
@@ -157,10 +164,29 @@ export class RecruiterService {
             }        
     }
 
-    async updateRecruiterInfos(jobId , recuiterId, updateRecruiterDto){
+    async updateRecruiterInfos(
+        recuiterId : number,
+        data: Prisma.RecruiterUpdateWithoutJobsInput) {
+            
+            const findRecuiter = await this.prisma.recruiter.findUnique({
+                where:{
+                    id: recuiterId,
+                }
+            })
+           
+            try {
+                    const updatedRecruiter = await this.prisma.recruiter.update({
+                        where: {
+                            id: recuiterId,
+                        },data,
+                    })
+                } catch (error) {
+                    
+            }
+            
+        }
 
-    }
+
 }
 
-    
 

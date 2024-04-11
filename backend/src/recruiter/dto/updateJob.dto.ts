@@ -41,8 +41,7 @@ export class updateJobOfferDto {
     @IsString()
     @IsOptional()
     profil: string;
-
-    
+   
     @IsOptional()
     advantages: string[];
 
