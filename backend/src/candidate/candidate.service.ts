@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-// import { JobOffer } from './candiatesInterfaces/jobOfferInterface';
+import { JobOffer } from './candiatesInterfaces/jobOfferInterface';
 
 @Injectable()
 export class CandidateService {
@@ -21,7 +21,7 @@ export class CandidateService {
         
     }
 
-    async getSearchOffers(){
+    async getSearchOffers() : Promise<Array<JobOffer>>{
 
         const jobOffers = await this.prisma.job.findMany({
             select: {
