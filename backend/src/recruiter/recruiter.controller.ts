@@ -3,7 +3,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { Recruiter } from '@prisma/client';
 import { GetRecruiter } from 'src/auth/decorator';
 import { JwtGuard } from 'src/auth/guard';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { OfferDTO } from './dto';
 import { RecruiterService } from './recruiter.service';
 import { updateJobOfferDto } from './dto/updateJob.dto';
