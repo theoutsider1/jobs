@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+// import { JobOffer } from './candiatesInterfaces/jobOfferInterface';
 
 @Injectable()
 export class CandidateService {
@@ -8,6 +9,7 @@ export class CandidateService {
     ){}
 
     async getLastJobs(){
+        // retreive on the 6 newest job offers
         const lastOffers = await this.prisma.job.findMany({
             take: 6,
             orderBy: {
@@ -17,5 +19,21 @@ export class CandidateService {
         
         return lastOffers;
         
+    }
+
+    async getSearchOffers(){
+
+        const jobOffers = await this.prisma.job.findMany({
+            select: {
+                title: true,
+                createdAt: true,
+                city: true,
+                contractType: true,
+                experience: true,
+                // profil:true,
+                companyName:true,
+            }
+        })
+        return jobOffers;
     }
 }

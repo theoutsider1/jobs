@@ -8,14 +8,15 @@ export class CandidateController {
         private candidateService : CandidateService
     ){}
 
+    // retreive on the 6 newest job offers
+    @Get()
+    async getLastJobOffers() {
+        return await this.candidateService.getLastJobs();
+    }
 
     @Get('trouverunemploi')
     async getAllJobOffers(){
-        return {"msg" : "hello"};
+        return await this.candidateService.getSearchOffers();
     }
-
-    @Get()
-    async getLastJobOffers() {
-        return this.candidateService.getLastJobs();
-    }
+    
 }
