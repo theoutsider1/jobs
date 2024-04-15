@@ -1,4 +1,21 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { CandidateService } from './candidate.service';
 
-@Controller('candidate')
-export class CandidateController {}
+@Controller('candidat')
+export class CandidateController {
+
+    constructor(
+        private candidateService : CandidateService
+    ){}
+
+
+    @Get('trouverunemploi')
+    async getAllJobOffers(){
+        return {"msg" : "hello"};
+    }
+
+    @Get()
+    async getLastJobOffers() {
+        return this.candidateService.getLastJobs();
+    }
+}
