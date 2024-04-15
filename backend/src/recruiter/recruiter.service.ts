@@ -2,13 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { Prisma, PrismaClient, Recruiter } from '@prisma/client';
-import { UpdateRecruiterDto } from './dto/updateRecuiterProfile.dto';
+import * as bcrypt from "bcrypt";
+import { ConfigService } from '@nestjs/config';
 
 
 @Injectable()
 export class RecruiterService {
     constructor (
-        private prisma : PrismaService,){}
+        private prisma : PrismaService,
+        private config: ConfigService){}
 
     async myprofile (myProfileDetails : Recruiter){
         return {"myProfileDetails" : myProfileDetails};
@@ -167,21 +169,44 @@ export class RecruiterService {
     async updateRecruiterInfos(
         recuiterId : number,
         data: Prisma.RecruiterUpdateWithoutJobsInput) {
-            
+            const saltOrRounds = 10;
             const findRecuiter = await this.prisma.recruiter.findUnique({
                 where:{
                     id: recuiterId,
                 }
             })
-           
+           if('password' in data || 'email' in data){
+            if (data.mail === findRecuiter.mail){
+                return {"msg": "it seems like the old email"};
+            } 
+
+            if(data.password){
+                const isMatch = await bcrypt.compare(data.password.toString(), findRecuiter.password)
+                if (isMatch){
+                    return {"msg": "it seems like the old email"};
+                } else {
+                    const newPassword = data.password.toString()
+                    const hash = await bcrypt.hash(newPassword,saltOrRounds)
+
+                     data.password = hash
+                }
+            }
+           }
             try {
                     const updatedRecruiter = await this.prisma.recruiter.update({
                         where: {
                             id: recuiterId,
                         },data,
-                    })
+                    });
+                    return updatedRecruiter;
+
                 } catch (error) {
-                    
+                    if (error instanceof PrismaClientKnownRequestError){
+                        throw error.code
+                    } else {
+                        
+                        throw error
+                    }
             }
             
         }
