@@ -51,59 +51,33 @@ const LatestOffer = ()=> {
             
                 <div className="grid grid-cols-3 justify-center items-center gap-10 p-10">
                 
-                {offers && 
-                    offers.map((off, index) => (
+                    {offers && 
+                        offers.map((off, index) => (
+                            
+                            <div key={index} className="flex items-center bg-primary p-3 rounded">
+                                <div className="w-32">
+                                <img
+                                className="h-[83px] w-[83px] rounded-lg"
+                                src="https://github.com/horizon-ui/horizon-tailwind-react-ts-corporate/blob/main/src/assets/img/profile/image1.png?raw=true"
+                                alt=""
+                                />
+                            </div>
+                            <div className="w-full ml-4">
+                                <h2>{off.title}</h2>
+                                <p className="text-base font-medium text-navy-700 dark:text-white">
+                                {off.companyName}
+                                </p>
+                                <p className="mt-2 text-sm text-gray-600 inline">
+                                {off.city} | {off.contractType}
+                                </p>
+                                <div className="flex justify-end items-end">
+                                <p className="text-sm">{off.createdAt}</p>
+                                </div>
+                            </div>
+                            </div>
                         
-                        <div key={index} className="flex items-center bg-primary p-3 rounded">
-                            <div className="">
-                            <img
-                            className="h-[83px] w-[83px] rounded-lg"
-                            src="https://github.com/horizon-ui/horizon-tailwind-react-ts-corporate/blob/main/src/assets/img/profile/image1.png?raw=true"
-                            alt=""
-                            />
-                        </div>
-                        <div className="w-full ml-4">
-                            <h2>{off.title}</h2>
-                            <p className="text-base font-medium text-navy-700 dark:text-white">
-                            {off.companyName}
-                            </p>
-                            <p className="mt-2 text-sm text-gray-600 inline">
-                            {off.city} | {off.contractType}
-                            </p>
-                            <div className="flex justify-end items-end">
-                            <p className="text-sm">{off.createdAt}</p>
-                            </div>
-                        </div>
-                        </div>
-                       
-                    ))
-                }
-                
-                    
-                    <div className="">
-                        <div className="flex items-center bg-primary p-3 rounded">
-                        <div className="">
-                            <img
-                            className="h-[83px] w-[83px] rounded-lg"
-                            src="https://github.com/horizon-ui/horizon-tailwind-react-ts-corporate/blob/main/src/assets/img/profile/image1.png?raw=true"
-                            alt=""
-                            />
-                        </div>
-                        <div className="ml-4">
-                            <h2>Title Offer </h2>
-                            <p className="text-base font-medium text-navy-700 dark:text-white">
-                            Technology behind the Blockchain
-                            </p>
-                            <p className="mt-2 text-sm text-gray-600 inline">
-                            Ville | Contract
-                            </p>
-                            <div className="flex justify-end">
-                            <p className="text-sm">publish date</p>
-                            </div>
-                        </div>
-                       
-                        </div>
-                    </div>
+                        ))
+                    }
                 </div>
                 
             </div>
