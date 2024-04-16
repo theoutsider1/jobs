@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { CandidateService } from './candidate.service';
+import { JobOffer } from './candiatesInterfaces/jobOfferInterface';
 
 @Controller('candidat')
 export class CandidateController {
@@ -15,7 +16,7 @@ export class CandidateController {
     }
 
     @Get('trouverunemploi')
-    async getAllJobOffers(){
+    async getAllJobOffers(@Query() query:JobOffer){
         return await this.candidateService.getSearchOffers();
     }
     

@@ -1,8 +1,12 @@
 import {  useEffect, useState } from "react";
 import OffersCard from "./OffersCard";
 import { SidebarFilter } from "./SidebarFiiter";
-import {regions} from "../../Types/Globals";
-import { jobDetails } from "../../Types/DataJobs";
+// import {regions} from "../../Types/Globals";
+// import { jobDetails } from "../../Types/DataJobs";
+import axios from "axios";
+import { OfferData } from "../../Types/Globals";
+
+
 
 
 
@@ -10,35 +14,38 @@ const OffersList = () => {
 
     //const [showData, setShowData] = useState(false);
     const [checkboxValues, setCheckboxValues] = useState<string[]>([]);
-    const [dropdownToggle, setdropdrownToggle] = useState(false);
-    const [regionSelected, setRegionSelected] = useState("Ville, Région")
+    // const [dropdownToggle, setdropdrownToggle] = useState(false);
+    // const [regionSelected, setRegionSelected] = useState("Ville, Région")
     const [searchValue, setSearchValue] = useState('')
-    
+    const [data, setData] = useState<OfferData[]>([]); 
    
     //toggle region dropdown 
 
-    const handleDropdownToggle = () =>{
-        setdropdrownToggle(!dropdownToggle)
+    // const handleDropdownToggle = () =>{
+    //     setdropdrownToggle(!dropdownToggle)
                   
-    }
+    // }
   
     // get the value of the list regions
-    const handleDropDownValue = (value:string)=>{
+    // const handleDropDownValue = (value:string)=>{
        
-        setRegionSelected(value.toLowerCase().replace(/[-_',]/g," " ) )
+    //     setRegionSelected(value.toLowerCase().replace(/[-_',]/g," " ) )
 
-        setdropdrownToggle(!dropdownToggle)
-    }
+    //     setdropdrownToggle(!dropdownToggle)
+    // }
     
     // handle Search input 
-    const handleSubmit = (e: any, searchValue: string, regionSelected: string, setCheckboxValues: React.Dispatch<React.SetStateAction<string[]>>) => {
+    const handleSubmit = (e: any, searchValue: string, setCheckboxValues: React.Dispatch<React.SetStateAction<string[]>>) => {
         e.preventDefault();
         
         setCheckboxValues((prevValues) => {
             if ( searchValue && !checkboxValues.includes(searchValue) 
-            && regionSelected && regionSelected !== "Ville, Région" && !checkboxValues.includes(regionSelected)){
+            // && !checkboxValues.includes(regionSelected)
+            ){
                 // let f : string = regionSelected
-                return [...prevValues,searchValue, regionSelected];
+                return [...prevValues,searchValue,
+                    //  regionSelected
+                    ];
             }
 
             if (searchValue && !checkboxValues.includes(searchValue)) {
@@ -46,11 +53,12 @@ const OffersList = () => {
                 return [...prevValues, searchValue];
 
             } 
-            if(regionSelected && !checkboxValues.includes(regionSelected)){
+            // if(regionSelected 
+            //     && !checkboxValues.includes(regionSelected)){
                 
-                return [...prevValues, regionSelected];
+            //     return [...prevValues, regionSelected];
                 
-            } 
+            // } 
            
            
             return prevValues;
@@ -68,27 +76,43 @@ const OffersList = () => {
         }
     
     }
-    
+    // Fetch data depends on the search input and checkboxes values
+    const fetchOffers = async ()=> {
+       await axios.get<OfferData[]>("http://localhost:3000/candidat/trouverunemploi")
+        .then(response =>{            
+            setData(response.data)})
+        .catch(error => console.log(error))
+    }
     // Assume this function is called when you handle form submission
     const handlesub = (e: any) => {
-        
-        handleSubmit(e, searchValue,regionSelected ,setCheckboxValues);
+        fetchOffers()
+        handleSubmit(e, searchValue
+            // ,regionSelected 
+            , setCheckboxValues);
         
    
     };
    
     const handleFilterChange = (values: string[])=>{
-        if (searchValue || regionSelected && regionSelected !== "Ville, Région"){
+        if (searchValue 
+            // || regionSelected && regionSelected !== "Ville, Région"
+            ){
 
-           if (searchValue && regionSelected && regionSelected !== "Ville, Région"){
+           if (searchValue 
+            // && regionSelected && regionSelected !== "Ville, Région"
+            ){
 
-                setCheckboxValues([searchValue, regionSelected, ...values])
+                setCheckboxValues([searchValue
+                    // , regionSelected
+                    , ...values])
 
-           } else  if (regionSelected && regionSelected !== "Ville, Région") {
+           }
+            // else  if (regionSelected && regionSelected !== "Ville, Région") {
 
-                setCheckboxValues([regionSelected, ...values])
+            //     setCheckboxValues([regionSelected, ...values])
 
-            } else if (searchValue){                
+            // } 
+            else if (searchValue){                
                 setCheckboxValues([searchValue, ...values])
             } 
         } else {
@@ -98,7 +122,7 @@ const OffersList = () => {
 
     }
     useEffect(()=>{
-        console.log(checkboxValues);
+        console.log(data);
         
     },[checkboxValues])
     
@@ -121,7 +145,7 @@ const OffersList = () => {
                     {/** Search Bar */}
                     <div className="flex w-full" >
                         <form onSubmit={handlesub} className="flex w-full">
-                            <div className="w-1/2 ">
+                            <div className="w-full">
                             
                                 <label htmlFor="searchDropdown" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Domaines, Mots clés</label>
                                 <input type="search" id="searchDropdown" onChange={handleInputChange} value={searchValue} className="block w-full p-3 text-sm text-gray-900 rounded-s-lg border-r-gray-50 border-r-2 border border-gray-300 bg-slate-100 " placeholder="Méties, Domaines, Mots clés"/>
@@ -130,39 +154,20 @@ const OffersList = () => {
 
                             {/** dropdown ville et régions */}
 
-                        <div className="w-1/2 relative flex">
-                            <div className="flex flex-col w-full">
-                                <button id="dropdown-button" data-dropdown-toggle="dropdown" onClick={handleDropdownToggle} className="flex-auto z-10 inline-flex items-center justify-between p-3 text-sm font-medium text-center text-gray-900  bg-slate-100 border border-gray-300  hover:bg-gray-200 focus:ring-1"  type="button">
-                                        {regionSelected}
-                                        <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
-                                        </svg>
-                                </button>
-                                { dropdownToggle &&(
-                                    <div className={`${dropdownToggle  ? " w-[343px] h-56 overflow-y-auto z-30 mt-11 absolute rounded-b-md bg-third" : "hidden"}`}>
-                                            {regions.map(ville => (
-                                                <ul className="text-sm pt-4 ">
-                                                    <li key={ville} value={ville} onClick={() =>
-                                                        handleDropDownValue(ville)} 
-                                                        className="px-4 py-3 hover:bg-third cursor-pointer " >{ville}</li>
-                                                
-                                                </ul>
-                                            ))}
-                                    </div>)}
+                            <div className="relative flex">
                             
+                            
+                                <div className="flex-none w-9">
+                                    <button type="submit" className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-search rounded-e-lg border border-gray-300 hover:bg-secondary">
+                                            <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                            </svg>
+                                            <span className="sr-only">Search</span>
+                                    </button>
+                                
+                                </div>
+                                
                             </div>
-                         
-                            <div className="flex-none w-9">
-                                <button type="submit" className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-search rounded-e-lg border border-gray-300 hover:bg-secondary">
-                                        <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                                        </svg>
-                                        <span className="sr-only">Search</span>
-                                </button>
-                            
-                            </div>
-                            
-                        </div>
                         </form>
                     </div>
                     
@@ -180,7 +185,7 @@ const OffersList = () => {
 
                 {
                 
-                jobDetails.filter(offer => {
+                data.filter(offer => {
                         
                         // Check if any property value in the offer matches any value in checkboxValues
                         return Object.values(offer).some(value => {

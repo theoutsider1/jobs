@@ -21,13 +21,14 @@ export const jobSlice = createSlice({
             if (jobFinded) {
                 const newJob: OfferData = {
                     id:id, // IDs start from 1
-                    jobTitle: jobFinded.jobTitle, 
+                    createdAt: jobFinded.createdAt,
+                    title: jobFinded.title, 
                     companyName: jobFinded.companyName, 
-                    contract: jobFinded.contract, 
-                    ville: jobFinded.ville, 
+                    contractType: jobFinded.contractType, 
+                    city: jobFinded.city, 
                     domaine: jobFinded.domaine, 
                     studies: jobFinded.studies, 
-                    experienceYears: jobFinded.experienceYears, 
+                    experience: jobFinded.experience, 
                     description: jobFinded.description, 
                     missions: jobFinded.missions, 
                     profil: jobFinded.profil, 

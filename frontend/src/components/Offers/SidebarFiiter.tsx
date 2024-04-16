@@ -97,7 +97,7 @@ export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => 
     <div className="bg-third w-full">
       {filterCategories.map((category) => (
         <div key={category.title} className="p-4 border-b-2 border-b-pink-950">
-          <h4>{category.title}:</h4>
+          <h4>{category.title}</h4>
           <ul className="p-2">
             {category.options.map((option) => (
               <li key={option}>

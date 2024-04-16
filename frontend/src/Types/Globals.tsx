@@ -9,13 +9,14 @@ export interface  activeStateProps{
 // interfaces
 export interface OfferData {
     id: number;
-    jobTitle: string;
+    createdAt: string;
+    title: string;
     companyName?: string;
-    contract?: string;
-    ville: string;
+    contractType?: string;
+    city: string;
     domaine?: string;
     studies?: string;
-    experienceYears?: string;
+    experience?: string;
     description? : string;
     missions? : string[] ;
     profil? : string[];

@@ -14,7 +14,7 @@ import { useAppDispatch } from '../store/store';
 
 
 
-const OffersCard: React.FC<{ jobs: OfferData, id:any }> = ({ jobs,id }) =>  {
+const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
    // const [targetJob , setTargetJob] = useState(Number)
     const navigate = useNavigate();
     const  dispatch = useAppDispatch()
@@ -47,7 +47,7 @@ const OffersCard: React.FC<{ jobs: OfferData, id:any }> = ({ jobs,id }) =>  {
 
                                 <div className="flex justify-between">
 
-                                    <h2 className="font-medium text-xl">{jobs.jobTitle}</h2>
+                                    <h2 className="font-medium text-xl">{jobs.title}</h2>
                                     <span> <IonIcon icon={heartOutline}  className='cursor-pointer'></IonIcon></span>  
 
                                 </div>
@@ -62,12 +62,12 @@ const OffersCard: React.FC<{ jobs: OfferData, id:any }> = ({ jobs,id }) =>  {
                                     
                                     <div className='border-x-2 border-neutral-500 px-4'>
                                         <IonIcon icon={locationOutline} className='text-base'></IonIcon>
-                                        {jobs.ville}
+                                        {jobs.city}
                                     </div>
 
                                     <div className='px-4'>
                                         <IonIcon icon={newspaperOutline} className='text-base text-rose-950 pr-1' ></IonIcon>
-                                        {jobs.contract}
+                                        {jobs.contractType}
                                     </div>
                                 </div>
 
@@ -79,7 +79,7 @@ const OffersCard: React.FC<{ jobs: OfferData, id:any }> = ({ jobs,id }) =>  {
                                         </div>
                                         
                                         <div className='px-4'>
-                                            {jobs.experienceYears}
+                                            {jobs.experience}
                                         </div>
                                 </div>
 

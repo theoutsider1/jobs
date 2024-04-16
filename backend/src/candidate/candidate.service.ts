@@ -34,6 +34,7 @@ export class CandidateService {
 
         const jobOffers = await this.prisma.job.findMany({
             select: {
+                id: true,
                 title: true,
                 createdAt: true,
                 city: true,
