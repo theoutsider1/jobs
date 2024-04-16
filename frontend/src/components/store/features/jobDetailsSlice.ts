@@ -28,6 +28,7 @@ export const jobSlice = createSlice({
                     city: jobFinded.city, 
                     domaine: jobFinded.domaine, 
                     studies: jobFinded.studies, 
+                    jobType: jobFinded.jobType,
                     experience: jobFinded.experience, 
                     description: jobFinded.description, 
                     missions: jobFinded.missions, 

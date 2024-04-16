@@ -40,6 +40,8 @@ export class CandidateService {
                 city: true,
                 contractType: true,
                 experience: true,
+                domaine: true,
+                jobType: true,
                 // profil:true,
                 companyName:true,
             }

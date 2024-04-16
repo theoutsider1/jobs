@@ -75,7 +75,7 @@ const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
 
                                 <div className='flex py-4'>
                                         <div className='pr-4 borde border-r-2 border-neutral-500'>
-                                            {jobs.studies}
+                                            {jobs.jobType}
                                         </div>
                                         
                                         <div className='px-4'>
