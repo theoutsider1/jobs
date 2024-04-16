@@ -9,6 +9,7 @@ async function bootstrap() {
     // only fields that we defined
     whitelist: true,
   }))
+  app.enableCors();
   await app.listen(3000);
 }
 bootstrap();

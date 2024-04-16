@@ -11,6 +11,15 @@ export class CandidateService {
     async getLastJobs(){
         // retreive on the 6 newest job offers
         const lastOffers = await this.prisma.job.findMany({
+            select: {
+                title: true,
+                createdAt: true,
+                city: true,
+                contractType: true,
+                experience: true,
+                // profil:true,
+                companyName:true,
+            },
             take: 6,
             orderBy: {
                 createdAt: 'desc',
