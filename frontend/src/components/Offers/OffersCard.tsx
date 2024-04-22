@@ -11,6 +11,7 @@ import { useAppDispatch } from '../store/store';
 import { useState } from 'react';
 import axios from 'axios';
 import { offerEmploi } from '../store/features/dataShapes/dataInterfaces';
+import { formatDate } from '../../Types/globalFunctions';
 
 
 const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
@@ -25,20 +26,12 @@ const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
         
        await  axios.get(`http://localhost:3000/candidat/description/${id}`)
         .then( response => {
-            // console.log(response.data)
-            
             const convertDate = response.data
-            // console.log(convertDate);
+            const formattedOffers ={...convertDate, createdAt: formatDate(convertDate.createdAt)}
             
             setDetailsOffer(convertDate)
-            dispatch(getJob({ job: [convertDate] }));
+            dispatch(getJob({ job: [formattedOffers] }));
             })
-            // .then(() => {
-            // //     // Once fetchOfferDetails is completed and state is updated, dispatch getJob
-            //  dispatch(getJob({ job: convertDate }));
-                
-            // })
-            // .then (()=> console.log(`formated  date:  ${detailsOffer}`))
             
         .catch(error => console.log(error)
         )
@@ -47,11 +40,8 @@ const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
     }
     const navigateToJobDescription = ()=> {
         fetchOfferDetails(id)
-        .then(() => {
-            // Once fetchOfferDetails is completed and state is updated, dispatch getJob
-            // dispatch(getJob({ job: detailsOffer }));
-            navigate(`/description/${id}`);
-            
+        .then(() => { 
+            navigate(`/description/${id}`); 
         })
     }
 
