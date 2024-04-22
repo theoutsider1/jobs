@@ -18,11 +18,11 @@ const Router = createBrowserRouter([
                 element: <HeroSection/>,
             },
             {
-                path: "/offers",
+                path: "/trouverunemploi",
                 element: <OffersList/>,
             },
             {
-                path: "/JobDescription",
+                path: "/description/:id",
                 element:<JobDescription/>,
             },
             {

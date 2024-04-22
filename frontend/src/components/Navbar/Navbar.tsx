@@ -56,7 +56,7 @@ const Navbar = () => {
             <Link to="/ContacezNous" className=" /*py-7*/ px-3 inline-block">
             Contact
             </Link>
-            <Link to="/offers" className=" /*py-7*/ px-3 inline-block">
+            <Link to="/trouverunemploi" className=" /*py-7*/ px-3 inline-block">
             Offres d'emplois
             </Link>
           </li>

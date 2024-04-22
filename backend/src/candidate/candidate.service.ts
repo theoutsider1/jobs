@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { JobOffer } from './candiatesInterfaces/jobOfferInterface';
+import { JobOffer, offerEmploi } from './candiatesInterfaces/jobOfferInterface';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class CandidateService {
@@ -44,8 +45,47 @@ export class CandidateService {
                 jobType: true,
                 // profil:true,
                 companyName:true,
+
             }
         })
         return jobOffers;
+    }
+
+    async getOfferDetails (id : number): Promise <offerEmploi | { error: string }>  {
+    
+        
+        try {
+            const jobInfos = await this.prisma.job.findUnique({
+                where: {
+                    id: id,
+                },
+                select : {
+                    id: true,
+                    createdAt : true,
+                    title: true,
+                    city: true,
+                    contractType: true,
+                    experience: true,
+                    domaine: true,
+                    companyName: true,
+                    description: true,
+                    jobType: true,
+                    missions: true,
+                    profil: true,
+                    advantages: true,
+
+                }
+            });
+    
+            if (!jobInfos) {
+                return { error: 'Job not found' }; // Return custom error message
+            }
+    
+            // If jobInfos is not empty, return the job details
+            return jobInfos;
+        } catch (error) {
+            console.error('Error fetching job details:', error);
+            return { error: 'Internal server error' }; // Return generic error message
+        }
     }
 }

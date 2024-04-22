@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import StatisticsBar from "./Statistics";
 import axios from "axios";
+import { formatDate } from "../../Types/globalFunctions";
 
 
 interface Offers {
@@ -12,13 +13,13 @@ interface Offers {
     companyName: string;
 }
 // format date xx-xx-2024
-const formatDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero based
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-};
+// const formatDate = (dateString: string): string => {
+//     const date = new Date(dateString);
+//     const day = date.getDate().toString().padStart(2, "0");
+//     const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero based
+//     const year = date.getFullYear();
+//     return `${day}-${month}-${year}`;
+// };
 
 
 const LatestOffer = ()=> { 

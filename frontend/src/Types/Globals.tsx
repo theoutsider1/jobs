@@ -16,7 +16,7 @@ export interface OfferData {
     city: string;
     domaine?: string;
     jobType?: string;
-    studies?: string;
+    studies?: string | null;
     experience?: string;
     description? : string;
     missions? : string[] ;

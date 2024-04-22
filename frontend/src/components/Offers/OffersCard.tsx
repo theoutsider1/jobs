@@ -8,29 +8,55 @@ import { useNavigate } from 'react-router-dom';
 
 import { getJob } from '../store/features/jobDetailsSlice';
 import { useAppDispatch } from '../store/store';
-
-
-
-
+import { useState } from 'react';
+import axios from 'axios';
+import { offerEmploi } from '../store/features/dataShapes/dataInterfaces';
 
 
 const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
    // const [targetJob , setTargetJob] = useState(Number)
     const navigate = useNavigate();
-    const  dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
+    const [detailsOffer, setDetailsOffer] = useState<offerEmploi[]>([])
+    // const stringId : string  = jobs.id.toString()
+    
+    
+    const fetchOfferDetails =async (id:number  ) => {
+        
+       await  axios.get(`http://localhost:3000/candidat/description/${id}`)
+        .then( response => {
+            // console.log(response.data)
+            
+            const convertDate = response.data
+            // console.log(convertDate);
+            
+            setDetailsOffer(convertDate)
+            dispatch(getJob({ job: [convertDate] }));
+            })
+            // .then(() => {
+            // //     // Once fetchOfferDetails is completed and state is updated, dispatch getJob
+            //  dispatch(getJob({ job: convertDate }));
+                
+            // })
+            // .then (()=> console.log(`formated  date:  ${detailsOffer}`))
+            
+        .catch(error => console.log(error)
+        )
 
+        
+    }
     const navigateToJobDescription = ()=> {
-            navigate('/JobDescription');
-           dispatch(getJob({id:id}))
-                 
-         
+        fetchOfferDetails(id)
+        .then(() => {
+            // Once fetchOfferDetails is completed and state is updated, dispatch getJob
+            // dispatch(getJob({ job: detailsOffer }));
+            navigate(`/description/${id}`);
+            
+        })
     }
 
-   
     return (
-        <>
-            
-            
+        <>            
             {/** offer details */}
 
                      <div className="w-full m-9">
@@ -38,7 +64,7 @@ const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
                             <div className="w-1/3 ">
                                 <img className=" w-full rounded-lg"
                                 src="https://github.com/horizon-ui/horizon-tailwind-react-ts-corporate/blob/main/src/assets/img/profile/image1.png?raw=true"
-                                alt=""/>
+                                alt="company-img"/>
                             </div>
 
                             <div className="w-full ml-6 pt-4">
@@ -94,7 +120,7 @@ const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
 
                                 <div className='flex justify-between pt-6'>
                                     <div className=' opacity-70'>
-                                        Publish Date 
+                                        {jobs.createdAt}
                                     </div>
                                     <div>
                                     <button

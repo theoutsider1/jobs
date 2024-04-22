@@ -1,12 +1,17 @@
 
-import { useAppSelector } from "../store/store";
+// import { OfferData } from "../../Types/Globals";
+// import { useAppSelector } from "../store/store";
+//import { OfferData } from "../../Types/Globals";
 import { UploadCvComponent } from "../UploadCvComponent/UploadCvComponent";
 import  { useState } from "react";
+import { offerEmploi } from "../store/features/dataShapes/dataInterfaces";
 
 
-const JobDetails = ()=> {
-    const jobD = useAppSelector(state => state.getJob.job)
+const JobDetails : React.FC<{jobD : offerEmploi[]}> = ({jobD})=> {
+    // const jobD = useAppSelector(state => state.getJob.job)
     const [handleCvPopup, setHandleCvPopup] = useState(false);
+
+   
     
     const handleTurnPopupTrue = ()=> {
         setHandleCvPopup(true);
@@ -14,17 +19,18 @@ const JobDetails = ()=> {
     const handleTurnPopupFalse = ()=> {
         setHandleCvPopup(false);
     }
-    //console.log(jobD);
+
     
     return (
         <>
              <div className="w-full  bg-white ">
-                
+               
                  <div className="bg-third py-10 px-44">
-                 {
+                   
+                 { 
                     
                     jobD.map((job) => (
-                        <div className="bg-white p-14 rounded-md" key={job.studies}>
+                        <div className="bg-white p-14 rounded-md" key={job.id}>
 
                             <h4 className="font-semibold text-xl p-3 ">
                                 Description:
@@ -37,11 +43,9 @@ const JobDetails = ()=> {
                             </h4>
                         
                             <ul className="p-2">
-                             {job.missions?.map((m,index) => (
-                                
-                                    <li key={`mission_${index}`} className="px-6">{m}</li>
-                                
-                                ))}
+                         
+                                <li  className="px-6">{job.missions}</li>
+                            
                             </ul>
                        
                             <h4 className="font-semibold text-xl p-3">
@@ -49,11 +53,9 @@ const JobDetails = ()=> {
                             </h4>
 
                             <ul className="p-2">
-                                {job.profil?.map((pro,index) => (
-                                    
-                                        <li key={`profil_${index}`} className="px-6">{pro}</li>
-                                    
-                                ))}
+                                
+                                 <li className="px-6">{job.profil}</li>
+
                             </ul>
                         
                             <h4 className="font-semibold text-xl p-3">
@@ -61,7 +63,7 @@ const JobDetails = ()=> {
                             </h4>
 
                             <ul className="p-2">
-                                {job.avantages?.map((avanta,index) => (
+                                {job.advantages?.map((avanta,index) => (
                                     
                                         <li key={`mission_${index}`} className="px-6">{avanta}</li>
                                     
@@ -80,11 +82,12 @@ const JobDetails = ()=> {
                     </div>
                     
                     ))}
-                    
+                     
                    
                 </div>
-     
+    
             </div>
+            
             <UploadCvComponent isOpen={handleCvPopup} isClose={handleTurnPopupFalse}/>
         </>
     )

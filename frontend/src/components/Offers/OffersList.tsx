@@ -1,15 +1,18 @@
 import {  useEffect, useState } from "react";
 import OffersCard from "./OffersCard";
 import { SidebarFilter } from "./SidebarFiiter";
-// import {regions} from "../../Types/Globals";
-// import { jobDetails } from "../../Types/DataJobs";
 import axios from "axios";
 import { OfferData } from "../../Types/Globals";
 
 
 
-
-
+export const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero based
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+};
 const OffersList = () => {
 
     //const [showData, setShowData] = useState(false);
@@ -63,6 +66,7 @@ const OffersList = () => {
            
             return prevValues;
         });
+        
     };
 
     const handleInputChange =  (e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -79,8 +83,14 @@ const OffersList = () => {
     // Fetch data depends on the search input and checkboxes values
     const fetchOffers = async ()=> {
        await axios.get<OfferData[]>("http://localhost:3000/candidat/trouverunemploi")
-        .then(response =>{            
-            setData(response.data)})
+        .then(response =>{
+            const comingData = response.data
+            const formattedOffers = comingData.map((offer : OfferData) => ({
+                ...offer,
+                createdAt : formatDate(offer.createdAt)
+            }));
+            setData(formattedOffers)})
+            
         .catch(error => console.log(error))
     }
     // Assume this function is called when you handle form submission

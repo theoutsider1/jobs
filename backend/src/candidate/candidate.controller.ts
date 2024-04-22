@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { CandidateService } from './candidate.service';
 import { JobOffer } from './candiatesInterfaces/jobOfferInterface';
 
@@ -16,8 +16,17 @@ export class CandidateController {
     }
 
     @Get('trouverunemploi')
-    async getAllJobOffers(@Query() query:JobOffer){
+    async getAllJobOffers(@Query() query : string): Promise<JobOffer[]>{
         return await this.candidateService.getSearchOffers();
     }
+    @Get('/description/:id')
+    async jobDetails(@Param('id', ParseIntPipe) id : number){
+    
+        return await this.candidateService.getOfferDetails(id);
+    }
+
+
+
+
     
 }
