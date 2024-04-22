@@ -1,7 +1,4 @@
 
-// import { OfferData } from "../../Types/Globals";
-// import { useAppSelector } from "../store/store";
-//import { OfferData } from "../../Types/Globals";
 import { UploadCvComponent } from "../UploadCvComponent/UploadCvComponent";
 import  { useState } from "react";
 import { offerEmploi } from "../store/features/dataShapes/dataInterfaces";
@@ -25,7 +22,7 @@ const JobDetails : React.FC<{jobD : offerEmploi[]}> = ({jobD})=> {
                
                  <div className="bg-third py-10 px-44">
                    
-                 { 
+                 { jobD &&
                     
                     jobD.map((job) => (
                         <div className="bg-white p-14 rounded-md" key={job.id}>

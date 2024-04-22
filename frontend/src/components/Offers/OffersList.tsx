@@ -15,57 +15,23 @@ export const formatDate = (dateString: string): string => {
 };
 const OffersList = () => {
 
-    //const [showData, setShowData] = useState(false);
     const [checkboxValues, setCheckboxValues] = useState<string[]>([]);
-    // const [dropdownToggle, setdropdrownToggle] = useState(false);
-    // const [regionSelected, setRegionSelected] = useState("Ville, Région")
     const [searchValue, setSearchValue] = useState('')
     const [data, setData] = useState<OfferData[]>([]); 
-   
-    //toggle region dropdown 
-
-    // const handleDropdownToggle = () =>{
-    //     setdropdrownToggle(!dropdownToggle)
-                  
-    // }
   
-    // get the value of the list regions
-    // const handleDropDownValue = (value:string)=>{
-       
-    //     setRegionSelected(value.toLowerCase().replace(/[-_',]/g," " ) )
-
-    //     setdropdrownToggle(!dropdownToggle)
-    // }
-    
     // handle Search input 
     const handleSubmit = (e: any, searchValue: string, setCheckboxValues: React.Dispatch<React.SetStateAction<string[]>>) => {
         e.preventDefault();
         
         setCheckboxValues((prevValues) => {
             if ( searchValue && !checkboxValues.includes(searchValue) 
-            // && !checkboxValues.includes(regionSelected)
             ){
-                // let f : string = regionSelected
-                return [...prevValues,searchValue,
-                    //  regionSelected
-                    ];
+                return [...prevValues,searchValue,];
             }
-
             if (!searchValue || searchValue == ''
-                //  && !checkboxValues.includes(searchValue)
-                ) {
-              
+                ) {              
                 return [...prevValues];
-
             } 
-            // if(regionSelected 
-            //     && !checkboxValues.includes(regionSelected)){
-                
-            //     return [...prevValues, regionSelected];
-                
-            // } 
-           
-           
             return prevValues;
         });
         
@@ -98,47 +64,27 @@ const OffersList = () => {
     // Assume this function is called when you handle form submission
     const handlesub = (e: any) => {
         fetchOffers()
-        handleSubmit(e, searchValue
-            // ,regionSelected 
-            , setCheckboxValues);
-        
-   
+        handleSubmit(e, searchValue, setCheckboxValues);
+
     };
    
     const handleFilterChange = (values: string[])=>{
-       
-            // || regionSelected && regionSelected !== "Ville, Région"
-            
 
            if (searchValue 
-            // && regionSelected && regionSelected !== "Ville, Région"
             ){
-
-                setCheckboxValues([searchValue
-                    // , regionSelected
-                    , ...values])
-                    return console.log("executed ");
-                    
-
+                setCheckboxValues([searchValue, ...values])
            }
-            // else  if (regionSelected && regionSelected !== "Ville, Région") {
-
-            //     setCheckboxValues([regionSelected, ...values])
-
-            // } 
+          
             else if (searchValue== '' || !searchValue){                
                 setCheckboxValues([...values])
-                return console.log('2 return "executed ');
                 
             } 
-        //  else {
-        //     setCheckboxValues([...values])
-        // }
-       
 
     }
     useEffect(()=>{
-        console.log(data);
+        
+        console.log(data)
+        console.log(checkboxValues)
         
     },[checkboxValues])
     
@@ -206,9 +152,7 @@ const OffersList = () => {
                         // Check if any property value in the offer matches any value in checkboxValues
                         return Object.values(offer).some(value => {
                            
-                          if (typeof value === 'string') {
-                            //console.log(checkboxValues)
-                            
+                          if (typeof value === 'string') { 
                             return checkboxValues.some(checkboxValue => value.toLowerCase().replace(/[-_']/g," ").includes(checkboxValue.toLowerCase().replace(/[-_']/g," ")));
                             
                           } 

@@ -2,16 +2,7 @@ import { useEffect, useState } from "react";
 import StatisticsBar from "./Statistics";
 import axios from "axios";
 import { formatDate } from "../../Types/globalFunctions";
-
-
-interface Offers {
-    title: string;
-    createdAt : string;
-    city :string;
-    contractType : string;
-    experience: string;
-    companyName: string;
-}
+import { Offers } from "../../Types/Globals";
 
 
 

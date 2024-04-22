@@ -102,3 +102,14 @@ export const inputOfferAttributes: inputOffer[] = [
     {id: 'nomComplet', label:'Nom Complet'},
     {id: 'nomComplet', label:'Nom Complet'},
 ]
+
+
+// interface used in Latestoffers component 
+export interface Offers {
+    title: string;
+    createdAt : string;
+    city :string;
+    contractType : string;
+    experience: string;
+    companyName: string;
+}

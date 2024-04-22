@@ -8,7 +8,7 @@ const JobTitleBar: React.FC<{jobD : offerEmploi[]}> = ({jobD})=> {
     return (
         <div>
         {
-        // jobD &&
+        jobD &&
         jobD.map(e =>(
             <div className="w-full bg-fourth" key={e.title}>
                 <div className=" grid grid-cols-4 gap-14 p-10 px-24 justify-around items-center">

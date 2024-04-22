@@ -8,7 +8,7 @@ const filterCategories = [
   },
   {
     title: "Le type du contrat",
-    options: ["CDI", "CDD", "Stage", "Anapec", "Freelance"],
+    options: ["full-time", "CDD", "Stage", "Anapec", "Freelance"],
   },
   {
     title: "Domaines",
@@ -81,15 +81,12 @@ export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => 
       const { value, checked } = e.currentTarget;
       setUserInfo((prevUserInfo) =>
       checked ? [value,...prevUserInfo ] : prevUserInfo.filter((item) => item !== value)
-    );
-     //onCheckboxChange(userInfo);
-   
-    
+    );  
   };
 
   useEffect(() => {
     onCheckboxChange(userInfo);
-    //console.log(userInfo);
+   
     
   }, [userInfo]);
 

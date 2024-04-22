@@ -9,10 +9,8 @@ const JobDescription= ()=> {
    
     return (
         <div className="flex flex-col" >  
-        <div><JobTitleBar jobD = {jobD} /></div>
-        <div> <JobDetails jobD={jobD}/></div>
-                       
-          
+            <div><JobTitleBar jobD = {jobD} /></div>
+            <div> <JobDetails jobD={jobD}/></div>
         </div>
     )
 }
