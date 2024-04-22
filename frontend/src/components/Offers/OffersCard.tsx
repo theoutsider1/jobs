@@ -18,9 +18,6 @@ const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
    // const [targetJob , setTargetJob] = useState(Number)
     const navigate = useNavigate();
     const dispatch = useAppDispatch()
-    const [detailsOffer, setDetailsOffer] = useState<offerEmploi[]>([])
-    // const stringId : string  = jobs.id.toString()
-    
     
     const fetchOfferDetails =async (id:number  ) => {
         
@@ -28,8 +25,7 @@ const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
         .then( response => {
             const convertDate = response.data
             const formattedOffers ={...convertDate, createdAt: formatDate(convertDate.createdAt)}
-            
-            setDetailsOffer(convertDate)
+
             dispatch(getJob({ job: [formattedOffers] }));
             })
             

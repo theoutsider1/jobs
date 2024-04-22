@@ -8,11 +8,9 @@ import { offerEmploi } from "../store/features/dataShapes/dataInterfaces";
 
 
 const JobDetails : React.FC<{jobD : offerEmploi[]}> = ({jobD})=> {
-    // const jobD = useAppSelector(state => state.getJob.job)
+    
     const [handleCvPopup, setHandleCvPopup] = useState(false);
 
-   
-    
     const handleTurnPopupTrue = ()=> {
         setHandleCvPopup(true);
     }

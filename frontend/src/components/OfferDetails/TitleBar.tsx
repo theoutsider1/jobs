@@ -6,7 +6,7 @@ import { offerEmploi } from '../store/features/dataShapes/dataInterfaces';
 const JobTitleBar: React.FC<{jobD : offerEmploi[]}> = ({jobD})=> {
 
     return (
-        <>
+        <div>
         {
         jobD &&
         jobD.map(e =>(
@@ -38,7 +38,7 @@ const JobTitleBar: React.FC<{jobD : offerEmploi[]}> = ({jobD})=> {
                 
             </div>
              ) )}
-        </>
+        </div>
     )
 }
 
