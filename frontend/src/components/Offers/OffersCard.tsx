@@ -5,17 +5,13 @@ import {locationOutline} from 'ionicons/icons';
 import {newspaperOutline} from 'ionicons/icons';
 import { OfferData } from '../../Types/Globals';
 import { useNavigate } from 'react-router-dom';
-
 import { getJob } from '../store/features/jobDetailsSlice';
 import { useAppDispatch } from '../store/store';
-import { useState } from 'react';
 import axios from 'axios';
-import { offerEmploi } from '../store/features/dataShapes/dataInterfaces';
 import { formatDate } from '../../Types/globalFunctions';
 
 
 const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
-   // const [targetJob , setTargetJob] = useState(Number)
     const navigate = useNavigate();
     const dispatch = useAppDispatch()
     

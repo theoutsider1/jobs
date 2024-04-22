@@ -51,9 +51,11 @@ const OffersList = () => {
                     ];
             }
 
-            if (searchValue && !checkboxValues.includes(searchValue)) {
+            if (!searchValue || searchValue == ''
+                //  && !checkboxValues.includes(searchValue)
+                ) {
               
-                return [...prevValues, searchValue];
+                return [...prevValues];
 
             } 
             // if(regionSelected 
@@ -104,9 +106,9 @@ const OffersList = () => {
     };
    
     const handleFilterChange = (values: string[])=>{
-        if (searchValue 
+       
             // || regionSelected && regionSelected !== "Ville, Région"
-            ){
+            
 
            if (searchValue 
             // && regionSelected && regionSelected !== "Ville, Région"
@@ -115,6 +117,8 @@ const OffersList = () => {
                 setCheckboxValues([searchValue
                     // , regionSelected
                     , ...values])
+                    return console.log("executed ");
+                    
 
            }
             // else  if (regionSelected && regionSelected !== "Ville, Région") {
@@ -122,12 +126,14 @@ const OffersList = () => {
             //     setCheckboxValues([regionSelected, ...values])
 
             // } 
-            else if (searchValue){                
-                setCheckboxValues([searchValue, ...values])
+            else if (searchValue== '' || !searchValue){                
+                setCheckboxValues([...values])
+                return console.log('2 return "executed ');
+                
             } 
-        } else {
-            setCheckboxValues([...values])
-        }
+        //  else {
+        //     setCheckboxValues([...values])
+        // }
        
 
     }
