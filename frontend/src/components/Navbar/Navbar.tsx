@@ -3,10 +3,10 @@ import logo from "../../assets/2jobs.svg";
 import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import Button from "./Button";
-//import menuOutline from '../../assets/menu-outline.svg';
 import { IonIcon } from '@ionic/react';
-import { menu , close } from 'ionicons/icons';
-//import Espace from "./BeforeNav/Espace";
+import { menu , close, personCircleOutline } from 'ionicons/icons';
+
+
 
 
 
@@ -47,16 +47,16 @@ const Navbar = () => {
         </div>
         <ul className="md:flex hidden gap-2 items-center">
           <li>
-            <Link to="/" className=" /*py-7*/ px-3 inline-block">
+            <Link to="/" className="px-3 inline-block">
               Home
             </Link>
-            <Link to="/lancerUnOffre" className=" /*py-7*/ px-3 inline-block">
+            <Link to="/lancerUnOffre" className="px-3 inline-block">
               A propos
             </Link>
-            <Link to="/ContacezNous" className=" /*py-7*/ px-3 inline-block">
+            <Link to="/ContacezNous" className="px-3 inline-block">
             Contact
             </Link>
-            <Link to="/trouverunemploi" className=" /*py-7*/ px-3 inline-block">
+            <Link to="/trouverunemploi" className="px-3 inline-block">
             Offres d'emplois
             </Link>
           </li>
@@ -64,10 +64,15 @@ const Navbar = () => {
           <NavLinks />
           </li>
           
+          
         </ul>
-        <div className="md:block hidden">
+        <div className="md:block hidden ">
           <Button />
+          </div>
+        <div className="bg-bright flex justify-center items-center px-3 py-3 rounded-full">
+         <IonIcon icon={personCircleOutline} className="text-4xl"></IonIcon>
         </div>
+
 
         {/* Mobile navbar */}
 

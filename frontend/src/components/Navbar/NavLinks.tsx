@@ -54,7 +54,6 @@ const links:Links[] = [
 const NavLinks = ()=>{
      const [hover, setHover]= useState(false);
      const [indexHovered, setIndexHovered]=useState<null | number>(null);
-     
 
      const handleHoverIn = (index:number) =>{
         setHover(true);
@@ -63,19 +62,18 @@ const NavLinks = ()=>{
      }
      const handleMouseLeave = ()=>{
         setHover(!hover)
+        setIndexHovered(null);
+        
      }
-
-     
-    
 
     return (
     <>
         {
             links.map((item,index:number) => (
                 
-                    <div key={index} className='inline-block px-3 text-left cursor-pointer '  >
-                        <div className=''>
-                            <h2 className='inline py-7 ' onMouseEnter={() => handleHoverIn(index)}  key={item.name} >{item.name} </h2>
+                    <div key={index} className='inline-block px-3 text-left cursor-pointer ' onMouseLeave={handleMouseLeave} >
+                        <div className='' >
+                            <h2 className='inline py-7 ' onMouseEnter={() => handleHoverIn(index)} key={item.name} >{item.name} </h2>
                             <svg className={`inline w-2.5 h-2.5 transform ${hover && indexHovered === index ? '' : `-rotate-90`}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
                             </svg>

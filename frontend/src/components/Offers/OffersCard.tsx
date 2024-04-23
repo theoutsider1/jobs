@@ -33,7 +33,11 @@ const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
     const navigateToJobDescription = ()=> {
         fetchOfferDetails(id)
         .then(() => { 
-            navigate(`/description/${id}`); 
+            navigate(`/description/${id}`);
+            window.scrollTo({
+                top: 0,
+                // behavior: 'smooth' // Optional: Smooth scrolling animation
+              });
         })
     }
 
