@@ -11,53 +11,54 @@ import axios from 'axios';
 
 
 export const HeroSectionRecruteur = ()=>{
-    const [email, setmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [credentials, setcredentials] = useState(false);
+
+    // Incoming data from the server 
+    const [recruiterData, setRecuiterData] = useState({
+        email : "",
+        password : ""
+    })
 
     
-
-    const handleMailChangeInput = (e : ChangeEvent<HTMLInputElement>) => {
-        const val = e.target.value.toString();
-        setmail(val);
-       
+    const handleInputChanges = (e : ChangeEvent<HTMLInputElement>)=> {
+        e.preventDefault();
         
-    }
-    const handlePasswordChangeInput = (e : ChangeEvent<HTMLInputElement>)=> {
-        const pw = e.target.value.toString();
-        setPassword(pw);
+        // get the name + value attributes
+        const {name, value} = e.target;
+        setRecuiterData({
+            ...recruiterData, 
+            [name]: value
+        })
     }
 
     const handleLoginSubmit = async(e: FormEvent)=> {
         e.preventDefault();
         const userData = {
-            email : email,
-            password : password, 
+            email : recruiterData.email,
+            password : recruiterData.password, 
         };
-        axios.post("http://localhost:3000/espacerecruteurs/login", userData)
-        .then(response => {
-          console.log(response.status, response.data.access_token);
-          return response.data.access_token;
-        })
-        .catch(error => {
-          if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          } else if (error.request) {
-            // The request was made but no response was received
-            console.log(error.request);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log("Error", error.message);
-          }
-          console.log(error.config);
-        });
+
+        try {
+            const response = await axios.post("http://localhost:3000/espacerecruteurs/login", userData)
+               
+                console.log(response.status, response.data.access_token);
+            
+        } catch (error : any) { 
+            // if Unauthorized  or forbidden  
+            if (error.response.data.statusCode ==  "401" || error.response.data.statusCode ==  "403" ) {
+                console.log("hello" )
+                
+                setcredentials(true);
+                
+            }         
+           
+        }
+        
+        
     }
     return (
        <>
-        <div className="w-full h-screen drop-shadow-lg pt-10 bg-[url('../../src/assets/recrutePhoto.png')] bg-cover bg-no-repeat  flexc justify-center items-center relative ">
+        <div className="w-full h-screen pt-10 pb-0 bg-[url('../../src/assets/recrutePhoto.png')] bg-cover bg-no-repeat flex justify-center items-center relative ">
         <div className="w-full flex flex-col justify-start items-end ">
             <h2 className="text-white text-5xl font-extrabold tracking-widest m-24  ">
             <span className='underline decoration-darkk'>2JOBS</span> LA PLATEFORME  <br />
@@ -69,22 +70,28 @@ export const HeroSectionRecruteur = ()=>{
        
     </div>
     <div className="w-full flex justify-center items-center absolute -bottom-36  ">
-        <div className="w-96 p-8 bg-white rounded-lg">
+        <div className="w-96 p-8 bg-white rounded-lg ">
             <h3 className="text-2xl font-semibold">Connectez-vous:</h3>
 
             <form
-             onSubmit={handleLoginSubmit} 
-             className="">
+             onSubmit={handleLoginSubmit} >
                 <div className="p-3">
                     <label htmlFor="email" className="hidden mb-2 text-sm font-medium text-gray-900">Your email</label>
-                    <input type="email" value={email}  onChange={handleMailChangeInput} name="recruteur-email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="name@company.com" />
+                    <input type="email" value={recruiterData.email}  onChange={handleInputChanges} name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="name@company.com" />
                 </div>
-                <div className="p-3">
-                      <label htmlFor="password" className="hidden mb-2 text-sm font-medium text-gray-900">Password</label>
-                      <input type="password" value={password} onChange={handlePasswordChangeInput} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "/>
-                  </div>
+                <div className="p-4 relative">
+                      <label htmlFor="password" className="hidden  mb-2 text-sm font-medium text-gray-900">Password</label>
+                      <input type="password" value={recruiterData.password} onChange={handleInputChanges} name="password" id="password" placeholder="••••••••" 
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "/>
 
-                  <div className="flex items-center justify-between p-4">
+                      <div className='absolute'>
+                        <span className={credentials ? 'text-sm text-red-800 px-2 py-1' : 'hidden'} >Incorrect Credentials</span>
+
+                        </div>
+                  </div>
+                 
+
+                  <div className="flex items-center justify-between p-5">
                       <div className="flex items-start">
                           <div className="flex items-center h-5">
                             <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 " />

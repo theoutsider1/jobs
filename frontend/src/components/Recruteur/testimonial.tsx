@@ -8,11 +8,8 @@ import shape from '../../assets/shape.svg'
 
 export const Testimonials = ()=> {
 
-
-
-
     return (
-        <div className={`w-full bg-third`}>
+        <div className={`w-full bg-third -mt-1`}>
             <div className="flex flex-row justify-between ">
                 <div className='flex'>
                      <div className='w-1/2'>
