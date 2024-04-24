@@ -32,5 +32,5 @@ export class loginDto {
 
     @IsString()
     @IsNotEmpty()
-    password : String;
+    password : string;
 }

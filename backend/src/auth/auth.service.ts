@@ -61,12 +61,11 @@ export class AuthService {
                 mail : loginDto.email
             }
         })
+        // Email doesn't exist 
+        if (!recruiter) {
+            throw new ForbiddenException('Credentials incorrect')
+        }
         try {
-            
-            // Email doesn't exist 
-            if (!recruiter) {
-                throw new ForbiddenException('Credentials incorrect')
-            }
 
             // Compare password
             const isMatch = await bcrypt.compare(loginDto.password.toString() , recruiter.password)
