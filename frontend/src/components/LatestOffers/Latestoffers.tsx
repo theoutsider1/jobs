@@ -3,6 +3,7 @@ import StatisticsBar from "./Statistics";
 import axios from "axios";
 import { formatDate } from "../../Types/globalFunctions";
 import { Offers } from "../../Types/Globals";
+import { Link } from "react-router-dom";
 
 
 
@@ -67,9 +68,11 @@ const LatestOffer = ()=> {
                 
             </div>
             <div className="w-full pb-4 flex justify-center items-center ">
+                <Link to="/espacerecruteur">
                     <button className="bg-fourth shadow-shadow hover:bg-secondary text-white font-light text-lg py-2 px-10 rounded">
                          Voir Plus
                     </button>
+                 </Link>
                 </div>
             <div className="">
                 <StatisticsBar/>

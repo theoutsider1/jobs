@@ -3,7 +3,7 @@ import { dataFromChild } from "../../Types/Globals";
 
 const filterCategories = [
   {
-    title: "Le type du travail",
+    title: "Le type du travail:",
     options: ["Temps plein", "Mi-temps", "Étudiant", "À distance"],
   },
   {
@@ -11,7 +11,7 @@ const filterCategories = [
     options: ["full-time", "CDD", "Stage", "Anapec", "Freelance"],
   },
   {
-    title: "Domaines",
+    title: "Domaines:",
     options: [
       "Agriculture",
       "Audiovisual",
@@ -66,7 +66,7 @@ const filterCategories = [
     options:[
       "Stage PFE",
       "Stage PFA",
-      "Stage d’observation<",
+      "Stage d’observation",
       "Stage pré-mbauche",
       
     ],
@@ -76,7 +76,7 @@ const filterCategories = [
 
 export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => {
   const [userInfo, setUserInfo] = useState<string[]>([]);
-
+  const [clickSection, setClickSection ] = useState(false);
   const handleChange =  (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value, checked } = e.currentTarget;
       setUserInfo((prevUserInfo) =>
@@ -94,11 +94,12 @@ export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => 
     <div className="bg-third w-full">
       {filterCategories.map((category) => (
         <div key={category.title} className="p-4 border-b-2 border-b-pink-950">
-          <h4>{category.title}</h4>
+          <button onClick={() => setClickSection(!clickSection)}>{category.title}</button>
           <ul className="p-2">
             {category.options.map((option) => (
               <li key={option}>
-                <label>
+                <label  >
+                {/* className={clickSection ? '' : 'hidden'} */}
                   <input type="checkbox" value={option} onChange={handleChange} />
                   <span className="px-3">{option}</span>
                 </label>
@@ -107,7 +108,7 @@ export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => 
           </ul>
         </div>
       ))}
-      {/* Add more filter sections as needed */}
+     
     </div>
   );
 };

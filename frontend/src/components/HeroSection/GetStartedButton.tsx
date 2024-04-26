@@ -6,7 +6,7 @@ const GetStartedButton = ()=> {
     const navigate = useNavigate();
 
     const navigateToJobOffers= () => {
-        navigate('/offers')
+        navigate('/espacerecruteur')
     }
     return (
         <>
