@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { dataFromChild } from "../../Types/Globals";
-
+import { IonIcon } from '@ionic/react';
+import {chevronForwardOutline} from 'ionicons/icons';
 const filterCategories = [
   {
     title: "Le type du travail:",
     options: ["Temps plein", "Mi-temps", "Étudiant", "À distance"],
   },
   {
-    title: "Le type du contrat",
+    title: "Le type du contrat:",
     options: ["full-time", "CDD", "Stage", "Anapec", "Freelance"],
   },
   {
@@ -76,13 +77,20 @@ const filterCategories = [
 
 export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => {
   const [userInfo, setUserInfo] = useState<string[]>([]);
-  const [clickSection, setClickSection ] = useState(false);
+  const [clickedfilter, setClickedfilter] = useState(false);
+  const [filterIndex , setFilterIndex] = useState<null | number> (null);
+
   const handleChange =  (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value, checked } = e.currentTarget;
       setUserInfo((prevUserInfo) =>
       checked ? [value,...prevUserInfo ] : prevUserInfo.filter((item) => item !== value)
     );  
   };
+
+  const toggleBewteenfilters = (index : number) => {
+      setClickedfilter(!clickedfilter)
+      setFilterIndex(index)
+  }
 
   useEffect(() => {
     onCheckboxChange(userInfo);
@@ -92,14 +100,17 @@ export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => 
 
   return (
     <div className="bg-third w-full">
-      {filterCategories.map((category) => (
-        <div key={category.title} className="p-4 border-b-2 border-b-pink-950">
-          <button onClick={() => setClickSection(!clickSection)}>{category.title}</button>
-          <ul className="p-2">
+      {filterCategories.map((category , index) => (
+        <div key={category.title} className="p-4 ">
+          <div className="w-full cursor-pointer flex justify-between">
+            <h3 onClick={() => toggleBewteenfilters(index)} className="w-full text-left	inline ">{category.title}</h3>
+            <IonIcon icon={chevronForwardOutline} className={clickedfilter && filterIndex === index ?`rotate-90 text-xl py-1` : `text-xl py-1`}></IonIcon>  
+          </div>
+      
+          <ul className={`p-2 ${clickedfilter && filterIndex === index ? '' : 'hidden'}`}>
             {category.options.map((option) => (
               <li key={option}>
-                <label  >
-                {/* className={clickSection ? '' : 'hidden'} */}
+                <label>
                   <input type="checkbox" value={option} onChange={handleChange} />
                   <span className="px-3">{option}</span>
                 </label>
