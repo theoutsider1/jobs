@@ -4,11 +4,11 @@ import { IonIcon } from '@ionic/react';
 import {chevronForwardOutline} from 'ionicons/icons';
 const filterCategories = [
   {
-    title: "Le type du travail:",
+    title: "Type du travail:",
     options: ["Temps plein", "Mi-temps", "Étudiant", "À distance"],
   },
   {
-    title: "Le type du contrat:",
+    title: "Type du contrat:",
     options: ["full-time", "CDD", "Stage", "Anapec", "Freelance"],
   },
   {
@@ -88,9 +88,15 @@ export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => 
   };
 
   const toggleBewteenfilters = (index : number) => {
+    if (filterIndex == index ){
       setClickedfilter(!clickedfilter)
       setFilterIndex(index)
-  }
+    } else {
+      setClickedfilter(true)
+      setFilterIndex(index)
+    }
+      
+  } 
 
   useEffect(() => {
     onCheckboxChange(userInfo);
@@ -99,18 +105,18 @@ export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => 
   }, [userInfo]);
 
   return (
-    <div className="bg-third w-full">
+    <div className=" w-full">
       {filterCategories.map((category , index) => (
-        <div key={category.title} className="p-4 ">
-          <div className="w-full cursor-pointer flex justify-between">
-            <h3 onClick={() => toggleBewteenfilters(index)} className="w-full text-left	inline ">{category.title}</h3>
+        <div key={category.title} className="p-3 ">
+          <div onClick={() => toggleBewteenfilters(index)} className="w-full cursor-pointer flex justify-between">
+            <h3  className="w-full text-left	inline ">{category.title}</h3>
             <IonIcon icon={chevronForwardOutline} className={clickedfilter && filterIndex === index ?`rotate-90 text-xl py-1` : `text-xl py-1`}></IonIcon>  
           </div>
       
-          <ul className={`p-2 ${clickedfilter && filterIndex === index ? '' : 'hidden'}`}>
+          <ul className={`${clickedfilter && filterIndex === index ? '' : 'hidden'}`}>
             {category.options.map((option) => (
-              <li key={option}>
-                <label>
+              <li key={option} className="py-1.5">
+                <label className="cursor-pointer " >
                   <input type="checkbox" value={option} onChange={handleChange} />
                   <span className="px-3">{option}</span>
                 </label>
