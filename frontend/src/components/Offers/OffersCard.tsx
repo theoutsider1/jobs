@@ -95,7 +95,7 @@ const OffersCard: React.FC<{ jobs: OfferData, id:number }> = ({ jobs,id }) =>  {
                                         </div>
                                 </div>
 
-                                {/** Requirements  */}
+                                {/** Domaine  */}
 
                                 <div className='flex items-center'>
                                    <IonIcon icon={bagOutline} className='text-base'></IonIcon>

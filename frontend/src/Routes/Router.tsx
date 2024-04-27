@@ -7,6 +7,7 @@ import { HeroSectionRecruteur } from "../components/Recruteur/LandingPage/HeroSe
 import { ContactezNous } from "../components/ContactPage/ContactezNous";
 import { AddJobComponent } from "../components/Recruteur/AddOffersPage/AddJobComponent";
 import { ChooseSpace } from "../components/ChooseSpace/ChooseSpaceT";
+import { OffersManagement } from "../components/Recruteur/JobsManagement/JobsManagement";
 
 const Router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const Router = createBrowserRouter([
             {
                 path:"/chooseSpace",
                 element: <ChooseSpace/>,
+            },
+            {
+                path:"/suivezlesOffres",
+                element: <OffersManagement/>,
             },
             
         ]
