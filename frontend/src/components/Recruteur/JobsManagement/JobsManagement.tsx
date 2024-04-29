@@ -1,4 +1,7 @@
-import { ChangeEvent, useRef, useState } from "react"
+ import axios from "axios";
+import { 
+    // ChangeEvent, useRef, 
+useState, useEffect} from "react"
 
 export const OffersManagement = () =>{
 
@@ -32,6 +35,46 @@ export const OffersManagement = () =>{
                 break;
         }
     }
+    const fetchAllData = async () => {
+        try {
+           
+            const token : string | null = localStorage.getItem('token');// Change 'jwtToken' to your token key
+            
+            // const headers = { 'Authorization': 'Bearer access_token' };
+            // Make sure token is available
+            if (!token) {
+            throw new Error('JWT token not found');
+            }
+           
+    
+            await axios.get("http://localhost:3000/recruteurs/myjoboffers", 
+            
+            {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then (response => {
+                const allOffersData = response.data
+                console.log(allOffersData);
+                
+            })
+            axios.interceptors.request.use(request => {
+                console.log('Request:', request);
+                return request;
+            })
+        } catch (error) {
+            console.log(error);
+            
+        }
+       
+        
+    }
+
+    useEffect ( () => {
+       fetchAllData()
+    },[])
 
     return (
         <div className="w-full flex flex-col">

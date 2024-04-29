@@ -5,6 +5,7 @@ import { LatestProfiles } from './LastestProfs';
 import { StatisRec } from './RecStatistics';
 import { TestimonialsCards } from './TestiCards';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -12,6 +13,7 @@ import axios from 'axios';
 
 export const HeroSectionRecruteur = ()=>{
     const [credentials, setcredentials] = useState(false);
+    const navigate = useNavigate();
 
     // Incoming data from the server 
     const [recruiterData, setRecuiterData] = useState({
@@ -40,8 +42,16 @@ export const HeroSectionRecruteur = ()=>{
 
         try {
             const response = await axios.post("http://localhost:3000/espacerecruteurs/login", userData)
-               
-                console.log(response.status, response.data.access_token);
+             localStorage.setItem('token', response.data.access_token)
+            
+            //     localStorage.setItem('accessToken', response.data.access_token);
+                navigate('/suivezlesoffres')
+
+                
+
+            console.log('here the key', response);
+            
+                  
             
         } catch (error : any) { 
             // if Unauthorized  or forbidden  

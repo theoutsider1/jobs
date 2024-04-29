@@ -14,7 +14,7 @@ import { UpdateRecruiterDto } from './dto/updateRecuiterProfile.dto';
 export class RecruiterController {
     constructor(private recruiterService : RecruiterService){}
 
-// Recruiter Profile 
+// Recruiter Profile  
     @Get('profile')
     getProfil(@GetRecruiter() recruiterId:Recruiter){        
         return this.recruiterService.myprofile(recruiterId);
