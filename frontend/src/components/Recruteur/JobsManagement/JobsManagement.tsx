@@ -4,7 +4,34 @@ export const OffersManagement = () =>{
 
     // const ref: React.MutableRefObject<HTMLInputElement | null>  = useRef(null);
     // const [value , setValue] = useState('');
+    const [allOffers, setAllOffers] = useState(true);
+    const [inprogressOffers, setInprogressOffers] = useState(false);
+    const [closedOffers , setClosedOffers] = useState(false);
 
+    const toggleBetweenOffers = (selectedOffer : string) => {
+        switch(selectedOffer) {
+            case 'all':
+                setAllOffers(true);
+                setInprogressOffers(false);
+                setClosedOffers(false);
+                break;
+            case 'inprogress':
+                setAllOffers(false);
+                setInprogressOffers(true);
+                setClosedOffers(false);
+                break;
+            case 'closed':
+                setAllOffers(false);
+                setInprogressOffers(false);
+                setClosedOffers(true);
+                break;
+            default:
+                setAllOffers(true);
+                setInprogressOffers(false);
+                setClosedOffers(false);
+                break;
+        }
+    }
 
     return (
         <div className="w-full flex flex-col">
@@ -16,9 +43,9 @@ export const OffersManagement = () =>{
 
             <div className="px-28">
                 <div className=" flex gap-12 justify-start border-b-2 py-0.5">
-                    <h4 className="px-3 cursor-pointer">Tous les offres de travail jhg</h4>
-                    <h4 className="px-3 cursor-pointer">Offres de travail en cours jhg</h4>
-                    <h4 className="px-3 cursor-pointer underline underline-offset-8">Offres de travail clôturées jhg</h4>
+                    <h4 onClick={() => toggleBetweenOffers('all')} className={`px-3 cursor-pointer ${allOffers ? 'underline underline-offset-8 ' : '' } `}>Tous les offres de travail jhg</h4>
+                    <h4 onClick={() =>  toggleBetweenOffers('inprogress')} className={`px-3 cursor-pointer ${inprogressOffers ? 'underline underline-offset-8' : ''} `}>Offres de travail en cours jhg</h4>
+                    <h4 onClick={() => toggleBetweenOffers('closed')} className={`px-3 cursor-pointer ${closedOffers  ? 'underline underline-offset-8' : ''}`}>Offres de travail clôturées jhg</h4>
                 </div>
                 {/* Seach Form (Input)*/}
                 <div className="w-full flex justify-end m-2">
