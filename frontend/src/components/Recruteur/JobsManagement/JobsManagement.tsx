@@ -43,9 +43,9 @@ export const OffersManagement = () =>{
 
             <div className="px-28">
                 <div className=" flex gap-12 justify-start border-b-2 py-0.5">
-                    <h4 onClick={() => toggleBetweenOffers('all')} className={`px-3 cursor-pointer ${allOffers ? 'underline underline-offset-8 ' : '' } `}>Tous les offres de travail jhg</h4>
-                    <h4 onClick={() =>  toggleBetweenOffers('inprogress')} className={`px-3 cursor-pointer ${inprogressOffers ? 'underline underline-offset-8' : ''} `}>Offres de travail en cours jhg</h4>
-                    <h4 onClick={() => toggleBetweenOffers('closed')} className={`px-3 cursor-pointer ${closedOffers  ? 'underline underline-offset-8' : ''}`}>Offres de travail clôturées jhg</h4>
+                    <h4 onClick={() => toggleBetweenOffers('all')} className={`px-3 cursor-pointer ${allOffers ? 'underline underline-offset-8 decoration-darkk' : '' } `}>Tous les offres de travail jhg</h4>
+                    <h4 onClick={() =>  toggleBetweenOffers('inprogress')} className={`px-3 cursor-pointer ${inprogressOffers ? 'underline underline-offset-8 decoration-darkk' : ''} `}>Offres de travail en cours jhg</h4>
+                    <h4 onClick={() => toggleBetweenOffers('closed')} className={`px-3 cursor-pointer ${closedOffers  ? 'underline underline-offset-8 decoration-darkk' : ''}`}>Offres de travail clôturées jhg</h4>
                 </div>
                 {/* Seach Form (Input)*/}
                 <div className="w-full flex justify-end m-2">
