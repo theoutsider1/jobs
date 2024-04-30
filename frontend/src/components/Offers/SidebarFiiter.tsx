@@ -105,7 +105,7 @@ export const SidebarFilter: React.FC<dataFromChild> = ({ onCheckboxChange }) => 
   }, [userInfo]);
 
   return (
-    <div className=" w-full">
+    <div className="flex-none bg-third">
       {filterCategories.map((category , index) => (
         <div key={category.title} className="p-3 ">
           <div onClick={() => toggleBewteenfilters(index)} className="w-full cursor-pointer flex justify-between">

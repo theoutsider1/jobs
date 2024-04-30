@@ -137,13 +137,16 @@ const OffersList = () => {
             
             </div>            
            
-            <div className=" bg-fifth flex flex-row w-full justify-start p-24 gap-14">
+            <div className=" w-full bg-fifth flex justify-between p-24 ">
 
 
-                <div className="flex-none w-96 bg-third rounded-xl">
+                <div className="w-2/6 h-[100%] bg-third">
+                    <div className=" bg-third rounded-xl">
                     <SidebarFilter onCheckboxChange= {handleFilterChange}/>
+                    </div>
+                    
                 </div>
-                <div className="flex-auto">
+                <div className="w-4/6">
 
                 {
                 
@@ -166,8 +169,7 @@ const OffersList = () => {
                       ))  }                  
                 </div>                
             </div>
-            <div>                
-            </div>
+          
             
       </>
     )
