@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import {  createSlice } from "@reduxjs/toolkit";
 import { whichSpaceIsActive } from "../../../Types/Globals";
 
 
@@ -45,6 +45,6 @@ export const whichSpaceIsActiveSlice = createSlice({
 
 export const {recruteurIsAtiveAction , candidatIsAtiveAction} = whichSpaceIsActiveSlice.actions;
 
-// Export the reducer of the slicel
+// Export the reducer of the slice
 
 export default whichSpaceIsActiveSlice.reducer;

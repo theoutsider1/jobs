@@ -13,6 +13,13 @@ export const OffersManagement = () =>{
     const [closedOffers , setClosedOffers] = useState(false);
     const [allData , setAllData ] = useState<OffData []>([]);
 
+    const [allOffersLength ,setAllOffersLength] = useState<number> (0);
+
+    // To be calculated later once the schema has been modified
+    const [inprogressOffersLength ,setInprogressOffersLength] = useState<number> (0);
+    const [closedOffersLength ,setClosedOffersLength] = useState<number> (0);
+
+    
     const toggleBetweenOffers = (selectedOffer : string) => {
         switch(selectedOffer) {
             case 'all':
@@ -59,11 +66,13 @@ export const OffersManagement = () =>{
             )
             .then (response => {
                 const allOffersData : [] = response.data
+
                 setAllData(allOffersData)
-                console.log(allOffersData);
+               setAllOffersLength(response.data.length)
+                // console.log(allOffersData);
                 
                 
-            })
+            }) 
             
         } catch (error) {
             console.log(error);
@@ -89,9 +98,28 @@ export const OffersManagement = () =>{
 
             <div className="px-28">
                 <div className=" flex gap-12 justify-start border-b-2 py-0.5">
-                    <h4 onClick={() => toggleBetweenOffers('all')} className={`px-3 cursor-pointer ${allOffers ? 'underline underline-offset-8 decoration-darkk' : '' } `}>Tous les offres de travail jhg</h4>
-                    <h4 onClick={() =>  toggleBetweenOffers('inprogress')} className={`px-3 cursor-pointer ${inprogressOffers ? 'underline underline-offset-8 decoration-darkk' : ''} `}>Offres de travail en cours jhg</h4>
-                    <h4 onClick={() => toggleBetweenOffers('closed')} className={`px-3 cursor-pointer ${closedOffers  ? 'underline underline-offset-8 decoration-darkk' : ''}`}>Offres de travail clôturées jhg</h4>
+                    <div className="px-3">
+                        <h4  onClick={() => toggleBetweenOffers('all')} className={` cursor-pointer inline ${allOffers ? 'underline underline-offset-8 decoration-darkk' : '' } `} >
+                            Tous les offres de travail
+                        </h4>
+                        <span className="px-1 m-1 text-md rounded-lg bg-primary decoration-none">{allOffersLength}</span>
+
+                    </div>
+                    <div className="px-3">
+                        <h4   onClick={() =>  toggleBetweenOffers('inprogress')} className={`inline px-3 cursor-pointer ${inprogressOffers ? 'underline underline-offset-8 decoration-darkk' : ''} `}>
+                            Offres de travail en cours 
+                        </h4>
+                        <span className="px-1 m-1 text-md rounded-lg bg-primary decoration-none">{inprogressOffersLength}</span>
+
+                    </div>
+                    <div className="px-3">
+                        <h4 onClick={() => toggleBetweenOffers('closed')} className={`inline px-3 cursor-pointer ${closedOffers  ? 'underline underline-offset-8 decoration-darkk' : ''}`}>
+                            Offres de travail clôturées
+                        </h4>
+                        <span className="px-1 m-1 text-md rounded-lg bg-primary decoration-none">
+                            {closedOffersLength}
+                        </span>
+                    </div>                   
                 </div>
                 {/* Seach Form (Input)*/}
                 <div className="w-full flex justify-end m-2">
@@ -126,7 +154,9 @@ export const OffersManagement = () =>{
                             <th className="p-3">Publication</th>
                             <th>Date de publication</th>
                             <th>Date de clôture</th>
+                            {/* should be added in the schema */}
                             <th>Nombre de vues</th>
+                            {/* should be added in the schema */}
                             <th>Nombre de CVs</th>
                             <th>Modifié</th>
                             
@@ -142,7 +172,7 @@ export const OffersManagement = () =>{
                                 <td>0</td>
                                 <td>0</td>
                                 <td>
-                                    <button className="px-5 rounded-lg bg-third cursor-pointer underline">edit</button>
+                                    <button className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline ">edit</button>
                                 </td>
                             </tr>
                         </tbody>
