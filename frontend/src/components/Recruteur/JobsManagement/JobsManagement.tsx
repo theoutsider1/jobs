@@ -2,6 +2,7 @@
 import { 
     // ChangeEvent, useRef, 
 useState, useEffect} from "react"
+import { OffData } from "../../../Types/Globals";
 
 export const OffersManagement = () =>{
 
@@ -10,6 +11,7 @@ export const OffersManagement = () =>{
     const [allOffers, setAllOffers] = useState(true);
     const [inprogressOffers, setInprogressOffers] = useState(false);
     const [closedOffers , setClosedOffers] = useState(false);
+    const [allData , setAllData ] = useState<OffData []>([]);
 
     const toggleBetweenOffers = (selectedOffer : string) => {
         switch(selectedOffer) {
@@ -56,14 +58,13 @@ export const OffersManagement = () =>{
               }
             )
             .then (response => {
-                const allOffersData = response.data
+                const allOffersData : [] = response.data
+                setAllData(allOffersData)
                 console.log(allOffersData);
                 
+                
             })
-            axios.interceptors.request.use(request => {
-                console.log('Request:', request);
-                return request;
-            })
+            
         } catch (error) {
             console.log(error);
             
@@ -74,6 +75,8 @@ export const OffersManagement = () =>{
 
     useEffect ( () => {
        fetchAllData()
+       
+       
     },[])
 
     return (
@@ -114,10 +117,11 @@ export const OffersManagement = () =>{
                     </div>
                     
                 </div>
-
-                <div className=" w-full  overflow-hidden rounded-md m-2">
+                
+                <div className=" w-full overflow-hidden rounded-md m-2">
+                
                 <table className="table-fixed w-full">
-                    <thead className="bg-primary">
+                    <thead  className="bg-primary">
                         <tr className="">
                             <th className="p-3" >Publication</th>
                             <th>Date de publication</th>
@@ -126,35 +130,21 @@ export const OffersManagement = () =>{
                             <th>Nombre de CVs</th>
                         </tr>
                     </thead>
-                    <tbody className="bg-fifth">
-                        <tr className="text-center ">
-                            <td className="p-3"> The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                            <td>Malcolm Lockyer</td>
-                            <td>1961</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr className="text-center">
-                            <td className="p-3">Witchy Woman</td>
-                            <td>The Eagles</td>
-                            <td>1972</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr className="text-center">
-                            <td className="p-3">Shining Star</td>
-                            <td>Earth, Wind, and Fire</td>
-                            <td>1975</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
+                    {allData && 
+                    allData.map( data => 
+                        <tbody  key={data.id} className="bg-fifth">
+                            <tr  className="text-center ">
+                                <td className="p-3"> {data.title}</td>
+                                <td>Malcolm Lockyer</td>
+                                <td>1961</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                        )} 
                     </table>
-
                 </div>
-
-
-                
+                               
             </div>
         </div>
     )

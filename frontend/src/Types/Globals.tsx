@@ -24,6 +24,23 @@ export interface OfferData {
     avantages?: string[];
 
 }
+export interface OffData {
+    id: number;
+    createdAt: string;
+    title: string;
+    companyName?: string;
+    contractType?: string;
+    city: string;
+    domaine?: string;
+    jobType?: string;
+    //studies?: string | null;
+    experience?: string;
+    description? : string;
+    missions? : string[] ;
+    profil? : string[];
+    advantages?: string[];
+
+}
 
 // function props that i'm passing to sideBarFilter to collect checkboxes values 
 

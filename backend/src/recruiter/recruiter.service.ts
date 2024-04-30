@@ -55,6 +55,22 @@ export class RecruiterService {
         const myAllJobOffers = await this.prisma.job.findMany({
             where: {
                 publishedById : recruiterId,
+            },
+            select: {
+                id: true,
+                createdAt: true,
+                title: true,
+                companyName: true,
+                contractType: true,
+                city: true,
+                domaine: true,
+                jobType: true,
+                // studies: true,
+                experience: true,
+                description: true,
+                missions: true,
+                profil: true,
+                advantages: true,
             }
         })
 
@@ -65,7 +81,7 @@ export class RecruiterService {
             } 
 
             // if not 
-            return {"Your Job Offers" : myAllJobOffers}
+            return myAllJobOffers;
 
             
         } catch (error) {
