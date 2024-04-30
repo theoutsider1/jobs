@@ -123,22 +123,27 @@ export const OffersManagement = () =>{
                 <table className="table-fixed w-full">
                     <thead  className="bg-primary">
                         <tr className="">
-                            <th className="p-3" >Publication</th>
+                            <th className="p-3">Publication</th>
                             <th>Date de publication</th>
                             <th>Date de clôture</th>
                             <th>Nombre de vues</th>
                             <th>Nombre de CVs</th>
+                            <th>Modifié</th>
+                            
                         </tr>
                     </thead>
                     {allData && 
                     allData.map( data => 
                         <tbody  key={data.id} className="bg-fifth">
-                            <tr  className="text-center ">
+                            <tr  className="text-center">
                                 <td className="p-3"> {data.title}</td>
-                                <td>Malcolm Lockyer</td>
-                                <td>1961</td>
+                                <td>{data.createdAt}</td>
+                                <td>{data.updatedAt}</td>
                                 <td>0</td>
                                 <td>0</td>
+                                <td>
+                                    <button className="px-5 rounded-lg bg-third cursor-pointer underline">edit</button>
+                                </td>
                             </tr>
                         </tbody>
                         )} 

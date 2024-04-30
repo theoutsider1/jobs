@@ -59,6 +59,7 @@ export class RecruiterService {
             select: {
                 id: true,
                 createdAt: true,
+                updatedAt: true,
                 title: true,
                 companyName: true,
                 contractType: true,

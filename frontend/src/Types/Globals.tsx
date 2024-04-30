@@ -27,6 +27,7 @@ export interface OfferData {
 export interface OffData {
     id: number;
     createdAt: string;
+    updatedAt: string;
     title: string;
     companyName?: string;
     contractType?: string;
