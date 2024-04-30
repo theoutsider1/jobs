@@ -2,9 +2,6 @@ import {  createSlice } from "@reduxjs/toolkit";
 import { whichSpaceIsActive } from "../../../Types/Globals";
 
 
-
-
-
 // Create the initial state of the counter
 
 const initialState: whichSpaceIsActive={

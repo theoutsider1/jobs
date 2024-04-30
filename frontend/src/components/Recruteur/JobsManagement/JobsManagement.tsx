@@ -19,7 +19,7 @@ export const OffersManagement = () =>{
     const [inprogressOffersLength ,setInprogressOffersLength] = useState<number> (0);
     const [closedOffersLength ,setClosedOffersLength] = useState<number> (0);
 
-    
+    // toggle between h4 tags 
     const toggleBetweenOffers = (selectedOffer : string) => {
         switch(selectedOffer) {
             case 'all':
@@ -55,9 +55,7 @@ export const OffersManagement = () =>{
             throw new Error('JWT token not found');
             }
            
-    
-            await axios.get("http://localhost:3000/recruteurs/myjoboffers", 
-            
+            await axios.get("http://localhost:3000/recruteurs/myjoboffers",  
             {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -66,25 +64,21 @@ export const OffersManagement = () =>{
             )
             .then (response => {
                 const allOffersData : [] = response.data
-
+                
                 setAllData(allOffersData)
-               setAllOffersLength(response.data.length)
-                // console.log(allOffersData);
-                
-                
+                // allOffers number
+                setAllOffersLength(response.data.length)
+  
             }) 
             
         } catch (error) {
             console.log(error);
             
-        }
-       
-        
+        }    
     }
 
     useEffect ( () => {
-       fetchAllData()
-       
+       fetchAllData() 
        
     },[])
 
@@ -98,22 +92,32 @@ export const OffersManagement = () =>{
 
             <div className="px-28">
                 <div className=" flex gap-12 justify-start border-b-2 py-0.5">
+
+                    {/* underline titles */}
+                    {/*  Tous les offres de travail */}
                     <div className="px-3">
-                        <h4  onClick={() => toggleBetweenOffers('all')} className={` cursor-pointer inline ${allOffers ? 'underline underline-offset-8 decoration-darkk' : '' } `} >
+                        <h4 onClick={() => toggleBetweenOffers('all')} 
+                            className={` cursor-pointer inline ${allOffers ? 'underline underline-offset-8 decoration-darkk' : '' } `} >
                             Tous les offres de travail
                         </h4>
                         <span className="px-1 m-1 text-md rounded-lg bg-primary decoration-none">{allOffersLength}</span>
 
                     </div>
+
+                    {/* Offres de travail en cours  */}
                     <div className="px-3">
-                        <h4   onClick={() =>  toggleBetweenOffers('inprogress')} className={`inline px-3 cursor-pointer ${inprogressOffers ? 'underline underline-offset-8 decoration-darkk' : ''} `}>
+                        <h4 onClick={() =>  toggleBetweenOffers('inprogress')}
+                            className={`inline px-3 cursor-pointer ${inprogressOffers ? 'underline underline-offset-8 decoration-darkk' : ''} `}>
                             Offres de travail en cours 
                         </h4>
                         <span className="px-1 m-1 text-md rounded-lg bg-primary decoration-none">{inprogressOffersLength}</span>
 
                     </div>
+
+                    {/* Offres de travail clôturées */}
                     <div className="px-3">
-                        <h4 onClick={() => toggleBetweenOffers('closed')} className={`inline px-3 cursor-pointer ${closedOffers  ? 'underline underline-offset-8 decoration-darkk' : ''}`}>
+                        <h4 onClick={() => toggleBetweenOffers('closed')} 
+                            className={`inline px-3 cursor-pointer ${closedOffers  ? 'underline underline-offset-8 decoration-darkk' : ''}`}>
                             Offres de travail clôturées
                         </h4>
                         <span className="px-1 m-1 text-md rounded-lg bg-primary decoration-none">
@@ -146,6 +150,9 @@ export const OffersManagement = () =>{
                     
                 </div>
                 
+                {/* Data table */}
+                {allData && 
+                    allData.map( data => 
                 <div className=" w-full overflow-hidden rounded-md m-2">
                 
                 <table className="table-fixed w-full">
@@ -162,8 +169,7 @@ export const OffersManagement = () =>{
                             
                         </tr>
                     </thead>
-                    {allData && 
-                    allData.map( data => 
+                    
                         <tbody  key={data.id} className="bg-fifth">
                             <tr  className="text-center">
                                 <td className="p-3"> {data.title}</td>
@@ -176,10 +182,10 @@ export const OffersManagement = () =>{
                                 </td>
                             </tr>
                         </tbody>
-                        )} 
+                       
                     </table>
                 </div>
-                               
+                        )}         
             </div>
         </div>
     )

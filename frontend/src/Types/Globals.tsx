@@ -24,6 +24,8 @@ export interface OfferData {
     avantages?: string[];
 
 }
+
+// used in JobsManagement component (fetchAllData()) 
 export interface OffData {
     id: number;
     createdAt: string;
