@@ -13,11 +13,11 @@ export const OffersManagement = () =>{
     const [closedOffers , setClosedOffers] = useState(false);
     const [allData , setAllData ] = useState<OffData []>([]);
 
-    const [allOffersLength ,setAllOffersLength] = useState<number> (0);
+    const [allOffersLength ,setAllOffersLength] = useState<number>(0);
 
     // To be calculated later once the schema has been modified
-    const [inprogressOffersLength ,setInprogressOffersLength] = useState<number> (0);
-    const [closedOffersLength ,setClosedOffersLength] = useState<number> (0);
+    const [inprogressOffersLength ,setInprogressOffersLength] = useState<number>(0);
+    const [closedOffersLength ,setClosedOffersLength] = useState<number>(0);
 
     // toggle between h4 tags 
     const toggleBetweenOffers = (selectedOffer : string) => {
@@ -54,7 +54,7 @@ export const OffersManagement = () =>{
             if (!token) {
             throw new Error('JWT token not found');
             }
-           
+
             await axios.get("http://localhost:3000/recruteurs/myjoboffers",  
             {
                 headers: {
@@ -67,7 +67,8 @@ export const OffersManagement = () =>{
                 
                 setAllData(allOffersData)
                 // allOffers number
-                setAllOffersLength(response.data.length)
+                response.data.length ? setAllOffersLength(response.data.length) : setAllOffersLength(0);
+                
   
             }) 
             
@@ -151,41 +152,48 @@ export const OffersManagement = () =>{
                 </div>
                 
                 {/* Data table */}
-                {allData && 
-                    allData.map( data => 
+               
                 <div className=" w-full overflow-hidden rounded-md m-2">
                 
-                <table className="table-fixed w-full">
-                    <thead  className="bg-primary">
-                        <tr className="">
-                            <th className="p-3">Publication</th>
-                            <th>Date de publication</th>
-                            <th>Date de clôture</th>
-                            {/* should be added in the schema */}
-                            <th>Nombre de vues</th>
-                            {/* should be added in the schema */}
-                            <th>Nombre de CVs</th>
-                            <th>Modifié</th>
+                    {allData && allData.length > 0 ? (
+                        <table className="table-fixed w-full">
+                            <thead className="bg-primary">
+                                <tr>
+                                    <th className="p-3">Publication</th>
+                                    <th>Date de publication</th>
+                                    <th>Date de clôture</th>
+                                    <th>Nombre de vues</th>
+                                    <th>Nombre de CVs</th>
+                                    <th>Modifié</th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-fifth">
+                                {allData.map(data => (
+                                    <tr key={data.id} className="text-center">
+                                        <td className="p-3">{data.title}</td>
+                                        <td>{data.createdAt}</td>
+                                        <td>{data.updatedAt}</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>
+                                            <button className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">edit</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <div className="w-full flex justify-center">
+                            <div className="flex flex-col gap-8 justify-center">
+                            <p className="">Vous n'avez pas encore ajouté aucun offre d'emploi</p>
+                            <button className="mx-24 p-1.5 bg-secondary text-white">Ajouter</button>
+                            </div>
                             
-                        </tr>
-                    </thead>
-                    
-                        <tbody  key={data.id} className="bg-fifth">
-                            <tr  className="text-center">
-                                <td className="p-3"> {data.title}</td>
-                                <td>{data.createdAt}</td>
-                                <td>{data.updatedAt}</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>
-                                    <button className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline ">edit</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                       
-                    </table>
+                        </div>
+                        
+                    )}
                 </div>
-                        )}         
+                               
             </div>
         </div>
     )
