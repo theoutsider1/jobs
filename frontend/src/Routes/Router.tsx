@@ -8,6 +8,7 @@ import { ContactezNous } from "../components/ContactPage/ContactezNous";
 import { AddJobComponent } from "../components/Recruteur/AddOffersPage/AddJobComponent";
 import { ChooseSpace } from "../components/ChooseSpace/ChooseSpaceT";
 import { OffersManagement } from "../components/Recruteur/JobsManagement/JobsManagement";
+import { EditJobOffer } from "../components/Recruteur/JobsManagement/EditJobOffer/EditJobOffer";
 
 const Router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const Router = createBrowserRouter([
             {
                 path:"/suivezlesOffres",
                 element: <OffersManagement/>,
+            },
+            {
+                path:"/suivezlesOffres/modifieroffre/:id",
+                element: <EditJobOffer/>,
             },
             
         ]

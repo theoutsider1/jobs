@@ -3,6 +3,7 @@ import {
     // ChangeEvent, useRef, 
 useState, useEffect} from "react"
 import { OffData } from "../../../Types/Globals";
+import { useNavigate } from "react-router-dom";
 
 export const OffersManagement = () =>{
 
@@ -12,13 +13,20 @@ export const OffersManagement = () =>{
     const [inprogressOffers, setInprogressOffers] = useState(false);
     const [closedOffers , setClosedOffers] = useState(false);
     const [allData , setAllData ] = useState<OffData []>([]);
-
+    const navigate = useNavigate();
     const [allOffersLength ,setAllOffersLength] = useState<number>(0);
 
     // To be calculated later once the schema has been modified
     const [inprogressOffersLength ,setInprogressOffersLength] = useState<number>(0);
     const [closedOffersLength ,setClosedOffersLength] = useState<number>(0);
+    const handleEditJobOffer = (jobId : number)=> {
 
+        navigate(`/suivezlesOffres/modifieroffre/${jobId}`);
+        window.scrollTo({
+            top: 0,
+            // behavior: 'smooth' // Optional: Smooth scrolling animation
+          });
+    }
     // toggle between h4 tags 
     const toggleBetweenOffers = (selectedOffer : string) => {
         switch(selectedOffer) {
@@ -176,7 +184,7 @@ export const OffersManagement = () =>{
                                         <td>0</td>
                                         <td>0</td>
                                         <td>
-                                            <button className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">edit</button>
+                                            <button onClick={() => handleEditJobOffer(data.id)} className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">edit</button>
                                         </td>
                                     </tr>
                                 ))}
