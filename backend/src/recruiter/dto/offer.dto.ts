@@ -31,6 +31,18 @@ export class OfferDTO {
     missions: string;
 
     @IsString()
+    @IsOptional()
+    deadline: string;
+
+    @IsString()
+    @IsOptional()
+    fonction: string;
+
+    @IsString()
+    @IsOptional()
+    studiesRequirement: string;
+
+    @IsString()
     profil: string;
 
     

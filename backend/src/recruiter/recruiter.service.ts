@@ -19,7 +19,7 @@ export class RecruiterService {
     async createOffer(data : Prisma.JobCreateWithoutPublishedByInput, idRecuiter: any ) {
         const recruiterIdNumber: number = Number(idRecuiter);
         
-        const { title, city, contractType, experience, domaine, companyName, description, jobType, missions, profil, advantages } = data;
+        const { title, city, contractType, experience, domaine, companyName, description, jobType, missions,deadline,fonction,studiesRequirement ,profil, advantages } = data;
         try {
         const job = await this.prisma.job.create({ data: {
             title,
@@ -31,6 +31,9 @@ export class RecruiterService {
             description,
             jobType,
             missions,
+            deadline,
+            fonction,
+            studiesRequirement,
             profil,
             advantages,
             appliedCandidateId: null,
