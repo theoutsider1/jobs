@@ -36,7 +36,9 @@ export interface OffData {
     city: string;
     domaine?: string;
     jobType?: string;
-    //studies?: string | null;
+    deadline? : string ;
+    fonction?: string;
+    studiesRequirement?: string;
     experience?: string;
     description? : string;
     missions? : string[] ;

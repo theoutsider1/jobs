@@ -4,24 +4,29 @@ import {
 useState, useEffect} from "react"
 import { OffData } from "../../../Types/Globals";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getRecruiterOffersList, } from "../../store/features/recruiterOffersSlice";
+
 
 export const OffersManagement = () =>{
-
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
     // const ref: React.MutableRefObject<HTMLInputElement | null>  = useRef(null);
     // const [value , setValue] = useState('');
     const [allOffers, setAllOffers] = useState(true);
     const [inprogressOffers, setInprogressOffers] = useState(false);
     const [closedOffers , setClosedOffers] = useState(false);
     const [allData , setAllData ] = useState<OffData []>([]);
-    const navigate = useNavigate();
+    
     const [allOffersLength ,setAllOffersLength] = useState<number>(0);
 
     // To be calculated later once the schema has been modified
     const [inprogressOffersLength ,setInprogressOffersLength] = useState<number>(0);
     const [closedOffersLength ,setClosedOffersLength] = useState<number>(0);
-    const handleEditJobOffer = (jobId : number)=> {
-
-        navigate(`/suivezlesOffres/modifieroffre/${jobId}`);
+    const handleEditJobOffer = (data : any , jobId : number)=> {
+        
+        dispatch(getRecruiterOffersList({recruiterOffer : data}))
+        navigate(`/suivezlesOffres/modifieroffre/${jobId}`)
         window.scrollTo({
             top: 0,
             // behavior: 'smooth' // Optional: Smooth scrolling animation
@@ -71,7 +76,7 @@ export const OffersManagement = () =>{
               }
             )
             .then (response => {
-                const allOffersData : [] = response.data
+                const allOffersData : OffData[] = response.data
                 
                 setAllData(allOffersData)
                 // allOffers number
@@ -184,7 +189,7 @@ export const OffersManagement = () =>{
                                         <td>0</td>
                                         <td>0</td>
                                         <td>
-                                            <button onClick={() => handleEditJobOffer(data.id)} className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">edit</button>
+                                            <button onClick={() => handleEditJobOffer(data, data.id)} className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">edit</button>
                                         </td>
                                     </tr>
                                 ))}
