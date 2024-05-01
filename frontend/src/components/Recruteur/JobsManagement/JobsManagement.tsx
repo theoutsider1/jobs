@@ -23,9 +23,9 @@ export const OffersManagement = () =>{
     // To be calculated later once the schema has been modified
     const [inprogressOffersLength ,setInprogressOffersLength] = useState<number>(0);
     const [closedOffersLength ,setClosedOffersLength] = useState<number>(0);
-    const handleEditJobOffer = (data : any , jobId : number)=> {
+    const handleEditJobOffer = (data : OffData , jobId : number)=> {
         
-        dispatch(getRecruiterOffersList({recruiterOffer : data}))
+        dispatch(getRecruiterOffersList({recruiterOffer : [data]}))
         navigate(`/suivezlesOffres/modifieroffre/${jobId}`)
         window.scrollTo({
             top: 0,
