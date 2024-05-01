@@ -12,8 +12,7 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     @Post('signup')
     signup(@Body() dto : AuthDto){
-       console.log(typeof dto.phoneNumber)
-       
+   
        return this.authService.signup(dto);
     }
 
