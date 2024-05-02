@@ -22,7 +22,7 @@ export const DeletePopup: React.FC<DeletePopupProps> = ({ closePopup }) =>{
                             {/*header*/}
                             {/* <div className="flex items-start justify-between p-5 border-b border-solid border-neutral-300 rounded-t">
                                 <h3 className="text-2xl font-semibold">Confirmez-vous la suppression?</h3>
-                                
+   
                             </div> */}
                             {/*body*/}
                             <div className="relative p-6 flex-auto">
