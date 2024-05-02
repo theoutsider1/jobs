@@ -55,7 +55,6 @@ export const EditJobOffer = () => {
             <form id="" className="w-full bg-third p-5 flex flex-col ">
                 {/* row 1 */}
                 <div className="w-full flex flex-row-12 justify-around gap-8">
-               {/* row 1 */}
                 <div className="mb-5 w-4/12">
                     <label
                         htmlFor="name"
@@ -65,6 +64,7 @@ export const EditJobOffer = () => {
                     </label>
                     <input
                         type="text"
+                        value={field.title}
                         name="name"
                         id="name"
                         placeholder="Full Name"
@@ -80,6 +80,7 @@ export const EditJobOffer = () => {
                         </label>
                         <input
                             type="text"
+                            value={field.companyName}
                             name="name"
                             id="name"
                             placeholder="Full Name"
@@ -95,6 +96,7 @@ export const EditJobOffer = () => {
                         </label>
                         <input
                             type="text"
+                            value={field.experience}
                             name="name"
                             id="name"
                             placeholder="Full Name"
@@ -114,6 +116,7 @@ export const EditJobOffer = () => {
                         </label>
                         <input
                             type="text"
+                            value={field.fonction}
                             name="name"
                             id="name"
                             placeholder="Full Name"
@@ -129,6 +132,7 @@ export const EditJobOffer = () => {
                         </label>
                         <input
                             type="text"
+                            value={field.contractType}
                             name="name"
                             id="name"
                             placeholder="Full Name"
@@ -144,6 +148,7 @@ export const EditJobOffer = () => {
                         </label>
                         <input
                             type="text"
+                            value={field.jobType}
                             name="name"
                             id="name"
                             placeholder="Full Name"
@@ -163,6 +168,7 @@ export const EditJobOffer = () => {
                         </label>
                         <input
                             type="text"
+                            value={field.city}
                             name="name"
                             id="name"
                             placeholder="Full Name"
@@ -178,6 +184,7 @@ export const EditJobOffer = () => {
                         </label>
                         <input
                             type="text"
+                            value={field.domaine}
                             name="name"
                             id="name"
                             placeholder="Full Name"
@@ -193,6 +200,7 @@ export const EditJobOffer = () => {
                         </label>
                         <input
                             type="text"
+                            value={field.deadline}
                             name="name"
                             id="name"
                             placeholder="Full Name"
@@ -212,6 +220,7 @@ export const EditJobOffer = () => {
                         </label>
                         <textarea
                         id="profilField"
+                        value={field.studiesRequirement}
                         name="profil"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
@@ -225,6 +234,7 @@ export const EditJobOffer = () => {
                         </label>
                         <textarea
                         id="profilField"
+                        value={field.profil}
                         name="profil"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
@@ -238,6 +248,7 @@ export const EditJobOffer = () => {
                         </label>
                         <textarea
                         id="profilField"
+                        value={field.missions}
                         name="profil"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
@@ -255,6 +266,7 @@ export const EditJobOffer = () => {
                         </label>
                         <textarea
                         id="profilField"
+                        value={field.description}
                         name="profil"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                    
