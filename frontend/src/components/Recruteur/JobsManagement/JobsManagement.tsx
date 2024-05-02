@@ -6,7 +6,10 @@ import { OffData } from "../../../Types/Globals";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getRecruiterOffersList, } from "../../store/features/recruiterOffersSlice";
-
+import {  IonIcon } from "@ionic/react";
+import {pencilOutline} from 'ionicons/icons';
+import {trash} from 'ionicons/icons';
+import { DeletePopup } from "./DeletePopup";
 
 export const OffersManagement = () =>{
     const navigate = useNavigate()
@@ -18,11 +21,15 @@ export const OffersManagement = () =>{
     const [closedOffers , setClosedOffers] = useState(false);
     const [allData , setAllData ] = useState<OffData []>([]);
     
+
     const [allOffersLength ,setAllOffersLength] = useState<number>(0);
 
     // To be calculated later once the schema has been modified
     const [inprogressOffersLength ,setInprogressOffersLength] = useState<number>(0);
     const [closedOffersLength ,setClosedOffersLength] = useState<number>(0);
+
+    
+    //Store Click job offer in redux store & navigate to # to edit it
     const handleEditJobOffer = (data : OffData , jobId : number)=> {
         
         dispatch(getRecruiterOffersList({recruiterOffer : [data]}))
@@ -32,6 +39,18 @@ export const OffersManagement = () =>{
             // behavior: 'smooth' // Optional: Smooth scrolling animation
           });
     }
+
+    //delete job confirmation
+    const [deleteConfirmation , setDeleteConfirmation] = useState(false);
+
+    const handleDeleteConfirmation = () => {
+        setDeleteConfirmation(true);
+    };
+
+    const handleCancelConfirmation = () => {
+        setDeleteConfirmation(false);
+    };
+
     // toggle between h4 tags 
     const toggleBetweenOffers = (selectedOffer : string) => {
         switch(selectedOffer) {
@@ -177,7 +196,8 @@ export const OffersManagement = () =>{
                                     <th>Date de clôture</th>
                                     <th>Nombre de vues</th>
                                     <th>Nombre de CVs</th>
-                                    <th>Modifié</th>
+                                    <th>Modifier</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody className="bg-fifth">
@@ -188,8 +208,12 @@ export const OffersManagement = () =>{
                                         <td>{data.updatedAt}</td>
                                         <td>0</td>
                                         <td>0</td>
-                                        <td>
-                                            <button onClick={() => handleEditJobOffer(data, data.id)} className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">edit</button>
+                                        <td className="flex justify-center gap-4 items-center p-3">
+                                            <button onClick={() => handleEditJobOffer(data, data.id)} className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">
+                                                edit
+                                                <IonIcon icon={pencilOutline}></IonIcon>
+                                            </button>
+                                            <IonIcon icon={trash} onClick={handleDeleteConfirmation} className="cursor-pointer px-2.5"></IonIcon>
                                         </td>
                                     </tr>
                                 ))}
@@ -208,6 +232,11 @@ export const OffersManagement = () =>{
                 </div>
                                
             </div>
+
+            {deleteConfirmation && (
+                <DeletePopup closePopup={handleCancelConfirmation} />
+            )}
+        
         </div>
     )
 }
