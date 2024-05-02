@@ -40,7 +40,7 @@ export const OffersManagement = () =>{
           });
     }
 
-    //delete job confirmation
+    //Delete job confirmation
     const [deleteConfirmation , setDeleteConfirmation] = useState(false);
 
     const handleDeleteConfirmation = () => {
