@@ -49,7 +49,7 @@ export const EditJobOffer = () => {
             
             <div className="w-full flex-col jusify-between ">
                
-                <h3 className="w-full p-10 bg-fifth text-center text-5xl font-semibold ">
+                <h3 className="w-full p-10 bg-fifth  text-center text-5xl font-semibold ">
                      Modifier votre <span className="underline decoration-dashed decoration-darkk">offre d'emploi</span>
                 </h3>
             <form id="" className="w-full bg-third p-5 flex flex-col ">
@@ -284,6 +284,11 @@ export const EditJobOffer = () => {
                     </div>
                      
                 </div>
+                <div className="w-full flex justify-center ">
+                <button type="submit" className="w-36 block bg-darkk rounded-md py-2.5 px-6 text-normal font-semibold text-white">Modifier</button>
+
+                </div>
+
             </form>            
                 
              </div>
