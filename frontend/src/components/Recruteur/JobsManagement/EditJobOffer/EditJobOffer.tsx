@@ -210,13 +210,11 @@ export const EditJobOffer = () => {
                             >
                             Requirements Text Area:
                         </label>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
-                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
+                        <textarea
+                        id="profilField"
+                        name="profil"
+                        className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+                    
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
@@ -225,28 +223,24 @@ export const EditJobOffer = () => {
                             >
                         Profil Text Area:
                         </label>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
-                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
+                        <textarea
+                        id="profilField"
+                        name="profil"
+                        className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+                    
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="name"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
-                            Avantage (Tags):
+                            Missions Text Area:
                         </label>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
-                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
+                        <textarea
+                        id="profilField"
+                        name="profil"
+                        className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+                    
                     </div>    
                 </div>
                 
@@ -257,22 +251,20 @@ export const EditJobOffer = () => {
                             htmlFor="name"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
-                            Missions Text Area:
+                           Description Text Area:
                         </label>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
-                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
+                        <textarea
+                        id="profilField"
+                        name="profil"
+                        className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+                   
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="name"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
-                        Description Text Area:
+                        Avantage (Tags):  
                         </label>
                         <input
                             type="text"
