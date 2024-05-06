@@ -1,9 +1,9 @@
 
 
-import { useState } from "react"
+// import { useState } from "react"
 import { useAppSelector } from "../../../store/store"
-import { AddAdvantageComponent } from "../../AddOffersPage/AddOfferFrom/AddAdvantageComponent"
-import { AddOfferFormComponent } from "../../AddOffersPage/AddOfferFrom/AddOfferComponent"
+// import { AddAdvantageComponent } from "../../AddOffersPage/AddOfferFrom/AddAdvantageComponent"
+// import { AddOfferFormComponent } from "../../AddOffersPage/AddOfferFrom/AddOfferComponent"
 
 export const EditJobOffer = () => {
 
@@ -13,33 +13,7 @@ export const EditJobOffer = () => {
         return state.recruiterOffersList.recruiterOffer
     })
 
-    //  test const [contractDropdown, setContractDropdown] = useState(false);
-    const [selectedContract, setSelectedContract] = useState("Choisir le type de contrat");
-    const [contractDropdown, setContractDropdown] = useState(false);
-
-    //Types de Contrat
-
-    const [toggleTypeContract, setToggleTypeContract]=useState(false);
-    const [selectedTypeTravail, setSelectedTypeTravail]= useState("Choisir le type de travail")
-
-    const HandleToggleContactDropdown = () => {
-        setContractDropdown(!contractDropdown)
-    }
-  
-    const handleContractOptionClick = (e:React.MouseEvent<HTMLButtonElement>,label:string)=> {
-        e.preventDefault;
-        setSelectedContract(label)
-        HandleToggleContactDropdown()
-    }
-    //Types de Contrat functions
-    const handleTypeTravailToggle = ()=> {
-        setToggleTypeContract(!toggleTypeContract);
-    }
-    const handleTypeTravailOptions = (e: React.MouseEvent<HTMLButtonElement>, label:string)=> {
-        e.preventDefault;
-        setSelectedTypeTravail(label)
-        handleTypeTravailToggle()
-    }
+    
    
     return (
         <div className="w-full">
@@ -57,49 +31,49 @@ export const EditJobOffer = () => {
                 <div className="w-full flex flex-row-12 justify-around gap-8">
                 <div className="mb-5 w-4/12">
                     <label
-                        htmlFor="name"
+                        htmlFor="title"
                         className="mb-3 block text-base font-medium text-[#07074D]"
                         >
                         Nom Du Poste:
                     </label>
                     <input
                         type="text"
-                        value={field.title}
-                        name="name"
-                        id="name"
-                        placeholder="Full Name"
+                        defaultValue={field.title}
+                        name="title"
+                        id="title"
+                        placeholder="Nom du Poste"
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="entreprise"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                         Entreprise:
                         </label>
                         <input
                             type="text"
-                            value={field.companyName}
-                            name="name"
-                            id="name"
+                            defaultValue={field.companyName}
+                            name="entreprise"
+                            id="entreprise"
                             placeholder="Full Name"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="experience"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                             Experience:
                         </label>
                         <input
                             type="text"
-                            value={field.experience}
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
+                            defaultValue={field.experience}
+                            name="experience"
+                            id="experience"
+                            placeholder="Experience"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
                     </div>    
@@ -109,49 +83,49 @@ export const EditJobOffer = () => {
                 <div className="w-full flex flex-row-12 justify-around gap-8">
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="fonction"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                             Fonction dropdown:
                         </label>
                         <input
                             type="text"
-                            value={field.fonction}
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
+                            defaultValue={field.fonction}
+                            name="fonction"
+                            id="fonction"
+                            placeholder="Fonction"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="contractType"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                         Type de Contrat dropdown:
                         </label>
                         <input
                             type="text"
-                            value={field.contractType}
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
+                            defaultValue={field.contractType}
+                            name="contractType"
+                            id="contractType"
+                            placeholder=" Type de Contrat"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="jobType"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                             Type de Travail dropdown:
                         </label>
                         <input
                             type="text"
-                            value={field.jobType}
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
+                            defaultValue={field.jobType}
+                            name="jobType"
+                            id="jobType"
+                            placeholder="Type de Travail"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
                     </div>    
@@ -161,49 +135,49 @@ export const EditJobOffer = () => {
                 <div className="w-full flex flex-row-12 justify-around gap-8">
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="city"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                             Ville dropdown:
                         </label>
                         <input
                             type="text"
-                            value={field.city}
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
+                            defaultValue={field.city}
+                            name="city"
+                            id="city"
+                            placeholder="Ville"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="domaine"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                         Domaine dropdown:
                         </label>
                         <input
                             type="text"
-                            value={field.domaine}
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
+                            defaultValue={field.domaine}
+                            name="domaine"
+                            id="domaine"
+                            placeholder="Domaine"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="deadline"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                             Deadline (Date):
                         </label>
                         <input
-                            type="text"
-                            value={field.deadline}
-                            name="name"
-                            id="name"
-                            placeholder="Full Name"
+                            type="date"
+                            defaultValue={field.deadline}
+                            name="deadline"
+                            id="deadline"
+                            placeholder="Deadline"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
                     </div>    
@@ -213,43 +187,43 @@ export const EditJobOffer = () => {
                 <div className="w-full flex flex-row-12 justify-around gap-8">
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="studiesRequirements"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                             Requirements Text Area:
                         </label>
                         <textarea
-                        id="profilField"
-                        value={field.studiesRequirement}
-                        name="profil"
+                        id="studiesRequirements"
+                        defaultValue={field.studiesRequirement}
+                        name="studiesRequirements"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="profile"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                         Profil Text Area:
                         </label>
                         <textarea
-                        id="profilField"
-                        value={field.profil}
-                        name="profil"
+                        id="profile"
+                        defaultValue={field.profil}
+                        name="profile"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="mission"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                             Missions Text Area:
                         </label>
                         <textarea
-                        id="profilField"
-                        value={field.missions}
-                        name="profil"
+                        id="mission"
+                        defaultValue={field.missions}
+                        name="mission"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>    
@@ -259,29 +233,29 @@ export const EditJobOffer = () => {
                 <div className="w-full flex flex-row-12 justify-around gap-8">
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="description"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                            Description Text Area:
                         </label>
                         <textarea
-                        id="profilField"
-                        value={field.description}
-                        name="profil"
+                        id="description"
+                        defaultValue={field.description}
+                        name="description"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                    
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="name"
+                            htmlFor="advantages"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                         Avantage (Tags):  
                         </label>
                         <input
                             type="text"
-                            name="name"
-                            id="name"
+                            name="advantages"
+                            id="advantages"
                             placeholder="Full Name"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
