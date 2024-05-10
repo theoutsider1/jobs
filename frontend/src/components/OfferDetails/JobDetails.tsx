@@ -8,7 +8,10 @@ const JobDetails : React.FC<{jobD : offerEmploi[]}> = ({jobD})=> {
     
     const [handleCvPopup, setHandleCvPopup] = useState(false);
 
-    const handleTurnPopupTrue = ()=> {
+    const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
+
+    const handleTurnPopupTrue = (jobId: number)=> {
+        setSelectedJobId(jobId); // Store the selected job ID
         setHandleCvPopup(true);
     }
     const handleTurnPopupFalse = ()=> {
@@ -69,7 +72,7 @@ const JobDetails : React.FC<{jobD : offerEmploi[]}> = ({jobD})=> {
                             <div className="flex justify-end">
                                 <button
                                     type="button"
-                                    onClick={handleTurnPopupTrue}
+                                    onClick={()=>handleTurnPopupTrue(job.id)}
                                     className="rounded bg-darkk px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_8px_9px_-4px_rgba(0,0,0,0.3)] " >
                                     Postuler
                                 </button>
@@ -83,7 +86,7 @@ const JobDetails : React.FC<{jobD : offerEmploi[]}> = ({jobD})=> {
     
             </div>
             
-            <UploadCvComponent isOpen={handleCvPopup} isClose={handleTurnPopupFalse}/>
+            <UploadCvComponent jobId={selectedJobId}  isOpen={handleCvPopup} isClose={handleTurnPopupFalse}/>
         </>
     )
 }
