@@ -1,12 +1,13 @@
-import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { CandidateService } from './candidate.service';
 import { JobOffer } from './candiatesInterfaces/jobOfferInterface';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('candidat')
 export class CandidateController {
 
     constructor(
-        private candidateService : CandidateService
+        private candidateService : CandidateService,
     ){}
 
     // retreive on the 6 newest job offers
@@ -25,6 +26,12 @@ export class CandidateController {
         return await this.candidateService.getOfferDetails(id);
     }
 
+    @Post('postuler/cv/:id')
+    @UseInterceptors(FileInterceptor('file'))
+    async handleUploadCv (@UploadedFile() file : Express.Multer.File ,@Param('id', ParseIntPipe) jobId : number) {
+
+        return await this.candidateService.handleUploadFile(file , jobId);
+    }
 
 
 
