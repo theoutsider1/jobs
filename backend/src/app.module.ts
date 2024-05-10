@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { RecruiterModule } from './recruiter/recruiter.module';
 import { CandidateModule } from './candidate/candidate.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { SupabaseModule } from './supabase/supabase.module';
 
 
 
@@ -18,7 +19,8 @@ import { PrismaModule } from './prisma/prisma.module';
     AuthModule,
     RecruiterModule,
     CandidateModule,
-    PrismaModule ],
+    PrismaModule,
+    SupabaseModule ],
   // controllers: [AppController],
   // providers: [AppService],
 })
