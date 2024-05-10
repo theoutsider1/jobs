@@ -50,7 +50,10 @@ model Job {
   publishedBy Recruiter @relation(fields: [publishedById],references: [id] )
 
   publishedById Int
-}
+
+  // CVs relation 
+   cvsFiles       CvsFile[] // One-to-many relationship with CvsFile
+  }
 
 model Recruiter {
 
@@ -89,6 +92,15 @@ model Candidate {
 
   jobs Job[]
 
+}
 
+model CvsFile {
+  id Int @id @default(autoincrement())
+  filename  String
+  size      Int
+  url       String
+  createdAt DateTime @default(now())
 
+   jobId          Int       // Foreign key to Job model
+  job            Job       @relation(fields: [jobId], references: [id])
 }
