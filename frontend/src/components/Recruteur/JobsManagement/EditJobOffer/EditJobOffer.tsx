@@ -2,12 +2,13 @@ import { useAppSelector } from "../../../store/store"
 import {  useState } from "react";
 import { fonctionOptions } from "../../../../Types/Globals";
 import { dropdownOptions } from "../../../../Types/Globals";
-
+import { typeTravail } from "../../../../Types/Globals";
 
 export const EditJobOffer = () => {
 
     const [toggleFonctions, setToggleFonctions] = useState(false);
     const [toggleContractType, setToggleContractType] = useState(false);
+    const [toggleTypeTravail, setToggleTypeTravail] = useState(false);
     
     
     // get all job details from redux store
@@ -18,24 +19,31 @@ export const EditJobOffer = () => {
     const jobB = toEditJob[0]
     const [newFonction, setNewFonction] = useState(jobB.fonction)
     const [newContractType, setNewContractType] = useState(jobB.contractType)
+    const [newTypeTravail, setNewTypeTravail] = useState(jobB.jobType)
 
     // toggle FONCTION dropdown options
     const toggleFonctionOptions = () => {
-        setToggleFonctions(!toggleFonctions)  
+        setToggleFonctions(!toggleFonctions);
     }
     const handleNewFonction = (label : string)=>{
-        setNewFonction(label)
+        setNewFonction(label);
     }
 
     // handle CONTRACT TYPE dropdown options
     const handleToggleContractType = () => {
-        setToggleContractType(!toggleContractType)  
+        setToggleContractType(!toggleContractType);
     }
     const handleNewContractType = (label :string) => {
-        setNewContractType(label)
+        setNewContractType(label);
        
     }
-
+    // handle CONTRACT TYPE dropdown options
+    const handleToggleTypeTravail = () => {
+        setToggleTypeTravail(!toggleTypeTravail);
+    }
+    const handleNewTypeTravail = (label : string)=> {
+        setNewTypeTravail(label)
+    }
     
    
     return (
@@ -55,7 +63,7 @@ export const EditJobOffer = () => {
                 <div className="mb-5 w-4/12">
                     <label
                         htmlFor="title"
-                        className="mb-3 block text-base font-medium text-[#07074D]"
+                        className="mb-3 block text-base font-medium text-black"
                         >
                         Titre De Poste:
                     </label>
@@ -71,7 +79,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="entreprise"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
                         Entreprise:
                         </label>
@@ -87,7 +95,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="experience"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
                             Experience:
                         </label>
@@ -108,7 +116,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12 relative ">
                         <label
                             htmlFor="fonction"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
                             Fonction:
                         </label>
@@ -141,9 +149,9 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12 relative">
                         <label
                             htmlFor="contractType"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
-                        Type de Contrat dropdown:
+                        Type de Contrat:
                         </label>
                         <button id="dropdownDefaultButton" onClick={()=>handleToggleContractType()}
                          data-dropdown-toggle="dropdown-list" className="w-full  text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
@@ -170,21 +178,37 @@ export const EditJobOffer = () => {
                                 </ul>
                             </div>}
                     </div>
-                    <div className="mb-5 w-4/12">
+                    <div className="mb-5 w-4/12 relative">
                         <label
                             htmlFor="jobType"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
-                            Type de Travail dropdown:
+                            Type de Travail:
                         </label>
-                        <input
-                            type="text"
-                            defaultValue={field.jobType}
-                            name="jobType"
-                            id="jobType"
-                            placeholder="Type de Travail"
-                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
+                            <button id="dropdownDefaultButton" onClick={()=>handleToggleTypeTravail()}
+                            data-dropdown-toggle="dropdown-list" className="w-full  text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
+                                {newTypeTravail}
+                            <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                            </button>
+                            { toggleTypeTravail &&
+                    
+                            <div id="dropdown-list" className={`w-full z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow h-32 overflow-auto`}>
+                                    <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton" >
+                                        {typeTravail.map(option => (
+                                            <li
+                                            key={option.id}
+                                            onClick={() => {
+                                                handleNewTypeTravail(option.label)
+                                                setToggleTypeTravail(!toggleTypeTravail)  
+                                            }}
+                                            className=" text-left block px-4 py-2 hover:bg-third">
+                                                {option.label}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>}
                     </div>    
                 </div>
 
@@ -193,7 +217,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="city"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-[black"
                             >
                             Ville dropdown:
                         </label>
@@ -209,7 +233,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="domaine"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
                         Domaine dropdown:
                         </label>
@@ -225,7 +249,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="deadline"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
                             Deadline (Date):
                         </label>
@@ -245,7 +269,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="studiesRequirements"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
                             Requirements Text Area:
                         </label>
@@ -259,7 +283,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="profile"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
                         Profil Text Area:
                         </label>
@@ -273,7 +297,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="mission"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
                             Missions Text Area:
                         </label>
@@ -291,7 +315,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="description"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
                            Description Text Area:
                         </label>
@@ -305,7 +329,7 @@ export const EditJobOffer = () => {
                     <div className="mb-5 w-4/12">
                         <label
                             htmlFor="advantages"
-                            className="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-black"
                             >
                         Avantage (Tags):  
                         </label>
