@@ -32,7 +32,7 @@ export const UploadCvComponent: React.FC<uploadCvCandidatProps> = ({isOpen , isC
     formData.append('file', file);
 
     try {
-      // Replace 'YOUR_UPLOAD_ENDPOINT' with your actual upload endpoint
+      // Get 'UPLOAD_ENDPOINT' from Props
       const response = await axios.post(`http://localhost:3000/candidat/postuler/cv/${jobId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'

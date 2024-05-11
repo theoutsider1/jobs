@@ -94,6 +94,42 @@ export const dropdownOptions: DropdownOption[] = [
     { id: 4, label: "Anapec",}
 ];
 
+
+export const fonctionOptions: DropdownOption[] = [
+    { id: 1, label: "Communication" },
+    { id: 2, label: "Marketing- social mediat", },
+    { id: 3, label: "Commercial", },
+    { id: 4, label: "Graphist",},
+    { id: 5, label: "Data",},
+    { id: 6, label: "Cybersécurité",},
+    { id: 7, label: "Développeur",},
+    { id: 8, label: "Finance",},
+    { id: 9, label: "Product manager",},
+    { id: 10, label: "Responsable relation client",},
+    { id: 11, label: "RAF",},
+    { id: 12, label: "HR",},
+    { id: 13, label: "PR",},
+    { id: 14, label: "Logistic",},
+    { id: 15, label: "Juriste",},
+    { id: 16, label: "Formation",}
+];
+
+// Communication 
+// Marketing- social mediat
+// Logistic 
+// Commercial 
+// Graphist 
+// Data
+// Cybersécurité
+// Développeur
+// Product manager   
+// Finance 
+// Responsable relation client 
+// Juriste
+// RAF
+// HR
+// PR
+// Formation
 // ---------- Types de travail -------
 
 export const typeTravail: DropdownOption[] = [
@@ -108,6 +144,7 @@ export const typeTravail: DropdownOption[] = [
 export interface uploadCvCandidatProps {
         isOpen : boolean;
         isClose : ()=> void;
+        jobId: number | null; // Add jobId property
 }
 
 // -------------- lancer un offre  interface -------------------

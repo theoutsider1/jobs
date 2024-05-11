@@ -1,18 +1,35 @@
-
-
 // import { useState } from "react"
+// import axios from "axios"
 import { useAppSelector } from "../../../store/store"
 // import { AddAdvantageComponent } from "../../AddOffersPage/AddOfferFrom/AddAdvantageComponent"
 // import { AddOfferFormComponent } from "../../AddOffersPage/AddOfferFrom/AddOfferComponent"
+import { fonctionOptions } from "../../../../Types/Globals";
+import {  useState } from "react";
 
 export const EditJobOffer = () => {
 
-   
-    const toEditJob  = useAppSelector(state => {
+    const [toggleFonctions, setToggleFonctions] = useState(false);
+
     
+    
+    // get all job details from redux store
+    const toEditJob  = useAppSelector(state => {
+        
         return state.recruiterOffersList.recruiterOffer
     })
+    const jobB = toEditJob[0]
+    const [newFonction, setNewFonction] = useState(jobB.fonction)
 
+    // toggle fontion dropdown options
+    const toggleFonctionOptions = () => {
+        setToggleFonctions(!toggleFonctions)
+       
+        
+    }
+
+    const handleNewFonction = (label : string)=>{
+        setNewFonction(label)
+    }
     
    
     return (
@@ -21,7 +38,7 @@ export const EditJobOffer = () => {
                 
            
             
-            <div className="w-full flex-col jusify-between ">
+            <div key={field.id} className="w-full flex-col jusify-between ">
                
                 <h3 className="w-full p-10 bg-fifth  text-center text-5xl font-semibold ">
                      Modifier votre <span className="underline decoration-dashed decoration-darkk">offre d'emploi</span>
@@ -34,7 +51,7 @@ export const EditJobOffer = () => {
                         htmlFor="title"
                         className="mb-3 block text-base font-medium text-[#07074D]"
                         >
-                        Nom Du Poste:
+                        Titre De Poste:
                     </label>
                     <input
                         type="text"
@@ -81,21 +98,45 @@ export const EditJobOffer = () => {
 
                 {/* row 2 */}
                 <div className="w-full flex flex-row-12 justify-around gap-8">
-                    <div className="mb-5 w-4/12">
+                    <div className="mb-5 w-4/12 relative ">
                         <label
                             htmlFor="fonction"
                             className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                             Fonction dropdown:
                         </label>
-                        <input
+                        {/* <input
                             type="text"
                             defaultValue={field.fonction}
                             name="fonction"
                             id="fonction"
                             placeholder="Fonction"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
+                        /> */}
+                        <button id="dropdownDefaultButton" onClick={()=>toggleFonctionOptions()}
+                         data-dropdown-toggle="dropdown-list" className="w-full  text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
+                            {newFonction}
+                        <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+                    { toggleFonctions &&
+                   
+                   <div id="dropdown-list" className={`w-full z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow h-32 overflow-auto`}>
+                        <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton" >
+                            {fonctionOptions.map(option => (
+                                 <li
+                                 key={option.id}
+                                 onClick={() => {
+                                    handleNewFonction(option.label)
+                                    setToggleFonctions(!toggleFonctions)
+                                }}
+                                 className=" text-left block px-4 py-2 hover:bg-third">
+                                    {option.label}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>}
                     </div>
                     <div className="mb-5 w-4/12">
                         <label

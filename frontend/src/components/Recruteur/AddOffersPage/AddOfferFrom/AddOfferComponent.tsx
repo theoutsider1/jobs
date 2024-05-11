@@ -5,11 +5,6 @@ import { HistoricalSideBarComponent } from "../Historic/HistoricalSection";
 
 
 
-
-
-
-
-
 export const AddOfferFormComponent = () => {
     const [contractDropdown, setContractDropdown] = useState(false);
     const [selectedContract, setSelectedContract] = useState("Choisir le type de contrat");
