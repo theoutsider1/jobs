@@ -113,23 +113,42 @@ export const fonctionOptions: DropdownOption[] = [
     { id: 15, label: "Juriste",},
     { id: 16, label: "Formation",}
 ];
+export const regionOptions : DropdownOption[] = [
+    { id: 1, label: "Chaouia - Ouardigha" },
+    { id: 2, label: "Doukala – Abda", },
+    { id: 3, label: "Fès – Boulemane", },
+    { id: 4, label: "Casablanca",},
+    { id: 5, label: "Gharb - Chrarda - Béni Hssen",},
+    { id: 6, label: "Guelmim - Es-Semara",},
+    { id: 7, label: "Laâyoune - Boujdour - S. El Hamra",},
+    { id: 8, label: "Meknès – Tafilalet",},
+    { id: 9, label: "Marrakech – Tensift - Al Haouz",},
+    { id: 10, label: "Oriental",},
+    { id: 11, label: "Oued Ed-Dahab - Lagouira",},
+    { id: 12, label: "Rabat - Salé - Zemmour - Zaer",},
+    { id: 13, label: "Souss - Massa - Daraa",},
+    { id: 14, label: "Tadla – Azilal",},
+    { id: 15, label: "Taza - Al Hoceïma - Taounate",},
+    { id: 16, label: "Tanger - Tétouan",}
+];
 
-// Communication 
-// Marketing- social mediat
-// Logistic 
-// Commercial 
-// Graphist 
-// Data
-// Cybersécurité
-// Développeur
-// Product manager   
-// Finance 
-// Responsable relation client 
-// Juriste
-// RAF
-// HR
-// PR
-// Formation
+// REgions 
+// Chaouia - Ouardigha
+// DA : Doukala – Abda
+// FB : Fès – Boulemane
+// GC : Grand Casablanca
+// saasasa GCBH : Gharb - Chrarda - Béni Hssen
+// GS : Guelmim - Es-Semara
+// LBSH : Laâyoune - Boujdour - S. El Hamra
+// MT : Meknès – Tafilalet
+// MTH : Marrakech – Tensift - Al Haouz
+// O : Oriental
+// ODL : Oued Ed-Dahab - Lagouira
+// RSZZ : Rabat - Salé - Zemmour - Zaer
+// SMD : Souss - Massa - Daraa
+// TA : Tadla – Azilal
+// THT : Taza - Al Hoceïma - Taounate
+// TT : Tanger - Tétouan 
 // ---------- Types de travail -------
 
 export const typeTravail: DropdownOption[] = [

@@ -3,23 +3,26 @@ import {  useState } from "react";
 import { fonctionOptions } from "../../../../Types/Globals";
 import { dropdownOptions } from "../../../../Types/Globals";
 import { typeTravail } from "../../../../Types/Globals";
+import { regionOptions } from "../../../../Types/Globals";
 
 export const EditJobOffer = () => {
 
     const [toggleFonctions, setToggleFonctions] = useState(false);
     const [toggleContractType, setToggleContractType] = useState(false);
     const [toggleTypeTravail, setToggleTypeTravail] = useState(false);
-    
+    const [toggleRegion, setToggleRegion] = useState(false);
     
     // get all job details from redux store
     const toEditJob  = useAppSelector(state => {
         
         return state.recruiterOffersList.recruiterOffer
     })
-    const jobB = toEditJob[0]
-    const [newFonction, setNewFonction] = useState(jobB.fonction)
-    const [newContractType, setNewContractType] = useState(jobB.contractType)
-    const [newTypeTravail, setNewTypeTravail] = useState(jobB.jobType)
+    const jobB = toEditJob[0];
+
+    const [newFonction, setNewFonction] = useState(jobB.fonction);
+    const [newContractType, setNewContractType] = useState(jobB.contractType);
+    const [newTypeTravail, setNewTypeTravail] = useState(jobB.jobType);
+    const [newRegion, setNewRegion] = useState(jobB.city);
 
     // toggle FONCTION dropdown options
     const toggleFonctionOptions = () => {
@@ -43,6 +46,13 @@ export const EditJobOffer = () => {
     }
     const handleNewTypeTravail = (label : string)=> {
         setNewTypeTravail(label)
+    }
+    // handle Region dropdown options
+    const handleToggleRegion = () => {
+        setToggleRegion(!toggleRegion);
+    }
+    const handleNewRegion = (label : string)=> {
+        setNewRegion(label)
     }
     
    
@@ -214,21 +224,36 @@ export const EditJobOffer = () => {
 
                 {/* row 3 */}
                 <div className="w-full flex flex-row-12 justify-around gap-8">
-                    <div className="mb-5 w-4/12">
+                    <div className="mb-5 w-4/12 relative">
                         <label
                             htmlFor="city"
                             className="mb-3 block text-base font-medium text-[black"
                             >
-                            Ville dropdown:
+                            Ville:
                         </label>
-                        <input
-                            type="text"
-                            defaultValue={field.city}
-                            name="city"
-                            id="city"
-                            placeholder="Ville"
-                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
+                        <button id="dropdownDefaultButton" onClick={()=>handleToggleRegion()}
+                            data-dropdown-toggle="dropdown-list" className="w-full  text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
+                                {newRegion}
+                            <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        { toggleRegion &&
+                    
+                        <div id="dropdown-list" className={`w-full z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow h-32 overflow-auto`}>
+                            <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton" >
+                                {regionOptions.map(option => (
+                                    <li
+                                        key={option.id}
+                                        onClick={() => {
+                                            handleNewRegion(option.label)
+                                            setToggleRegion(!toggleRegion)  
+                                        }}
+                                        className=" text-left block px-4 py-2 hover:bg-third">
+                                            {option.label}
+                                    </li>))}
+                            </ul>
+                        </div>}
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
