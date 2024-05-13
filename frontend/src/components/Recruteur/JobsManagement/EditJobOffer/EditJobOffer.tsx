@@ -19,7 +19,7 @@ export const EditJobOffer = () => {
     })
     const jobB = toEditJob[0];
 
-    const [newFonction, setNewFonction] = useState(jobB.fonction);
+    const [newFonction, setNewFonction] = useState(jobB.fonction || '');
     const [newContractType, setNewContractType] = useState(jobB.contractType);
     const [newTypeTravail, setNewTypeTravail] = useState(jobB.jobType);
     const [newRegion, setNewRegion] = useState(jobB.city);
@@ -64,7 +64,7 @@ export const EditJobOffer = () => {
         setNewDomaine(label)
     }
     
-   // ---------------------
+   // ------Advantages input---------------
    const [avantage, setAvantage] = useState<string[]>([]);
    const [currentInput, setCurrentInput] = useState<string>('');
 
@@ -87,18 +87,37 @@ export const EditJobOffer = () => {
        setAvantage([...avantage.filter(tag => avantage.indexOf(tag) !== index)]);
    };
    // ---------------------
+
+   // HandleSubmit 
+   const [initialFormData, setinitialFormData] = useState({
+    title : jobB.title,
+    city : jobB.city,
+    contractType: jobB.contractType,
+    experience : jobB.experience,
+    domaine : jobB.domaine,
+    companyName: jobB.companyName,
+    jobType: jobB.jobType,
+    missions : jobB.missions,
+    deadline: jobB.deadline,
+    fonction: jobB.fonction,
+    studiesRequirement: jobB.studiesRequirement,
+    profil : jobB.profil,
+    advantages : jobB.advantages,
+
+   })
+   const handleSubmit = ()=>{
+
+   }
     return (
         <div className="w-full">
             {toEditJob && toEditJob.map(field => (
-                
-           
-            
+ 
             <div key={field.id} className="w-full flex-col jusify-between ">
                
                 <h3 className="w-full p-10 bg-fifth  text-center text-5xl font-semibold ">
                      Modifier votre <span className="underline decoration-dashed decoration-darkk">offre d'emploi</span>
                 </h3>
-            <form id="" className="w-full bg-third p-5 flex flex-col ">
+            <form onSubmit={handleSubmit} id="" className="w-full bg-third p-5 flex flex-col ">
                 {/* row 1 */}
                 <div className="w-full flex flex-row-12 justify-around gap-8">
                 <div className="mb-5 w-4/12">
@@ -119,7 +138,7 @@ export const EditJobOffer = () => {
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="entreprise"
+                            htmlFor="companyName"
                             className="mb-3 block text-base font-medium text-black"
                             >
                         Entreprise:
@@ -127,7 +146,7 @@ export const EditJobOffer = () => {
                         <input
                             type="text"
                             defaultValue={field.companyName}
-                            name="entreprise"
+                            name="companyName"
                             id="entreprise"
                             placeholder="Full Name"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -340,43 +359,43 @@ export const EditJobOffer = () => {
                 <div className="w-full flex flex-row-12 justify-around gap-8">
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="studiesRequirements"
+                            htmlFor="studiesRequirement"
                             className="mb-3 block text-base font-medium text-black"
                             >
                             Requirements Text Area:
                         </label>
                         <textarea
-                        id="studiesRequirements"
+                        id="studiesRequirement"
                         defaultValue={field.studiesRequirement}
-                        name="studiesRequirements"
+                        name="studiesRequirement"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="profile"
+                            htmlFor="profil"
                             className="mb-3 block text-base font-medium text-black"
                             >
                         Profil Text Area:
                         </label>
                         <textarea
-                        id="profile"
+                        id="profil"
                         defaultValue={field.profil}
-                        name="profile"
+                        name="profil"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
-                            htmlFor="mission"
+                            htmlFor="missions"
                             className="mb-3 block text-base font-medium text-black"
                             >
                             Missions Text Area:
                         </label>
                         <textarea
-                        id="mission"
+                        id="missions"
                         defaultValue={field.missions}
-                        name="mission"
+                        name="missions"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>    
