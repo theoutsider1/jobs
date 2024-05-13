@@ -48,7 +48,7 @@ const Router = createBrowserRouter([
                 element: <OffersManagement/>,
             },
             {
-                path:"/suivezlesOffres/modifieroffre/:id",
+                path:"/suivezlesoffres/modifieroffre/:id",
                 element: <EditJobOffer/>,
             },
             

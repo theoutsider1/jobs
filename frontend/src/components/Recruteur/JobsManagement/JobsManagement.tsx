@@ -33,7 +33,7 @@ export const OffersManagement = () =>{
     const handleEditJobOffer = (data : OffData , jobId : number)=> {
         
         dispatch(getRecruiterOffersList({recruiterOffer : [data]}))
-        navigate(`/suivezlesOffres/modifieroffre/${jobId}`)
+        navigate(`/suivezlesoffres/modifieroffre/${jobId}`)
         window.scrollTo({
             top: 0,
             // behavior: 'smooth' // Optional: Smooth scrolling animation
