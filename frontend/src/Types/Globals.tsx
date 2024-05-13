@@ -131,24 +131,29 @@ export const regionOptions : DropdownOption[] = [
     { id: 15, label: "Taza - Al Hoceïma - Taounate",},
     { id: 16, label: "Tanger - Tétouan",}
 ];
+export const domaineOptions : DropdownOption[] = [
+    { id: 1, label: "Agriculture" },
+    { id: 2, label: "Audiovisual", },
+    { id: 3, label: "Industrie", },
+    { id: 4, label: "Energie",},
+    { id: 5, label: "Electronique",},
+    { id: 6, label: "Marketing",},
+    { id: 7, label: "Finance",},
+    { id: 8, label: "Santé",},
+    { id: 9, label: "Tourisme",},
+    { id: 10, label: "Immobilier",},
+];
 
-// REgions 
-// Chaouia - Ouardigha
-// DA : Doukala – Abda
-// FB : Fès – Boulemane
-// GC : Grand Casablanca
-// saasasa GCBH : Gharb - Chrarda - Béni Hssen
-// GS : Guelmim - Es-Semara
-// LBSH : Laâyoune - Boujdour - S. El Hamra
-// MT : Meknès – Tafilalet
-// MTH : Marrakech – Tensift - Al Haouz
-// O : Oriental
-// ODL : Oued Ed-Dahab - Lagouira
-// RSZZ : Rabat - Salé - Zemmour - Zaer
-// SMD : Souss - Massa - Daraa
-// TA : Tadla – Azilal
-// THT : Taza - Al Hoceïma - Taounate
-// TT : Tanger - Tétouan 
+// Agriculture
+//  Audiovisual
+//   Industrie
+//    Energie
+//     Electronique
+//      Marketing
+//       Finance
+//        Santé 
+//       Tourisme 
+//       Immobilier
 // ---------- Types de travail -------
 
 export const typeTravail: DropdownOption[] = [
