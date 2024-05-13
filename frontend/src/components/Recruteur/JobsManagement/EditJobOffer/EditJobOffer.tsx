@@ -1,17 +1,17 @@
 import { useAppSelector } from "../../../store/store"
-import {  useState } from "react";
+import {  ChangeEvent,KeyboardEvent ,useState } from "react";
 import { fonctionOptions } from "../../../../Types/Globals";
 import { dropdownOptions } from "../../../../Types/Globals";
 import { typeTravail } from "../../../../Types/Globals";
 import { regionOptions } from "../../../../Types/Globals";
-
+import { domaineOptions } from "../../../../Types/Globals";
 export const EditJobOffer = () => {
 
     const [toggleFonctions, setToggleFonctions] = useState(false);
     const [toggleContractType, setToggleContractType] = useState(false);
     const [toggleTypeTravail, setToggleTypeTravail] = useState(false);
     const [toggleRegion, setToggleRegion] = useState(false);
-    
+    const [toggleDomaine, setToggleDomaine]= useState(false);
     // get all job details from redux store
     const toEditJob  = useAppSelector(state => {
         
@@ -23,6 +23,7 @@ export const EditJobOffer = () => {
     const [newContractType, setNewContractType] = useState(jobB.contractType);
     const [newTypeTravail, setNewTypeTravail] = useState(jobB.jobType);
     const [newRegion, setNewRegion] = useState(jobB.city);
+    const [newDomaine, setNewDomaine]=useState(jobB.domaine);
 
     // toggle FONCTION dropdown options
     const toggleFonctionOptions = () => {
@@ -54,8 +55,35 @@ export const EditJobOffer = () => {
     const handleNewRegion = (label : string)=> {
         setNewRegion(label)
     }
+
+    // Handle Domaine Dropdown options
+    const handleToggleDomaine = ()=>{
+        setToggleDomaine(!toggleDomaine);
+    }
+    const handleNewDomaine = (label: string)=> {
+        setNewDomaine(label)
+    }
     
+   // ---------------------
+   const [avantage, setAvantage] = useState<string[]>([]);
+   const [currentInput, setCurrentInput] = useState<string>('');
+
+   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+       setCurrentInput(event.target.value);
+   };
+
+   const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
+       if (event.key === ',' && !avantage.includes(currentInput.trim())) {
+        const trimmedInput = currentInput.trim().replace(/,/g, ''); // Remove commas from input
+        
+        
+       }
+   };
    
+   const removeAvantage = (index:number) => {
+       setAvantage([...avantage.filter(tag => avantage.indexOf(tag) !== index)]);
+   };
+   // ---------------------
     return (
         <div className="w-full">
             {toEditJob && toEditJob.map(field => (
@@ -255,21 +283,37 @@ export const EditJobOffer = () => {
                             </ul>
                         </div>}
                     </div>
-                    <div className="mb-5 w-4/12">
+                    <div className="mb-5 w-4/12 relative ">
                         <label
                             htmlFor="domaine"
                             className="mb-3 block text-base font-medium text-black"
                             >
                         Domaine dropdown:
                         </label>
-                        <input
-                            type="text"
-                            defaultValue={field.domaine}
-                            name="domaine"
-                            id="domaine"
-                            placeholder="Domaine"
-                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
+                        <button id="dropdownDefaultButton" onClick={()=>handleToggleDomaine()}
+                         data-dropdown-toggle="dropdown-list" className="w-full  text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
+                            {newDomaine}
+                        <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+                    { toggleDomaine &&
+                   
+                   <div id="dropdown-list" className={`w-full z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow h-32 overflow-auto`}>
+                        <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton" >
+                            {domaineOptions.map(option => (
+                                 <li
+                                 key={option.id}
+                                 onClick={() => {
+                                    handleNewDomaine(option.label)
+                                    setToggleDomaine(!toggleDomaine)
+                                }}
+                                 className=" text-left block px-4 py-2 hover:bg-third">
+                                    {option.label}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>}
                     </div>
                     <div className="mb-5 w-4/12">
                         <label
@@ -358,13 +402,34 @@ export const EditJobOffer = () => {
                             >
                         Avantage (Tags):  
                         </label>
+                        
                         <input
-                            type="text"
-                            name="advantages"
-                            id="advantages"
-                            placeholder="Full Name"
-                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                        />
+                    type="text"
+                    id="avantages"
+                   // value= {currentInput}
+                    onChange={handleInputChange}
+                    onKeyUp={(e)=> handleAddAvantage(e)}
+                    {...({ value: currentInput } as { value: string })}
+                    placeholder="Press enter to add tags"
+                    className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+
+                    <ul>
+                        {
+                            avantage.length>0 &&
+                            avantage.map((adv,index) => (
+                                <li key={index} className="p-2"> 
+                                    <div key={index} className="tag-item inline-flex items-start justify-start px-5 py-2 rounded-[32px] text-sm shadow-sm font-medium bg-secondary text-neutral-100 mr-2">
+                                        <span className="text">{adv}</span>
+                                        <span onClick={() => removeAvantage(index)} className="close cursor-pointer ml-2 hover:text-neutral-700">&times;</span>
+                                    </div>
+                                </li>
+                            ))
+                        }
+                    </ul>
+
+
+
+
                     </div>
                      
                 </div>

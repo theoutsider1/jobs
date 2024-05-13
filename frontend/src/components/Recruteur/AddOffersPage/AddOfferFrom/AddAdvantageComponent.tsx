@@ -41,9 +41,10 @@ export const AddAdvantageComponent = ()=> {
                 <input
                     type="text"
                     id="avantages"
-                    value= {currentInput}
+                   // value= {currentInput}
                     onChange={handleInputChange}
                     onKeyUp={(e)=> handleAddAvantage(e)}
+                    {...({ value: currentInput } as { value: string })}
                     placeholder="Press enter to add tags"
                     className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
 
