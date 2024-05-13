@@ -14,10 +14,14 @@ export const AddAdvantageComponent = ()=> {
     };
 
     const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter' && !avantage.includes(currentInput.trim())) {
-            setAvantage([...avantage, currentInput.trim()]);
-            setCurrentInput('');
-        }
+        if (event.key === ',' && !avantage.includes(currentInput.trim())) {
+            const trimmedInput = currentInput.trim().replace(/,/g, ''); // Remove commas from input
+            if(trimmedInput !== '' && trimmedInput !== ','){
+                setAvantage([...avantage, trimmedInput]);
+                setCurrentInput('');
+            }
+            
+           }
     };
     
     const removeAvantage = (index:number) => {
