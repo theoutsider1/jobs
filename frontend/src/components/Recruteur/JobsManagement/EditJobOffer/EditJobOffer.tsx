@@ -28,50 +28,31 @@ export const EditJobOffer = () => {
     const toggleFonctionOptions = () => {
         setToggleFonctions(!toggleFonctions);
     }
-    const handleNewFonction = (label : string)=>{
-        setNewFonction(label);
-    }
 
     // handle CONTRACT TYPE dropdown options
     const handleToggleContractType = () => {
         setToggleContractType(!toggleContractType);
     }
-    const handleNewContractType = (label :string) => {
-        setNewContractType(label);  
-    }
+
     // handle CONTRACT TYPE dropdown options
     const handleToggleTypeTravail = () => {
         setToggleTypeTravail(!toggleTypeTravail);
     }
-    const handleNewTypeTravail = (label : string)=> {
-        setNewTypeTravail(label)
-    }
+
     // handle Region dropdown options
     const handleToggleRegion = () => {
         setToggleRegion(!toggleRegion);
-    }
-    const handleNewRegion = (label : string)=> {
-        setNewRegion(label)
     }
 
     // Handle Domaine Dropdown options
     const handleToggleDomaine = ()=>{
         setToggleDomaine(!toggleDomaine);
     }
-    const handleNewDomaine = (label: string)=> {
-        setNewDomaine(label)
-    }
+
     
    // ------Advantages input---------------
    const [avantage, setAvantage] = useState<string[]>([]);
    const [currentInput, setCurrentInput] = useState<string>('');
-
-   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-       setCurrentInput(event.target.value);
-   };
-
-  
-   
   
    // ---------------------
 
@@ -475,32 +456,28 @@ const removeAvantage = (index:number) => {
                         </label>
                         
                         <input
-                    type="text"
-                    id="avantages"
-                   name= "advantages"
-                  // onChange={(e) => handleChange(e)} 
-                     onChange={(e) => setCurrentInput(e.target.value)}
-                   onKeyUp={(e)=> handleAddAvantage(e)}
-                    {...({ value: currentInput } as { value: string })}
-                    placeholder="Press enter to add tags"
-                    className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+                            type="text"
+                            id="avantages"
+                            name= "advantages"
+                            onChange={(e) => setCurrentInput(e.target.value)}
+                            onKeyUp={(e)=> handleAddAvantage(e)}
+                            {...({ value: currentInput } as { value: string })}
+                            placeholder="Press enter to add tags"
+                            className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
 
-                    <ul>
-                        {
-                            avantage.length>0 &&
-                            avantage.map((adv,index) => (
-                                <li key={index} className="p-2"> 
-                                    <div key={index} className="tag-item inline-flex items-start justify-start px-5 py-2 rounded-[32px] text-sm shadow-sm font-medium bg-secondary text-neutral-100 mr-2">
-                                        <span className="text">{adv}</span>
-                                        <span onClick={() => removeAvantage(index)} className="close cursor-pointer ml-2 hover:text-neutral-700">&times;</span>
-                                    </div>
-                                </li>
-                            ))
-                        }
-                    </ul>
-
-
-
+                        <ul>
+                            {
+                                avantage.length>0 &&
+                                avantage.map((adv,index) => (
+                                    <li key={index} className="p-2"> 
+                                        <div key={index} className="tag-item inline-flex items-start justify-start px-5 py-2 rounded-[32px] text-sm shadow-sm font-medium bg-secondary text-neutral-100 mr-2">
+                                            <span className="text">{adv}</span>
+                                            <span onClick={() => removeAvantage(index)} className="close cursor-pointer ml-2 hover:text-neutral-700">&times;</span>
+                                        </div>
+                                    </li>
+                                ))
+                            }
+                        </ul>
 
                     </div>
                      
