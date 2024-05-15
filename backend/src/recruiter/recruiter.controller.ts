@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Recruiter } from '@prisma/client';
 import { GetRecruiter } from 'src/auth/decorator';
@@ -53,7 +53,7 @@ export class RecruiterController {
         return this.recruiterService.getJobById(jobId);
     }
 // Update job offer
-    @Patch('update/:id')
+    @Put('update/:id')
     async editJobOffer(
         @Param('id', ParseIntPipe) jobId : number , 
         @Body() updateJobOfferDto: updateJobOfferDto,

@@ -5,6 +5,7 @@ import { dropdownOptions } from "../../../../Types/Globals";
 import { typeTravail } from "../../../../Types/Globals";
 import { regionOptions } from "../../../../Types/Globals";
 import { domaineOptions } from "../../../../Types/Globals";
+import axios from "axios";
 export const EditJobOffer = () => {
 
     const [toggleFonctions, setToggleFonctions] = useState(false);
@@ -27,26 +28,49 @@ export const EditJobOffer = () => {
     // toggle FONCTION dropdown options
     const toggleFonctionOptions = () => {
         setToggleFonctions(!toggleFonctions);
+        setToggleContractType(false);
+        setToggleTypeTravail(false);
+        setToggleRegion(false);
+        setToggleDomaine(false);
     }
 
     // handle CONTRACT TYPE dropdown options
     const handleToggleContractType = () => {
         setToggleContractType(!toggleContractType);
+        setToggleFonctions(false);
+        setToggleTypeTravail(false);
+        setToggleRegion(false);
+        setToggleDomaine(false);
+        
     }
 
     // handle CONTRACT TYPE dropdown options
     const handleToggleTypeTravail = () => {
         setToggleTypeTravail(!toggleTypeTravail);
+        setToggleContractType(false);
+        setToggleFonctions(false);
+        setToggleRegion(false);
+        setToggleDomaine(false);
+
     }
 
     // handle Region dropdown options
     const handleToggleRegion = () => {
         setToggleRegion(!toggleRegion);
+        setToggleContractType(false);
+        setToggleFonctions(false);
+        setToggleTypeTravail(false);
+        setToggleDomaine(false);
     }
 
     // Handle Domaine Dropdown options
     const handleToggleDomaine = ()=>{
         setToggleDomaine(!toggleDomaine);
+        setToggleRegion(false);
+        setToggleContractType(false);
+        setToggleFonctions(false);
+        setToggleTypeTravail(false);
+       
     }
 
     
@@ -91,12 +115,11 @@ export const EditJobOffer = () => {
                 [name]: value,
                 }));
             }
+
+            console.log(initialFormData);
+            
     };
 
-//    const handleDropdownClick = ()=>{
-//         console.log(initialFormData);
-        
-//    }
 const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === ',' && !avantage.includes(currentInput.trim())) {
      const trimmedInput = currentInput.trim().replace(/,/g, ''); // Remove commas from input
@@ -108,6 +131,7 @@ const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
      
              // Update initialFormData with new advantages
              handleChange({ name: 'advantages', value: newAvantages });
+       
      }
      
    // }
@@ -119,10 +143,14 @@ const removeAvantage = (index:number) => {
     setAvantage([...avantage.filter(tag => avantage.indexOf(tag) !== index)]);
     handleChange({name: "advantages", value : newAvantages})
 };
-   useEffect(()=>{
-    console.log(initialFormData);
+// Post Data Function 
+ const handleSubmit = ()=>{
+    const data = axios.put("")
+ }
+//   useEffect(()=>{
+//     console.log(initialFormData);
     
-   },[handleChange]);
+//    },[handleChange]);
     return (
         <div className="w-full">
             {toEditJob && toEditJob.map(field => (
@@ -133,7 +161,7 @@ const removeAvantage = (index:number) => {
                      Modifier votre <span className="underline decoration-dashed decoration-darkk">offre d'emploi</span>
                 </h3>
             <form 
-            //onSubmit={handleSubmit} 
+            onSubmit={handleSubmit} 
             id="" className="w-full bg-third p-5 flex flex-col ">
                 {/* row 1 */}
                 <div className="w-full flex flex-row-12 justify-around gap-8">
@@ -149,7 +177,8 @@ const removeAvantage = (index:number) => {
                         defaultValue={field.title}
                         name="title"
                         id="title"
-                        onChange={(e) => handleChange(e)}                        placeholder="Nom du Poste"
+                        onChange={(e) => handleChange(e)}
+                        placeholder="Nom du Poste"
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                     </div>
@@ -163,7 +192,8 @@ const removeAvantage = (index:number) => {
                         <input
                             type="text"
                             defaultValue={field.companyName}
-                            onChange={(e) => handleChange(e)}                            name="companyName"
+                            onChange={(e) => handleChange(e)}
+                            name="companyName"
                             id="entreprise"
                             placeholder="Full Name"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -179,7 +209,8 @@ const removeAvantage = (index:number) => {
                         <input
                             type="text"
                             defaultValue={field.experience}
-                            onChange={(e) => handleChange(e)}                            name="experience"
+                            onChange={(e) => handleChange(e)}
+                            name="experience"
                             id="experience"
                             placeholder="Experience"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -213,8 +244,8 @@ const removeAvantage = (index:number) => {
                                  <li
                                     key={option.id}
                                     onClick={() => {
-                                        handleChange({ name: 'fonction', value: option.label })
-                                       // handleNewFonction(option.label)
+                                        handleChange({ name: 'fonction', value: option.label })   
+                                        setNewFonction(option.label)                                   
                                         setToggleFonctions(!toggleFonctions)
                                     }}
                                     data-name= "fonction"
@@ -249,7 +280,7 @@ const removeAvantage = (index:number) => {
                                         data-name ="contractType"
                                         onClick={() => {
                                             handleChange({ name: 'contractType', value: option.label })
-                                            //handleNewContractType(option.label)
+                                            setNewContractType(option.label)
                                             setToggleContractType(!toggleContractType)  
                                         }}
                                         className=" text-left block px-4 py-2 hover:bg-third">
@@ -282,7 +313,7 @@ const removeAvantage = (index:number) => {
                                             key={option.id}
                                             onClick={() => {
                                                 handleChange({ name: 'jobType', value: option.label })
-                                                // handleNewTypeTravail(option.label)
+                                                setNewTypeTravail(option.label)
                                                 setToggleTypeTravail(!toggleTypeTravail)  
                                             }}
                                             className=" text-left block px-4 py-2 hover:bg-third">
@@ -319,7 +350,7 @@ const removeAvantage = (index:number) => {
                                         key={option.id}
                                         onClick={() => {
                                             handleChange({ name: 'city', value: option.label })
-                                           // handleNewRegion(option.label)
+                                            setNewRegion(option.label)
                                             setToggleRegion(!toggleRegion)  
                                         }}
                                         className=" text-left block px-4 py-2 hover:bg-third">
@@ -351,7 +382,7 @@ const removeAvantage = (index:number) => {
                                  key={option.id}
                                  onClick={() => {
                                     handleChange({ name: 'domaine', value: option.label })
-                                    //handleNewDomaine(option.label)
+                                    setNewDomaine(option.label)
                                     setToggleDomaine(!toggleDomaine)
                                 }}
                                  className=" text-left block px-4 py-2 hover:bg-third">
