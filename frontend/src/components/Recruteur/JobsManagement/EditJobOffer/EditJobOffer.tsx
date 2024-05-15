@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../store/store"
-import {  ChangeEvent,KeyboardEvent ,useState } from "react";
+import {  ChangeEvent,KeyboardEvent ,useEffect,useState } from "react";
 import { fonctionOptions } from "../../../../Types/Globals";
 import { dropdownOptions } from "../../../../Types/Globals";
 import { typeTravail } from "../../../../Types/Globals";
@@ -13,8 +13,7 @@ export const EditJobOffer = () => {
     const [toggleRegion, setToggleRegion] = useState(false);
     const [toggleDomaine, setToggleDomaine]= useState(false);
     // get all job details from redux store
-    const toEditJob  = useAppSelector(state => {
-        
+    const toEditJob  = useAppSelector(state => {        
         return state.recruiterOffersList.recruiterOffer
     })
     const jobB = toEditJob[0];
@@ -38,8 +37,7 @@ export const EditJobOffer = () => {
         setToggleContractType(!toggleContractType);
     }
     const handleNewContractType = (label :string) => {
-        setNewContractType(label);
-       
+        setNewContractType(label);  
     }
     // handle CONTRACT TYPE dropdown options
     const handleToggleTypeTravail = () => {
@@ -91,23 +89,43 @@ export const EditJobOffer = () => {
    // HandleSubmit 
    const [initialFormData, setinitialFormData] = useState({
     title : jobB.title,
-    city : jobB.city,
-    contractType: jobB.contractType,
+    city : newRegion,
+    contractType: newContractType,
     experience : jobB.experience,
-    domaine : jobB.domaine,
+    domaine : newDomaine,
     companyName: jobB.companyName,
-    jobType: jobB.jobType,
+    jobType: newTypeTravail,
     missions : jobB.missions,
     deadline: jobB.deadline,
-    fonction: jobB.fonction,
+    fonction: newFonction,
     studiesRequirement: jobB.studiesRequirement,
     profil : jobB.profil,
     advantages : jobB.advantages,
-
    })
-   const handleSubmit = ()=>{
 
-   }
+   const handleChange = (event: ChangeEvent<HTMLInputElement> | { name: string; value: string })=>{
+    if ('target' in event) {
+        const { name, value } = event.target;
+        setinitialFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      } else {
+        const { name, value } = event;
+        setinitialFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      }
+    };
+//    const handleDropdownClick = ()=>{
+//         console.log(initialFormData);
+        
+//    }
+   useEffect(()=>{
+    console.log(initialFormData);
+    
+   },[handleChange]);
     return (
         <div className="w-full">
             {toEditJob && toEditJob.map(field => (
@@ -117,7 +135,9 @@ export const EditJobOffer = () => {
                 <h3 className="w-full p-10 bg-fifth  text-center text-5xl font-semibold ">
                      Modifier votre <span className="underline decoration-dashed decoration-darkk">offre d'emploi</span>
                 </h3>
-            <form onSubmit={handleSubmit} id="" className="w-full bg-third p-5 flex flex-col ">
+            <form 
+            //onSubmit={handleSubmit} 
+            id="" className="w-full bg-third p-5 flex flex-col ">
                 {/* row 1 */}
                 <div className="w-full flex flex-row-12 justify-around gap-8">
                 <div className="mb-5 w-4/12">
@@ -132,7 +152,7 @@ export const EditJobOffer = () => {
                         defaultValue={field.title}
                         name="title"
                         id="title"
-                        placeholder="Nom du Poste"
+                        onChange={(e) => handleChange(e)}                        placeholder="Nom du Poste"
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                     </div>
@@ -146,7 +166,7 @@ export const EditJobOffer = () => {
                         <input
                             type="text"
                             defaultValue={field.companyName}
-                            name="companyName"
+                            onChange={(e) => handleChange(e)}                            name="companyName"
                             id="entreprise"
                             placeholder="Full Name"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -162,7 +182,7 @@ export const EditJobOffer = () => {
                         <input
                             type="text"
                             defaultValue={field.experience}
-                            name="experience"
+                            onChange={(e) => handleChange(e)}                            name="experience"
                             id="experience"
                             placeholder="Experience"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -194,13 +214,15 @@ export const EditJobOffer = () => {
                         <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton" >
                             {fonctionOptions.map(option => (
                                  <li
-                                 key={option.id}
-                                 onClick={() => {
-                                    handleNewFonction(option.label)
-                                    setToggleFonctions(!toggleFonctions)
-                                }}
-                                 className=" text-left block px-4 py-2 hover:bg-third">
-                                    {option.label}
+                                    key={option.id}
+                                    onClick={() => {
+                                        handleChange({ name: 'fonction', value: option.label })
+                                        handleNewFonction(option.label)
+                                        setToggleFonctions(!toggleFonctions)
+                                    }}
+                                    data-name= "fonction"
+                                    className=" text-left block px-4 py-2 hover:bg-third">
+                                        {option.label}
                                 </li>
                             ))}
                         </ul>
@@ -227,7 +249,9 @@ export const EditJobOffer = () => {
                                     {dropdownOptions.map(option => (
                                         <li
                                         key={option.id}
+                                        data-name ="contractType"
                                         onClick={() => {
+                                           // handleChange('fonction', option.label)
                                             handleNewContractType(option.label)
                                             setToggleContractType(!toggleContractType)  
                                         }}
@@ -260,7 +284,7 @@ export const EditJobOffer = () => {
                                             <li
                                             key={option.id}
                                             onClick={() => {
-                                                handleNewTypeTravail(option.label)
+                                               // handleNewTypeTravail(option.label)
                                                 setToggleTypeTravail(!toggleTypeTravail)  
                                             }}
                                             className=" text-left block px-4 py-2 hover:bg-third">
@@ -347,6 +371,7 @@ export const EditJobOffer = () => {
                         <input
                             type="date"
                             defaultValue={field.deadline}
+                            //onChange={handleChange}
                             name="deadline"
                             id="deadline"
                             placeholder="Deadline"
@@ -366,8 +391,9 @@ export const EditJobOffer = () => {
                         </label>
                         <textarea
                         id="studiesRequirement"
-                        defaultValue={field.studiesRequirement}
                         name="studiesRequirement"
+                        defaultValue={field.studiesRequirement}
+                       // onChange={handleChange}
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>
@@ -380,8 +406,9 @@ export const EditJobOffer = () => {
                         </label>
                         <textarea
                         id="profil"
-                        defaultValue={field.profil}
                         name="profil"
+                        defaultValue={field.profil}
+                       // onChange={handleChange}
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>
@@ -396,6 +423,7 @@ export const EditJobOffer = () => {
                         id="missions"
                         defaultValue={field.missions}
                         name="missions"
+                       // onChange={handleChange}
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>    
@@ -414,6 +442,7 @@ export const EditJobOffer = () => {
                         id="description"
                         defaultValue={field.description}
                         name="description"
+                       // onChange={handleChange}
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                    
                     </div>
