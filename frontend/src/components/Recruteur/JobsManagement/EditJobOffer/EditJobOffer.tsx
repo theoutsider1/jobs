@@ -59,15 +59,14 @@ export const EditJobOffer = () => {
    // HandleSubmit 
    const [initialFormData, setinitialFormData] = useState({
     title : jobB.title,
-    city : newRegion,
-    contractType: newContractType,
+    city : jobB.city,
+    contractType: jobB.contractType,
     experience : jobB.experience,
-    domaine : newDomaine,
+    domaine : jobB.domaine,
     companyName: jobB.companyName,
-    jobType: newTypeTravail,
+    jobType: jobB.jobType,
     missions : jobB.missions,
     deadline: jobB.deadline,
-    fonction: newFonction,
     studiesRequirement: jobB.studiesRequirement,
     profil : jobB.profil,
     advantages : jobB.advantages,
@@ -101,8 +100,8 @@ export const EditJobOffer = () => {
 const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === ',' && !avantage.includes(currentInput.trim())) {
      const trimmedInput = currentInput.trim().replace(/,/g, ''); // Remove commas from input
-     if(trimmedInput !== '' && trimmedInput !== ','){
-         if (trimmedInput !== '' && trimmedInput !== ',') {
+     //if(trimmedInput !== '' && trimmedInput !== ','){
+         if (trimmedInput !== '' && trimmedInput !== ',' && !avantage.includes(trimmedInput)) {
              const newAvantages = [...avantage, trimmedInput];
              setAvantage(newAvantages);
              setCurrentInput('');
@@ -111,7 +110,7 @@ const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
              handleChange({ name: 'advantages', value: newAvantages });
      }
      
-    }
+   // }
 }
 };
 
