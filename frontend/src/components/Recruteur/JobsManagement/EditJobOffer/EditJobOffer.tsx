@@ -70,20 +70,9 @@ export const EditJobOffer = () => {
        setCurrentInput(event.target.value);
    };
 
-   const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
-       if (event.key === ',' && !avantage.includes(currentInput.trim())) {
-        const trimmedInput = currentInput.trim().replace(/,/g, ''); // Remove commas from input
-        if(trimmedInput !== '' && trimmedInput !== ','){
-            setAvantage([...avantage, trimmedInput]);
-            setCurrentInput('');
-        }
-        
-       }
-   };
+  
    
-   const removeAvantage = (index:number) => {
-       setAvantage([...avantage.filter(tag => avantage.indexOf(tag) !== index)]);
-   };
+  
    // ---------------------
 
    // HandleSubmit 
@@ -103,25 +92,53 @@ export const EditJobOffer = () => {
     advantages : jobB.advantages,
    })
 
-   const handleChange = (event: ChangeEvent<HTMLInputElement> | { name: string; value: string })=>{
-    if ('target' in event) {
-        const { name, value } = event.target;
-        setinitialFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
-      } else {
-        const { name, value } = event;
-        setinitialFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
-      }
+   const handleChange = (
+        event: 
+            ChangeEvent<HTMLInputElement> | 
+            { name: string; value: string | string[] } | 
+            ChangeEvent<HTMLTextAreaElement>) => {
+
+            if ('target' in event) {
+                const { name, value } = event.target;
+                setinitialFormData((prevData) => ({
+                ...prevData,
+                [name]: value,
+                }));
+            } else {
+                const { name, value } = event;
+                setinitialFormData((prevData) => ({
+                ...prevData,
+                [name]: value,
+                }));
+            }
     };
+
 //    const handleDropdownClick = ()=>{
 //         console.log(initialFormData);
         
 //    }
+const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === ',' && !avantage.includes(currentInput.trim())) {
+     const trimmedInput = currentInput.trim().replace(/,/g, ''); // Remove commas from input
+     if(trimmedInput !== '' && trimmedInput !== ','){
+         if (trimmedInput !== '' && trimmedInput !== ',') {
+             const newAvantages = [...avantage, trimmedInput];
+             setAvantage(newAvantages);
+             setCurrentInput('');
+     
+             // Update initialFormData with new advantages
+             handleChange({ name: 'advantages', value: newAvantages });
+     }
+     
+    }
+}
+};
+
+const removeAvantage = (index:number) => {
+    const newAvantages = avantage.filter(tag => avantage.indexOf(tag) !== index)
+    setAvantage([...avantage.filter(tag => avantage.indexOf(tag) !== index)]);
+    handleChange({name: "advantages", value : newAvantages})
+};
    useEffect(()=>{
     console.log(initialFormData);
     
@@ -217,7 +234,7 @@ export const EditJobOffer = () => {
                                     key={option.id}
                                     onClick={() => {
                                         handleChange({ name: 'fonction', value: option.label })
-                                        handleNewFonction(option.label)
+                                       // handleNewFonction(option.label)
                                         setToggleFonctions(!toggleFonctions)
                                     }}
                                     data-name= "fonction"
@@ -251,8 +268,8 @@ export const EditJobOffer = () => {
                                         key={option.id}
                                         data-name ="contractType"
                                         onClick={() => {
-                                           // handleChange('fonction', option.label)
-                                            handleNewContractType(option.label)
+                                            handleChange({ name: 'contractType', value: option.label })
+                                            //handleNewContractType(option.label)
                                             setToggleContractType(!toggleContractType)  
                                         }}
                                         className=" text-left block px-4 py-2 hover:bg-third">
@@ -284,7 +301,8 @@ export const EditJobOffer = () => {
                                             <li
                                             key={option.id}
                                             onClick={() => {
-                                               // handleNewTypeTravail(option.label)
+                                                handleChange({ name: 'jobType', value: option.label })
+                                                // handleNewTypeTravail(option.label)
                                                 setToggleTypeTravail(!toggleTypeTravail)  
                                             }}
                                             className=" text-left block px-4 py-2 hover:bg-third">
@@ -320,7 +338,8 @@ export const EditJobOffer = () => {
                                     <li
                                         key={option.id}
                                         onClick={() => {
-                                            handleNewRegion(option.label)
+                                            handleChange({ name: 'city', value: option.label })
+                                           // handleNewRegion(option.label)
                                             setToggleRegion(!toggleRegion)  
                                         }}
                                         className=" text-left block px-4 py-2 hover:bg-third">
@@ -351,7 +370,8 @@ export const EditJobOffer = () => {
                                  <li
                                  key={option.id}
                                  onClick={() => {
-                                    handleNewDomaine(option.label)
+                                    handleChange({ name: 'domaine', value: option.label })
+                                    //handleNewDomaine(option.label)
                                     setToggleDomaine(!toggleDomaine)
                                 }}
                                  className=" text-left block px-4 py-2 hover:bg-third">
@@ -370,9 +390,9 @@ export const EditJobOffer = () => {
                         </label>
                         <input
                             type="date"
+                            name= "deadline"
                             defaultValue={field.deadline}
-                            //onChange={handleChange}
-                            name="deadline"
+                            onChange={(e) => handleChange(e)} 
                             id="deadline"
                             placeholder="Deadline"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -393,7 +413,7 @@ export const EditJobOffer = () => {
                         id="studiesRequirement"
                         name="studiesRequirement"
                         defaultValue={field.studiesRequirement}
-                       // onChange={handleChange}
+                        onChange={(e) => handleChange(e)} 
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>
@@ -408,7 +428,7 @@ export const EditJobOffer = () => {
                         id="profil"
                         name="profil"
                         defaultValue={field.profil}
-                       // onChange={handleChange}
+                        onChange={(e) => handleChange(e)} 
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>
@@ -423,7 +443,7 @@ export const EditJobOffer = () => {
                         id="missions"
                         defaultValue={field.missions}
                         name="missions"
-                       // onChange={handleChange}
+                        onChange={(e) => handleChange(e)} 
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
                     </div>    
@@ -442,7 +462,7 @@ export const EditJobOffer = () => {
                         id="description"
                         defaultValue={field.description}
                         name="description"
-                       // onChange={handleChange}
+                        onChange={(e) => handleChange(e)} 
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                    
                     </div>
@@ -457,9 +477,10 @@ export const EditJobOffer = () => {
                         <input
                     type="text"
                     id="avantages"
-                   // value= {currentInput}
-                    onChange={handleInputChange}
-                    onKeyUp={(e)=> handleAddAvantage(e)}
+                   name= "advantages"
+                  // onChange={(e) => handleChange(e)} 
+                     onChange={(e) => setCurrentInput(e.target.value)}
+                   onKeyUp={(e)=> handleAddAvantage(e)}
                     {...({ value: currentInput } as { value: string })}
                     placeholder="Press enter to add tags"
                     className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
