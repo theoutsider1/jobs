@@ -196,3 +196,23 @@ export interface Offers {
     experience: string;
     companyName: string;
 }
+
+// Interface  UpdateJobOfferDTO used in EditJobOffer.tsx
+
+export interface UpdateJobOfferDTO {
+    id?: number;
+    title?: string;
+    companyName?: string;
+    contractType?: string;
+    city?: string;
+    domaine?: string;
+    jobType?: string;
+    studies?: string | null;
+    experience?: string;
+    deadline? : string;
+    description? : string;
+    missions? : string[] ;
+    profil? : string[];
+    avantages?: string[];
+
+}
