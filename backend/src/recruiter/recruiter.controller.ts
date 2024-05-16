@@ -53,7 +53,7 @@ export class RecruiterController {
         return this.recruiterService.getJobById(jobId);
     }
 // Update job offer
-    @Put('update/:id')
+    @Patch('update/:id')
     async editJobOffer(
         @Param('id', ParseIntPipe) jobId : number , 
         @Body() updateJobOfferDto: updateJobOfferDto,

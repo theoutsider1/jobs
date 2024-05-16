@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../../store/store"
-import {  ChangeEvent,KeyboardEvent ,useEffect,useState } from "react";
-import { fonctionOptions } from "../../../../Types/Globals";
+import {  ChangeEvent,FormEvent,FormEventHandler,KeyboardEvent ,useEffect,useState } from "react";
+import { UpdateJobOfferDTO, fonctionOptions } from "../../../../Types/Globals";
 import { dropdownOptions } from "../../../../Types/Globals";
 import { typeTravail } from "../../../../Types/Globals";
 import { regionOptions } from "../../../../Types/Globals";
@@ -143,14 +143,42 @@ const removeAvantage = (index:number) => {
     setAvantage([...avantage.filter(tag => avantage.indexOf(tag) !== index)]);
     handleChange({name: "advantages", value : newAvantages})
 };
+
 // Post Data Function 
- const handleSubmit = ()=>{
-    const data = axios.put("")
- }
-//   useEffect(()=>{
-//     console.log(initialFormData);
-    
-//    },[handleChange]);
+ const handleSubmit = (
+        e: FormEvent<HTMLFormElement>)=> {
+
+            e.preventDefault()
+            
+            const token : string | null = localStorage.getItem('token');
+            
+            if (!token) {
+                throw new Error('Token not Found');
+            }
+            const updatedJob : UpdateJobOfferDTO = {
+                ...initialFormData
+            }
+
+            try {
+                const response = axios.patch(`http://localhost:3000/recruteurs/update/${jobB.id}`,
+                 updatedJob,
+                    {
+                    headers: {
+                        Authorization : `Bearer ${token}`,
+                    }})
+                    
+                    return console.log(response);
+                    ;
+
+            } catch (error) {
+                throw new Error('Token not Found');
+            }
+    }
+  useEffect(()=>{
+    // Create a custom FormEvent instance
+    const customEvent = new Event('submit') as unknown as FormEvent<HTMLFormElement>;
+    handleSubmit(customEvent);    
+   },[]);
     return (
         <div className="w-full">
             {toEditJob && toEditJob.map(field => (
