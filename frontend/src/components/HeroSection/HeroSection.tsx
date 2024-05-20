@@ -39,6 +39,7 @@ const HeroSection: React.FC =( )=>{
         <div>
             <WhyUs/>
         </div>
+        
         </>
     ) 
 }
