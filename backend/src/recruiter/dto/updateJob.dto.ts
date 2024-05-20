@@ -45,6 +45,9 @@ export class updateJobOfferDto {
     @IsOptional()
     advantages: string[];
 
+    @IsOptional()
+    deadline: string;
+
     @Optional()
     publishedById: number;
 

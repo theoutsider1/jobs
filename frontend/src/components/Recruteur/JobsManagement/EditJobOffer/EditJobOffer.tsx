@@ -1,11 +1,13 @@
 import { useAppSelector } from "../../../store/store"
-import {  ChangeEvent,FormEvent,FormEventHandler,KeyboardEvent ,useEffect,useState } from "react";
+import {  ChangeEvent,FormEvent,KeyboardEvent ,useEffect,useRef,useState } from "react";
 import { UpdateJobOfferDTO, fonctionOptions } from "../../../../Types/Globals";
 import { dropdownOptions } from "../../../../Types/Globals";
 import { typeTravail } from "../../../../Types/Globals";
 import { regionOptions } from "../../../../Types/Globals";
 import { domaineOptions } from "../../../../Types/Globals";
 import axios from "axios";
+
+
 export const EditJobOffer = () => {
 
     const [toggleFonctions, setToggleFonctions] = useState(false);
@@ -13,13 +15,15 @@ export const EditJobOffer = () => {
     const [toggleTypeTravail, setToggleTypeTravail] = useState(false);
     const [toggleRegion, setToggleRegion] = useState(false);
     const [toggleDomaine, setToggleDomaine]= useState(false);
+
     // get all job details from redux store
     const toEditJob  = useAppSelector(state => {        
         return state.recruiterOffersList.recruiterOffer
     })
-    const jobB = toEditJob[0];
 
-    const [newFonction, setNewFonction] = useState(jobB.fonction || '');
+    const jobB = toEditJob[0]; // extract the first job from this list  
+
+    const [newFonction, setNewFonction] = useState(jobB.fonction);
     const [newContractType, setNewContractType] = useState(jobB.contractType);
     const [newTypeTravail, setNewTypeTravail] = useState(jobB.jobType);
     const [newRegion, setNewRegion] = useState(jobB.city);
@@ -69,18 +73,31 @@ export const EditJobOffer = () => {
         setToggleRegion(false);
         setToggleContractType(false);
         setToggleFonctions(false);
-        setToggleTypeTravail(false);
-       
+        setToggleTypeTravail(false);       
     }
-
     
+     // The ISO 8601 date string
+    const isoDateString = '2024-05-16T15:21:00.876Z';
+            
+    // Create a new Date object from the ISO string
+    const date = new Date(isoDateString);
+    
+    // Get the date components
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const day = String(date.getUTCDate()).padStart(2, '0');
+
+    // Format the date string as YYYY-MM-DD
+    const formattedDate =  `${year}-${month}-${day}`;
+ 
+    
+    // const newDate = formatDate(jobB.deadline ?  jobB.deadline : 'Not available')
    // ------Advantages input---------------
    const [avantage, setAvantage] = useState<string[]>([]);
    const [currentInput, setCurrentInput] = useState<string>('');
   
-   // ---------------------
-
-   // HandleSubmit 
+   // --------Initial Data-------------
+    
    const [initialFormData, setinitialFormData] = useState({
     title : jobB.title,
     city : jobB.city,
@@ -96,6 +113,7 @@ export const EditJobOffer = () => {
     advantages : jobB.advantages,
    })
 
+// Update Changes in initialFormData 
    const handleChange = (
         event: 
             ChangeEvent<HTMLInputElement> | 
@@ -116,35 +134,33 @@ export const EditJobOffer = () => {
                 }));
             }
 
-            console.log(initialFormData);
             
-    };
+            
+};
 
 const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === ',' && !avantage.includes(currentInput.trim())) {
      const trimmedInput = currentInput.trim().replace(/,/g, ''); // Remove commas from input
-     //if(trimmedInput !== '' && trimmedInput !== ','){
          if (trimmedInput !== '' && trimmedInput !== ',' && !avantage.includes(trimmedInput)) {
+
+            //Add Advantage in advantages Array 
              const newAvantages = [...avantage, trimmedInput];
              setAvantage(newAvantages);
              setCurrentInput('');
      
              // Update initialFormData with new advantages
-             handleChange({ name: 'advantages', value: newAvantages });
-       
+             handleChange({ name: 'advantages', value: newAvantages });      
      }
-     
-   // }
 }
 };
-
+// Remove Advantage from advantages Array 
 const removeAvantage = (index:number) => {
     const newAvantages = avantage.filter(tag => avantage.indexOf(tag) !== index)
     setAvantage([...avantage.filter(tag => avantage.indexOf(tag) !== index)]);
     handleChange({name: "advantages", value : newAvantages})
 };
 
-// Post Data Function 
+// Update Job Offer  
  const handleSubmit = (
         e: FormEvent<HTMLFormElement>)=> {
 
@@ -155,6 +171,7 @@ const removeAvantage = (index:number) => {
             if (!token) {
                 throw new Error('Token not Found');
             }
+
             const updatedJob : UpdateJobOfferDTO = {
                 ...initialFormData
             }
@@ -166,9 +183,7 @@ const removeAvantage = (index:number) => {
                     headers: {
                         Authorization : `Bearer ${token}`,
                     }})
-                    
-                    return console.log(response);
-                    ;
+                    return response;
 
             } catch (error) {
                 throw new Error('Token not Found');
@@ -178,6 +193,8 @@ const removeAvantage = (index:number) => {
     // Create a custom FormEvent instance
     const customEvent = new Event('submit') as unknown as FormEvent<HTMLFormElement>;
     handleSubmit(customEvent);    
+    
+    
    },[]);
     return (
         <div className="w-full">
@@ -392,7 +409,7 @@ const removeAvantage = (index:number) => {
                             htmlFor="domaine"
                             className="mb-3 block text-base font-medium text-black"
                             >
-                        Domaine dropdown:
+                        Domaine:
                         </label>
                         <button id="dropdownDefaultButton" onClick={()=>handleToggleDomaine()}
                          data-dropdown-toggle="dropdown-list" className="w-full  text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
@@ -425,13 +442,17 @@ const removeAvantage = (index:number) => {
                             htmlFor="deadline"
                             className="mb-3 block text-base font-medium text-black"
                             >
-                            Deadline (Date):
+                            Deadline:
                         </label>
                         <input
                             type="date"
                             name= "deadline"
-                            defaultValue={field.deadline}
-                            onChange={(e) => handleChange(e)} 
+                            defaultValue={formattedDate}
+                           
+                            onChange={(e) =>{ 
+                                console.log(e.target.value)
+                                
+                                handleChange(e)}} 
                             id="deadline"
                             placeholder="Deadline"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -461,7 +482,7 @@ const removeAvantage = (index:number) => {
                             htmlFor="profil"
                             className="mb-3 block text-base font-medium text-black"
                             >
-                        Profil Text Area:
+                        Profil:
                         </label>
                         <textarea
                         id="profil"
@@ -495,7 +516,7 @@ const removeAvantage = (index:number) => {
                             htmlFor="description"
                             className="mb-3 block text-base font-medium text-black"
                             >
-                           Description Text Area:
+                           Description:
                         </label>
                         <textarea
                         id="description"

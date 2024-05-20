@@ -170,12 +170,18 @@ export class RecruiterService {
                         id: jobId,
                     }
                 })
+                
                 if (findJobById){
+                    if (typeof data.deadline === 'string') {
+                        data.deadline = new Date(data.deadline).toISOString();
+                    }
                     const updatedJob =  await this.prisma.job.update({
                         where: {
                             id: jobId,}, data})
+                        console.log(data);
                         
-                        return updatedJob}
+                        return updatedJob
+                    }
 
                 
             } catch (error) {

@@ -61,8 +61,6 @@ export class RecruiterController {
         ){
             // convert the 'id' to a number
             const recruiterId = Number(recruiter.id);
-            console.log(recruiterId);
-         
             return this.recruiterService.updateJobOffer(jobId, updateJobOfferDto, recruiterId);
     }
 // Update myProfile
