@@ -67,10 +67,13 @@ const Navbar = () => {
           
         </ul>
         <div className="md:block hidden ">
-          <Button />
+          {/* <Button /> */}
           </div>
-        <div className="bg-bright flex justify-center items-center px-3 py-3 rounded-full">
+        {/* <div className="bg-bright flex justify-center items-center px-3 py-3 rounded-full">
          <IonIcon icon={personCircleOutline} className="text-4xl"></IonIcon>
+        </div> */}
+        <div className="flex gap-5">
+          <span>S'inscrire</span> |  <span>Log In</span>         
         </div>
 
 
