@@ -1,11 +1,12 @@
 import { useAppSelector } from "../../../store/store"
-import {  ChangeEvent,FormEvent,KeyboardEvent ,useEffect,useRef,useState } from "react";
+import {  ChangeEvent,FormEvent,KeyboardEvent ,useState } from "react";
 import { UpdateJobOfferDTO, fonctionOptions } from "../../../../Types/Globals";
 import { dropdownOptions } from "../../../../Types/Globals";
 import { typeTravail } from "../../../../Types/Globals";
 import { regionOptions } from "../../../../Types/Globals";
 import { domaineOptions } from "../../../../Types/Globals";
 import axios from "axios";
+import { PopupSuccess } from "./PopupSuccess";
 
 
 export const EditJobOffer = () => {
@@ -134,9 +135,7 @@ export const EditJobOffer = () => {
                 [name]: value,
                 }));
             }
-
-            
-            
+         
 };
 
 const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -162,7 +161,7 @@ const removeAvantage = (index:number) => {
 };
 
 // Update Job Offer  
- const handleSubmit = (
+  const handleSubmit = async (
         e: FormEvent<HTMLFormElement>)=> {
 
             e.preventDefault()
@@ -177,26 +176,38 @@ const removeAvantage = (index:number) => {
                 ...initialFormData
             }
 
-            try {
-                const response = axios.patch(`http://localhost:3000/recruteurs/update/${jobB.id}`,
-                 updatedJob,
-                    {
-                    headers: {
-                        Authorization : `Bearer ${token}`,
-                    }})
-                    return response;
-
-            } catch (error) {
-                throw new Error('Token not Found');
-            }
+           await axios.patch(`http://localhost:3000/recruteurs/update/${jobB.id}`, updatedJob, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then(response => {
+                if (response.statusText === 'OK'){
+                    handleCloseSuccessPopup()
+                }
+               
+            })
+            .catch(error => {
+                console.error('Error updating job:', error);
+                throw error; // Rethrow error if you want to handle it further up the call stack
+            });
     }
-  useEffect(()=>{
-    // Create a custom FormEvent instance
-    const customEvent = new Event('submit') as unknown as FormEvent<HTMLFormElement>;
-    handleSubmit(customEvent);    
+
+    // Show PopUp When the job has been Updated Successfully
+
+    const [successPopup , setSuccessPopup] = useState(false);
+
+    const handleCloseSuccessPopup = ()=> {
+        setSuccessPopup(!successPopup)
+    }
+
+//   useEffect(()=>{
+//     // Create a custom FormEvent instance
+//     const customEvent = new Event('submit') as unknown as FormEvent<HTMLFormElement>;
+//     handleSubmit(customEvent);    
     
     
-   },[]);
+//    },[]);
     return (
         <div className="w-full">
             {toEditJob && toEditJob.map(field => (
@@ -563,7 +574,7 @@ const removeAvantage = (index:number) => {
                      
                 </div>
                 <div className="w-full flex justify-center ">
-                <button type="submit" className="w-36 block bg-darkk rounded-md py-2.5 px-6 text-normal font-semibold text-white">Modifier</button>
+                <button type="submit" className="w-36 block bg-darkk rounded-md py-2.5 px-6 text-normal font-semibold text-white" >Modifier</button>
 
                 </div>
 
@@ -571,6 +582,12 @@ const removeAvantage = (index:number) => {
                 
              </div>
              ))}
+
+
+             {
+                successPopup && 
+                <PopupSuccess  closeSuccessPopup = {handleCloseSuccessPopup}/>
+             }
         </div>
     )
 }
