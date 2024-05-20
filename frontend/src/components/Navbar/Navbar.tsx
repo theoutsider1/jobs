@@ -63,8 +63,7 @@ const Navbar = () => {
           <li className="z-50">
           <NavLinks />
           </li>
-          
-          
+       
         </ul>
         <div className="md:block hidden ">
           {/* <Button /> */}
@@ -73,7 +72,9 @@ const Navbar = () => {
          <IonIcon icon={personCircleOutline} className="text-4xl"></IonIcon>
         </div> */}
         <div className="flex gap-5">
-          <span>S'inscrire</span> |  <span>Log In</span>         
+          <span className="cursor-pointer">S'inscrire</span>  
+          <span>|</span>
+          <span className="cursor-pointer" >Log In</span>         
         </div>
 
 
