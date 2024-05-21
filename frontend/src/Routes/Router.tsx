@@ -9,6 +9,7 @@ import { AddJobComponent } from "../components/Recruteur/AddOffersPage/AddJobCom
 import { ChooseSpace } from "../components/ChooseSpace/ChooseSpaceT";
 import { OffersManagement } from "../components/Recruteur/JobsManagement/JobsManagement";
 import { EditJobOffer } from "../components/Recruteur/JobsManagement/EditJobOffer/EditJobOffer";
+import { LoginCanditatesForm } from "../components/Navbar/IdentificationForms/LoginForm";
 
 const Router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ const Router = createBrowserRouter([
             {
                 path:"/suivezlesoffres/modifieroffre/:id",
                 element: <EditJobOffer/>,
+            },
+            {
+                path:"/login",
+                element: <LoginCanditatesForm/>,
             },
             
         ]

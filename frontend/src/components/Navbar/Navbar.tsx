@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import logo from "../../assets/2jobs.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import Button from "./Button";
 import { IonIcon } from '@ionic/react';
@@ -16,7 +16,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [isScrolled , setIsScrolled] = useState(false);
 
-
+  const navigate = useNavigate()
 
   
   useEffect(()=> {
@@ -72,9 +72,9 @@ const Navbar = () => {
          <IonIcon icon={personCircleOutline} className="text-4xl"></IonIcon>
         </div> */}
         <div className="flex gap-5">
-          <span className="cursor-pointer">S'inscrire</span>  
+          <span className="cursor-pointer" >S'inscrire</span>  
           <span>|</span>
-          <span className="cursor-pointer" >Log In</span>         
+          <span className="cursor-pointer" onClick={() => navigate('/login')}>S’identifier</span>         
         </div>
 
 

@@ -1,9 +1,12 @@
 export const LoginCanditatesForm = ()=> {
     return (
-        <div>
+        <div className="p-10 bg-third flex flex-col gap-5 justify-center items-center">
+           
         <form
-        // onSubmit={handleLoginSubmit} className=''
+        // onSubmit={handleLoginSubmit} 
+        className='bg-neutral-100 w-auto p-12'
          >
+             <h3 className="text-3xl">S’identifier</h3>
            <div className="p-3">
                <label htmlFor="email" className="hidden mb-2 text-sm font-medium text-gray-900">Your email</label>
                <input type="email"
