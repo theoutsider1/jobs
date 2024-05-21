@@ -10,6 +10,7 @@ import { ChooseSpace } from "../components/ChooseSpace/ChooseSpaceT";
 import { OffersManagement } from "../components/Recruteur/JobsManagement/JobsManagement";
 import { EditJobOffer } from "../components/Recruteur/JobsManagement/EditJobOffer/EditJobOffer";
 import { LoginCanditatesForm } from "../components/Navbar/IdentificationForms/LoginForm";
+import { CreateAccountCandidates } from "../components/Navbar/IdentificationForms/CreateAccount";
 
 const Router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ const Router = createBrowserRouter([
             {
                 path:"/login",
                 element: <LoginCanditatesForm/>,
+            },
+            {
+                path:"/signup",
+                element: <CreateAccountCandidates/>,
             },
             
         ]

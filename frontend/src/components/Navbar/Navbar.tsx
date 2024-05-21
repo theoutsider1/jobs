@@ -72,7 +72,7 @@ const Navbar = () => {
          <IonIcon icon={personCircleOutline} className="text-4xl"></IonIcon>
         </div> */}
         <div className="flex gap-5">
-          <span className="cursor-pointer" >S'inscrire</span>  
+          <span className="cursor-pointer" onClick={() => navigate('/signup')}>S'inscrire</span>  
           <span>|</span>
           <span className="cursor-pointer" onClick={() => navigate('/login')}>S’identifier</span>         
         </div>
