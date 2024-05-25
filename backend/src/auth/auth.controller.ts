@@ -28,9 +28,10 @@ export class AuthController {
             const token =  await  this.authService.logIn(loginDto);
             response.cookie('access_token', token, {
                 httpOnly: true,
-                secure: true,
+                //secure: true,
             })
-            return  response.send({ msg: 'LogIn Successfully'});
+            
+            return response.status(HttpStatus.OK).json({ message: 'Login Successfully' });
             
         } catch (error) {
             
