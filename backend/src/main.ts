@@ -9,7 +9,11 @@ async function bootstrap() {
     // only fields that we defined
     whitelist: true,
   }))
-  app.enableCors();
+  app.enableCors(
+   { origin: 'http://localhost:5173', // Replace with your frontend origin
+     //methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+     credentials: true,}
+  );
   await app.listen(3000);
 }
 bootstrap();
