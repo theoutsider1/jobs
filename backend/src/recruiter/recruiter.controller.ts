@@ -7,6 +7,7 @@ import { OfferDTO } from './dto';
 import { RecruiterService } from './recruiter.service';
 import { updateJobOfferDto } from './dto/updateJob.dto';
 import { UpdateRecruiterDto } from './dto/updateRecuiterProfile.dto';
+import { Request } from 'express';
 
 
 @UseGuards(JwtGuard)
@@ -32,9 +33,10 @@ export class RecruiterController {
 
 // Show all the Job Offers
     @Get('myjoboffers')
-    async myOffers(@GetRecruiter() recruiter : Recruiter){
+    async myOffers(@Req() request: Request ,@GetRecruiter() recruiter : Recruiter){
+ 
         const recruiterId = recruiter.id; 
-    return await this.recruiterService.myJobOffers(recruiterId);
+       return await this.recruiterService.myJobOffers(recruiterId );
 
     }
 // Delete a job offer 
