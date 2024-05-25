@@ -6,6 +6,8 @@ import { Prisma } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
+import { response } from "express";
+
 
 
 @Injectable()
@@ -45,16 +47,13 @@ export class AuthService {
                     // Unique constraint violation error
                     throw new ForbiddenException('Credentials taken');
                 }
-            }else { 
-               
+            }else {    
                  // Other types of errors
                 throw error;
-                
             }
         }
- 
-       
-    }
+ }
+                
 
     async logIn(loginDto : loginDto ) {
         
@@ -76,10 +75,8 @@ export class AuthService {
             if (!isMatch) {
                 throw new UnauthorizedException()
             }
-            
             // if the credentials are correct
-            return this.signToken(recruiter.id, recruiter.mail)
-            
+            return this.signToken(recruiter.id, recruiter.mail);
 
        } catch (error) {
             if (error instanceof PrismaClientKnownRequestError){
@@ -110,6 +107,6 @@ export class AuthService {
                 })
             return {
                 access_token : token,
-            };
+            }
         }
 }
