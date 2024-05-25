@@ -53,8 +53,9 @@ export class RecruiterService {
         }
     }
 
-    async myJobOffers(recruiterId: number ) {
+    async myJobOffers(recruiterId: number) {
         // Get the job offers if there are any
+
         const myAllJobOffers = await this.prisma.job.findMany({
             where: {
                 publishedById : recruiterId,
