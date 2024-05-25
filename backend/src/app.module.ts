@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
@@ -9,6 +9,7 @@ import { CandidateModule } from './candidate/candidate.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { SupabaseModule } from './supabase/supabase.module';
 
+import  * as cookieParser  from 'cookie-parser';
 
 
 @Module({
@@ -24,4 +25,8 @@ import { SupabaseModule } from './supabase/supabase.module';
   // controllers: [AppController],
   // providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(cosumer: MiddlewareConsumer){
+    cosumer.apply(cookieParser()).forRoutes('*');
+  }
+}
