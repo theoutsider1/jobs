@@ -92,7 +92,7 @@ export class AuthService {
     }
 
     async signToken(recruiterId: number, email : string
-        ) : Promise<{access_token : string}> {
+        ) : Promise<string> {
             const payload = {
                 sub: recruiterId,
                 email
@@ -105,8 +105,7 @@ export class AuthService {
                     expiresIn : '6h',
                     secret:secret
                 })
-            return {
-                access_token : token,
-            }
+            return token
+            
         }
 }
