@@ -10,6 +10,10 @@ import { CreateAccountForm } from './CreateAccountForm';
 
 
 
+interface RecruiterData {
+    email: string;
+    password: string;
+}
 
 
 export const HeroSectionRecruteur = ()=>{
@@ -26,15 +30,14 @@ export const HeroSectionRecruteur = ()=>{
         setToggleCreateAccountFormPopup(false);
     }
     // Incoming data from the server 
-    const [recruiterData, setRecuiterData] = useState({
-        email : "",
-        password : ""
-    })
+    const [recruiterData, setRecuiterData] = useState<RecruiterData>({
+        email: "",
+        password: ""
+    });
     
 
     
-    const handleInputChanges = (e : ChangeEvent<HTMLInputElement>)=> {
-        e.preventDefault();
+    const handleInputChanges = (e: ChangeEvent<HTMLInputElement>)=> {
         
         // get the name + value attributes
         const {name, value} = e.target;
@@ -43,7 +46,7 @@ export const HeroSectionRecruteur = ()=>{
             [name]: value
         })
     }
-
+    // Handle Login submit 
     const handleLoginSubmit = async(e: FormEvent)=> {
         e.preventDefault();
         const userData = {
@@ -53,29 +56,23 @@ export const HeroSectionRecruteur = ()=>{
         console.log('Submitting user data:', userData);
         
         try {
-            const response = await axios.post("http://localhost:3000/espacerecruteurs/login", userData,
-           { withCredentials: true})
+            const response = await axios.post("http://localhost:3000/espacerecruteurs/login",
+             userData,
+            // to use Cookies (HttpOnly)
+            { withCredentials: true})
+
             if (response.status === 200) {
-            // Ensure response data structure is correct
-            
-            navigate('/suivezlesoffres');
-        } else {
-            console.log('Unexpected response status:', response.status);
-        }
-            
+                // Ensure response data structure is correct
+                
+                navigate('/suivezlesoffres');
+                } 
+                
         } catch (error : any) { 
-            console.error('Error during login attempt:', error);
             // if Unauthorized  or forbidden  
-            if (error.response.data.statusCode ==  "401" || error.response.data.statusCode ==  "403" ) {
-                console.log("hello" )
-                
-                setcredentials(true);
-                
-            }         
-           
-        }
-        
-        
+            if (error.response.data.statusCode ==  "401" || error.response.data.statusCode ==  "403" ) { 
+                setcredentials(true);                
+            }                    
+        }        
     }
     return (
        <>
@@ -98,7 +95,7 @@ export const HeroSectionRecruteur = ()=>{
              onSubmit={handleLoginSubmit} className='' >
                 <div className="p-3">
                     <label htmlFor="email" className="hidden mb-2 text-sm font-medium text-gray-900">Your email</label>
-                    <input type="email" value={recruiterData.email}  onChange={handleInputChanges} name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="name@company.com" />
+                    <input type="email"  value={recruiterData.email}  onChange={handleInputChanges} name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="name@company.com" />
                 </div>
                 <div className="p-3 relative">
                       <label htmlFor="password" className="hidden  mb-2 text-sm font-medium text-gray-900">Password</label>
@@ -136,7 +133,7 @@ export const HeroSectionRecruteur = ()=>{
         <TestimonialsCards/>
         <StatisRec/>
         <LatestProfiles/>
-
+        
         <CreateAccountForm isOpen= {toggleCreateAccountFormPopup} isClose={hideCreateAccountPopup} />
 </>
      
