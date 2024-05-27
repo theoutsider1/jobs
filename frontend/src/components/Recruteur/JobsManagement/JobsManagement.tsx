@@ -24,7 +24,8 @@ export const OffersManagement = () =>{
 
     const [allOffersLength ,setAllOffersLength] = useState<number>(0);
 
-    // To be calculated later once the schema has been modified
+    // IMPORTANT : WILL be calculated later once the schema has been modified
+    
     const [inprogressOffersLength ,setInprogressOffersLength] = useState<number>(0);
     const [closedOffersLength ,setClosedOffersLength] = useState<number>(0);
 
@@ -79,20 +80,18 @@ export const OffersManagement = () =>{
     const fetchAllData = async () => {
         try {
            
-            const token : string | null = localStorage.getItem('token');// Change 'jwtToken' to your token key
+            // const token : string | null = localStorage.getItem('token');// Change 'jwtToken' to your token key
             
-            // const headers = { 'Authorization': 'Bearer access_token' };
-            // Make sure token is available
-            if (!token) {
-            throw new Error('JWT token not found');
-            }
+            // // const headers = { 'Authorization': 'Bearer access_token' };
+            // // Make sure token is available
+            // if (!token) {
+            // throw new Error('JWT token not found');
+            // }
 
             await axios.get("http://localhost:3000/recruteurs/myjoboffers",  
             {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
+                withCredentials: true,
+            }
             )
             .then (response => {
                 const allOffersData : OffData[] = response.data
