@@ -53,7 +53,7 @@ export const UploadCvComponent: React.FC<uploadCvCandidatProps> = ({isOpen , isC
             <div className="w-full flex flex-row">
                         <div className="w-1/2">
                             <div className="w-full flex items-start p-3">
-                                <img src={twoSvg} alt=""className="h-10" />                  
+                                <img src={twoSvg} alt="" className="h-10" />                  
                             </div>
                         </div>
                         <div className="w-1/2">

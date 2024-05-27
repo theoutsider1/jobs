@@ -170,6 +170,13 @@ export interface uploadCvCandidatProps {
         isClose : ()=> void;
         jobId: number | null; // Add jobId property
 }
+// ----------- Create Recruiter Account Props / espace recruiter --------------
+
+export interface createAccountPopupProps {
+        isOpen : boolean;
+        isClose : ()=> void;
+       // jobId: number | null; // Add jobId property
+}
 
 // -------------- lancer un offre  interface -------------------
 
