@@ -6,6 +6,7 @@ import { StatisRec } from './RecStatistics';
 import { TestimonialsCards } from './TestiCards';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { CreateAccountForm } from './CreateAccountForm';
 
 
 
@@ -14,12 +15,22 @@ import { useNavigate } from 'react-router-dom';
 export const HeroSectionRecruteur = ()=>{
     const [credentials, setcredentials] = useState(false);
     const navigate = useNavigate();
+    // Handle Create account PopUp 
 
+    const [toggleCreateAccountFormPopup , setToggleCreateAccountFormPopup] = useState(false);
+
+    const showCreateAccountPopup = ()=>{
+        setToggleCreateAccountFormPopup(true);
+    }
+    const hideCreateAccountPopup = ()=>{
+        setToggleCreateAccountFormPopup(false);
+    }
     // Incoming data from the server 
     const [recruiterData, setRecuiterData] = useState({
         email : "",
         password : ""
     })
+    
 
     
     const handleInputChanges = (e : ChangeEvent<HTMLInputElement>)=> {
@@ -39,21 +50,21 @@ export const HeroSectionRecruteur = ()=>{
             email : recruiterData.email,
             password : recruiterData.password, 
         };
-
+        console.log('Submitting user data:', userData);
+        
         try {
-            const response = await axios.post("http://localhost:3000/espacerecruteurs/login", userData)
-             localStorage.setItem('token', response.data.access_token)
+            const response = await axios.post("http://localhost:3000/espacerecruteurs/login", userData,
+           { withCredentials: true})
+            if (response.status === 200) {
+            // Ensure response data structure is correct
             
-            //     localStorage.setItem('accessToken', response.data.access_token);
-                navigate('/suivezlesoffres')
-
-                
-
-            console.log('here the key', response);
-            
-                  
+            navigate('/suivezlesoffres');
+        } else {
+            console.log('Unexpected response status:', response.status);
+        }
             
         } catch (error : any) { 
+            console.error('Error during login attempt:', error);
             // if Unauthorized  or forbidden  
             if (error.response.data.statusCode ==  "401" || error.response.data.statusCode ==  "403" ) {
                 console.log("hello" )
@@ -113,10 +124,11 @@ export const HeroSectionRecruteur = ()=>{
                       <a href="#" className="text-sm font-medium text-primary-600 hover:underline ">Forgot password?</a>
                   </div>
                   <button type="submit" className="w-full text-gray bg-fourth hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm  py-3 text-center ">Sign in</button>
-                  <p className="text-sm font-light pt-2 text-gray-500 dark:text-gray-400">
-                      Don’t have an account yet? <a href="#" className="font-medium text-gray-500 hover:underline ">Sign up</a>
-                  </p>
+                  
             </form>
+            <p className="text-sm font-light pt-2 text-gray-500 dark:text-gray-400">
+                      Don’t have an account yet? <button type="button" onClick={() => showCreateAccountPopup()} className="font-medium text-gray-500 hover:underline ">Sign up</button>
+            </p>
         </div>
 
         </div>
@@ -124,7 +136,8 @@ export const HeroSectionRecruteur = ()=>{
         <TestimonialsCards/>
         <StatisRec/>
         <LatestProfiles/>
-    
+
+        <CreateAccountForm isOpen= {toggleCreateAccountFormPopup} isClose={hideCreateAccountPopup} />
 </>
      
         
