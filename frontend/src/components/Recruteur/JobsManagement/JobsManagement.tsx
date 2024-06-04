@@ -12,6 +12,7 @@ import {trash} from 'ionicons/icons';
 import { DeletePopup } from "./DeletePopup";
 import { Riple } from "react-loading-indicators";
 
+
 export const OffersManagement = () =>{
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -109,10 +110,13 @@ export const OffersManagement = () =>{
             
         }    
     }
-
+   
+      
+      // 
+     
     useEffect ( () => {
        fetchAllData() 
-       
+
     },[])
 
     return (
@@ -187,7 +191,7 @@ export const OffersManagement = () =>{
                
                 <div className=" w-full overflow-hidden rounded-md m-2">
                 
-                    {allData && allData.length < 0 ? (
+                    {allData && allData.length > 0 ? (
                         <table className="table-fixed w-full">
                             <thead className="bg-primary">
                                 <tr>
@@ -220,9 +224,9 @@ export const OffersManagement = () =>{
                             </tbody>
                         </table>
                     ) : (
-                        <div className="w-full flex justify-center">
-                            <div className="flex flex-col gap-8 justify-center">
-                                <Riple color="#cfa59a" size="medium" text="" textColor="" />
+                        <div className="w-full flex justify-center ">
+                            <div className="flex flex-col m-36 gap-8 justify-center">
+                                <Riple color="#4ADE80" size="medium" text="" textColor="" />
                                 {/* <button className="mx-24 p-1.5 bg-secondary text-white">Ajouter</button> */}
                             </div>
                             
