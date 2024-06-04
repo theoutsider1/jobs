@@ -6,7 +6,7 @@ import { Prisma } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
-import { response } from "express";
+// import { response } from "express";
 
 
 
@@ -38,7 +38,7 @@ export class AuthService {
                 }
             })
              // return the saved user (Recruiter)
-            return this.signToken(recruiter.id , recruiter.mail);
+            return this.signToken(recruiter.id , recruiter.mail , 'recruiter');
 
         }catch(error){
              
@@ -57,26 +57,54 @@ export class AuthService {
 
     async logIn(loginDto : loginDto ) {
         
-        const recruiter = await this.prisma.recruiter.findUnique({
-            where: {
-                mail : loginDto.email
-            }
-        })
+        
         // Email doesn't exist 
-        if (!recruiter) {
-            throw new ForbiddenException('Credentials incorrect')
-        }
+        // if (!recruiter) {
+        //     throw new ForbiddenException('Credentials incorrect')
+        // }
+        
         try {
+            const recruiter = await this.prisma.recruiter.findUnique({
+                where: {
+                    mail : loginDto.email
+                }
+            })
+            if (recruiter){
+                 // Compare password
+                const isMatch = await bcrypt.compare(loginDto.password.toString() , recruiter.password)
 
-            // Compare password
-            const isMatch = await bcrypt.compare(loginDto.password.toString() , recruiter.password)
+                // Password doesn't exist 
+                if (!isMatch) {
+                    throw new UnauthorizedException()
+                }
 
-            // Password doesn't exist 
-            if (!isMatch) {
-                throw new UnauthorizedException()
+                return this.signToken(recruiter.id, recruiter.mail, 'recruiter');
+            } else if (!recruiter){
+                const candidate = await this.prisma.candidate.findUnique({
+                    where : {
+                        mail:loginDto.email
+                    }
+                })
+                const isMatch = await bcrypt.compare(loginDto.password.toString() , candidate.password)
+
+                // Password doesn't exist 
+                if (!isMatch) {
+                    throw new UnauthorizedException()
+                }
+                return this.signToken(candidate.id, candidate.mail , 'candidate');
             }
+            
+
+            
+               
+           
+            // if(recruiter){
+               
+            // } else if (candidat){
+            //     return this.signToken(candidat.id, recruiter.mail);
+            // }
             // if the credentials are correct
-            return this.signToken(recruiter.id, recruiter.mail);
+           
 
        } catch (error) {
             if (error instanceof PrismaClientKnownRequestError){
@@ -91,11 +119,14 @@ export class AuthService {
   
     }
 
-    async signToken(recruiterId: number, email : string
+    async signToken(recruiterId: number, email : string , role : string
         ) : Promise<string> {
+
+            
             const payload = {
                 sub: recruiterId,
-                email
+                email,
+                role: role
             } ;
 
             const secret = this.config.get('JWT_SECRET');

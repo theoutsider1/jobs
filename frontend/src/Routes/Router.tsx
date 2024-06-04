@@ -22,42 +22,53 @@ const Router = createBrowserRouter([
                 element: <HeroSection/>,
             },
             {
+                // public 
                 path: "/trouverunemploi",
                 element: <OffersList/>,
             },
             {
+                // public
                 path: "/description/:id",
                 element:<JobDescription/>,
             },
             {
+                // public and but if the user if logged in as a candidate can't access it 
                 path: "/EspaceRecruteur",
                 element:<HeroSectionRecruteur/>,
             },
-            {
+            { 
+                // public routes
                 path: "/ContacezNous",
                 element:<ContactezNous/>,
             },
             {
+                // check if the user  is logged in and is a recruiter
                 path:"/lancerUnOffre",
                 element: <AddJobComponent/>,
             },
             {
+                // first page if the user is not logged in 
                 path:"/chooseSpace",
                 element: <ChooseSpace/>,
             },
             {
+                // check if the user  is logged in and is a recruiter
                 path:"/suivezlesOffres",
                 element: <OffersManagement/>,
             },
             {
+                // check if the user  is logged in and is a recruiter
                 path:"/suivezlesoffres/modifieroffre/:id",
                 element: <EditJobOffer/>,
             },
             {
+                // public
+
                 path:"/login",
                 element: <LoginCanditatesForm/>,
             },
             {
+                // public 
                 path:"/signup",
                 element: <CreateAccountCandidates/>,
             },

@@ -88,6 +88,8 @@ model Candidate {
 
   mail String @unique
 
+  password String 
+
   phone_number String @db.VarChar(10)
 
   jobs Job[]
