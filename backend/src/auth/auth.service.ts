@@ -120,23 +120,23 @@ export class AuthService {
     }
 
     async signToken(recruiterId: number, email : string , role : string
-        ) : Promise<string> {
+        ) : Promise<{ token: string; role: string }> {
 
             
             const payload = {
                 sub: recruiterId,
                 email,
-                role: role
+                role
             } ;
 
             const secret = this.config.get('JWT_SECRET');
-            const token = await this.jwtService.signAsync(
+            const token : string = await this.jwtService.signAsync(
                 payload,
                 {
                     expiresIn : '6h',
                     secret:secret
                 })
-            return token
+            return {token , role}
             
         }
 }

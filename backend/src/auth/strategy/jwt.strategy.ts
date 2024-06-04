@@ -27,18 +27,30 @@ export class jwtStrategy extends PassportStrategy(
             });
         }
         
-    async validate (payload : {sub: number, email: string}){
+    async validate (payload : {sub: number, email: string, role: string}){
 
-        const user =  await this.prisma.recruiter.findUnique({
+        const recruiter =  await this.prisma.recruiter.findUnique({
             where: {
                 id: payload.sub
             }
         });
-        if (user) {
+        const candidate = await this.prisma.candidate.findUnique({
+            where: {
+                id: payload.sub
+            }
+        });
+
+        if(recruiter) {
             
-            delete user.password;
-            return user;
-        } else {
+            delete recruiter.password;
+            return recruiter;
+            
+        } else if(candidate){
+
+            delete candidate.password;
+            return candidate;
+        } 
+        else {
             
             throw new UnauthorizedException();
         }

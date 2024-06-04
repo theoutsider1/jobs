@@ -25,13 +25,13 @@ export class AuthController {
      async logIn(@Body() loginDto : loginDto, @Res()response : Response){
         
         try {      
-            const token =  await  this.authService.logIn(loginDto);
+            const {token, role} =  await  this.authService.logIn(loginDto);
             response.cookie('access_token', token, {
                 httpOnly: true,
                 //secure: true,
             })
             
-            return response.status(HttpStatus.OK).json({ message: 'Login Successfully' });
+            return response.status(HttpStatus.OK).json({ message: 'Login Successfully', role});
             
         } catch (error) {
             
