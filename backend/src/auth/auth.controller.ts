@@ -31,7 +31,7 @@ export class AuthController {
                 //secure: true,
             })
             
-            return response.status(HttpStatus.OK).json({ message: 'Login Successfully', role});
+            return response.status(HttpStatus.OK).json({ message: 'Login Successfully', role, token});
             
         } catch (error) {
             
