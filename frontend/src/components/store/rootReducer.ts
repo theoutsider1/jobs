@@ -10,5 +10,6 @@ export const rootReducer = combineReducers({
     space : whichSpaceIsActiveSlice.reducer,
     recruiterOffersList : recruiterOffersSlice.reducer,
     auth: authReducer,
+    
 })
   
