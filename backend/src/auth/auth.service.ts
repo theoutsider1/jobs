@@ -119,6 +119,28 @@ export class AuthService {
   
     }
 
+    //--------
+    async validateToken(token : string) {
+        try {
+         
+        const secret = this.config.get<string>('JWT_SECRET')
+        if(token){
+            const decode = await this.jwtService.verify(token,{secret})
+            return decode
+        } else {
+            return false
+        }
+          // If user exists, return true, otherwise return false
+          
+        //   return !!user;
+        } catch (error) {
+          // Handle any errors that may occur during the database query
+          console.error('Error validating token:', error);
+          return false; // Return false in case of any error
+        }
+      }
+    //--------
+
     async signToken(recruiterId: number, email : string , role : string
         ) : Promise<{ token: string; role: string }> {
 
@@ -128,7 +150,7 @@ export class AuthService {
                 email,
                 role
             } ;
-
+            
             const secret = this.config.get('JWT_SECRET');
             const token : string = await this.jwtService.signAsync(
                 payload,
