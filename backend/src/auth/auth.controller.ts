@@ -1,7 +1,8 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Res, UnauthorizedException } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Req, Res, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { AuthDto, loginDto } from "./dto";
 import { Response } from "express";
+import { JwtGuard } from "./guard";
 
 
 
@@ -31,7 +32,7 @@ export class AuthController {
                 //secure: true,
             })
             
-            return response.status(HttpStatus.OK).json({ message: 'Login Successfully', role, token});
+            return response.status(HttpStatus.OK).json({ message: 'Login Successfully', role, token, isLoggedIn : true});
             
         } catch (error) {
             
@@ -45,6 +46,20 @@ export class AuthController {
                 return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ message: 'Internal Server Error' });
             }
         }
+    }
+    @Get('validate-token')
+    //  @UseGuards(JwtGuard)
+    async validateToken(@Req() req): Promise<{ isLogged: boolean, role: string }> {
+        const token = req.cookies.access_token;
+        const decode = await this.authService.validateToken(token);
+        const valid = decode;
+        console.log({ isLogged: !!valid, role: valid.role });
+        if(valid){
+            return { isLogged: true, role: valid.role };
+        }else{
+            return { isLogged: false, role: valid.role };
+        }   
+       
     }
 }
             
