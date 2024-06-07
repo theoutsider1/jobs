@@ -7,6 +7,9 @@ import { TestimonialsCards } from './TestiCards';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { CreateAccountForm } from './CreateAccountForm';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/features/authSlice';
+// import useAuth from '../../../hooks/useAuth';
 
 
 
@@ -17,6 +20,9 @@ interface RecruiterData {
 
 
 export const HeroSectionRecruteur = ()=>{
+    const dispatch = useDispatch();
+ 
+    
     const [credentials, setcredentials] = useState(false);
     const navigate = useNavigate();
     // Handle Create account PopUp 
@@ -53,7 +59,7 @@ export const HeroSectionRecruteur = ()=>{
             email : recruiterData.email,
             password : recruiterData.password, 
         };
-        console.log('Submitting user data:', userData);
+        //console.log('Submitting user data:', userData);
         
         try {
             const response = await axios.post("http://localhost:3000/espacerecruteurs/login",
@@ -62,11 +68,15 @@ export const HeroSectionRecruteur = ()=>{
             { withCredentials: true})
 
             if (response.status === 200) {
-                // Ensure response data structure is correct
-                
-                navigate('/suivezlesoffres');
-                } 
-                
+                // Ensure response data structure is correct 
+                const { isLoggedIn, role } = response.data;
+                // Set isLoggedIn to true in Redux store 
+                if(dispatch(login({ isLoggedIn, role }))){
+                    navigate('/suivezlesoffres');
+                }
+               
+            }            
+            
         } catch (error : any) { 
             // if Unauthorized  or forbidden  
             if (error.response.data.statusCode ==  "401" || error.response.data.statusCode ==  "403" ) { 
