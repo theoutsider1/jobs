@@ -1,10 +1,10 @@
 
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import { activeStateProps } from "../../../Types/Globals";
-import { RootState } from "../../store/store";
+//import { RootState } from "../../store/store";
 
 export const RecruterSpace: React.FC<activeStateProps>= ({onActive, roleFromAuth})=> { 
-    const {recruteurSpace}= useSelector((state : RootState ) => state.space)
+    //const {recruteurSpace}= useSelector((state : RootState ) => state.space)
     
     return (
         <div>
