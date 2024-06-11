@@ -30,7 +30,7 @@ import { IonIcon } from "@ionic/react";
                             </Link>
                         </li>
                         <li className='block w-full text-left  px-2.5 py-2 hover:bg-bright'>
-                            <Link to="">
+                            <Link to="/suivezlesOffres" onClick={()=> setHandleClick(!handleClick)}>
                                 Mes Offres
                             </Link>
                         </li>
