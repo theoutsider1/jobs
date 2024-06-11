@@ -8,7 +8,7 @@ import axios from "axios";
 import { PopupSuccess } from "./PopupSuccess";
 import {  useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { editJob } from "../../../store/features/editJob";
+import { editJob } from "../../../store/features/editJobSlice";
 
 
 export const EditJobOffer = () => {
