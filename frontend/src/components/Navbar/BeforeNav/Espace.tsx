@@ -40,7 +40,6 @@ const Espace:React.FC = ()=> {
         setSpace(roleFromAuth)
   
       }
-      console.log(roleFromAuth);
       
     },[roleFromAuth])
 

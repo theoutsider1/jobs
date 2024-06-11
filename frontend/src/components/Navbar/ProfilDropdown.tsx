@@ -19,7 +19,7 @@ import { IonIcon } from "@ionic/react";
                     <span className="cursor-pointer" onClick={() => navigate('/login')}>S’identifier</span>
                 </div>
                 ) : (
-                <div className="relative  flex justify-center items-center ">
+                <div className="relative z-40 flex justify-center items-center ">
                     <IonIcon icon={personCircleOutline} onClick={() => setHandleClick(!handleClick)} className="text-4xl cursor-pointer" />
                     <div className={`${handleClick ? ' absolute top-8 bg-primary rounded-md mt-5' : 'hidden'}`}>
                     {handleClick && (
