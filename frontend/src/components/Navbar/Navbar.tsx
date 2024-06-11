@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
 import logo from "../../assets/2jobs.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import Button from "./Button";
 import { IonIcon } from '@ionic/react';
-import { menu , close, personCircleOutline } from 'ionicons/icons';
+import { menu , close } from 'ionicons/icons';
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import ProfilDropdown from "./ProfilDropdown";
 
 
 
-
+export  interface isLogged {
+  isLoggedIn : boolean;
+}
 
 
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [isScrolled , setIsScrolled] = useState(false);
-
-  const navigate = useNavigate()
+  const {isLoggedIn} = useSelector((state : RootState) => state.auth)
+  
 
   
   useEffect(()=> {
@@ -71,11 +76,7 @@ const Navbar = () => {
         {/* <div className="bg-bright flex justify-center items-center px-3 py-3 rounded-full">
          <IonIcon icon={personCircleOutline} className="text-4xl"></IonIcon>
         </div> */}
-        <div className="flex gap-5">
-          <span className="cursor-pointer" onClick={() => navigate('/signup')}>S'inscrire</span>  
-          <span>|</span>
-          <span className="cursor-pointer" onClick={() => navigate('/login')}>S’identifier</span>         
-        </div>
+        <ProfilDropdown isLoggedIn= {isLoggedIn}/>      
 
 
         {/* Mobile navbar */}
