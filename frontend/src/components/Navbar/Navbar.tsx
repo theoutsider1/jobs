@@ -55,7 +55,7 @@ const Navbar = () => {
             <Link to="/" className="px-3 inline-block">
               Home
             </Link>
-            <Link to="/lancerUnOffre" className="px-3 inline-block">
+            <Link to="" className="px-3 inline-block">
               A propos
             </Link>
             <Link to="/ContacezNous" className="px-3 inline-block">
@@ -88,7 +88,7 @@ const Navbar = () => {
             <Link to="/" className=" /*py-7*/ px-3 py-3 block">
                 Home
             </Link>
-            <Link to="/lancerUnOffre" className=" /*py-7*/ px-3 py-3 block">
+            <Link to="" className=" /*py-7*/ px-3 py-3 block">
               A propos
             </Link>
             <Link to="/ContacezNous" className=" /*py-7*/ px-3 py-3 block">
