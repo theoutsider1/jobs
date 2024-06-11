@@ -25,18 +25,23 @@ const Espace:React.FC = ()=> {
     }
     const handleCandidatSpaceClick = ()=> {
         dispatch(candidatIsAtiveAction())
+        alert('vous etes conneté autant que recruteur')
         navigate('/');
         
     
     }
-    const roleFromAuth = useSelector((state: RootState) => state.auth.role)
+    const roleFromAuth = localStorage.getItem('role')
+    //useSelector((state: RootState) => state.auth.role)
     const [space, setSpace]= useState<string | null> (null);
 
     useEffect(()=>{
+
       if (roleFromAuth !== null && roleFromAuth == 'recruiter' ) {
-        setSpace(role)
+        setSpace(roleFromAuth)
   
       }
+      console.log(roleFromAuth);
+      
     },[roleFromAuth])
 
     return (
