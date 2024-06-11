@@ -25,22 +25,22 @@ import { IonIcon } from "@ionic/react";
                     {handleClick && (
                         <ul className='py-2'>
                         <li className='block w-44 text-left  px-2.5 py-2 hover:bg-bright'>
-                            <Link to="">
-                                Mon Profile
+                            <Link to=""  onClick={()=> setHandleClick(!handleClick)}>
+                                Mon profile
                             </Link>
                         </li>
                         <li className='block w-full text-left  px-2.5 py-2 hover:bg-bright'>
                             <Link to="/suivezlesOffres" onClick={()=> setHandleClick(!handleClick)}>
-                                Mes Offres
+                                Mes offres
                             </Link>
                         </li>
-                        {/* <li className='w-full text-left block px-2.5 py-2 hover:bg-bright'>
-                            <Link to="/">
-                                
+                        <li className='w-full text-left block px-2.5 py-2 hover:bg-bright'>
+                            <Link to="/lancerUnOffre"  onClick={()=> setHandleClick(!handleClick)}>
+                                Ajouter un offre
                             </Link>
-                        </li> */}
+                        </li>
                         <li className='block w-full text-left px-2.5 py-2 hover:bg-bright'>
-                            <Link to="">
+                            <Link to=""  onClick={()=> setHandleClick(!handleClick)}>
                                 Se déconnecter
                             </Link>
                         </li>
