@@ -1,7 +1,7 @@
 // Manage which space is active props 
 
 export interface  activeStateProps{
-    
+    roleFromAuth : string | null;
     onActive: ()=> void;
 }
 
