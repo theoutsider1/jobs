@@ -223,3 +223,23 @@ export interface UpdateJobOfferDTO {
     avantages?: string[];
 
 }
+
+export interface EditedJob {
+    id?: number;
+    createdAt?: string;
+    updatedAt?: string;
+    title?: string;
+    companyName?: string;
+    contractType?: string;
+    city?: string;
+    domaine?: string;
+    jobType?: string;
+    deadline?: string;
+    fonction?: string;
+    studiesRequirement?: string;
+    experience?: string;
+    description?: string;
+    missions?: string; // Changed from string[] to string
+    profil?: string; // Changed from string[] to string
+    advantages?: string[];
+}
