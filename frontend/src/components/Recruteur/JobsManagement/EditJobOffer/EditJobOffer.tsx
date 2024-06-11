@@ -1,34 +1,29 @@
-import { useAppSelector } from "../../../store/store"
-import {  ChangeEvent,FormEvent,KeyboardEvent ,useState } from "react";
-import { UpdateJobOfferDTO, fonctionOptions } from "../../../../Types/Globals";
+import {  ChangeEvent,FormEvent,KeyboardEvent ,useEffect,useState } from "react";
+import { EditedJob, fonctionOptions } from "../../../../Types/Globals";
 import { dropdownOptions } from "../../../../Types/Globals";
 import { typeTravail } from "../../../../Types/Globals";
 import { regionOptions } from "../../../../Types/Globals";
 import { domaineOptions } from "../../../../Types/Globals";
 import axios from "axios";
 import { PopupSuccess } from "./PopupSuccess";
+import {  useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { editJob } from "../../../store/features/editJob";
 
 
 export const EditJobOffer = () => {
-
+    const dispatch = useDispatch()
+    const {id} = useParams<Record<string, string | undefined>>();
+    
+    
+     const [toEditJob, setToEditJob] = useState<EditedJob | undefined>(undefined)
+    // To toggle between DropDowns 
     const [toggleFonctions, setToggleFonctions] = useState(false);
     const [toggleContractType, setToggleContractType] = useState(false);
     const [toggleTypeTravail, setToggleTypeTravail] = useState(false);
     const [toggleRegion, setToggleRegion] = useState(false);
     const [toggleDomaine, setToggleDomaine]= useState(false);
 
-    // get all job details from redux store
-    const toEditJob  = useAppSelector(state => {        
-        return state.recruiterOffersList.recruiterOffer
-    })
-
-    const jobB = toEditJob[0]; // extract the first job from this list  
-
-    const [newFonction, setNewFonction] = useState(jobB.fonction);
-    const [newContractType, setNewContractType] = useState(jobB.contractType);
-    const [newTypeTravail, setNewTypeTravail] = useState(jobB.jobType);
-    const [newRegion, setNewRegion] = useState(jobB.city);
-    const [newDomaine, setNewDomaine]=useState(jobB.domaine);
 
     // toggle FONCTION dropdown options
     const toggleFonctionOptions = () => {
@@ -77,6 +72,16 @@ export const EditJobOffer = () => {
         setToggleTypeTravail(false);       
     }
     
+    const jobB = toEditJob; 
+  
+    //To Show selected option (value)
+    const [newFonction, setNewFonction] = useState(jobB?.fonction);
+    const [newContractType, setNewContractType] =useState(jobB?.contractType)
+    const [newTypeTravail, setNewTypeTravail] = useState(jobB?.jobType)
+    const [newRegion, setNewRegion] = useState(jobB?.city)
+    const [newDomaine, setNewDomaine]=useState(jobB?.domaine)
+
+    
      // The ISO 8601 date string
     const isoDateString = '2024-05-16T15:21:00.876Z';
             
@@ -90,30 +95,33 @@ export const EditJobOffer = () => {
 
     // Format the date string as YYYY-MM-DD
     const formattedDate =  `${year}-${month}-${day}`;
-    // const dateInputRef = useRef <HTMLInputElement>
-    // const dateAv = useState(jobB.deadline)
-    
-    // const newDate = formatDate(jobB.deadline ?  jobB.deadline : 'Not available')
-   // ------Advantages input---------------
+   
+       // ------Advantages input---------------
    const [avantage, setAvantage] = useState<string[]>([]);
    const [currentInput, setCurrentInput] = useState<string>('');
   
    // --------Initial Data-------------
-    
+       
    const [initialFormData, setinitialFormData] = useState({
-    title : jobB.title,
-    city : jobB.city,
-    contractType: jobB.contractType,
-    experience : jobB.experience,
-    domaine : jobB.domaine,
-    companyName: jobB.companyName,
-    jobType: jobB.jobType,
-    missions : jobB.missions,
-    deadline: jobB.deadline,
-    studiesRequirement: jobB.studiesRequirement,
-    profil : jobB.profil,
-    advantages : jobB.advantages,
-   })
+    id: jobB?.id , // Provide a default value if id is null or undefined
+    createdAt: jobB?.createdAt ,
+    updatedAt: jobB?.updatedAt ,
+    title: jobB?.title ,
+    companyName: jobB?.companyName,
+    contractType: jobB?.contractType,
+    city: jobB?.city ,
+    domaine: jobB?.domaine,
+    jobType: jobB?.jobType ,
+    deadline: jobB?.deadline,
+    fonction: jobB?.fonction , // Provide a default value if fonction is null or undefined
+    studiesRequirement: jobB?.studiesRequirement,
+    experience: jobB?.experience ,
+    description: jobB?.description,
+    missions: jobB?.missions, // Provide a default value if missions is null or undefined
+    profil: jobB?.profil , // Provide a default value if profil is null or undefined
+    advantages: jobB?.advantages,
+});
+   
 
 // Update Changes in initialFormData 
    const handleChange = (
@@ -165,21 +173,12 @@ const removeAvantage = (index:number) => {
         e: FormEvent<HTMLFormElement>)=> {
 
             e.preventDefault()
-            
-            const token : string | null = localStorage.getItem('token');
-            
-            if (!token) {
-                throw new Error('Token not Found');
-            }
-
-            const updatedJob : UpdateJobOfferDTO = {
+            const updatedJob : EditedJob = {
                 ...initialFormData
             }
 
-           await axios.patch(`http://localhost:3000/recruteurs/update/${jobB.id}`, updatedJob, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+           await axios.patch(`http://localhost:3000/recruteurs/update/${id}`, updatedJob, {
+                withCredentials : true,
             })
             .then(response => {
                 if (response.statusText === 'OK'){
@@ -200,19 +199,37 @@ const removeAvantage = (index:number) => {
     const handleCloseSuccessPopup = ()=> {
         setSuccessPopup(!successPopup)
     }
+    const fetchDatat = ()=>{
+        axios.get(`http://localhost:3000/recruteurs/offer/${id}`, 
+        {withCredentials : true})
+        .then(res => {
+            const data : EditedJob  = res.data.job
+             // Dispatch action with correct payload
+            dispatch(editJob({editJob: data } ));
+            setToEditJob(data)
+            setNewFonction(data.fonction)
+            setNewContractType(data.contractType)
+            setNewTypeTravail(data.jobType)
+            setNewRegion(data.city)
+            setNewDomaine(data.city)
+            setAvantage(data.advantages ?? []);
+            console.log(data);
+         
+        }).catch(error => {
+            console.log(error);
+            
+        });
+    }
+    useEffect(()=>{
 
-//   useEffect(()=>{
-//     // Create a custom FormEvent instance
-//     const customEvent = new Event('submit') as unknown as FormEvent<HTMLFormElement>;
-//     handleSubmit(customEvent);    
-    
-    
-//    },[]);
+        fetchDatat()
+       
+    },[id, dispatch])
     return (
         <div className="w-full">
-            {toEditJob && toEditJob.map(field => (
+            {toEditJob  ? (
  
-            <div key={field.id} className="w-full flex-col jusify-between ">
+            <div key={toEditJob.id} className="w-full flex-col jusify-between ">
                
                 <h3 className="w-full p-10 bg-fifth  text-center text-5xl font-semibold ">
                      Modifier votre <span className="underline decoration-dashed decoration-darkk">offre d'emploi</span>
@@ -231,7 +248,7 @@ const removeAvantage = (index:number) => {
                     </label>
                     <input
                         type="text"
-                        defaultValue={field.title}
+                        defaultValue={toEditJob.title}
                         name="title"
                         id="title"
                         onChange={(e) => handleChange(e)}
@@ -248,7 +265,7 @@ const removeAvantage = (index:number) => {
                         </label>
                         <input
                             type="text"
-                            defaultValue={field.companyName}
+                            defaultValue={toEditJob.companyName}
                             onChange={(e) => handleChange(e)}
                             name="companyName"
                             id="entreprise"
@@ -265,7 +282,7 @@ const removeAvantage = (index:number) => {
                         </label>
                         <input
                             type="text"
-                            defaultValue={field.experience}
+                            defaultValue={toEditJob.experience}
                             onChange={(e) => handleChange(e)}
                             name="experience"
                             id="experience"
@@ -484,7 +501,7 @@ const removeAvantage = (index:number) => {
                         <textarea
                         id="studiesRequirement"
                         name="studiesRequirement"
-                        defaultValue={field.studiesRequirement}
+                        defaultValue={jobB?.studiesRequirement}
                         onChange={(e) => handleChange(e)} 
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
@@ -499,7 +516,7 @@ const removeAvantage = (index:number) => {
                         <textarea
                         id="profil"
                         name="profil"
-                        defaultValue={field.profil}
+                        defaultValue={jobB?.profil}
                         onChange={(e) => handleChange(e)} 
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     
@@ -513,7 +530,7 @@ const removeAvantage = (index:number) => {
                         </label>
                         <textarea
                         id="missions"
-                        defaultValue={field.missions}
+                        defaultValue={jobB?.missions}
                         name="missions"
                         onChange={(e) => handleChange(e)} 
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
@@ -532,7 +549,7 @@ const removeAvantage = (index:number) => {
                         </label>
                         <textarea
                         id="description"
-                        defaultValue={field.description}
+                        defaultValue={jobB?.description}
                         name="description"
                         onChange={(e) => handleChange(e)} 
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
@@ -557,9 +574,9 @@ const removeAvantage = (index:number) => {
                             className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
 
                         <ul>
-                            {initialFormData.advantages &&
+                            {avantage &&
                                 
-                                initialFormData.advantages.map((adv,index) => (
+                                avantage.map((adv,index) => (
                                     <li key={index} className="p-2"> 
                                         <div key={index} className="tag-item inline-flex items-start justify-start px-5 py-2 rounded-[32px] text-sm shadow-sm font-medium bg-secondary text-neutral-100 mr-2">
                                             <span className="text">{adv}</span>
@@ -580,8 +597,10 @@ const removeAvantage = (index:number) => {
 
             </form>            
                 
-             </div>
-             ))}
+             </div>) : (
+                <p>Loading...</p>
+            )
+             }
 
 
              {
