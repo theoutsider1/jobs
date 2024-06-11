@@ -6,9 +6,10 @@ import secondStepSvg from "../../assets/secondStepSvg.svg";
 import groupeAs from "../../assets/groupAs.svg";
 import groupeBs from "../../assets/groupBs.svg";
 
-export const ChooseSpace= ()=> {
-  // const [currentRole, setCurrentRole] = useState(roles[0]);
 
+export const ChooseSpace= ()=> {
+
+  
   return (
     <div className=" max-w-full mx-auto bg-secondary flex flex-col justify-start items-center ">
       <div className="p-5 md:w-auto w-full flex justify-center  ">
