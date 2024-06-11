@@ -55,11 +55,18 @@ export const HeroSectionRecruteur = ()=>{
     // Handle Login submit 
     const handleLoginSubmit = async(e: FormEvent)=> {
         e.preventDefault();
+        
         const userData = {
             email : recruiterData.email,
             password : recruiterData.password, 
         };
         //console.log('Submitting user data:', userData);
+        
+        if(recruiterData.email === "" ||
+            recruiterData.password === "" 
+            ){
+            setcredentials(true);
+          }
         
         try {
             const response = await axios.post("http://localhost:3000/espacerecruteurs/login",
@@ -70,8 +77,10 @@ export const HeroSectionRecruteur = ()=>{
             if (response.status === 200) {
                 // Ensure response data structure is correct 
                 const { isLoggedIn, role } = response.data;
+                
                 // Set isLoggedIn to true in Redux store 
                 if(dispatch(login({ isLoggedIn, role }))){
+                    localStorage.setItem('role', role)
                     navigate('/suivezlesoffres');
                 }
                
@@ -112,7 +121,7 @@ export const HeroSectionRecruteur = ()=>{
                       <input type="password" value={recruiterData.password} onChange={handleInputChanges} name="password" id="password" placeholder="••••••••" 
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "/>
 
-                      <div className='absolute'>
+                      <div className=''>
                         <span className={credentials ? 'text-sm text-red-800 px-2 py-1' : 'hidden'} >Incorrect Credentials</span>
 
                         </div>
