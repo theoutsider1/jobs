@@ -9,6 +9,7 @@ import { PopupSuccess } from "./PopupSuccess";
 import {  useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { editJob } from "../../../store/features/editJobSlice";
+import { Riple } from "react-loading-indicators";
 
 
 export const EditJobOffer = () => {
@@ -598,7 +599,9 @@ const removeAvantage = (index:number) => {
             </form>            
                 
              </div>) : (
-                <p>Loading...</p>
+                <div className="w-full h-screen flex justify-center items-center">
+                <Riple color="#4ADE80" size="medium" text="" textColor="" />
+            </div>
             )
              }
 
