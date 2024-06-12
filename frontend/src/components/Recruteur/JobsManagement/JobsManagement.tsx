@@ -227,7 +227,6 @@ export const OffersManagement = () =>{
                         <div className="w-full flex justify-center ">
                             <div className="flex flex-col m-36 gap-8 justify-center">
                                 <Riple color="#4ADE80" size="medium" text="" textColor="" />
-                                {/* <button className="mx-24 p-1.5 bg-secondary text-white">Ajouter</button> */}
                             </div>
                             
                         </div>
