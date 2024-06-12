@@ -73,9 +73,7 @@ const Navbar = () => {
         <div className="md:block hidden ">
           {/* <Button /> */}
           </div>
-        {/* <div className="bg-bright flex justify-center items-center px-3 py-3 rounded-full">
-         <IonIcon icon={personCircleOutline} className="text-4xl"></IonIcon>
-        </div> */}
+      
         <ProfilDropdown isLoggedIn= {isLoggedIn}/>      
 
 
