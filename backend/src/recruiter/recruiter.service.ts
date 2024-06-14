@@ -78,17 +78,41 @@ export class RecruiterService {
                 missions: true,
                 profil: true,
                 advantages: true,
+                cvsFiles: true,
             }
         })
+        const formatDate = (dateString: Date): string => {
+            const date = new Date(dateString);
+            const day = date.getDate().toString().padStart(2, "0");
+            const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero based
+            const year = date.getFullYear();
+            return `${day}-${month}-${year}`;
+        };
+        const currentDate = new Date();
 
+        // Separate expired and active job offers
+        const expiredJobOffers = myAllJobOffers.filter(offer => new Date(offer.deadline) < currentDate);
+        const activeJobOffers = myAllJobOffers.filter(offer => new Date(offer.deadline) >= currentDate);
+        const appliedCv = myAllJobOffers.map(offer => offer.cvsFiles.length)
+       
         try {
             // if job[] is empty 
             if(myAllJobOffers.length === 0 ){
                 return {"msg" : "You didn't add any job offer yet"};
             } 
-
+            const updatedJobDates = myAllJobOffers.map(offer => ({
+                ...offer,
+                createdAt : formatDate(offer.createdAt),
+                updatedAt : formatDate(offer.updatedAt),
+                deadline : formatDate(offer.deadline),
+                cvs: appliedCv
+            }))
+            
             // if not 
-            return myAllJobOffers;
+            return {myOffer : updatedJobDates , 
+               expiredJobOffers : expiredJobOffers,
+               activeJobOffers : activeJobOffers
+             };
 
             
         } catch (error) {
