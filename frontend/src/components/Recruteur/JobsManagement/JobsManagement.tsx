@@ -223,7 +223,7 @@ export const OffersManagement = () =>{
                                         <td>{data.createdAt}</td>
                                         <td>{data.updatedAt}</td>
                                         <td>0</td>
-                                        <td>{data.cvs}</td>
+                                        <td>{data.cvsFiles}</td>
                                         <td className="flex justify-center gap-4 items-center p-3">
                                             <button onClick={() => handleEditJobOffer(data, data.id)} className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">
                                                 edit
