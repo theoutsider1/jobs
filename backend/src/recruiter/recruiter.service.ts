@@ -93,7 +93,24 @@ export class RecruiterService {
         // Separate expired and active job offers
         const expiredJobOffers = myAllJobOffers.filter(offer => new Date(offer.deadline) < currentDate);
         const activeJobOffers = myAllJobOffers.filter(offer => new Date(offer.deadline) >= currentDate);
-       
+
+        // Replace cvsFiles with the length of cvsFiles[] 
+        const newExpiredOffers = expiredJobOffers.map(job =>({ 
+            ...job,
+            createdAt : formatDate(job.createdAt),
+            updatedAt : formatDate(job.updatedAt),
+            deadline : formatDate(job.deadline),
+            cvsFiles:  job.cvsFiles.length
+            }));
+        const newActiveOffers = activeJobOffers.map(job =>({ 
+            ...job,
+            createdAt : formatDate(job.createdAt),
+            updatedAt : formatDate(job.updatedAt),
+            deadline : formatDate(job.deadline),
+            cvsFiles:  job.cvsFiles.length
+            }));
+            
+            
         try {
             // if job[] is empty 
             if(myAllJobOffers.length === 0 ){
@@ -106,11 +123,12 @@ export class RecruiterService {
                 deadline : formatDate(offer.deadline),
                 cvsFiles:  offer.cvsFiles.length
             }))
+
             
             // if not 
             return {myOffer : updatedJobDates , 
-               expiredJobOffers : expiredJobOffers,
-               activeJobOffers : activeJobOffers
+               expiredJobOffers : newExpiredOffers,
+               activeJobOffers : newActiveOffers
              };
 
             
