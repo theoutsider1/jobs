@@ -95,12 +95,24 @@ export const OffersManagement = () =>{
                 withCredentials: true,
             }
             )
-            .then (response => {
-                const allOffersData : OffData[] = response.data
+            .then (response  => {
+               const  { myOffer, expiredJobOffers, activeJobOffers } = response.data
+                // const allOffersData : OffData[] = response.data.expiredJobOffers
                 
-                setAllData(allOffersData)
+                console.log(myOffer);
+
+                // Filter and format the dates for each job offer
+                
+                setAllData(myOffer)
+                const closedOffers = expiredJobOffers.length;
+                const activeOffers = activeJobOffers.length;
+                setClosedOffersLength(closedOffers);
+                setInprogressOffersLength(activeOffers);
+                
+
+                
                 // allOffers number
-                response.data.length ? setAllOffersLength(response.data.length) : setAllOffersLength(0);
+                setAllOffersLength(myOffer.length) 
                 
   
             }) 
@@ -211,7 +223,7 @@ export const OffersManagement = () =>{
                                         <td>{data.createdAt}</td>
                                         <td>{data.updatedAt}</td>
                                         <td>0</td>
-                                        <td>0</td>
+                                        <td>{data.cvs}</td>
                                         <td className="flex justify-center gap-4 items-center p-3">
                                             <button onClick={() => handleEditJobOffer(data, data.id)} className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">
                                                 edit
