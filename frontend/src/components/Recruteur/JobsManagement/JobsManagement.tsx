@@ -18,6 +18,7 @@ export const OffersManagement = () =>{
     const dispatch = useDispatch();
     // const ref: React.MutableRefObject<HTMLInputElement | null>  = useRef(null);
     // const [value , setValue] = useState('');
+    const [loading, setLoading] = useState(true);
     const [allOffers, setAllOffers] = useState(true);
     const [inprogressOffers, setInprogressOffers] = useState(false);
     const [closedOffers , setClosedOffers] = useState(false);
@@ -30,6 +31,10 @@ export const OffersManagement = () =>{
     
     const [inprogressOffersLength ,setInprogressOffersLength] = useState<number>(0);
     const [closedOffersLength ,setClosedOffersLength] = useState<number>(0);
+
+
+    const [closedJobsData, setClosedJobData] = useState<OffData []>([])
+    const [activeJobsData, setActiveJobsData] = useState<OffData []>([])
 
     
     //Store Click job offer in redux store & navigate to # to edit it
@@ -99,11 +104,13 @@ export const OffersManagement = () =>{
                const  { myOffer, expiredJobOffers, activeJobOffers } = response.data
                 // const allOffersData : OffData[] = response.data.expiredJobOffers
                 
-                console.log(myOffer);
+                console.log('expired',expiredJobOffers);
 
                 // Filter and format the dates for each job offer
                 
                 setAllData(myOffer)
+                setClosedJobData(expiredJobOffers)
+                setActiveJobsData(activeJobOffers)
                 const closedOffers = expiredJobOffers.length;
                 const activeOffers = activeJobOffers.length;
                 setClosedOffersLength(closedOffers);
@@ -113,7 +120,7 @@ export const OffersManagement = () =>{
                 
                 // allOffers number
                 setAllOffersLength(myOffer.length) 
-                
+                setLoading(false);
   
             }) 
             
@@ -130,6 +137,64 @@ export const OffersManagement = () =>{
        fetchAllData() 
 
     },[])
+    const renderTable = (data: any[]) => (
+        <table className="table-fixed w-full">
+            <thead className="bg-primary">
+                <tr>
+                    <th className="p-3">Publication</th>
+                    <th>Date de publication</th>
+                    <th>Date de clôture</th>
+                    <th>Nombre de vues</th>
+                    <th>Nombre de CVs</th>
+                    <th>Modifier</th>
+                </tr>
+            </thead>
+            <tbody className="bg-fifth">
+                {data.map(item => (
+                    <tr key={item.id} className="text-center">
+                        <td className="p-3">{item.title}</td>
+                        <td>{item.createdAt}</td>
+                        <td>{item.updatedAt}</td>
+                        <td>0</td>
+                        <td>{item.cvsFiles}</td>
+                        <td className="flex justify-center gap-4 items-center p-3">
+                            <button onClick={() => handleEditJobOffer(item, item.id)} className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">
+                                edit
+                                <IonIcon icon={pencilOutline}></IonIcon>
+                            </button>
+                            <IonIcon icon={trash} onClick={handleDeleteConfirmation} className="cursor-pointer px-2.5"></IonIcon>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    );
+    const renderContent = () => {
+        if(loading == true && allData){
+            return (
+                <div className="w-full flex justify-center ">
+                    <div className="flex flex-col m-36 gap-8 justify-center">
+                         <Riple color="#4ADE80" size="medium" text="" textColor="" /> 
+                    </div>
+                </div>
+            );
+        }if (allOffers && allData && allData.length > 0) {
+            return renderTable(allData);
+        } else if (inprogressOffers && activeJobsData && activeJobsData.length > 0) {
+            return renderTable(activeJobsData);
+        } else if (closedOffers && closedJobsData && closedJobsData.length > 0) {
+            return renderTable(closedJobsData);
+        } else {
+            return (
+                <div className="w-full flex justify-center ">
+                    <div className="flex flex-col m-36 gap-8 justify-center">
+                        {/* <Riple color="#4ADE80" size="medium" text="" textColor="" /> */}
+                        <p>Pas d'offre disponible.</p>
+                    </div>
+                </div>
+            );
+        }
+    };
 
     return (
         <div className="w-full flex flex-col">
@@ -203,47 +268,7 @@ export const OffersManagement = () =>{
                
                 <div className=" w-full overflow-hidden rounded-md m-2">
                 
-                    {allData && allData.length > 0 ? (
-                        <table className="table-fixed w-full">
-                            <thead className="bg-primary">
-                                <tr>
-                                    <th className="p-3">Publication</th>
-                                    <th>Date de publication</th>
-                                    <th>Date de clôture</th>
-                                    <th>Nombre de vues</th>
-                                    <th>Nombre de CVs</th>
-                                    <th>Modifier</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody className="bg-fifth">
-                                {allData.map(data => (
-                                    <tr key={data.id} className="text-center">
-                                        <td className="p-3">{data.title}</td>
-                                        <td>{data.createdAt}</td>
-                                        <td>{data.updatedAt}</td>
-                                        <td>0</td>
-                                        <td>{data.cvsFiles}</td>
-                                        <td className="flex justify-center gap-4 items-center p-3">
-                                            <button onClick={() => handleEditJobOffer(data, data.id)} className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">
-                                                edit
-                                                <IonIcon icon={pencilOutline}></IonIcon>
-                                            </button>
-                                            <IonIcon icon={trash} onClick={handleDeleteConfirmation} className="cursor-pointer px-2.5"></IonIcon>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <div className="w-full flex justify-center ">
-                            <div className="flex flex-col m-36 gap-8 justify-center">
-                                <Riple color="#4ADE80" size="medium" text="" textColor="" />
-                            </div>
-                            
-                        </div>
-                        
-                    )}
+                {renderContent()}
                 </div>
                                
             </div>

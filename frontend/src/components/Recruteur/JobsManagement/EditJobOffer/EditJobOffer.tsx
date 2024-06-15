@@ -226,6 +226,9 @@ const removeAvantage = (index:number) => {
         fetchDatat()
        
     },[id, dispatch])
+
+
+    
     return (
         <div className="w-full">
             {toEditJob  ? (
