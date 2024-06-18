@@ -33,7 +33,7 @@ import { IonIcon } from "@ionic/react";
                     {handleClick && (
                         <ul className='py-2'>
                         <li className='block w-44 text-left  px-2.5 py-2 hover:bg-bright'>
-                            <Link to=""  onClick={()=> setHandleClick(!handleClick)}>
+                            <Link to="/espacerecruteur/mon-profile"  onClick={()=> setHandleClick(!handleClick)}>
                                 Mon profile
                             </Link>
                         </li>
