@@ -8,8 +8,9 @@ import { IonIcon } from "@ionic/react";
  const ProfilDropdown: React.FC<isLogged> = ({isLoggedIn})=>{
     const navigate = useNavigate();
     const [handleClick, setHandleClick]= useState(false);
-   
-    return(
+ 
+
+    return (
 
         <>
             {!isLoggedIn ? (
@@ -19,7 +20,14 @@ import { IonIcon } from "@ionic/react";
                     <span className="cursor-pointer" onClick={() => navigate('/login')}>S’identifier</span>
                 </div>
                 ) : (
+                    <div className="flex flex-row items-center gap-4">
+                        <div className="border-r-2 border-neutral-950 px-4">
+                        <Link to=""  onClick={()=> setHandleClick(!handleClick)}>
+                            Déconnexion
+                            </Link>
+                        </div>
                 <div className="relative z-40 flex justify-center items-center ">
+                    
                     <IonIcon icon={personCircleOutline} onClick={() => setHandleClick(!handleClick)} className="text-4xl cursor-pointer" />
                     <div className={`${handleClick ? ' absolute top-8 bg-primary rounded-md mt-5' : 'hidden'}`}>
                     {handleClick && (
@@ -39,14 +47,12 @@ import { IonIcon } from "@ionic/react";
                                 Ajouter un offre
                             </Link>
                         </li>
-                        <li className='block w-full text-left px-2.5 py-2 hover:bg-bright'>
-                            <Link to=""  onClick={()=> setHandleClick(!handleClick)}>
-                                Se déconnecter
-                            </Link>
-                        </li>
+                      
                         </ul>
                     )}
                     </div>
+                    
+                </div>
                 </div>
                 )}
         </>
