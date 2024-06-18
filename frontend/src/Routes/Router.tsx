@@ -12,6 +12,7 @@ import { EditJobOffer } from '../components/Recruteur/JobsManagement/EditJobOffe
 import { LoginCanditatesForm } from '../components/Navbar/IdentificationForms/LoginForm';
 import { CreateAccountCandidates } from '../components/Navbar/IdentificationForms/CreateAccount';
 import ProtectedRoute from './ProtectedRoutes';
+import { RecruiterProfil } from '../components/MyProfil/RecruiterProfil/RecruiterProfile';
 
 const Router = createBrowserRouter([
   {
@@ -36,15 +37,24 @@ const Router = createBrowserRouter([
         element: <ProtectedRoute rolle="recruiter" />, // Use ProtectedRoute here
         children: [
           { path: '', element: <OffersManagement /> }, // Nested route rendered by Outlet in ProtectedRoute
+          { path: 'modifieroffre/:id', element: <EditJobOffer /> },
         ],
       },
       {
-        path: '/suivezlesoffres/modifieroffre/:id',
+        path: '/espacerecruteur',
         element: <ProtectedRoute rolle="recruiter" />, // Use ProtectedRoute here
         children: [
-          { path: '', element: <EditJobOffer /> }, // Nested route rendered by Outlet in ProtectedRoute
+          { path: 'mon-profile', element: <RecruiterProfil /> }, // Nested route rendered by Outlet in ProtectedRoute
+          
         ],
       },
+      // {
+      //   path: '/suivezlesoffres/modifieroffre/:id',
+      //   element: <ProtectedRoute rolle="recruiter" />, // Use ProtectedRoute here
+      //   children: [
+      //     { path: '', element: <EditJobOffer /> }, // Nested route rendered by Outlet in ProtectedRoute
+      //   ],
+      // },
       { path: '/login', element: <LoginCanditatesForm /> },
       { path: '/signup', element: <CreateAccountCandidates /> },
     ],
