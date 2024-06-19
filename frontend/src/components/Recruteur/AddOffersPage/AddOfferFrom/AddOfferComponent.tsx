@@ -34,14 +34,15 @@ export const AddOfferFormComponent = () => {
     }
   
     return (
-    <div className="w-full flex flex-row-4 ">
-      <div className="w-3/4 bg-third ">
-        <div className="w-full flex justify-center items-center p-10 ">
+    <div className="w-full h-screen flex flex-col ">
+     
+      <div className="w-full overflow-scroll pb-12 ">
+      <div className="w-full flex justify-center items-center p-10 bg-neutral-100">
           <h3 className="text-5xl font-semibold ">
             Lancer votre <span className="underline decoration-dashed decoration-darkk">offre d'emploi</span>
           </h3>
         </div>
-        <div className="w-full p-6 flex flex-col justify-start items-start">
+        <div className="px-24 flex flex-col justify-center items-center">
           <form id="contactForm" className="w-full">
             <div className="w-full">
               <ul>
@@ -254,9 +255,9 @@ export const AddOfferFormComponent = () => {
         </div>
             
       </div>
-      <div className="w-1/4 bg-bright">
+      {/* <div className="w-1/4 bg-bright">
         <HistoricalSideBarComponent/>
-      </div>
+      </div> */}
       
     </div>
   );
