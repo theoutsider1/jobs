@@ -13,6 +13,7 @@ import { LoginCanditatesForm } from '../components/Navbar/IdentificationForms/Lo
 import { CreateAccountCandidates } from '../components/Navbar/IdentificationForms/CreateAccount';
 import ProtectedRoute from './ProtectedRoutes';
 import { RecruiterProfil } from '../components/MyProfil/RecruiterProfil/RecruiterProfile';
+import { MainProfileComponent } from '../components/MyProfil/RecruiterProfil/MainProfileComponent';
 
 const Router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ const Router = createBrowserRouter([
         path: '/espacerecruteur',
         element: <ProtectedRoute rolle="recruiter" />, // Use ProtectedRoute here
         children: [
-          { path: 'mon-profile', element: <RecruiterProfil /> }, // Nested route rendered by Outlet in ProtectedRoute
+          { path: 'mon-profile', element: <MainProfileComponent /> }, // Nested route rendered by Outlet in ProtectedRoute
           
         ],
       },
