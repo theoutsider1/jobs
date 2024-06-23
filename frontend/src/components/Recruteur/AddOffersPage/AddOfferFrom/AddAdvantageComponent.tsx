@@ -52,12 +52,12 @@ export const AddAdvantageComponent = ()=> {
                     placeholder="Press enter to add tags"
                     className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
 
-                    <ul>
+                    <ul className="flex flex-row flex-wrap">
                         {
                             avantage.length>0 &&
                             avantage.map((adv,index) => (
                                 <li key={index} className="p-2"> 
-                                    <div key={index} className="tag-item inline-flex items-start justify-start px-5 py-2 rounded-[32px] text-sm shadow-sm font-medium bg-secondary text-neutral-100 mr-2">
+                                    <div key={index} className="tag-item inline-flex  items-start justify-start px-5 py-2 rounded-[32px] text-sm shadow-sm font-medium bg-secondary text-neutral-100 mr-2">
                                         <span className="text">{adv}</span>
                                         <span onClick={() => removeAvantage(index)} className="close cursor-pointer ml-2 hover:text-neutral-700">&times;</span>
                                     </div>
