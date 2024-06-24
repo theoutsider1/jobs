@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { dropdownOptions, typeTravail } from "../../../../Types/Globals";
+import { dropdownOptions, regions, typeTravail } from "../../../../Types/Globals";
 import { AddAdvantageComponent } from "./AddAdvantageComponent";
-import { HistoricalSideBarComponent } from "../Historic/HistoricalSection";
+// import { HistoricalSideBarComponent } from "../Historic/HistoricalSection";
 
-
+// city / domaine / deadline / studiesREquirements
 
 export const AddOfferFormComponent = () => {
     const [contractDropdown, setContractDropdown] = useState(false);
@@ -16,23 +16,31 @@ export const AddOfferFormComponent = () => {
 
     const HandleToggleContactDropdown = () => {
         setContractDropdown(!contractDropdown)
+        setToggleRegion(false);
+        setToggleTypeContract(false);
     }
   
-    const handleContractOptionClick = (e:React.MouseEvent<HTMLButtonElement>,label:string)=> {
-        e.preventDefault;
+    const handleContractOptionClick = (label:string)=> {
+        
         setSelectedContract(label)
         HandleToggleContactDropdown()
     }
     //Types de Contrat functions
     const handleTypeTravailToggle = ()=> {
         setToggleTypeContract(!toggleTypeContract);
+        setContractDropdown(false);
+        setToggleRegion(false);
     }
-    const handleTypeTravailOptions = (e: React.MouseEvent<HTMLButtonElement>, label:string)=> {
-        e.preventDefault;
+    const handleTypeTravailOptions = (label:string)=> {
+       
         setSelectedTypeTravail(label)
         handleTypeTravailToggle()
     }
-  
+
+    // regions 
+    const [toggleRegion, setToggleRegion]=useState(false);
+    const [selectedRegion, setSelectedRegion]= useState("Choisir la region")
+
     return (
     <div className="w-full h-screen flex flex-col ">
      
@@ -144,7 +152,7 @@ export const AddOfferFormComponent = () => {
                       <label
                         htmlFor="mission"
                         className="w-full m-1 text-xl font-semibold">
-                            Mission:
+                            Missions:
                       </label>
                     </div>
                     <div className="w-3/4">
@@ -178,10 +186,10 @@ export const AddOfferFormComponent = () => {
                       <label
                         htmlFor="typesContract"
                         className="w-full m-1 text-xl font-semibold">
-                            Types de Contract:
+                            Type de Contract:
                       </label>
                     </div>
-                    <div className="w-3/4">
+                    <div className="w-3/4 relative">
                     <button id="dropdownDefaultButton" onClick={HandleToggleContactDropdown} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
                             {selectedContract}
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -190,17 +198,17 @@ export const AddOfferFormComponent = () => {
                     </button>
                    { contractDropdown &&
                    
-                   <div id="dropdown-list" className={`z-10  bg-white divide-y divide-gray-100 rounded-lg shadow w-auto`}>
+                   <div id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
                         <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                             {dropdownOptions.map(option => (
-                                 <button
+                                 <li
                                  key={option.id}
-                                 onClick={(e) => {
+                                 onClick={() => {
                                     
-                                    handleContractOptionClick(e, option.label)}}
-                                 className="w-full text-left block px-4 py-2 hover:bg-gray-100">
+                                    handleContractOptionClick( option.label)}}
+                                 className="w-full text-left block px-4 py-2 hover:bg-primary cursor-pointer">
                                     {option.label}
-                                </button>
+                                </li>
                             ))}
                         </ul>
                     </div>}
@@ -213,10 +221,10 @@ export const AddOfferFormComponent = () => {
                       <label
                         htmlFor="typesContract"
                         className="w-full m-1 text-xl font-semibold">
-                            Types de Travail:
+                            Type de Travail:
                       </label>
                     </div>
-                    <div className="w-3/4">
+                    <div className="w-3/4 relative">
                     <button id="dropdownDefaultButton" onClick={handleTypeTravailToggle} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
                             {selectedTypeTravail}
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -225,17 +233,55 @@ export const AddOfferFormComponent = () => {
                     </button>
                    { toggleTypeContract &&
                    
-                   <div id="dropdown-list" className={`z-10  bg-white divide-y divide-gray-100 rounded-lg shadow w-auto`}>
+                   <div id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
                         <ul className="w-full py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                             {typeTravail.map(opt => (
-                                 <button
+                                 <li
                                  key={opt.id}
-                                 onClick={(e) => {
-                                    
-                                    handleTypeTravailOptions(e, opt.label)}}
-                                 className="w-full text-left block px-4 py-2 hover:bg-gray-100">
+                                 onClick={() => {
+                                    handleTypeTravailOptions(opt.label)}}
+
+                                 className="w-full text-left block px-4 py-2 hover:bg-primary cursor-pointer">
                                     {opt.label}
-                                </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>}
+                    </div>
+                  </div>
+                </li>
+                {/* Regions */}
+                <li className="p-3">
+                  <div className=" mx-14 flex flex-row-4 justify-center">
+                    <div className="w-1/4 mx-14">
+                      <label
+                        htmlFor="typesContract"
+                        className="w-full m-1 text-xl font-semibold">
+                            Région:
+                      </label>
+                    </div>
+                    <div className="w-3/4 relative">
+                    <button id="dropdownDefaultButton" onClick={()=> setToggleRegion(!toggleRegion)} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
+                            {selectedRegion}
+                        <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+                   { toggleRegion &&
+                   
+                   <div id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
+                        <ul className="w-full py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+                            {regions.map((opt, index) => (
+                                 <li
+                                 key={index}
+                                 onClick={() => {
+                                    setToggleTypeContract(false);
+                                    setContractDropdown(false);
+                                    setSelectedRegion(opt);
+                                    setToggleRegion(!toggleRegion)}}
+                                 className="w-full text-left px-4 py-2 hover:bg-primary cursor-pointer">
+                                    {opt}
+                                </li>
                             ))}
                         </ul>
                     </div>}
