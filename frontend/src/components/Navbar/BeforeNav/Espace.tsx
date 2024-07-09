@@ -14,6 +14,10 @@ const Espace:React.FC = ()=> {
     const role = useSelector((state: RootState) => state.auth.role)
     const navigate = useNavigate();
 
+    const roleFromAuth = localStorage.getItem('role')
+    //useSelector((state: RootState) => state.auth.role)
+    const [space, setSpace]= useState<string> ('candidate');
+
     {/** redux toolkit */}
     const dispatch =useAppDispatch();
 
@@ -21,25 +25,28 @@ const Espace:React.FC = ()=> {
         dispatch(recruteurIsAtiveAction())
         navigate('/EspaceRecruteur');
         console.log(role);
+        setSpace('recruiter')
    
     }
     const handleCandidatSpaceClick = ()=> {
         dispatch(candidatIsAtiveAction())
-        alert('vous etes conneté autant que recruteur')
+       // alert('vous etes conneté autant que recruteur')
+       setSpace('candidate')
         navigate('/');
         
     
     }
-    const roleFromAuth = localStorage.getItem('role')
-    //useSelector((state: RootState) => state.auth.role)
-    const [space, setSpace]= useState<string | null> (null);
+    
 
     useEffect(()=>{
 
-      if (roleFromAuth !== null && roleFromAuth == 'recruiter' ) {
-        setSpace(roleFromAuth)
-  
+      if (roleFromAuth !== null 
+            // && roleFromAuth == 'recruiter' 
+            ) {
+            setSpace(roleFromAuth)
+    
       }
+      
       
     },[roleFromAuth])
 

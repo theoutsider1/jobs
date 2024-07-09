@@ -21,6 +21,7 @@ export const MainProfileComponent = ()=>{
             {selectedView === 'offersManagement' &&  <OffersManagement/>}
             {selectedView === 'addOffer' &&  <AddOfferFormComponent/>}
             {selectedView === 'monProfile' &&  <OffersManagement/>}
+            
             </div>
 
         </div>
