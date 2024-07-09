@@ -44,6 +44,7 @@ export interface OffData {
     missions? : string[] ;
     profil? : string[];
     advantages?: string[];
+    cvsFiles : number;
 
 }
 
@@ -59,16 +60,16 @@ export interface dataFromChild {
 // régions
 
 export const regions: string[] = [
-    "Casablanca, Settat",
-    "rabat",
-    "Fes, Meknes",
+    "Casablanca - Settat",
+    "Rabat",
+    "Fes - Meknes",
     "Souss Massa",
     "Daraa Tafilalt",
     "Tanger - Al houceima",
     "Oujda",
-    "Marrakesh, Safi",
-    "Laayoune Dakhla",
-    "Beni Mellal-khnifra"
+    "Marrakesh - Safi",
+    "Laayoune - Dakhla",
+    "Beni Mellal - khnifra"
 ];
 
 
