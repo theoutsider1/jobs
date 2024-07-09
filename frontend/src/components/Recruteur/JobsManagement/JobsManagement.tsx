@@ -157,9 +157,9 @@ export const OffersManagement = () =>{
                         <td>{item.updatedAt}</td>
                         <td>0</td>
                         <td>{item.cvsFiles}</td>
-                        <td className="flex justify-center gap-4 items-center p-3">
-                            <button onClick={() => handleEditJobOffer(item, item.id)} className="px-5 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">
-                                edit
+                        <td className="flex justify-center gap-3 items-center p-3">
+                            <button onClick={() => handleEditJobOffer(item, item.id)} className="px-3 rounded-lg bg-third cursor-pointer hover:bg-secondary focus:underline">
+                                Modifier
                                 <IonIcon icon={pencilOutline}></IonIcon>
                             </button>
                             <IonIcon icon={trash} onClick={handleDeleteConfirmation} className="cursor-pointer px-2.5"></IonIcon>
