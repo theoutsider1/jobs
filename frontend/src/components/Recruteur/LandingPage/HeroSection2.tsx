@@ -82,7 +82,7 @@ export const HeroSectionRecruteur = ()=>{
                 // Set isLoggedIn to true in Redux store 
                 if(dispatch(login({ isLoggedIn, role }))){
                     localStorage.setItem('role', role)
-                    navigate('/suivezlesoffres');
+                    navigate('/espacerecruteur/mon-profile');
                 }
                
             }            
@@ -131,21 +131,21 @@ export const HeroSectionRecruteur = ()=>{
                      
     
                       <div className="flex items-center justify-between p-5">
-                          <div className="flex items-start">
+                          {/* <div className="flex items-start">
                               <div className="flex items-center h-5">
                                 <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 " />
                               </div>
                               <div className="ml-3 text-sm">
                                 <label htmlFor="remember" className="text-gray-500 ">Remember me</label>
                               </div>
-                          </div>
-                          <a href="#" className="text-sm font-medium text-primary-600 hover:underline ">Forgot password?</a>
+                          </div> */}
+                          <a href="#" className="text-sm font-medium text-primary-600 hover:underline ">Mot de passe oublié?</a>
                       </div>
                       <button type="submit" className="w-full text-gray bg-fourth hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm  py-3 text-center ">Sign in</button>
                       
                 </form>
                 <p className="text-sm font-light pt-2 text-gray-500 dark:text-gray-400">
-                          Don’t have an account yet? <button type="button" onClick={() => showCreateAccountPopup()} className="font-medium text-gray-500 hover:underline ">Sign up</button>
+                          Nouveau sur 2Jobs? <button type="button" onClick={() => showCreateAccountPopup()} className="font-medium text-gray-500 hover:underline ">Sign up</button>
                 </p>
             </div>
     
