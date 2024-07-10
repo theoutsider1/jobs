@@ -46,7 +46,7 @@ const ProfilDropdown: React.FC<isLogged> = ({ isLoggedIn }) => {
                 <div className="flex flex-row items-center gap-4">
                     <div className="border-r-2 border-neutral-950 px-4">
                         <Link to="">
-                            Déconnexion
+                            Hatim
                         </Link>
                     </div>
                     <div className="relative z-40 flex justify-center items-center" ref={menuRef}>
@@ -67,6 +67,11 @@ const ProfilDropdown: React.FC<isLogged> = ({ isLoggedIn }) => {
                                     <li className='w-full text-left block px-2.5 py-2 hover:bg-bright'>
                                         <Link to="/lancerUnOffre" onClick={toggleMenu}>
                                             Ajouter un offre
+                                        </Link>
+                                    </li>
+                                    <li className='w-full text-left block px-2.5 py-2 hover:bg-bright'>
+                                        <Link to="/lancerUnOffre" onClick={toggleMenu}>
+                                            Déconnexion
                                         </Link>
                                     </li>
                                 </ul>
