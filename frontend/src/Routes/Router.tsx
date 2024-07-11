@@ -12,7 +12,6 @@ import { EditJobOffer } from '../components/Recruteur/JobsManagement/EditJobOffe
 import { LoginCanditatesForm } from '../components/Navbar/IdentificationForms/LoginForm';
 import { CreateAccountCandidates } from '../components/Navbar/IdentificationForms/CreateAccount';
 import ProtectedRoute from './ProtectedRoutes';
-import { RecruiterProfil } from '../components/MyProfil/RecruiterProfil/RecruiterProfile';
 import { MainProfileComponent } from '../components/MyProfil/RecruiterProfil/MainProfileComponent';
 
 const Router = createBrowserRouter([
