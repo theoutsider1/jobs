@@ -2,6 +2,7 @@ import { RecruiterProfil } from "./RecruiterProfile"
 import { OffersManagement } from "../../Recruteur/JobsManagement/JobsManagement";
 import { useState } from "react";
 import { AddOfferFormComponent } from "../../Recruteur/AddOffersPage/AddOfferFrom/AddOfferComponent";
+import { RecruiterProfileInfo } from "../../Recruteur/RecruiterInfos/RecruiterProfileInfo";
 
 export const MainProfileComponent = ()=>{
     const [selectedView, setSelectedView] = useState('offersManagement');
@@ -20,7 +21,7 @@ export const MainProfileComponent = ()=>{
             <div className="content w-5/6 flex justify-center">
             {selectedView === 'offersManagement' &&  <OffersManagement/>}
             {selectedView === 'addOffer' &&  <AddOfferFormComponent/>}
-            {selectedView === 'monProfile' &&  <OffersManagement/>}
+            {selectedView === 'monProfile' &&  <RecruiterProfileInfo/>}
             
             </div>
 
