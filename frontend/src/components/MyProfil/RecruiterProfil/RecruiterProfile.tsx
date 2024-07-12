@@ -6,13 +6,39 @@ import { pencil } from 'ionicons/icons';
 import { homeOutline } from 'ionicons/icons';
 import { eyeOutline} from 'ionicons/icons';
 import { trashBinOutline} from 'ionicons/icons';
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-interface SidebarProps {
-  onSelect: (view: string) => void;
-  selectedView : string
-}
+// interface SidebarProps {
+//   onSelect: (view: string) => void;
+//   selectedView : string
+// }
 
-export const RecruiterProfil: React.FC<SidebarProps> = ({onSelect, selectedView})=>{
+export const RecruiterProfil= ()=>{
+  const [selectedView, setSelectedView] = useState('offersManagement');
+
+  const navigate = useNavigate();
+  
+
+  const handleSelect = (view: string) => {
+    setSelectedView(view);
+    switch (view) {
+      case 'myprofile':
+        navigate('/suivezlesOffres/mon-profile');
+        break;
+      case 'addOffer':
+        navigate('/suivezlesOffres/ajouter-offre');
+        break;
+      case 'offersManagement':
+        navigate('/suivezlesOffres/offersManagement');
+        break;
+      // Add more cases as needed
+      default:
+        console.error('Unknown view:', view);
+    }
+  };
+ 
+
 
   return (
     <div className="h-screen flex flex-col justify-between divide-y divide-neutral-700">
@@ -30,7 +56,7 @@ export const RecruiterProfil: React.FC<SidebarProps> = ({onSelect, selectedView}
 
         <div className="w-full px-2 py-12  flex flex-col gap-7 justify-start items-start">
           {/* Mes offres */}
-          <button className="text-xl " onClick={() => onSelect('offersManagement')}>
+          <button className="text-xl " onClick={() => handleSelect('offersManagement')}>
             <div className={`flex justify-start items-center ${selectedView === 'offersManagement'  ? `opacity-100` : `opacity-65`}`}>
             <IonIcon icon={pencil}  className="text-xl cursor-pointer" />
             <h5 className={`px-2 ${selectedView === 'offersManagement' ? `font-semibold` : ``} `}>Mes offres</h5>
@@ -39,7 +65,7 @@ export const RecruiterProfil: React.FC<SidebarProps> = ({onSelect, selectedView}
           </button>
 
             {/* Ajouter un offre */}
-          <button className="text-xl" onClick={() => onSelect('addOffer')}>
+            <button className="text-xl " onClick={() => handleSelect('addOffer')}>
             
             <div className={`flex justify-center items-center ${selectedView === 'addOffer' ? `opacity-100` : `opacity-65`}`}>
             <IonIcon icon={addCircleOutline}  className="text-xl  cursor-pointer" />
@@ -48,7 +74,7 @@ export const RecruiterProfil: React.FC<SidebarProps> = ({onSelect, selectedView}
             
           </button>
             {/* Trouver un candidat */}
-          <button className="text-xl ">
+          <button className="text-xl  ">
 
             <div className={`flex justify-center items-center ${selectedView === 'findCandidat' ? `opacity-100` : `opacity-65`}`}>
             <IonIcon icon={eyeOutline}  className="text-xl cursor-pointer" />
@@ -57,11 +83,11 @@ export const RecruiterProfil: React.FC<SidebarProps> = ({onSelect, selectedView}
             
           </button>
             {/* Mon profile */}
-          <button className="text-xl" onClick={() => onSelect('monProfile')}>
+          <button className="text-xl" onClick={() => handleSelect('myprofile')}>
 
-            <div className={`flex justify-center items-center ${selectedView === 'monProfile' ? `opacity-100` : `opacity-65`}`}>
+            <div className={`flex justify-center items-center ${selectedView === 'myprofile' ? `opacity-100` : `opacity-65`}`}>
               <IonIcon icon={personCircleOutline}  className="text-xl  cursor-pointer" />
-              <h5 className={`px-2 ${selectedView === 'monProfile' ? `font-semibold` : ``} `}>Mon Profile</h5>
+              <h5 className={`px-2 ${selectedView === 'myprofile' ? `font-semibold` : ``} `}>Mon Profile</h5>
             </div>
             
           </button>
