@@ -7,7 +7,9 @@ import { homeOutline } from 'ionicons/icons';
 import { eyeOutline} from 'ionicons/icons';
 import { trashBinOutline} from 'ionicons/icons';
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { RootState } from "../../store/store";
 
 // interface SidebarProps {
 //   onSelect: (view: string) => void;
@@ -24,7 +26,7 @@ export const RecruiterProfil= ()=>{
     setSelectedView(view);
     switch (view) {
       case 'myprofile':
-        navigate('/suivezlesOffres/mon-profile');
+        navigate(`/suivezlesOffres/mon-profile`);
         break;
       case 'addOffer':
         navigate('/suivezlesOffres/ajouter-offre');
