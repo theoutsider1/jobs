@@ -82,7 +82,8 @@ export const HeroSectionRecruteur = ()=>{
                 // Set isLoggedIn to true in Redux store 
                 if(dispatch(login({ isLoggedIn, role }))){
                     localStorage.setItem('role', role)
-                    navigate('/espacerecruteur/mon-profile');
+                    navigate('/suivezlesOffres/mon-profile');
+                    // navigate('/espacerecruteur/mon-profile');
                 }
                
             }            
