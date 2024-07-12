@@ -6,6 +6,7 @@ import { RootState } from '../components/store/store';
 import { axiosPrivate } from '../api/axios';
 import { login, logout } from '../components/store/features/authSlice';
 import { Riple } from "react-loading-indicators";
+import { RecruiterProfil } from '../components/MyProfil/RecruiterProfil/RecruiterProfile';
 
 interface ProtectedRouteProps {
   rolle?: string; // Optional prop to specify required role
@@ -60,7 +61,21 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ rolle }) => {
 
   // If the user's role is 'recruiter' and they are logged in, navigate to '/suivezlesoffres'
   if (role === 'recruiter' && isLoggedIn) {
-    return <Outlet />;
+    return(
+      <div className="main-container w-full flex flex-col-6">
+      {/* SideBar */}
+      <div className="w-1/6 bg-third ">
+          <RecruiterProfil />
+      </div>
+
+      {/* Selected Component */}
+      <div className="content w-5/6 flex justify-center">
+           <Outlet />;
+      </div>
+
+  </div>
+    ) 
+    
   }
 
   
