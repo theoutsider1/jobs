@@ -55,12 +55,12 @@ const ProfilDropdown: React.FC<isLogged> = ({ isLoggedIn }) => {
                             {isOpen && (
                                 <ul className='py-2'>
                                     <li className='block w-44 text-left px-2.5 py-2 hover:bg-bright'>
-                                        <Link to="/espacerecruteur/mon-profile" onClick={toggleMenu}>
+                                        <Link to="/suivezlesOffres/mon-profile" onClick={toggleMenu}>
                                             Mon profile
                                         </Link>
                                     </li>
                                     <li className='block w-full text-left px-2.5 py-2 hover:bg-bright'>
-                                        <Link to="/suivezlesOffres" onClick={toggleMenu}>
+                                        <Link to="/suivezlesOffres/ajouter-offre" onClick={toggleMenu}>
                                             Ajouter un offre
                                         </Link>
                                     </li>
