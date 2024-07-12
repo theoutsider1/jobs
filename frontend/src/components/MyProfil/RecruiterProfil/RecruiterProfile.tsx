@@ -18,7 +18,7 @@ export const RecruiterProfil= ()=>{
   const [selectedView, setSelectedView] = useState('offersManagement');
 
   const navigate = useNavigate();
-  
+  const location = useLocation();
 
   const handleSelect = (view: string) => {
     setSelectedView(view);
@@ -37,7 +37,17 @@ export const RecruiterProfil= ()=>{
         console.error('Unknown view:', view);
     }
   };
- 
+  useEffect(() => {
+    // Update the selectedView based on the current path
+    const path = location.pathname;
+    if (path.includes('mon-profile')) {
+      setSelectedView('myprofile');
+    } else if (path.includes('ajouter-offre')) {
+      setSelectedView('addOffer');
+    } else if (path.includes('offersManagement')) {
+      setSelectedView('offersManagement');
+    }
+  }, [location.pathname]);
 
 
   return (
