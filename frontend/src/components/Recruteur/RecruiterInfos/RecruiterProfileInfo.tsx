@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { axiosPrivate } from "../../../api/axios";
 import { RecruiterInfo } from "../../../Types/Globals";
 import { Riple } from "react-loading-indicators";
+import { formatDate } from "../../../Types/globalFunctions";
 
 export const RecruiterProfileInfo = ()=>{
     const [loading, setLoading] = useState(true); // Local loading state
@@ -18,8 +19,11 @@ export const RecruiterProfileInfo = ()=>{
     const fetchRecruiterData = async ()=>{
         const response = await axiosPrivate.get('/recruteurs/profile');
         const datainfo = response.data.myProfileDetails
-
-        setUserData(datainfo)
+        const data= {
+            ...datainfo,
+            createdAt: formatDate(datainfo.createdAt),
+            updatedAt: formatDate(datainfo.updatedAt)}
+        setUserData(data)
         setLoading(false)
       
     }
@@ -45,30 +49,44 @@ export const RecruiterProfileInfo = ()=>{
                     </div>
     
                     <div className="w-4/6">
-    
-                        <div className="py-2">
+
+                        <div className="">
                             <label htmlFor="fullName" className="w-full text-xl font-semibold">
                                 <span>Nom complet</span>
                             </label>
                          
-                                <input type="text" id="fullName" className="my-4 block w-full rounded-md border-0 py-1.5 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 " />
+                                <input type="text" id="fullName" defaultValue={userData.fullName}  className=" block w-full rounded-md border-0 py-1.5 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 " />
                       
                         </div>
                         <div className="py-2">
                             <label htmlFor="mail" className="w-full text-xl font-semibold">
                                 <span className="">mail</span>
                             </label>
-                                <input type="text" id="mail" className=" my-4 block w-full rounded-md border-0 py-1.5 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 " />
+                                <input type="text" id="mail" defaultValue={userData.mail} className="block w-full rounded-md border-0 py-1.5 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 " />
                       
                        </div>
                        <div className="py-2">
                             <label htmlFor="phone_number" className="w-full text-xl font-semibold">
                                 <span>Numero de Telephone</span>
                             </label>
-                                <input type="text" id="phone_number" className="my-4 block w-full rounded-md border-0 py-1.5 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 " />
+                                <input type="text" id="phone_number" defaultValue={userData.phone_number} className="block w-full rounded-md border-0 py-1.5 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 " />
                       
                        </div>
+
+                       <div className="my-4 w-full text-md">
+                            <span className="">ID: </span>
+                            <span className="text-xl font-semibold">{userData.id}</span>
+                        </div>
                       
+                        <div className="my-4 w-full text-md ">
+                            <span className="block my-2">Compte créé le: </span>
+                            <span className="text-xl font-semibold">{userData.createdAt}</span>
+                        </div>
+                        <div className="my-4 w-full text-md ">
+                            <span className="block my-2">Modifié  le: </span>
+                            <span className="text-xl font-semibold">{userData.updatedAt}</span>
+                        </div>
+
                     </div>
     
                 </div>
