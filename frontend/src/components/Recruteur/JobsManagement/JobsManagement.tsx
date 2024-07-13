@@ -198,7 +198,7 @@ export const OffersManagement = () =>{
 
     return (
         <div className="w-full flex flex-col">
-            <div className="w-full flex justify-center items-center p-10 ">
+            <div className="w-full flex justify-center bg-neutral-100 items-center p-10 ">
                 <h3 className="text-5xl font-semibold ">
                     Suivez vos <span className="underline decoration-dashed decoration-darkk">offres d'emploi</span>
                 </h3>

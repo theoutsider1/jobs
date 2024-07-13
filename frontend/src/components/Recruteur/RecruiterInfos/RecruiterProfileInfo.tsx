@@ -36,7 +36,7 @@ export const RecruiterProfileInfo = ()=>{
     if(userData){
         return(
             <div className="w-full">
-                <div className="p-12 font-semibold text-2xl text-center">
+                <div className="p-12 text-5xl font-semibold text-center bg-neutral-100">
                     <h3>Mon Profile</h3>
                 </div>
                 <div className="flex m-8 px-12">
