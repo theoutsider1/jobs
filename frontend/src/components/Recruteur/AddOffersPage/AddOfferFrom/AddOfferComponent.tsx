@@ -53,7 +53,13 @@ export const AddOfferFormComponent = () => {
           }
       };
 
-     
+      console.log("Adding event listener");
+      document.addEventListener('mousedown', handler);
+
+      return () => {
+          console.log("Removing event listener");
+          document.removeEventListener('mousedown', handler);
+      };
   }, []);
 
     return (
