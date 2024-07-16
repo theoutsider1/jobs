@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { dropdownOptions, regions, typeTravail } from "../../../../Types/Globals";
 import { AddAdvantageComponent } from "./AddAdvantageComponent";
 // import { HistoricalSideBarComponent } from "../Historic/HistoricalSection";
@@ -40,6 +40,21 @@ export const AddOfferFormComponent = () => {
     // regions 
     const [toggleRegion, setToggleRegion]=useState(false);
     const [selectedRegion, setSelectedRegion]= useState("Choisir la region")
+    const menuRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+      const handler = (e: MouseEvent) => {
+          if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+              setContractDropdown(false);
+              setToggleTypeContract(false);
+              setToggleRegion(false)
+              console.log("Menu closed", menuRef.current);
+          } else {
+              console.log("Clicked inside menu", menuRef.current);
+          }
+      };
+
+     
+  }, []);
 
     return (
     <div className="w-full h-screen flex flex-col ">
@@ -198,7 +213,7 @@ export const AddOfferFormComponent = () => {
                     </button>
                    { contractDropdown &&
                    
-                   <div id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
+                   <div ref={menuRef}  id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
                         <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                             {dropdownOptions.map(option => (
                                  <li
@@ -224,7 +239,7 @@ export const AddOfferFormComponent = () => {
                             Type de Travail:
                       </label>
                     </div>
-                    <div className="w-3/4 relative">
+                    <div className="w-3/4 relative " >
                     <button id="dropdownDefaultButton" onClick={handleTypeTravailToggle} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
                             {selectedTypeTravail}
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -233,7 +248,7 @@ export const AddOfferFormComponent = () => {
                     </button>
                    { toggleTypeContract &&
                    
-                   <div id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
+                   <div id="dropdown-list" ref={menuRef} className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
                         <ul className="w-full py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                             {typeTravail.map(opt => (
                                  <li
@@ -269,7 +284,7 @@ export const AddOfferFormComponent = () => {
                     </button>
                    { toggleRegion &&
                    
-                   <div id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
+                   <div ref={menuRef}  id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
                         <ul className="w-full py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                             {regions.map((opt, index) => (
                                  <li
