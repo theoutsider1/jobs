@@ -244,3 +244,33 @@ export interface EditedJob {
     profil?: string; // Changed from string[] to string
     advantages?: string[];
 }
+
+export interface RecruiterInfo{
+
+    createdAt: string;
+    fullName: string;
+    id : number;
+    mail: string;
+    phone_number : string;
+    updatedAt : string;
+}
+
+
+
+export interface AddJob {
+  id: number;
+  title: string;
+  city: string;
+  contractType: string;
+  experience: string;
+  domaine: string;
+  companyName: string;
+  description: string;
+  jobType: string;
+  missions: string;
+  deadline?: Date; 
+  fonction?: string;
+  studiesRequirement: string;
+  profil: string;
+  advantages: string[];
+  }
