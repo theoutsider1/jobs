@@ -47,17 +47,16 @@ export const AddOfferFormComponent = () => {
               setContractDropdown(false);
               setToggleTypeContract(false);
               setToggleRegion(false)
-              console.log("Menu closed", menuRef.current);
+             
           } else {
               console.log("Clicked inside menu", menuRef.current);
           }
       };
 
-      console.log("Adding event listener");
       document.addEventListener('mousedown', handler);
 
       return () => {
-          console.log("Removing event listener");
+         
           document.removeEventListener('mousedown', handler);
       };
   }, []);
