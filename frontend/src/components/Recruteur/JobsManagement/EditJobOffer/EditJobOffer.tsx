@@ -235,12 +235,12 @@ const removeAvantage = (index:number) => {
  
             <div key={toEditJob.id} className="w-full flex-col jusify-between ">
                
-                <h3 className="w-full p-10 bg-fifth  text-center text-5xl font-semibold ">
+                <h3 className="w-full p-10 bg-neutral-100  text-center text-5xl font-semibold ">
                      Modifier votre <span className="underline decoration-dashed decoration-darkk">offre d'emploi</span>
                 </h3>
             <form 
             onSubmit={handleSubmit} 
-            id="" className="w-full bg-third p-5 flex flex-col ">
+            id="" className="w-full p-5 flex flex-col ">
                 {/* row 1 */}
                 <div className="w-full flex flex-row-12 justify-around gap-8">
                 <div className="mb-5 w-4/12">
