@@ -91,6 +91,9 @@ export const AddOfferFormComponent = () => {
       if (inputRef.current) {
         inputRef.current.focus();
         console.log('Input focused:', inputRef.current.value)
+      } else if (inputTextArea.current) {
+        inputTextArea.current?.focus()
+        console.log('Input focused:', inputTextArea.current?.value);
       }
     
       document.addEventListener('mousedown', handler);
