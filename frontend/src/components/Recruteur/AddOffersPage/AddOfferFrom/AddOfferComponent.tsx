@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from "react";
-import { dropdownOptions, regions, typeTravail } from "../../../../Types/Globals";
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { AddJob, dropdownOptions, regions, typeTravail } from "../../../../Types/Globals";
 import { AddAdvantageComponent } from "./AddAdvantageComponent";
 // import { HistoricalSideBarComponent } from "../Historic/HistoricalSection";
 
 // city / domaine / deadline / studiesREquirements
 
 export const AddOfferFormComponent = () => {
+  
     const [contractDropdown, setContractDropdown] = useState(false);
     const [selectedContract, setSelectedContract] = useState("Choisir le type de contrat");
 
@@ -41,25 +42,34 @@ export const AddOfferFormComponent = () => {
     const [toggleRegion, setToggleRegion]=useState(false);
     const [selectedRegion, setSelectedRegion]= useState("Choisir la region")
     const menuRef = useRef<HTMLDivElement>(null);
+
+    
+    const handler = useCallback((e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setContractDropdown(false);
+        setToggleTypeContract(false);
+        setToggleRegion(false);
+        console.log("Clicked outside menu", menuRef.current);
+      } else {
+        console.log("Clicked inside menu", menuRef.current);
+      }
+    }, []);
+    
+    
     useEffect(() => {
-      const handler = (e: MouseEvent) => {
-          if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-              setContractDropdown(false);
-              setToggleTypeContract(false);
-              setToggleRegion(false)
-             
-          } else {
-              console.log("Clicked inside menu", menuRef.current);
-          }
-      };
-
+      console.log('Component mounted or inputRef changed');
+      
+    
       document.addEventListener('mousedown', handler);
-
+    
       return () => {
-         
-          document.removeEventListener('mousedown', handler);
+        document.removeEventListener('mousedown', handler);
       };
-  }, []);
+    }, [ handler]);
+
+  // useEffect(() => {
+  //   console.log(newJob);
+  // }, [newJob]);
 
     return (
     <div className="w-full h-screen flex flex-col ">
@@ -71,22 +81,25 @@ export const AddOfferFormComponent = () => {
           </h3>
         </div>
         <div className="px-24 flex flex-col justify-center items-center">
-          <form id="contactForm" className="w-full">
+          <form onSubmit={handleSubmit} id="contactForm" className="w-full">
             <div className="w-full">
               <ul>
                 <li className="p-3">
                   <div className=" mx-14 flex justify-center items-center">
                     <div className="w-1/4 mx-14">
                       <label
-                        htmlFor="nomComplet"
+                        htmlFor="title"
                         className="w-full m-1 text-xl font-semibold">
-                        Nom Du Poste:
+                        Titre De Poste:
                       </label>
                     </div>
                     <div className="w-3/4">
                       <input
+                      // ref={inputRef}
+                     
                         type="text"
-                        id="nomComplet"
+                        name ='title'
+                        id="title"
                         className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     </div>
                   </div>
@@ -145,8 +158,6 @@ export const AddOfferFormComponent = () => {
                     </div>
                   </div>
                 </li>
-
-
 
                 <li className="p-3">
                   <div className=" mx-14 flex flex-row-4 justify-center">
@@ -209,7 +220,7 @@ export const AddOfferFormComponent = () => {
                             Type de Contract:
                       </label>
                     </div>
-                    <div className="w-3/4 relative">
+                    <div className="w-3/4 relative" ref={menuRef} >
                     <button id="dropdownDefaultButton" onClick={HandleToggleContactDropdown} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
                             {selectedContract}
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -218,7 +229,7 @@ export const AddOfferFormComponent = () => {
                     </button>
                    { contractDropdown &&
                    
-                   <div ref={menuRef}  id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
+                   <div  id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
                         <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                             {dropdownOptions.map(option => (
                                  <li
@@ -244,7 +255,7 @@ export const AddOfferFormComponent = () => {
                             Type de Travail:
                       </label>
                     </div>
-                    <div className="w-3/4 relative " >
+                    <div className="w-3/4 relative " ref={menuRef} >
                     <button id="dropdownDefaultButton" onClick={handleTypeTravailToggle} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
                             {selectedTypeTravail}
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -253,7 +264,7 @@ export const AddOfferFormComponent = () => {
                     </button>
                    { toggleTypeContract &&
                    
-                   <div id="dropdown-list" ref={menuRef} className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
+                   <div id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
                         <ul className="w-full py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                             {typeTravail.map(opt => (
                                  <li
@@ -280,7 +291,7 @@ export const AddOfferFormComponent = () => {
                             Région:
                       </label>
                     </div>
-                    <div className="w-3/4 relative">
+                    <div className="w-3/4 relative" ref={menuRef} >
                     <button id="dropdownDefaultButton" onClick={()=> setToggleRegion(!toggleRegion)} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
                             {selectedRegion}
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -289,7 +300,7 @@ export const AddOfferFormComponent = () => {
                     </button>
                    { toggleRegion &&
                    
-                   <div ref={menuRef}  id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
+                   <div id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
                         <ul className="w-full py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                             {regions.map((opt, index) => (
                                  <li
@@ -313,11 +324,11 @@ export const AddOfferFormComponent = () => {
                 </li>
               </ul>
             </div>
-            
+           
           </form>
           <div className="w-full pt-12 flex justify-center items-center">
-              <button type="submit" className="block bg-darkk rounded-md py-2.5 px-6 text-normal font-semibold text-white">Postuler</button>
-            </div>
+              <button type="submit" className="block bg-darkk rounded-md py-2.5 px-6 text-normal font-semibold text-white">Publier l'offre</button>
+           
         </div>
             
       </div>
