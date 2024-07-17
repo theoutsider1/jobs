@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, RefObject } from 'react';
 import { AddJob, dropdownOptions, regions, typeTravail } from "../../../../Types/Globals";
 import { AddAdvantageComponent } from "./AddAdvantageComponent";
 // import { HistoricalSideBarComponent } from "../Historic/HistoricalSection";
@@ -23,6 +23,7 @@ export const AddOfferFormComponent = () => {
       advantages: [],
     })
    const inputRef = useRef<HTMLInputElement>(null);
+   const inputTextArea: RefObject<HTMLTextAreaElement> = useRef(null);
     const [contractDropdown, setContractDropdown] = useState(false);
     const [selectedContract, setSelectedContract] = useState("Choisir le type de contrat");
 
@@ -61,10 +62,8 @@ export const AddOfferFormComponent = () => {
 
     const handleSubmit = (e: React.FormEvent)=>{
       e.preventDefault();
-      // console.log(newJob);
-      console.log('newJob');
-      
-      
+      console.log(newJob);
+ 
     }
     const handler = useCallback((e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
@@ -76,7 +75,8 @@ export const AddOfferFormComponent = () => {
         console.log("Clicked inside menu", menuRef.current);
       }
     }, []);
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement ) => {
       const { name, value } = e.target;
       setNewJob((prevVal) => ({
         ...prevVal,
@@ -87,11 +87,10 @@ export const AddOfferFormComponent = () => {
     };
     
     useEffect(() => {
-      console.log('Component mounted or inputRef changed');
       if (inputRef.current) {
         inputRef.current.focus();
-        console.log('Input focused:', inputRef.current.value);
-      }
+        console.log('Input focused:', inputRef.current.value)
+      } 
     
       document.addEventListener('mousedown', handler);
     
@@ -151,6 +150,9 @@ export const AddOfferFormComponent = () => {
                     </div>
                     <div className="w-3/4">
                       <input
+                       onChange={handleChange}
+                       ref={inputRef}
+                       name='companyName'
                         type="text"
                         id="entreprise"
                         className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
@@ -169,7 +171,10 @@ export const AddOfferFormComponent = () => {
                     </div>
                     <div className="w-3/4">
                       <input
+                        onChange={handleChange}
+                        ref={inputRef}
                         type="text"
+                        name='experience'
                         id="experience"
                         className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     </div>
@@ -187,7 +192,10 @@ export const AddOfferFormComponent = () => {
                     </div>
                     <div className="w-3/4">
                       <input
+                        onChange={handleChange}
+                        ref={inputRef}
                         type="text"
+                        name='fonction'
                         id="fonction"
                         className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     </div>
@@ -205,6 +213,8 @@ export const AddOfferFormComponent = () => {
                     </div>
                     <div className="w-3/4">
                       <textarea
+                          onChange={handleChange}
+                          ref={inputTextArea}
                           id="descriptionField"
                           name="description"
                           className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
