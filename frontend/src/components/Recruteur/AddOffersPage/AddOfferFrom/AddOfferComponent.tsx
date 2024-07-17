@@ -359,11 +359,10 @@ export const AddOfferFormComponent = () => {
                 </li>
               </ul>
             </div>
-           
-          </form>
-          <div className="w-full pt-12 flex justify-center items-center">
+            <div className="w-full pt-12 flex justify-center items-center">
               <button type="submit" className="block bg-darkk rounded-md py-2.5 px-6 text-normal font-semibold text-white">Publier l'offre</button>
             </div>
+          </form>
            
         </div>
             
