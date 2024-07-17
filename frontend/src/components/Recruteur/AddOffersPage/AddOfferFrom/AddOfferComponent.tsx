@@ -59,6 +59,13 @@ export const AddOfferFormComponent = () => {
     const [selectedRegion, setSelectedRegion]= useState("Choisir la region")
     const menuRef = useRef<HTMLDivElement>(null);
 
+    const handleSubmit = (e: React.FormEvent)=>{
+      e.preventDefault();
+      // console.log(newJob);
+      console.log('newJob');
+      
+      
+    }
     const handler = useCallback((e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setContractDropdown(false);
