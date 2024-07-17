@@ -88,7 +88,10 @@ export const AddOfferFormComponent = () => {
     
     useEffect(() => {
       console.log('Component mounted or inputRef changed');
-      
+      if (inputRef.current) {
+        inputRef.current.focus();
+        console.log('Input focused:', inputRef.current.value);
+      }
     
       document.addEventListener('mousedown', handler);
     
