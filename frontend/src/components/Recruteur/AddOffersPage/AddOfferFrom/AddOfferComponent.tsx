@@ -6,7 +6,23 @@ import { AddAdvantageComponent } from "./AddAdvantageComponent";
 // city / domaine / deadline / studiesREquirements
 
 export const AddOfferFormComponent = () => {
-  
+  const [newJob , setNewJob] = useState<AddJob>(
+    { title: '',
+      city: '',
+      contractType: '',
+      experience: '',
+      domaine: '',
+      companyName: '',
+      description: '',
+      jobType: '',
+      missions: '',
+      deadline: undefined, 
+      fonction: '',
+      studiesRequirement: '',
+      profil: '',
+      advantages: [],
+    })
+   const inputRef = useRef<HTMLInputElement>(null);
     const [contractDropdown, setContractDropdown] = useState(false);
     const [selectedContract, setSelectedContract] = useState("Choisir le type de contrat");
 
@@ -43,7 +59,6 @@ export const AddOfferFormComponent = () => {
     const [selectedRegion, setSelectedRegion]= useState("Choisir la region")
     const menuRef = useRef<HTMLDivElement>(null);
 
-    
     const handler = useCallback((e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setContractDropdown(false);
@@ -58,14 +73,14 @@ export const AddOfferFormComponent = () => {
     
     useEffect(() => {
       console.log('Component mounted or inputRef changed');
-      
+     
     
       document.addEventListener('mousedown', handler);
     
       return () => {
         document.removeEventListener('mousedown', handler);
       };
-    }, [ handler]);
+    }, [inputRef, handler]);
 
   // useEffect(() => {
   //   console.log(newJob);
@@ -96,7 +111,9 @@ export const AddOfferFormComponent = () => {
                     <div className="w-3/4">
                       <input
                       // ref={inputRef}
-                     
+                      onChange={handleChange}
+                      
+                      ref={inputRef}
                         type="text"
                         name ='title'
                         id="title"
@@ -328,6 +345,7 @@ export const AddOfferFormComponent = () => {
           </form>
           <div className="w-full pt-12 flex justify-center items-center">
               <button type="submit" className="block bg-darkk rounded-md py-2.5 px-6 text-normal font-semibold text-white">Publier l'offre</button>
+            </div>
            
         </div>
             
