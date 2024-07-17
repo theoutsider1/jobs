@@ -76,7 +76,7 @@ export const AddOfferFormComponent = () => {
       }
     }, []);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement ) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
       setNewJob((prevVal) => ({
         ...prevVal,
@@ -86,11 +86,12 @@ export const AddOfferFormComponent = () => {
       
     };
     
+    
     useEffect(() => {
       if (inputRef.current) {
         inputRef.current.focus();
         console.log('Input focused:', inputRef.current.value)
-      } 
+      }
     
       document.addEventListener('mousedown', handler);
     
