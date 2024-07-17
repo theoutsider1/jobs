@@ -76,11 +76,19 @@ export const AddOfferFormComponent = () => {
         console.log("Clicked inside menu", menuRef.current);
       }
     }, []);
-    
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setNewJob((prevVal) => ({
+        ...prevVal,
+        [name]: value,
+      }));
+      console.log(newJob);
+      
+    };
     
     useEffect(() => {
       console.log('Component mounted or inputRef changed');
-     
+      
     
       document.addEventListener('mousedown', handler);
     
