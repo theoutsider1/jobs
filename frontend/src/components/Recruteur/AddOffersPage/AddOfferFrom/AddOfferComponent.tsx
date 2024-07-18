@@ -49,9 +49,9 @@ export const AddOfferFormComponent = () => {
         setContractDropdown(false);
         setToggleRegion(false);
     }
-    const handleTypeTravailOptions = (label:string)=> {
+    const handleTypeTravailOptions = ()=> {
        
-        setSelectedTypeTravail(label)
+       
         handleTypeTravailToggle()
     }
 
@@ -287,12 +287,10 @@ export const AddOfferFormComponent = () => {
                             {dropdownOptions.map(option => (
                                  <li
                                  key={option.id}
-                                 onClick={() => {
-                                    setNewJob((prev) =>({
-                                      ...prev,
-                                      contractType : option.label
-                                    }))
-                                    handleContractOptionClick( option.label)}}
+                                 onClick={() => { 
+                                    handleContractOptionClick( option.label)
+                                  }}
+                                    
                                  className="w-full text-left block px-4 py-2 hover:bg-primary cursor-pointer">
                                     {option.label}
                                 </li>
@@ -325,8 +323,7 @@ export const AddOfferFormComponent = () => {
                             {typeTravail.map(opt => (
                                  <li
                                  key={opt.id}
-                                 onClick={() => {
-                                    handleTypeTravailOptions(opt.label)}}
+                                
 
                                  className="w-full text-left block px-4 py-2 hover:bg-primary cursor-pointer">
                                     {opt.label}
@@ -362,10 +359,15 @@ export const AddOfferFormComponent = () => {
                                  <li
                                  key={index}
                                  onClick={() => {
-                                    setToggleTypeContract(false);
-                                    setContractDropdown(false);
-                                    setSelectedRegion(opt);
-                                    setToggleRegion(!toggleRegion)}}
+                                  setToggleTypeContract(false);
+                                  setContractDropdown(false);
+                                  setSelectedRegion(opt);
+                                  setToggleRegion(!toggleRegion);
+                                  setNewJob((prev) => ({
+                                    ...prev,
+                                    city: opt
+                                  }));
+                                }}
                                  className="w-full text-left px-4 py-2 hover:bg-primary cursor-pointer">
                                     {opt}
                                 </li>
