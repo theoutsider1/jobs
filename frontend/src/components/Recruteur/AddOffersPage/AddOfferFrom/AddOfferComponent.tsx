@@ -276,7 +276,7 @@ export const AddOfferFormComponent = () => {
                             Type de Contract:
                       </label>
                     </div>
-                    <div className="w-3/4 relative" ref={menuRef} >
+                    <div className="w-3/4 relative" ref={contractMenuRef} >
                     <button id="dropdownDefaultButton" onClick={HandleToggleContactDropdown} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
                             {selectedContract}
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -312,7 +312,7 @@ export const AddOfferFormComponent = () => {
                             Type de Travail:
                       </label>
                     </div>
-                    <div className="w-3/4 relative " ref={menuRef} >
+                    <div className="w-3/4 relative " ref={typeTravailMenuRef} >
                     <button id="dropdownDefaultButton" onClick={handleTypeTravailToggle} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
                             {selectedTypeTravail}
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -348,7 +348,7 @@ export const AddOfferFormComponent = () => {
                             Région:
                       </label>
                     </div>
-                    <div className="w-3/4 relative" ref={menuRef} >
+                    <div className="w-3/4 relative" ref={regionMenuRef} >
                     <button id="dropdownDefaultButton" onClick={()=> setToggleRegion(!toggleRegion)} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
                             {selectedRegion}
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
