@@ -49,30 +49,33 @@ export const AddOfferFormComponent = () => {
         setContractDropdown(false);
         setToggleRegion(false);
     }
-    const handleTypeTravailOptions = ()=> {
-       
-       
-        handleTypeTravailToggle()
+    const handleTypeTravailOptions = (opt : string) => {
+      setSelectedTypeTravail(opt);
+      handleTypeTravailToggle();
     }
 
     // regions 
     const [toggleRegion, setToggleRegion]=useState(false);
     const [selectedRegion, setSelectedRegion]= useState("Choisir la region")
-    const menuRef = useRef<HTMLDivElement>(null);
-
+    
+    const contractMenuRef = useRef<HTMLDivElement>(null);
+    const typeTravailMenuRef = useRef<HTMLDivElement>(null);
+    const regionMenuRef = useRef<HTMLDivElement>(null);
+    
     const handleSubmit = (e: React.FormEvent)=>{
       e.preventDefault();
       console.log(newJob);
  
     }
     const handler = useCallback((e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+      if (contractMenuRef.current && !contractMenuRef.current.contains(e.target as Node)) {
         setContractDropdown(false);
+      }
+      if (typeTravailMenuRef.current && !typeTravailMenuRef.current.contains(e.target as Node)) {
         setToggleTypeContract(false);
+      }
+      if (regionMenuRef.current && !regionMenuRef.current.contains(e.target as Node)) {
         setToggleRegion(false);
-        console.log("Clicked outside menu", menuRef.current);
-      } else {
-        console.log("Clicked inside menu", menuRef.current);
       }
     }, []);
 
@@ -322,11 +325,12 @@ export const AddOfferFormComponent = () => {
                         <ul className="w-full py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                             {typeTravail.map(opt => (
                                  <li
-                                 key={opt.id}
-                                
-
-                                 className="w-full text-left block px-4 py-2 hover:bg-primary cursor-pointer">
-                                    {opt.label}
+                                key={opt.id}
+                                onClick={() => {
+                                  handleTypeTravailOptions(opt.label);
+                                }}
+                                className="w-full text-left block px-4 py-2 hover:bg-primary cursor-pointer">
+                                  {opt.label}
                                 </li>
                             ))}
                         </ul>
