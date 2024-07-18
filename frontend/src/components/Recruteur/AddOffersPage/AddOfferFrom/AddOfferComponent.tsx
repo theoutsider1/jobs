@@ -230,15 +230,17 @@ export const AddOfferFormComponent = () => {
                   <div className=" mx-14 flex flex-row-4 justify-center">
                     <div className="w-1/4 mx-14">
                       <label
-                        htmlFor="mission"
+                        htmlFor="missions"
                         className="w-full m-1 text-xl font-semibold">
                             Missions:
                       </label>
                     </div>
                     <div className="w-3/4">
                       <textarea
+                          onChange={handleChange}
+                          ref={inputTextArea}
                           id="missionField"
-                          name="mission"
+                          name="missions"
                           className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     </div>
                   </div>
@@ -254,6 +256,8 @@ export const AddOfferFormComponent = () => {
                     </div>
                     <div className="w-3/4">
                       <textarea
+                        onChange={handleChange}
+                        ref={inputTextArea}
                         id="profilField"
                         name="profil"
                         className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
@@ -284,7 +288,10 @@ export const AddOfferFormComponent = () => {
                                  <li
                                  key={option.id}
                                  onClick={() => {
-                                    
+                                    setNewJob((prev) =>({
+                                      ...prev,
+                                      contractType : option.label
+                                    }))
                                     handleContractOptionClick( option.label)}}
                                  className="w-full text-left block px-4 py-2 hover:bg-primary cursor-pointer">
                                     {option.label}
