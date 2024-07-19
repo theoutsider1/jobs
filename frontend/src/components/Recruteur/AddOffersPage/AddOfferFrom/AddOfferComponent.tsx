@@ -76,7 +76,12 @@ const toggleDomaine = ()=>{
     // regions 
     const [toggleRegion, setToggleRegion]=useState(false);
     const [selectedRegion, setSelectedRegion]= useState("Choisir la region")
-    
+    const handleToggleRegion = ()=>{
+      setToggleTypeContract(false);
+      setContractDropdown(false);
+      setDomainesDropdown(false);
+      setToggleRegion(!toggleRegion);
+    }
     const contractMenuRef = useRef<HTMLDivElement>(null);
     const typeTravailMenuRef = useRef<HTMLDivElement>(null);
     const regionMenuRef = useRef<HTMLDivElement>(null);
