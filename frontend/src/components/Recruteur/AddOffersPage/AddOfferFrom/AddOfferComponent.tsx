@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback, RefObject } from 'react';
-import { AddJob, dropdownOptions, regions, typeTravail } from "../../../../Types/Globals";
+import { AddJob, domaineOptions, dropdownOptions, regions, typeTravail } from "../../../../Types/Globals";
 import { AddAdvantageComponent } from "./AddAdvantageComponent";
+import { axiosPrivate } from '../../../../api/axios';
 // import { HistoricalSideBarComponent } from "../Historic/HistoricalSection";
 
-// city / domaine / deadline / studiesREquirements
+
 
 export const AddOfferFormComponent = () => {
-  //const [avantage , setAvantage] = useState<AvantageList>([])
   const [newJob , setNewJob] = useState<AddJob>(
     { title: '',
       city: '',
@@ -27,6 +27,15 @@ export const AddOfferFormComponent = () => {
   const inputTextArea: RefObject<HTMLTextAreaElement> = useRef(null);
   const [contractDropdown, setContractDropdown] = useState(false);
   const [selectedContract, setSelectedContract] = useState("Choisir le type de contrat");
+// Domaines 
+const [domaine, setDomaine] = useState("Choisir le domaine");
+const [domainesDropdown, setDomainesDropdown] = useState(false);
+const toggleDomaine = ()=>{
+  setContractDropdown(false);
+  setToggleRegion(false);
+  setToggleTypeContract(false);
+  setDomainesDropdown(!domainesDropdown);
+}
 
     //Types de Contrat
   const [toggleTypeContract, setToggleTypeContract]=useState(false);
@@ -36,6 +45,7 @@ export const AddOfferFormComponent = () => {
         setContractDropdown(!contractDropdown)
         setToggleRegion(false);
         setToggleTypeContract(false);
+        setDomainesDropdown(false)
     }
   
   const handleContractOption = (label:string , field: string)=> {
@@ -52,6 +62,7 @@ export const AddOfferFormComponent = () => {
         setToggleTypeContract(!toggleTypeContract);
         setContractDropdown(false);
         setToggleRegion(false);
+        setDomainesDropdown(false)
     }
     const handleTypeTravailOptions = (option : string, field: string) => {
       setSelectedTypeTravail(option);
@@ -69,10 +80,12 @@ export const AddOfferFormComponent = () => {
     const contractMenuRef = useRef<HTMLDivElement>(null);
     const typeTravailMenuRef = useRef<HTMLDivElement>(null);
     const regionMenuRef = useRef<HTMLDivElement>(null);
+    const domaineMenuRef = useRef<HTMLDivElement>(null);
     
     const handleSubmit = (e: React.FormEvent)=>{
       e.preventDefault();
       console.log(newJob);
+      
  
     }
     const handler = useCallback((e: MouseEvent) => {
@@ -103,6 +116,7 @@ export const AddOfferFormComponent = () => {
         advantages: newAdvantages,
       }));
     };
+
   
     
     useEffect(() => {
@@ -364,7 +378,7 @@ export const AddOfferFormComponent = () => {
                       </label>
                     </div>
                     <div className="w-3/4 relative" ref={regionMenuRef} >
-                    <button id="dropdownDefaultButton" onClick={()=> setToggleRegion(!toggleRegion)} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
+                    <button id="dropdownDefaultButton" onClick={handleToggleRegion} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
                             {selectedRegion}
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
@@ -378,10 +392,9 @@ export const AddOfferFormComponent = () => {
                                  <li
                                  key={index}
                                  onClick={() => {
-                                  setToggleTypeContract(false);
-                                  setContractDropdown(false);
+                                  handleToggleRegion()
                                   setSelectedRegion(opt);
-                                  setToggleRegion(!toggleRegion);
+                                  
                                   setNewJob((prev) => ({
                                     ...prev,
                                     city: opt
@@ -389,6 +402,50 @@ export const AddOfferFormComponent = () => {
                                 }}
                                  className="w-full text-left px-4 py-2 hover:bg-primary cursor-pointer">
                                     {opt}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>}
+                    </div>
+                  </div>
+                </li>
+
+                {/* Domaines */}
+                <li className="p-3">
+                  <div className=" mx-14 flex flex-row-4 justify-center">
+                    <div className="w-1/4 mx-14">
+                      <label
+                        htmlFor="domaine"
+                        className="w-full m-1 text-xl font-semibold">
+                            Domaines:
+                      </label>
+                    </div>
+                    <div className="w-3/4 relative" ref={domaineMenuRef} >
+                    <button id="dropdownDefaultButton" onClick={()=> toggleDomaine()} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
+                            {domaine}
+                        <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+                   { domainesDropdown &&
+                   
+                   <div id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
+                        <ul className="w-full py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+                            {domaineOptions.map((opt, index) => (
+                                 <li
+                                 key={index}
+                                 onClick={() => {
+                                  setDomaine(opt.label)
+                                  toggleDomaine()
+
+                                  
+                                  setNewJob((prev) => ({
+                                    ...prev,
+                                    domaine: opt.label
+                                  }));
+                                }}
+                                 className="w-full text-left px-4 py-2 hover:bg-primary cursor-pointer">
+                                    {opt.label}
                                 </li>
                             ))}
                         </ul>
