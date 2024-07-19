@@ -287,6 +287,7 @@ export const AddOfferFormComponent = () => {
                     </div>
                   </div>
                 </li>
+                {/* Profil input */}
                 <li className="p-3">
                   <div className=" mx-14 flex flex-row-4 justify-center">
                     <div className="w-1/4 mx-14">
@@ -306,6 +307,29 @@ export const AddOfferFormComponent = () => {
                     </div>
                   </div>
                 </li>
+                {/* DeadLine Date */}
+                <li className="p-3">
+                  <div className=" mx-14 flex justify-center items-center">
+                    <div className="w-1/4 mx-14">
+                      <label
+                        htmlFor="deadline"
+                        className="w-full m-1 text-xl font-semibold">
+                        Deadline:
+                      </label>
+                    </div>
+                    <div className="w-3/4">
+                      <input
+                        onChange={handleChange}
+                        
+                        type="date"
+                        name='deadline'
+                        id="deadline"
+                        className="block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                    </div>
+                  </div>
+                </li>
+                {/* Contract Types */}
                 <li className="p-3">
                   <div className=" mx-14 flex flex-row-4 justify-center">
                     <div className="w-1/4 mx-14">
