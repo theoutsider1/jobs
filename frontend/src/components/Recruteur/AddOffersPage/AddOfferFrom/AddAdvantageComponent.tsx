@@ -24,7 +24,10 @@ export const AddAdvantageComponent : React.FC<AvantageListProps> = ({avantageLis
            }
     };
     
-   
+    const removeAvantage = (index:number) => {
+        const newAdvantages = avantageList.filter((_, i) => i !== index);
+        onAdvantagesChange(newAdvantages);
+        };
     // useEffect(() => {
     //    console.log(avantage)
     // }, [handleAddAvantage]);
