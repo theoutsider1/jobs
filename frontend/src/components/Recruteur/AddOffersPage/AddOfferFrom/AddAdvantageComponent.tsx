@@ -1,11 +1,8 @@
 import {ChangeEvent, KeyboardEvent, useState } from "react"
 
 
-
-
-
-
 export const AddAdvantageComponent = ()=> {
+
     const [avantage, setAvantage] = useState<string[]>([]);
     const [currentInput, setCurrentInput] = useState<string>('');
 
@@ -49,7 +46,7 @@ export const AddAdvantageComponent = ()=> {
                     onChange={handleInputChange}
                     onKeyUp={(e)=> handleAddAvantage(e)}
                     {...({ value: currentInput } as { value: string })}
-                    placeholder="Press enter to add tags"
+                    placeholder="Appuyez sur une virgule pour ajouter d'autres avantages"
                     className=" block w-full rounded-md border-0 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
 
                     <ul className="flex flex-row flex-wrap">
