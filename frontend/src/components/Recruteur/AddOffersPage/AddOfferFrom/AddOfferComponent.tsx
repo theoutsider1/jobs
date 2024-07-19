@@ -23,19 +23,21 @@ export const AddOfferFormComponent = () => {
       profil: '',
       advantages: [],
     })
+
   const inputRef = useRef<HTMLInputElement>(null);
   const inputTextArea: RefObject<HTMLTextAreaElement> = useRef(null);
   const [contractDropdown, setContractDropdown] = useState(false);
   const [selectedContract, setSelectedContract] = useState("Choisir le type de contrat");
-// Domaines 
-const [domaine, setDomaine] = useState("Choisir le domaine");
-const [domainesDropdown, setDomainesDropdown] = useState(false);
-const toggleDomaine = ()=>{
-  setContractDropdown(false);
-  setToggleRegion(false);
-  setToggleTypeContract(false);
-  setDomainesDropdown(!domainesDropdown);
-}
+
+  // Domaines 
+  const [domaine, setDomaine] = useState("Choisir le domaine");
+  const [domainesDropdown, setDomainesDropdown] = useState(false);
+  const toggleDomaine = ()=>{
+    setContractDropdown(false);
+    setToggleRegion(false);
+    setToggleTypeContract(false);
+    setDomainesDropdown(!domainesDropdown);
+  }
 
     //Types de Contrat
   const [toggleTypeContract, setToggleTypeContract]=useState(false);
@@ -102,6 +104,9 @@ const toggleDomaine = ()=>{
       }
       if (regionMenuRef.current && !regionMenuRef.current.contains(e.target as Node)) {
         setToggleRegion(false);
+      }
+      if (domaineMenuRef.current && !domaineMenuRef.current.contains(e.target as Node)) {
+        setDomainesDropdown(false);
       }
     }, []);
 
@@ -442,8 +447,6 @@ const toggleDomaine = ()=>{
                                  onClick={() => {
                                   setDomaine(opt.label)
                                   toggleDomaine()
-
-                                  
                                   setNewJob((prev) => ({
                                     ...prev,
                                     domaine: opt.label
