@@ -6,6 +6,7 @@ import { AddAdvantageComponent } from "./AddAdvantageComponent";
 // city / domaine / deadline / studiesREquirements
 
 export const AddOfferFormComponent = () => {
+  //const [avantage , setAvantage] = useState<AvantageList>([])
   const [newJob , setNewJob] = useState<AddJob>(
     { title: '',
       city: '',
@@ -95,7 +96,14 @@ export const AddOfferFormComponent = () => {
       console.log(newJob);
       
     };
-    
+    // Handle avantages changes in newJob     
+    const handleAdvantagesChange = (newAdvantages: string[]) => {
+      setNewJob((prevJob) => ({
+        ...prevJob,
+        advantages: newAdvantages,
+      }));
+    };
+  
     
     useEffect(() => {
       if (inputRef.current) {
@@ -389,7 +397,7 @@ export const AddOfferFormComponent = () => {
                   </div>
                 </li>
                 <li className="p-3">
-                  <AddAdvantageComponent/>
+                  <AddAdvantageComponent avantageList={newJob.advantages} onAdvantagesChange={handleAdvantagesChange} />
                 </li>
               </ul>
             </div>
