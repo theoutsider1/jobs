@@ -22,25 +22,28 @@ export const AddOfferFormComponent = () => {
       profil: '',
       advantages: [],
     })
-   const inputRef = useRef<HTMLInputElement>(null);
-   const inputTextArea: RefObject<HTMLTextAreaElement> = useRef(null);
-    const [contractDropdown, setContractDropdown] = useState(false);
-    const [selectedContract, setSelectedContract] = useState("Choisir le type de contrat");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const inputTextArea: RefObject<HTMLTextAreaElement> = useRef(null);
+  const [contractDropdown, setContractDropdown] = useState(false);
+  const [selectedContract, setSelectedContract] = useState("Choisir le type de contrat");
 
     //Types de Contrat
+  const [toggleTypeContract, setToggleTypeContract]=useState(false);
+  const [selectedTypeTravail, setSelectedTypeTravail]= useState("Choisir le type de travail")
 
-    const [toggleTypeContract, setToggleTypeContract]=useState(false);
-    const [selectedTypeTravail, setSelectedTypeTravail]= useState("Choisir le type de travail")
-
-    const HandleToggleContactDropdown = () => {
+  const HandleToggleContactDropdown = () => {
         setContractDropdown(!contractDropdown)
         setToggleRegion(false);
         setToggleTypeContract(false);
     }
   
-    const handleContractOptionClick = (label:string)=> {
+  const handleContractOptionClick = (label:string , field: string)=> {
         
         setSelectedContract(label)
+        setNewJob((prev)=>({
+          ...prev,
+          [field] : label
+        }))
         HandleToggleContactDropdown()
     }
     //Types de Contrat functions
@@ -271,7 +274,7 @@ export const AddOfferFormComponent = () => {
                   <div className=" mx-14 flex flex-row-4 justify-center">
                     <div className="w-1/4 mx-14">
                       <label
-                        htmlFor="typesContract"
+                        htmlFor="contractType"
                         className="w-full m-1 text-xl font-semibold">
                             Type de Contract:
                       </label>
@@ -283,7 +286,7 @@ export const AddOfferFormComponent = () => {
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
                         </svg>
                     </button>
-                   { contractDropdown &&
+                  { contractDropdown &&
                    
                    <div  id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
                         <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
@@ -291,7 +294,7 @@ export const AddOfferFormComponent = () => {
                                  <li
                                  key={option.id}
                                  onClick={() => { 
-                                    handleContractOptionClick( option.label)
+                                    handleContractOptionClick( option.label, 'contractType')
                                   }}
                                     
                                  className="w-full text-left block px-4 py-2 hover:bg-primary cursor-pointer">
