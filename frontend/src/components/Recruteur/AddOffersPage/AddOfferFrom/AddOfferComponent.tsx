@@ -267,7 +267,7 @@ export const AddOfferFormComponent = () => {
                     </div>
                   </div>
                 </li>
-
+                {/* Missions */}
                 <li className="p-3">
                   <div className=" mx-14 flex flex-row-4 justify-center">
                     <div className="w-1/4 mx-14">
@@ -283,6 +283,26 @@ export const AddOfferFormComponent = () => {
                           ref={inputTextArea}
                           id="missionField"
                           name="missions"
+                          className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
+                    </div>
+                  </div>
+                </li>
+                {/* studiesRequirement */}
+                <li className="p-3">
+                  <div className=" mx-14 flex flex-row-4 justify-center">
+                    <div className="w-1/4 mx-14">
+                      <label
+                        htmlFor="studiesRequirement"
+                        className="w-full m-1 text-xl font-semibold">
+                            Studies requirement:
+                      </label>
+                    </div>
+                    <div className="w-3/4">
+                      <textarea
+                          onChange={handleChange}
+                          ref={inputTextArea}
+                          id="studiesRequirement"
+                          name="studiesRequirement"
                           className="block w-full rounded-md border-0 h-24 py-2 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
                     </div>
                   </div>
