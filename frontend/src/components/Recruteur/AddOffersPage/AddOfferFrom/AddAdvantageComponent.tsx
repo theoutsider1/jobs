@@ -28,10 +28,6 @@ export const AddAdvantageComponent : React.FC<AvantageListProps> = ({avantageLis
         const newAdvantages = avantageList.filter((_, i) => i !== index);
         onAdvantagesChange(newAdvantages);
         };
-    // useEffect(() => {
-    //    console.log(avantage)
-    // }, [handleAddAvantage]);
-    
 
     return (
         <div className=" mx-14 flex flex-row-4 justify-center">
