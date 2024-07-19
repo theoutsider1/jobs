@@ -12,6 +12,7 @@ export const AddAdvantageComponent : React.FC<AvantageListProps> = ({avantageLis
         setCurrentInput(event.target.value);
     };
 
+    // Add new advantage to avantageList 
     const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === ',' && !avantageList.includes(currentInput.trim())) {
             const trimmedInput = currentInput.trim().replace(/,/g, ''); // Remove commas from input
@@ -23,7 +24,7 @@ export const AddAdvantageComponent : React.FC<AvantageListProps> = ({avantageLis
             
            }
     };
-    
+    // Remove advantage to avantageList  
     const removeAvantage = (index:number) => {
         const newAdvantages = avantageList.filter((_, i) => i !== index);
         onAdvantagesChange(newAdvantages);
@@ -42,7 +43,6 @@ export const AddAdvantageComponent : React.FC<AvantageListProps> = ({avantageLis
                 <input
                     type="text"
                     id="avantages"
-                   // value= {currentInput}
                     onChange={handleInputChange}
                     onKeyUp={(e)=> handleAddAvantage(e)}
                     {...({ value: currentInput } as { value: string })}
