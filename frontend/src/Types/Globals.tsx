@@ -164,6 +164,14 @@ export const typeTravail: DropdownOption[] = [
     { id: 14, label: "Mi-Temps",}
 ];
 
+// ---------- Domaines -------
+export const domaines: DropdownOption[] = [
+    { id: 123, label: "Temps plein" },
+    { id: 124, label: "A distance", },
+    { id: 135, label: "Etudiant", },
+    { id: 146, label: "Mi-Temps",}
+];
+
 // ----------- Upload Cv Props / espace candidat --------------
 
 export interface uploadCvCandidatProps {
@@ -258,7 +266,7 @@ export interface RecruiterInfo{
 
 
 export interface AddJob {
-  id: number;
+  
   title: string;
   city: string;
   contractType: string;
@@ -269,7 +277,7 @@ export interface AddJob {
   jobType: string;
   missions: string;
   deadline?: Date; 
-  fonction?: string;
+  fonction: string;
   studiesRequirement: string;
   profil: string;
   advantages: string[];
