@@ -12,7 +12,19 @@ export const AddAdvantageComponent : React.FC<AvantageListProps> = ({avantageLis
         setCurrentInput(event.target.value);
     };
 
+    const handleAddAvantage = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === ',' && !avantageList.includes(currentInput.trim())) {
+            const trimmedInput = currentInput.trim().replace(/,/g, ''); // Remove commas from input
+            if(trimmedInput !== '' && trimmedInput !== ','){
+                const newAdvantages = [...avantageList, trimmedInput];
+                onAdvantagesChange(newAdvantages);
+                setCurrentInput('');
+            }
+            
+           }
+    };
     
+   
     // useEffect(() => {
     //    console.log(avantage)
     // }, [handleAddAvantage]);
