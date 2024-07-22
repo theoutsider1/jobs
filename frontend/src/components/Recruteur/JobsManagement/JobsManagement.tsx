@@ -132,7 +132,7 @@ export const OffersManagement = () =>{
    
       
       // filter ACTIVE jobs 
-      const filterAvailableJobs = (jobs: OffData[]): OffData[] => {
+      const filterActiveJobs = (jobs: OffData[]): OffData[] => {
         const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
         return jobs.filter(job => job.deadline ? job.deadline >= currentDate : 0);
       };
@@ -141,7 +141,7 @@ export const OffersManagement = () =>{
     useEffect ( () => {
        fetchAllData() 
        
-        const availableJobs = filterAvailableJobs(allData);
+        const availableJobs = filterActiveJobs(allData);
         setActiveJobsData(availableJobs);
         
     },[])
