@@ -82,22 +82,7 @@ export const EditJobOffer = () => {
     const [newRegion, setNewRegion] = useState(jobB?.city)
     const [newDomaine, setNewDomaine]=useState(jobB?.domaine)
 
-    
-     // The ISO 8601 date string
-    const isoDateString = '2024-05-16T15:21:00.876Z';
-            
-    // Create a new Date object from the ISO string
-    const date = new Date(isoDateString);
-    
-    // Get the date components
-    const year = date.getUTCFullYear();
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-    const day = String(date.getUTCDate()).padStart(2, '0');
-
-    // Format the date string as YYYY-MM-DD
-    const formattedDate =  `${year}-${month}-${day}`;
-   
-       // ------Advantages input---------------
+    // ------Advantages input---------------
    const [avantage, setAvantage] = useState<string[]>([]);
    const [currentInput, setCurrentInput] = useState<string>('');
   
@@ -205,9 +190,11 @@ const removeAvantage = (index:number) => {
         {withCredentials : true})
         .then(res => {
             const data : EditedJob  = res.data.job
+            const newDate = data.deadline?.split('T')[0]
+           
              // Dispatch action with correct payload
             dispatch(editJob({editJob: data } ));
-            setToEditJob(data)
+            setToEditJob({...data , deadline : newDate})
             setNewFonction(data.fonction)
             setNewContractType(data.contractType)
             setNewTypeTravail(data.jobType)
@@ -480,7 +467,8 @@ const removeAvantage = (index:number) => {
                         <input
                             type="date"
                             name= "deadline"
-                            defaultValue={formattedDate}
+                           // defaultValue={formattedDate}
+                           value={toEditJob.deadline}
                            
                             onChange={(e) =>{ 
                                 console.log(e.target.value)
