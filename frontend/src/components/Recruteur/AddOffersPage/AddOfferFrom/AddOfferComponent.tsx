@@ -105,7 +105,7 @@ export const AddOfferFormComponent = () => {
     const handleSubmit = (e: React.FormEvent)=>{
       e.preventDefault();
        
-     
+      saveData()
     }
     const handler = useCallback((e: MouseEvent) => {
       if (contractMenuRef.current && !contractMenuRef.current.contains(e.target as Node)) {
@@ -139,7 +139,18 @@ export const AddOfferFormComponent = () => {
       }));
     };
 
-    
+    const saveData = async() =>{
+      try {
+        const response = await axiosPrivate.post('/recruteurs/addjob', newJob);
+        console.log(response);
+        
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+
+    }
   
     
     useEffect(() => {
