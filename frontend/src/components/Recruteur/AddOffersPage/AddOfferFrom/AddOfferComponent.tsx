@@ -23,7 +23,17 @@ export const AddOfferFormComponent = () => {
       profil: '',
       advantages: [],
     })
-
+    const handleConvertAndUpdateDate = (dateInput: string) => {
+      // Convert date string to ISO-8601 DateTime format
+      const isoDateTime = new Date(`${dateInput}T00:00:00Z`).toISOString();
+      
+      // Update the state with the new date
+      setNewJob(prevJob => ({
+          ...prevJob,
+          deadline: isoDateTime
+      }));
+  };
+  
   const inputRef = useRef<HTMLInputElement>(null);
   const inputTextArea: RefObject<HTMLTextAreaElement> = useRef(null);
   const [contractDropdown, setContractDropdown] = useState(false);
@@ -91,9 +101,8 @@ export const AddOfferFormComponent = () => {
     
     const handleSubmit = (e: React.FormEvent)=>{
       e.preventDefault();
-      console.log(newJob);
-      
- 
+       
+     
     }
     const handler = useCallback((e: MouseEvent) => {
       if (contractMenuRef.current && !contractMenuRef.current.contains(e.target as Node)) {
@@ -127,6 +136,7 @@ export const AddOfferFormComponent = () => {
       }));
     };
 
+    
   
     
     useEffect(() => {
@@ -339,8 +349,8 @@ export const AddOfferFormComponent = () => {
                     </div>
                     <div className="w-3/4">
                       <input
-                        onChange={handleChange}
-                        
+                        onChange={handleDateChange}
+                        ref={inputRef}
                         type="date"
                         name='deadline'
                         id="deadline"
