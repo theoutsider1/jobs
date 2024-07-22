@@ -33,7 +33,10 @@ export const AddOfferFormComponent = () => {
           deadline: isoDateTime
       }));
   };
-  
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = event.target.value; // Assuming the date input is in YYYY-MM-DD format
+    handleConvertAndUpdateDate(newDate);
+};
   const inputRef = useRef<HTMLInputElement>(null);
   const inputTextArea: RefObject<HTMLTextAreaElement> = useRef(null);
   const [contractDropdown, setContractDropdown] = useState(false);
