@@ -15,7 +15,7 @@ export const PopupSuccess: React.FC<SuccessPopupProps> = ({closeSuccessPopup}) =
         closeSuccessPopup(); // Close the popup completely
     };
     const redirectToDashboard = ()=> {
-        navigate(`/suivezlesoffres`)
+        navigate(`/suivezlesoffres/offersManagement`)
         window.scrollTo({
             top: 0,
             // behavior: 'smooth' // Optional: Smooth scrolling animation
