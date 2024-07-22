@@ -49,6 +49,10 @@ export const RecruiterProfileInfo = ()=>{
                     </div>
     
                     <div className="w-4/6">
+                        <div className="my-4 w-full text-md">
+                            <span className=" text-xl font-bold">ID: </span>
+                            <span className="text-2xl font-semibold">{userData.id}</span>
+                        </div>
 
                         <div className="">
                             <label htmlFor="fullName" className="w-full text-xl font-semibold">
@@ -72,12 +76,6 @@ export const RecruiterProfileInfo = ()=>{
                                 <input type="text" id="phone_number" defaultValue={userData.phone_number} className="block w-full rounded-md border-0 py-1.5 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 " />
                       
                        </div>
-
-                       <div className="my-4 w-full text-md">
-                            <span className="">ID: </span>
-                            <span className="text-xl font-semibold">{userData.id}</span>
-                        </div>
-                      
                         <div className="my-4 w-full text-md ">
                             <span className="block my-2">Compte créé le: </span>
                             <span className="text-xl font-semibold">{userData.createdAt}</span>
