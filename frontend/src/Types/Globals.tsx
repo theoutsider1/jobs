@@ -133,16 +133,16 @@ export const regionOptions : DropdownOption[] = [
     { id: 16, label: "Tanger - Tétouan",}
 ];
 export const domaineOptions : DropdownOption[] = [
-    { id: 1, label: "Agriculture" },
-    { id: 2, label: "Audiovisual", },
-    { id: 3, label: "Industrie", },
-    { id: 4, label: "Energie",},
-    { id: 5, label: "Electronique",},
-    { id: 6, label: "Marketing",},
-    { id: 7, label: "Finance",},
-    { id: 8, label: "Santé",},
-    { id: 9, label: "Tourisme",},
-    { id: 10, label: "Immobilier",},
+    { id: 122, label: "Agriculture" },
+    { id: 123, label: "Audiovisual", },
+    { id: 124, label: "Industrie", },
+    { id: 125, label: "Energie",},
+    { id: 126, label: "Electronique",},
+    { id: 127, label: "Marketing",},
+    { id: 128, label: "Finance",},
+    { id: 129, label: "Santé",},
+    { id: 130, label: "Tourisme",},
+    { id: 131, label: "Immobilier",},
 ];
 
 // Agriculture
@@ -164,13 +164,7 @@ export const typeTravail: DropdownOption[] = [
     { id: 14, label: "Mi-Temps",}
 ];
 
-// ---------- Domaines -------
-export const domaines: DropdownOption[] = [
-    { id: 123, label: "Temps plein" },
-    { id: 124, label: "A distance", },
-    { id: 135, label: "Etudiant", },
-    { id: 146, label: "Mi-Temps",}
-];
+
 
 // ----------- Upload Cv Props / espace candidat --------------
 
@@ -276,9 +270,11 @@ export interface AddJob {
   description: string;
   jobType: string;
   missions: string;
-  deadline?: Date; 
+  deadline?: string; 
   fonction: string;
   studiesRequirement: string;
   profil: string;
   advantages: string[];
   }
+
+  
