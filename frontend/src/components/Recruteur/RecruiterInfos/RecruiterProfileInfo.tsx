@@ -64,14 +64,14 @@ export const RecruiterProfileInfo = ()=>{
                         </div>
                         <div className="py-2">
                             <label htmlFor="mail" className="w-full text-xl font-semibold">
-                                <span className="">mail</span>
+                                <span className="">Mail</span>
                             </label>
                                 <input type="text" id="mail" defaultValue={userData.mail} className="block w-full rounded-md border-0 py-1.5 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 " />
                       
                        </div>
                        <div className="py-2">
                             <label htmlFor="phone_number" className="w-full text-xl font-semibold">
-                                <span>Numero de Telephone</span>
+                                <span>Numéro de Téléphone</span>
                             </label>
                                 <input type="text" id="phone_number" defaultValue={userData.phone_number} className="block w-full rounded-md border-0 py-1.5 pl-3 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 " />
                       
