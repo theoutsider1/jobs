@@ -1,7 +1,7 @@
  import axios from "axios";
 import { 
     // ChangeEvent, useRef, 
-useState, useEffect} from "react"
+useState, useEffect, ChangeEvent} from "react"
 import { OffData } from "../../../Types/Globals";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -35,7 +35,10 @@ export const OffersManagement = () =>{
     const [closedJobsData, setClosedJobData] = useState<OffData []>([])
     const [activeJobsData, setActiveJobsData] = useState<OffData []>([])
 
-    
+    // Handle Search Input 
+    const handleInputSearch = (e: ChangeEvent<HTMLInputElement>)=>{
+            setSearchQuery(e.target.value)
+    }
     //Store Click job offer in redux store & navigate to # to edit it
     const handleEditJobOffer = (data : OffData , jobId : number)=> {
         
