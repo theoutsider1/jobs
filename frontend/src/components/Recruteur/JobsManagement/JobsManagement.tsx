@@ -202,7 +202,9 @@ export const OffersManagement = () =>{
             return renderTable(activeJobsData);
         } else if (closedOffers && closedJobsData && closedJobsData.length > 0) {
             return renderTable(closedJobsData);
-        } 
+        } else if (filteredData && filteredData.length > 0){
+            return renderTable(filteredData)
+        }
          else{
             return (
                 <div className="w-full flex justify-center ">
