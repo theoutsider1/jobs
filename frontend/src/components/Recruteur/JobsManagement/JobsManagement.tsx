@@ -24,7 +24,7 @@ export const OffersManagement = () =>{
     const [closedOffers , setClosedOffers] = useState(false);
     const [allData , setAllData ] = useState<OffData []>([]);
     const [searchQuery, setSearchQuery] = useState(String)
-
+    const [filteredData, setFilteredData] = useState<OffData[]>([]);
     const [allOffersLength ,setAllOffersLength] = useState<number>(0);
 
     
@@ -36,8 +36,16 @@ export const OffersManagement = () =>{
     const [activeJobsData, setActiveJobsData] = useState<OffData []>([])
 
     // Handle Search Input 
-    const handleInputSearch = (e: ChangeEvent<HTMLInputElement>)=>{
-            setSearchQuery(e.target.value)
+    const handleSearchInput = (e: ChangeEvent<HTMLInputElement>)=>{
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+
+        const filteredOffers = allData.filter((offer) =>
+            offer.title.toLowerCase().includes(query)
+        );
+        setFilteredData(filteredOffers);
+        console.log(filteredData);
+        
     }
     //Store Click job offer in redux store & navigate to # to edit it
     const handleEditJobOffer = (data : OffData , jobId : number)=> {
@@ -194,7 +202,8 @@ export const OffersManagement = () =>{
             return renderTable(activeJobsData);
         } else if (closedOffers && closedJobsData && closedJobsData.length > 0) {
             return renderTable(closedJobsData);
-        } else {
+        } 
+         else{
             return (
                 <div className="w-full flex justify-center ">
                     <div className="flex flex-col m-36 gap-8 justify-center">
@@ -269,7 +278,7 @@ export const OffersManagement = () =>{
                                 <input 
                                     type="search" 
                                     value={searchQuery}
-                                    onChange={handleSearchQuery}
+                                    onChange={handleSearchInput}
                                     id="default-search" 
                                     className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-third focus:border-third" 
                                     placeholder="Recherche" 
