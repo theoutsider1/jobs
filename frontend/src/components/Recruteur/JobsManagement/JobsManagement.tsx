@@ -24,7 +24,7 @@ export const OffersManagement = () =>{
     const [closedOffers , setClosedOffers] = useState(false);
     const [allData , setAllData ] = useState<OffData []>([]);
     const [searchQuery, setSearchQuery] = useState(String)
-    const [filteredData, setFilteredData] = useState<OffData[]>([]);
+    //const [filteredData, setFilteredData] = useState<OffData[]>([]);
     const [allOffersLength ,setAllOffersLength] = useState<number>(0);
 
     
@@ -43,8 +43,9 @@ export const OffersManagement = () =>{
         const filteredOffers = allData.filter((offer) =>
             offer.title.toLowerCase().includes(query)
         );
-        setFilteredData(filteredOffers);
-        console.log(filteredData);
+        //setFilteredData(filteredOffers);
+        //console.log(filteredData);
+        setAllData(filteredOffers)
         
     }
     //Store Click job offer in redux store & navigate to # to edit it
@@ -202,10 +203,7 @@ export const OffersManagement = () =>{
             return renderTable(activeJobsData);
         } else if (closedOffers && closedJobsData && closedJobsData.length > 0) {
             return renderTable(closedJobsData);
-        } else if (filteredData && filteredData.length > 0){
-            return renderTable(filteredData)
-        }
-         else{
+        } else{
             return (
                 <div className="w-full flex justify-center ">
                     <div className="flex flex-col m-36 gap-8 justify-center">
