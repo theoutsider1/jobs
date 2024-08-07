@@ -1,10 +1,13 @@
+import { useCallback, useEffect, useRef, useState } from "react"
 
 
 
 export const CreateAccountCandidates = ()=> {
+  const [toggleRole, setToggleRole] = useState(false);
+  
+  const [selectedRole, setSelectedRole] = useState("vous etes");
 
-   
-
+  
     return (
        
              <div className="p-10 bg-third flex flex-col gap-5 justify-center items-center">
@@ -58,8 +61,9 @@ export const CreateAccountCandidates = ()=> {
    
                      </div> */}
                 </div>
-               
-   
+               {/*  */}
+              
+              {/*  */}
                 <div className="flex items-center justify-between p-5">
                     <div className="flex items-start">
                         <div className="flex items-center h-5">
@@ -75,6 +79,8 @@ export const CreateAccountCandidates = ()=> {
                 <p className="text-sm font-light pt-2 text-gray-500 dark:text-gray-400">
                     Don’t have an account yet? <a href="#" className="font-medium text-gray-500 hover:underline ">Sign up</a>
                 </p>
+
+                
           </form>
         </div>
     )
