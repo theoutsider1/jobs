@@ -90,7 +90,20 @@ export const CreateAccountCandidates = ()=> {
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
                         </svg>
                     </button>
+                   { toggleRole &&
                    
+                   <div id="dropdown-list" className={`absolute z-10 h-36 overflow-scroll bg-third divide-y divide-gray-100 rounded-lg shadow w-full`}>
+                        <ul className="w-full py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+                           
+                                 <li onClick={() => setSelectedRole("candidat")} className="w-full text-left block px-4 py-2 hover:bg-primary cursor-pointer">
+                                  Candidat
+                                </li>
+                                 <li onClick={() => setSelectedRole("recruteur")}  className="w-full text-left block px-4 py-2 hover:bg-primary cursor-pointer">
+                                  Recruteur
+                                </li>
+                            
+                        </ul>
+                    </div>}
                     </div>
                   </div>
               {/*  */}
