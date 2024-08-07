@@ -7,7 +7,10 @@ export const CreateAccountCandidates = ()=> {
   const roleRef = useRef<HTMLDivElement>(null);
   const [selectedRole, setSelectedRole] = useState("vous etes");
 
-  
+  const toggleDropdown = () => {
+    setToggleRole(prev => !prev);
+};
+   
     return (
        
              <div className="p-10 bg-third flex flex-col gap-5 justify-center items-center">
