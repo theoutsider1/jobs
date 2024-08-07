@@ -15,7 +15,12 @@ export const CreateAccountCandidates = ()=> {
       setToggleRole(false);
     }
    },[])
-   
+   useEffect(() => {
+    document.addEventListener("mousedown", handlerRefDropdown);
+    return () => {
+        document.removeEventListener("mousedown", handlerRefDropdown);
+    };
+}, [handlerRefDropdown]);
     return (
        
              <div className="p-10 bg-third flex flex-col gap-5 justify-center items-center">
