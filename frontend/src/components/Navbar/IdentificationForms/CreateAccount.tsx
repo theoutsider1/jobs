@@ -10,6 +10,11 @@ export const CreateAccountCandidates = ()=> {
   const toggleDropdown = () => {
     setToggleRole(prev => !prev);
 };
+   const handlerRefDropdown = useCallback((e: MouseEvent)=>{
+    if (roleRef.current && !roleRef.current.contains(e.target as Node)) {
+      setToggleRole(false);
+    }
+   },[])
    
     return (
        
