@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 export const CreateAccountCandidates = ()=> {
   const [toggleRole, setToggleRole] = useState(false);
-  
+  const roleRef = useRef<HTMLDivElement>(null);
   const [selectedRole, setSelectedRole] = useState("vous etes");
 
   
