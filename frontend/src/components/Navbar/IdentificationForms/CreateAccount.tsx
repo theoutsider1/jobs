@@ -75,7 +75,24 @@ export const CreateAccountCandidates = ()=> {
                      </div> */}
                 </div>
                {/*  */}
-              
+               <div className=" mx-14 flex flex-row-4 justify-center">
+                    {/* <div className="w-1/4 mx-14">
+                      <label
+                        htmlFor="jobType"
+                        className="w-full m-1 text-xl font-semibold">
+                           Voues etes:
+                      </label>
+                    </div> */}
+                    <div className="w-3/4 relative " ref={roleRef} >
+                    <button id="dropdownDefaultButton" onClick={toggleDropdown} data-dropdown-toggle="dropdown-list" className="w-full text-white bg-fourth hover:bg-darkk font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-between" type="button">
+                            {selectedRole}
+                        <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+                   
+                    </div>
+                  </div>
               {/*  */}
                 <div className="flex items-center justify-between p-5">
                     <div className="flex items-start">
