@@ -16,8 +16,6 @@ import { Riple } from "react-loading-indicators";
 export const OffersManagement = () =>{
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    // const ref: React.MutableRefObject<HTMLInputElement | null>  = useRef(null);
-    // const [value , setValue] = useState('');
     const [loading, setLoading] = useState(true);
     const [allOffers, setAllOffers] = useState(true);
     const [inprogressOffers, setInprogressOffers] = useState(false);
@@ -95,15 +93,6 @@ export const OffersManagement = () =>{
     }
     const fetchAllData = async () => {
         try {
-           
-            // const token : string | null = localStorage.getItem('token');// Change 'jwtToken' to your token key
-            
-            // // const headers = { 'Authorization': 'Bearer access_token' };
-            // // Make sure token is available
-            // if (!token) {
-            // throw new Error('JWT token not found');
-            // }
-
             await axios.get("http://localhost:3000/recruteurs/myjoboffers",  
             {
                 withCredentials: true,
@@ -258,12 +247,7 @@ export const OffersManagement = () =>{
                 </div>
                 {/* Seach Form (Input)*/}
                 <div className="w-full flex justify-end m-2">
-                {/* <input type="text" ref={ref} value={value} className="px-14" /> */}
-                {/* <input
-                        type="text"
-                        id="searchJob"
-                        className="  w-1/2 rounded-md border-0 py-2 m-2 text-gray-900 ring-1 ring-inset ring-gray-300 "/>
-                     */}
+                
                      <div className="w-1/3 py-4">
                            
                             <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
