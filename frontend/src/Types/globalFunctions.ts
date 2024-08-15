@@ -5,3 +5,15 @@ export const formatDate = (dateString: string): string => {
     const year = date.getFullYear();
     return `${day}-${month}-${year}`;
 };
+
+// export const handleConvertToISO()=> {
+//     const inputElement = inputRef.current;
+//     if (inputElement) {
+//         const dateInput = inputElement.value;
+//         if (dateInput) {
+//             // Convert date string to ISO-8601 DateTime format
+//             const isoDateTime = new Date(`${dateInput}T00:00:00Z`).toISOString();
+//             console.log(isoDateTime); // Or do something with the ISO string
+//         }
+//     }
+// }

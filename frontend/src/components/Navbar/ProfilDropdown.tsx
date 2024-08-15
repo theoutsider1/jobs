@@ -3,6 +3,8 @@ import { personCircleOutline } from 'ionicons/icons';
 import { isLogged } from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
+import { axiosPrivate } from "../../api/axios";
+import axios from "axios";
 
 const ProfilDropdown: React.FC<isLogged> = ({ isLoggedIn }) => {
     const navigate = useNavigate();
@@ -33,6 +35,24 @@ const ProfilDropdown: React.FC<isLogged> = ({ isLoggedIn }) => {
         setOpen(!isOpen);
         console.log("Menu toggled", isOpen);
     };
+
+    const logOut = async() => {
+        try {
+            setOpen(!isOpen);
+            const response = await axiosPrivate.post('/espacerecruteurs/logout', {});
+            navigate('/login');
+            console.log(response);
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.error('Axios error during logout:', error.response?.status, error.response?.data);
+            } else {
+                console.error('Unexpected error during logout:', error);
+            }
+        }
+  
+   // return logout;
+  };
+    
 
     return (
         <>
@@ -70,7 +90,7 @@ const ProfilDropdown: React.FC<isLogged> = ({ isLoggedIn }) => {
                                         </Link>
                                     </li>
                                     <li className='w-full text-left block px-2.5 py-2 hover:bg-bright'>
-                                        <Link to="/lancerUnOffre" onClick={toggleMenu}>
+                                        <Link to="/lancerUnOffre" onClick={logOut}>
                                             Déconnexion
                                         </Link>
                                     </li>

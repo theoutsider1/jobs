@@ -49,18 +49,31 @@ export class AuthController {
     }
     @Get('validate-token')
     //  @UseGuards(JwtGuard)
-    async validateToken(@Req() req): Promise<{ isLogged: boolean, role: string }> {
+    async validateToken(@Req() req): Promise<{ isLogged: boolean, role: string}> {
         const token = req.cookies.access_token;
         const decode = await this.authService.validateToken(token);
         const valid = decode;
-        console.log({ isLogged: !!valid, role: valid.role });
+        console.log({ isLogged: !!valid, role: valid.role});
         if(valid){
-            return { isLogged: true, role: valid.role };
+            return { isLogged: true, role: valid.role};
         }else{
             return { isLogged: false, role: valid.role };
         }   
        
     }
+    
+    //@HttpCode(HttpStatus.OK)
+    @Get('logout')
+    async logout(@Req() req, @Res() res) {
+        try {
+            res.clearCookie('token')
+            return res.status(200).json({ message: 'Logged out successfully' });
+   
+        } catch (error) {
+            
+            return error;
+        }
+         }
 }
             
                 

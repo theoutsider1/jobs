@@ -43,6 +43,8 @@ export class jwtStrategy extends PassportStrategy(
         if(recruiter) {
             
             delete recruiter.password;
+            console.log(recruiter);
+            
             return recruiter;
             
         } else if(candidate){

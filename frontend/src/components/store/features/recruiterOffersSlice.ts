@@ -23,6 +23,8 @@ export const recruiterOffersSlice= createSlice({
     reducers : {
         getRecruiterOffersList : (state , action : PayloadAction<{recruiterOffer : OffData[]}>)=> {
             state.recruiterOffer = action.payload.recruiterOffer;
+            
+            
         }
     }
 })
