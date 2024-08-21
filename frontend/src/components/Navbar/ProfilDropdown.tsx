@@ -5,10 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
 import { axiosPrivate } from "../../api/axios";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/features/authSlice";
 
 const ProfilDropdown: React.FC<isLogged> = ({ isLoggedIn }) => {
     const navigate = useNavigate();
-   
+    const dispatch = useDispatch()
+
     const menuRef = useRef<HTMLDivElement>(null);
     const [isOpen, setOpen] = useState(false);
 
@@ -36,10 +39,20 @@ const ProfilDropdown: React.FC<isLogged> = ({ isLoggedIn }) => {
         console.log("Menu toggled", isOpen);
     };
 
+    // Function to delete the cookie
+const deleteCookie = (name : string) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+};
+
     const logOut = async() => {
         try {
             setOpen(!isOpen);
             const response = await axiosPrivate.get('/espacerecruteurs/logout', {});
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('role')
+            deleteCookie('access_token');
+
+            dispatch(logout())
             console.log('Logout response:', response);
             navigate('/login');
             
