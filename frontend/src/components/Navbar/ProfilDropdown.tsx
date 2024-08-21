@@ -39,9 +39,10 @@ const ProfilDropdown: React.FC<isLogged> = ({ isLoggedIn }) => {
     const logOut = async() => {
         try {
             setOpen(!isOpen);
-            const response = await axiosPrivate.post('/espacerecruteurs/logout', {});
+            const response = await axiosPrivate.get('/espacerecruteurs/logout', {});
+            console.log('Logout response:', response);
             navigate('/login');
-            console.log(response);
+            
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.error('Axios error during logout:', error.response?.status, error.response?.data);
@@ -50,7 +51,6 @@ const ProfilDropdown: React.FC<isLogged> = ({ isLoggedIn }) => {
             }
         }
   
-   // return logout;
   };
     
 
