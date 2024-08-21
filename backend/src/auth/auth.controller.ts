@@ -62,16 +62,18 @@ export class AuthController {
        
     }
     
-    //@HttpCode(HttpStatus.OK)
+    @HttpCode(HttpStatus.OK)
     @Get('logout')
     async logout(@Req() req, @Res() res) {
         try {
+            // clear cookie
             res.clearCookie('token')
             return res.status(200).json({ message: 'Logged out successfully' });
    
         } catch (error) {
             
-            return error;
+            return res.status(500).json({ message: 'Internal Server Error' });
+
         }
          }
 }
